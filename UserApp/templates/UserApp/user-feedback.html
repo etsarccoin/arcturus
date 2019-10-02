@@ -1,0 +1,685 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'UserApp/assets/img/title.ico' %}">
+<title>Feedback Form</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/animations.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-social.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/highcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.bootstrap4.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-timepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-colorpicker.min.css' %}">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+	
+</head>
+
+<body role="document">
+
+<!--Header Top-->
+<div class="container-fluid bg-header-top">
+	<div class="container pad10T pad10B">
+    	<div class="row">
+            <div class="col-md-6 text-left-to-center pad5T pad5B">
+                <span class="header-top-text">Welcome to Arcturus</span>
+            </div>
+            <div class="col-md-6 text-right-to-center pad5T pad5B">
+            	<a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>	
+</div>
+	
+<!-- Navbar Start -->
+<div class="container pad0L pad0R">
+	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
+        <a class="navbar-brand" href="{% url 'Userindex' %}">
+            <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mrg5A active">
+                    <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userservice' %}">Service</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userabout' %}">About</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
+				</li>
+				<li class="nav-item mrg5A">
+					<a class="nav-link" href="{% url 'UserDashboard' %}">DashBoard</a>
+				</li>
+				<li class="nav-item mrg5A">
+					{% if logged_in %}
+					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
+					{% endif %}
+				</li>
+            </ul>
+        </div>
+    </nav>
+</div>
+	
+<!--Body Section-->
+<div class="container-fluid pad20T pad20B">
+	<div class="container">
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="profile-table">
+								<div class="profile-col">
+									<div class="image-warp">
+										<a href="#" class="image">
+											<img src="{% static 'UserApp/assets/img/upload-01.jpg' %}" alt="">
+										</a>
+									</div>
+								</div>
+								<div class="profile-col">
+									<div class="top">{{u_name}}</div>
+									<div class="info">
+										<div class="info-col">
+											<span>Last Login</span>
+											<span>25-08-2019 19:20 P.M.</span>
+										</div>
+										<div class="info-col">
+											<span>Login IP</span>
+											<span>192.168.1.5</span>
+										</div>
+										<div class="info-col">
+											<span>Browser</span>
+											<span>Mozila Firefox</span>
+										</div>
+										<div class="info-col">
+											<span>Country</span>
+											<span>INDIA</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 text-right-to-left">
+							<div class="prifile-welcome pad40T">Welcome to Arcturus Coin</div>
+							<div class="profile-action">
+								<ul class="profile-list">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b><i>User Wallet</i></b></a>
+											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b><i>User Profile</i></b></a>
+											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b><i>User Feedback</i></b></a>
+										</div>
+									</li>
+									<li>
+										<a href="#">
+											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
+										</a>
+									</li>
+									<li>
+										<a href="#" class="notification">
+											<img src="{% static 'UserApp/assets/img/icon-notification.png' %}" width="28" height="28" alt=""/>
+											<span class="pop"></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card pad0T pad0B">
+					<div class="row">
+						<div class="col-lg-4 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header">
+									<div class="row align-items-center">
+										<div class="col">Arcturus Wallet</div>
+										<div class="col text-right">
+											<a href="#">Withdrawl</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">123456789</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+						<div class="col-lg-4 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header bg-brown">
+									<div class="row align-items-center">
+										<div class="col">Deposit Funds</div>
+										<div class="col text-right">
+											<a href="#">Deposit</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">123456789</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+						<div class="col-lg-4 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header">
+									<div class="row align-items-center">
+										<div class="col">Requests Funds</div>
+										<div class="col text-right">
+											<a href="#">Requests</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">123456789</div>
+									</div>
+								</div>
+							</div>	
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col feedback-style">							
+							<form>
+									{% csrf_token %}
+								<div class="from-heading">Feedback Form</div>
+								<div class="form-row" align="left">
+									<div class="form-group col-md-4">
+										<label>Name</label>
+										<input type="text" name="user_name" id="user_name" value="{{u_name}}" class="form-control" placeholder="Name" readonly>
+									</div>
+									<div class="form-group col-md-4">
+										<label>Email</label>
+										<input type="email" name="user_mail" id="user_mail" value="{{u_mail}}" class="form-control" placeholder="Email" readonly>
+									</div>
+									<div class="form-group col-md-4">
+										<label>Phone</label>
+										<input type="text" name="phone_no" id="phone_no" class="form-control" placeholder="Phone">
+									</div>
+								</div>
+								
+								<div class="from-heading">Overall Experience</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="oe1" />
+											<label for="oe1" class="text-theme">Bad</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="oe2" />
+											<label for="oe2" class="text-theme">Poor</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="oe3" />
+											<label for="oe3" class="text-theme">Average</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="oe4" />
+											<label for="oe4" class="text-theme">Great</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="oe5" />
+											<label for="oe5" class="text-theme">Excellent</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="from-heading">Timely Response</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="tr1" />
+											<label for="tr1" class="text-theme">Bad</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="tr2" />
+											<label for="tr2" class="text-theme">Poor</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="tr3" />
+											<label for="tr3" class="text-theme">Average</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="tr4" />
+											<label for="tr4" class="text-theme">Great</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="tr5" />
+											<label for="tr5" class="text-theme">Excellent</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="from-heading">Our Support</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="os1" />
+											<label for="os1" class="text-theme">Bad</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="os2" />
+											<label for="os2" class="text-theme">Poor</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="os3" />
+											<label for="os3" class="text-theme">Average</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="os4" />
+											<label for="os4" class="text-theme">Great</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="os5" />
+											<label for="os5" class="text-theme">Excellent</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="from-heading">Overall Satisfaction</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="on1" />
+											<label for="on1" class="text-theme">Bad</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="on2" />
+											<label for="on2" class="text-theme">Poor</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="on3" />
+											<label for="on3" class="text-theme">Average</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="on4" />
+											<label for="on4" class="text-theme">Great</label>
+										</div>
+										<div class="radio">
+											<input type="radio" name="s" class="styled" id="on5" />
+											<label for="on5" class="text-theme">Excellent</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="from-heading">Want to rate with us for customer services?</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<div class="rating-star" data-number="5" data-score="2"></div>
+									</div>
+								</div>
+								
+								<div class="from-heading">Is there anything you would like to tell us?</div>
+								
+								<div class="form-row" align="left">
+									<div class="form-group col-12">
+										<textarea class="form-control no-resize"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-row" align="right">
+									<div class="form-group col-12 pad0L pad0R mrg0B" align="right">
+										<button type="submit" onclick="submitFeedBack()" class="btn btn-navbar-brown pad30L pad30R mrg5A">Send Feedback</button>
+									</div>
+								</div>
+								
+							</form>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Join Section-->
+<div class="container-fluid join-section-bg pad40T pad10B">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mrg30B">
+				<div class="join-left-text">Join our subscription and get instant updates about offers and discounts.</div>
+			</div>
+			<div class="col-lg-6 mrg30B">
+				<div class="join-right-input">
+					<div class="input-group mb-0">
+						<input type="text" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
+						<div class="input-group-append">
+							<span class="input-group-text">Submit</span>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Footer top-->
+<div class="container-fluid footer-bg-back pad40T pad10B">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 mrg30B">
+				<div class="footer-logo">
+					<a href="#">
+						<img src="{% static 'UserApp/assets/img/logo-bw.png' %}" width="222" class="img-fluid" alt=""/>
+					</a>
+				</div>
+				<div class="footer-logo-mater">Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit lobortis augue duis dolore te feugait nulla facilisi mazim placerat</div>
+				<ul class="footer-list">
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+							<span>Street, 11000 Helsinki, Finland</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+							<span>(+123)11 123 4567</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+							<span>office@example.com</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		  	<div class="col-lg-4">
+		  		<div class="footer-heading">Latest News</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+			</div>
+			<div class="col-lg-4">
+				<div class="footer-heading">Twitter Feed</div>
+				
+				<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Footer Bottom-->
+<div class="container-fluid bg-footer-bot">
+	<div class="row">
+		<div class="col">
+			<div class="footer-bot-text">
+				<a href="#">© 2011 Yourcompany.com, All Rights Reserved</a>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!-- Bootstrap core JavaScript --> 
+<script src="{% static 'UserApp/assets/js/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/css3-animate-it.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.input-mask.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2-2.3.4.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2.thumbs.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/highcharts.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.raty-fa.js' %}"></script>
+
+<script src="{% static 'UserApp/assets/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-colorpicker.min.js' %}"></script>
+	
+<script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+
+<script>
+	Highcharts.chart('coinGraph', {
+		chart: {
+			type: 'line',
+			backgroundColor: '#f4f4f4',
+			marginBottom: 30
+		},
+		title: {
+			text: false
+		},
+		subtitle: {
+			text: false
+		},
+		legend: {
+			margin: 0,
+			verticalAlign: 'bottom',
+			y: 15
+		},
+		xAxis: {
+			title: false,
+			tickInterval:1,
+			labels: false
+		},
+		yAxis: {
+			title: false,
+			tickInterval:1,
+			labels: false
+		},
+		plotOptions: {
+			line: {
+				dataLabels: {
+					enabled: true
+				},
+				enableMouseTracking: false
+			}
+		},
+		series: [{
+			name: 'Stock',
+			data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 23.2, 23.5, 22.3, 19.3, 13.9, 9.6],
+			color: '#6b3008'
+		}, {
+			name: 'Sale',
+			data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8],
+			color: '#ff7d00'
+		}]
+	});
+
+	$(document).ready(function() {	
+		"use strict";
+		$('#profile-table').DataTable( {
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+			"bLengthChange": false,
+			"bFilter": false,
+		});
+	});
+</script> 
+
+
+<!-- JS Added by Kuntal -->
+<script>
+		function submitFeedBack()
+		{
+			$.ajax({
+					type: "GET",
+					contentType: "application/json; charset=utf-8",
+					url: '{% url "EmailExistChecking" %}',
+					async: true,
+					data: {
+						mail: $('#e_mail').val()
+					   },
+					success: function (response)
+						{
+						  let is_taken = response['is_taken'];
+						  if(is_taken == 1)
+						  {
+							  alert("Email Already Exist !! ");
+							  $('#s_data').attr("disabled", true);
+						  }
+						  else
+						  {
+							$('#s_data').attr("disabled", false);
+							alert("Email Is Okay !! ");
+						  }
+					   },
+					error: function ()
+					{
+					notify('Something went wrong');
+					}
+				});
+		}
+		</script>
+
+</body>
+</html>
