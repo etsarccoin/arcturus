@@ -12,21 +12,29 @@ from getmac import get_mac_address
 
 
 def SendMail(toaddr, message):
-    fromaddr = "arcturuscoin@gmail.com"
-    password = "arc@2019"
-    toaddr = toaddr
+    # fromaddr = "arcturuscoin@gmail.com"
+    # password = "arc@2019"
+    # toaddr = toaddr
     subject = 'Arcturus'
     message = 'Subject: {}\n\n{}'.format(subject, message)
     
+    # try:
+    #     server = smtplib.SMTP('smtp.gmail.com', 587)  ## smtp.mail.yahoo.com
+    #     server.starttls()
+    #     server.ehlo()
+    #     server.login(fromaddr, password)
+    #     server.sendmail(fromaddr, toaddr, message)
+    #     server.quit()
+    # except SMTPException:
+    #     print("Mail id is Invalid !!")
     try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)  ## smtp.mail.yahoo.com
-        server.starttls()
-        server.ehlo()
-        server.login(fromaddr, password)
-        server.sendmail(fromaddr, toaddr, message)
-        server.quit()
-    except SMTPException:
-        print("Mail id is Invalid !!")
+        s = smtplib.SMTP('smtp.gmail.com', 587) 
+        s.starttls() 
+        s.login("arcturuscoin@gmail.com", "arc@2019")  
+        s.sendmail("arcturuscoin@gmail.com", toaddr, message) 
+        s.quit()
+    except Exception as e:
+        print("HI I AM FROM MAIL SEND ",e)
 
 
 def SendMailWithSubject(toaddr, subject, message):

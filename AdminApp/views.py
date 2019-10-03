@@ -4,8 +4,11 @@ from UserApp.models import CoinRequest, UsersDetail, UserAccountCoin, CoinPrice,
 from django.http import HttpResponse, JsonResponse
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 import datetime
-from .models import SocialMedialLink
+# from .models import SocialMedialLink,image_change,change_body
+from django.core.files.storage import FileSystemStorage
 
+from .forms import HomePageEditForm
+from .models import HomePage
 
 def Test(request):
     return render(request, 'AdminApp/demo-blank.html', context={})
@@ -19,7 +22,28 @@ def AdminDashboardPanel(request):
     except Exception as e:
         print(e)
         return AdminLogin(request)
+    
+def changeimage(request):
+    try:
+        if request.method == 'POST' and request.FILES['myfile']:
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+            return render(request, 'core/simple_upload.html', {
+                'uploaded_file_url': uploaded_file_url
+            })
+        return render(request, 'core/simple_upload.html')
+    except Exception as e:
+        print("hi i am error from change image ",e)
 
+        
+def update_context(request):
+    try:
+        admin_id=request.session['admin_id']
+        print(admin_id)
+    except Exception as e:
+        print("error from context update",e)
 
 def AdminLogin(request):
     if request.method == 'POST':
@@ -416,3 +440,22 @@ def SocialURLUpdate(request):
     except Exception as e:
         data = {'submitted': False}
         return JsonResponse(data)
+
+
+
+
+### @author: kamlesh   ####
+def HomePageEditView(request):
+    form = HomePageEditForm()
+    if request.method == "POST":
+        form_data = HomePageEditForm(request.POST,request.FILES)
+        print(form_data.data)
+        if form_data.is_valid():
+            
+            home_page = form_data.save(commit=False)
+            home_page.save()
+            
+            print(home_page)
+            # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
+
+    return render(request,'AdminApp/Admin-home-page-edit.html',{'form':form})

@@ -20,7 +20,7 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 
 
 
-base_url = 'http://127.0.0.1:8000/user/'
+base_url = 'www.arturus.world/user/'
 logging.basicConfig(filename="Log/AppLog.log",
                     format='%(asctime)s %(message)s',
                     filemode='w')
