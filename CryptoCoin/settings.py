@@ -25,7 +25,7 @@ SECRET_KEY = '_odrmox%!iti2yevze@j5)r-r=%@#q(7b#ngr^0+(1vkfb$25a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','www.arcturus.world','arcturus.world']
+ALLOWED_HOSTS = ['127.0.0.1','www.arcturus.world','arcturus.world','*']
 
 # APPEND_SLASH=False
 # Application definition

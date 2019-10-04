@@ -55,3 +55,9 @@ class HomePage(models.Model):
     footer_latest_news_pic_3 = models.ImageField(upload_to = "AdminApp/homepage/news/",blank=True)
 
 
+    def save(self, *args, **kwargs):
+        all_obj = HomePage.objects.all()
+        if len(all_obj > 1):
+            HomePage.objects.all().delete()
+
+        super().save(*args, **kwargs)   

@@ -5,7 +5,7 @@ from django.db import models
 # Storing Data For A New User and Existing User
 class UsersDetail(models.Model):
     first_name = models.CharField(max_length=255, blank=False)
-    middle_name = models.CharField(max_length=255)
+    middle_name = models.CharField(max_length=255,blank=True)
     last_name = models.CharField(max_length=255, blank=False)
     email = models.EmailField(primary_key=True, unique=True)
     ph = models.BigIntegerField()
