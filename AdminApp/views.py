@@ -4,8 +4,12 @@ from UserApp.models import CoinRequest, UsersDetail, UserAccountCoin, CoinPrice,
 from django.http import HttpResponse, JsonResponse
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 import datetime
+<<<<<<< HEAD
 # from .models import SocialMedialLink,image_change,change_body
 from django.core.files.storage import FileSystemStorage
+=======
+from .models import SocialMedialLink
+>>>>>>> 1a802fcedf47283f8cc03cc3d51fc873db10205b
 
 from .forms import HomePageEditForm
 from .models import HomePage
@@ -439,6 +443,7 @@ def SocialURLUpdate(request):
 
     except Exception as e:
         data = {'submitted': False}
+<<<<<<< HEAD
         return JsonResponse(data)
 
 
@@ -459,3 +464,6 @@ def HomePageEditView(request):
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
     return render(request,'AdminApp/Admin-home-page-edit.html',{'form':form})
+=======
+        return JsonResponse(data)
+>>>>>>> 1a802fcedf47283f8cc03cc3d51fc873db10205b

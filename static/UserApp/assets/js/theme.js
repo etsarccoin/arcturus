@@ -81,15 +81,7 @@ $owl.owlCarousel({
 
 });
 
-// For Data Table
-$(document).ready(function() {	
-	"use strict";
-	$('#coinHistoryTable').DataTable( {
-		responsive: true,
-		"pagingType": "full_numbers",
-		"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
-	});
-});
+
 
 
 

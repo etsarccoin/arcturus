@@ -38,9 +38,39 @@ def Test(request):
     # host = request.get_host()
     # print("REMOTE HOST", host)
     print(request.path_info)
-    return render(request, 'UserApp/index.html', context={})
+    return render(request, 'UserApp/test1.html', context={})
 
 
+def hotel(request):
+    print(request.path_info)
+    return render(request, 'UserApp/hotels.html', context={})
+
+
+def travel(request):
+    print(request.path_info)
+    return render(request, 'UserApp/travels.html', context={})
+
+
+def food(request):
+    print(request.path_info)
+    return render(request, 'UserApp/fooding.html', context={})
+
+
+def payment(request):
+    print(request.path_info)
+    return render(request, 'UserApp/payments.html', context={})
+
+
+def tour(request):
+    print(request.path_info)
+    return render(request, 'UserApp/tour.html', context={})
+
+
+def recreation(request):
+    print(request.path_info)
+    return render(request, 'UserApp/recreation.html', context={})
+
+    
 # Home Page After Login
 def UserIndex(request):
     try:

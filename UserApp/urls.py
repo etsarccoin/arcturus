@@ -25,5 +25,10 @@ urlpatterns = [
     path('user-feedback/', views.UserFeedbackControler, name="UserFeedback"),
     path('submit/user-feedback/', views.SubmitUserFeedBack, name="SubmitUserFeedback"),
     path("logout/",views.logout,name="UserLogout"),
-    path('test/', views.Test, name=""),
+    path('hotel/', views.hotel, name="hotel"),
+    path('travel/', views.travel, name="travel"),
+    path('food/', views.food, name="food"),
+    path('payment/', views.payment, name="payment"),
+    path('tour/', views.tour, name="tour"),
+    path('recreation/', views.recreation, name="recreation"),
 ]

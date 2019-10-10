@@ -1,5 +1,6 @@
 from django.db import models
 
+<<<<<<< HEAD
 
 class HomePage(models.Model):
     top_banner_heading = models.TextField(default = "Banner Heading",max_length = 32,blank = True)
@@ -61,3 +62,16 @@ class HomePage(models.Model):
             HomePage.objects.all().delete()
 
         super().save(*args, **kwargs)   
+=======
+class OurSerice(models.Model):
+    description = models.TextField()
+    updated_at = models.DateTimeField()
+
+
+class SocialMedialLink(models.Model):
+    facebook_link = models.TextField()
+    twitter_link = models.TextField()
+    googleplus = models.TextField()
+    linkedin = models.TextField()
+
+>>>>>>> 1a802fcedf47283f8cc03cc3d51fc873db10205b
