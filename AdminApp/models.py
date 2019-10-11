@@ -57,9 +57,8 @@ class HomePage(models.Model):
         all_obj = HomePage.objects.all()
         if len(all_obj > 1):
             HomePage.objects.all().delete()
-
         super().save(*args, **kwargs)   
-=======
+        
 class OurSerice(models.Model):
     description = models.TextField()
     updated_at = models.DateTimeField()
@@ -70,5 +69,3 @@ class SocialMedialLink(models.Model):
     twitter_link = models.TextField()
     googleplus = models.TextField()
     linkedin = models.TextField()
-
->>>>>>> 1a802fcedf47283f8cc03cc3d51fc873db10205b
