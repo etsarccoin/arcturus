@@ -70,7 +70,7 @@ def recreation(request):
     print(request.path_info)
     return render(request, 'UserApp/recreation.html', context={})
 
-def white(request):
+def white12(request):
     print(request.path_info)
     return render(request, 'UserApp/white.html', context={})
 
