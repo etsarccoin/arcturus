@@ -1,7 +1,4 @@
 from django.db import models
-
-<<<<<<< HEAD
-
 class HomePage(models.Model):
     top_banner_heading = models.TextField(default = "Banner Heading",max_length = 32,blank = True)
     top_banner_content = models.TextField(default = "Banner Content",max_length = 128, blank = True)
