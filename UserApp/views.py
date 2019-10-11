@@ -70,6 +70,10 @@ def recreation(request):
     print(request.path_info)
     return render(request, 'UserApp/recreation.html', context={})
 
+def white(request):
+    print(request.path_info)
+    return render(request, 'UserApp/white.html', context={})
+
     
 # Home Page After Login
 def UserIndex(request):

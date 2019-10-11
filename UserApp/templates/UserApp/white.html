@@ -1,0 +1,615 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{%static 'UserApp/assets/img/title.ico' %}">
+<title>White Paper</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/animations.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-social.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/highcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.bootstrap4.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-timepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-colorpicker.min.css' %}">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+	
+</head>
+
+<body role="document">
+
+<!--Header Top-->
+<div class="container-fluid bg-header-top">
+	<div class="container pad10T pad10B">
+    	<div class="row">
+            <div class="col-md-6 text-left-to-center pad5T pad5B">
+                <span class="header-top-text">Welcome to Arcturus</span>
+            </div>
+            <div class="col-md-6 text-right-to-center pad5T pad5B">
+            	<a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+                </a>
+                <a href="#" class="top-socila-icon">
+                	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>	
+</div>
+	
+<!-- Navbar Start -->
+<div class="container pad0L pad0R">
+	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
+        <a class="navbar-brand" href="{% url 'Userindex' %}">
+            <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mrg5A active">
+                    <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userservice' %}">Service</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userabout' %}">About</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
+                </li>
+				<li class="nav-item mrg5A">
+					{% if logged_in %}
+					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
+					{% else %}
+					<a href="{% url 'UserLogin' %}" class="btn btn-navbar-brown">Login</a>
+					{% endif %}
+				</li>
+            </ul>
+        </div>
+    </nav>
+</div>
+	
+<!--Banner Slider-->
+<div class="container-fluid baner-bg2 pad40B">
+    <div class="row" style="position: relative;">
+        <video class="embed-responsive embed-responsive-16by9" poster="https://www.paypalobjects.com/webstatic/mktg/wright/videos/home-signup.jpg" muted autoplay loop >
+            <source class="embed-responsive-item"  type="video/mp4" src="{% static 'UserApp/assets/video/banner-video-01.mp4' %}"/>
+        </video>
+        <div class="text-container">
+            <div class="text-row">
+                <div class="text-top">Welcome to Arcturus world !!!</div>
+                    <text class="text-bot">
+                         ARCTURUSis a start-up company specializing in creating cryptocurrencies for smoother transactions.
+                    </text>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--About Section-->
+<div class="container-fluid pad40T pad0B">
+	<div class="container">
+   	
+    	<div class="row">
+        	<h2 class="border-heading">-->> White Paper  <<--</h2>
+            <br><br><br>
+            <div class="col">
+            	<div class="row">
+            	<p>
+            		<strong>
+                        <h1 class="section-header">
+                            What is ARCTURUS?
+                        </h1>
+                    </strong>
+            	</p>
+                <p class="section-mater">
+					ARCTURUSis the next generation future-ready cryptocurrency developed using the stout blockchain technology with own custom-made algorithms. The name ‘ARCTURUS’ has been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.
+                </p>
+			    </div>
+                <div>
+                    <blockquote class="section-mater">
+                        <strong>
+                                <h5>Things that make ARCTURUS special include:</h5>
+                        </strong>
+                    </blockquote>
+                    <ul class="section-mater">
+                        <li>
+                            Users have complete switch over privacy –it’s the user who decides which information will be available and to which parties, having whole control over his privateinformation in accordance to his will and applicable laws.
+                        </li>
+                        <li>
+                            Conﬁdentiality without penalty - in ARCTURUS conﬁdential dealings do not cause inflation of the blockchain, avoiding unnecessary computational overhead or forfeiture on performance or scalability while entirely concealing the transaction value.
+                        </li>
+                        <li>
+                            No trustworthy setup required.
+                        </li>
+                        <li>
+                            Blocks are mined using Equihash Proof-of-Work algorithm.
+                        </li>
+                        <li>
+                            Limited release using periodic halving with total amount of coins ~250 million.
+                        </li>
+                        <li>
+                            No addresses are stored in the blockchain - no data whatsoever about either the sender or receiver of a transaction is deposited in the blockchain.
+                        </li>
+                        <li>
+                            Superior scalability through compressed blockchain size makes the ARCTURUS blockchain orders of magnitude lesser than any other blockchain implementation.
+                        </li>
+                        <li>
+                            ARCTURUS supports many transaction types such as escrow transactions, time locked transactions, atomic swaps and more.
+                        </li>
+                        <li>
+                            No premine. No ICO. Backed by a treasury, emitted from every block during the ﬁrst ﬁve years
+                        </li>
+                        <li>
+                            Implemented from scratch in C++ by a team of professional developers.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row pad40T pad40B">
+            <div class="col-lg-7 mrg30B">
+            	<h1 class="section-header">Introduction to the age of digital transactions:</h1>
+                <div class="section-mater"> 
+					<p>It is a well-known fact now that proposed by Satoshi Nakamoto back in the ﬁeld of crypto currencies technologies and research papers,Bitcoin was the ﬁrst implementation of the idea of a peer to peer electronic cash system. Today one can ﬁnd such projects varying from distributed computing to even broader enterprise solutions and have been applied to diverse ﬁelds from healthcare to metallurgy to automotive industries.</p>
+
+
+                    <p>
+                        But the most important thing that remains constant even today making Bitcoin still the top cryptocurrency and is as inﬂuential today as it was almost ten years ago is the basic need for people to store their money and transact in a secure way without relying on a centralized authority. This is also still the main use case and is most important as well.
+                    </p>
+                    <p>
+                        Similar to most other cryptocurrencies in case of Bitcoin too, your balance is denoted by a series of transactions which can be tracked back to the very beginning of a blockchain. In order to have faith on the system we need to make sure that each transaction in a chain is valid, and to do so without being dependent on a centralized entity, which is the main purpose of Bitcoin nodes and miners. All contributors in the system must approve, or using more professional terms "reach consensus” on an official version of the transaction history and also be able to do so without trusting each other or anyone else. The ability of the system to do so is the true strength of the Bitcoin idea.
+                    </p>
+            	</div>
+                <h1 class="section-header">Failure of Anonymity and the Need for Conﬁdentiality:</h1>
+                <div class="section-mater">
+                    <p>
+                        To begin with, transactions in the Bitcoin network were supposed to be anonymous. By spawning random private and public key pairs, and expending the public part to form an address that could   be employed to receive and control transactions, many Bitcoin users presumed that nothing in that process could serve any linkage to their real identity.
+                    </p>
+                    <p>
+                        But, this did not happen. Using blockchain analysis, research has shown that there are always data.Such data can originate from a number of means like the merchants,exchanges, OTC deals or even by gathering and clustering the blockchain data. It is then possible to identify users, and since all data, together with transaction amounts, is open and permanently stored in a public ledger, once the identity of users is known all their transactions past and future as well as their balance, become directly linked to them as a person.
+                    </p>
+                    <p>
+                        But, ideally no organization or individual prefers it. Everyone wants their transaction whether in digital or real-world transactions to be extremely private and confidential. These can only be accessed ideally by those authorized with the power to do so. 
+                    </p>
+                    <p>
+                        This would call for limiting the transparency of transaction details, comprisingof transferred amounts and identities of the participants and maintaining as little evidenceas possible about the transactions available in the public records to avert future analysis and a potential disclosure which is likely quite often.
+                    </p>
+                </div>
+                <h1 class="section-header">
+                    Introducing ARCTURUS
+                </h1>
+                <div class="section-mater">
+                    <p>
+                        We are a pioneering startup established in 2019 in the field of cryptocurrency development and also stepping in the world of digital transactions based on blockchain technology.
+                    </p>
+                    <p>
+                        We have engineered are own cryptocurrency called ARCTURUS. Our website design, name and logo has also been inspired from the same.
+                    </p>
+                    <p>ARCTURUS is the next generation future-ready cryptocurrency developed using the stout blockchain technology with own custom-made algorithms. The name &lsquo;ARCTURUS&rsquo; has been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.<br />
+                    Significantly, it is the brightest star in the constellation of Bo&ouml;tes, the fourth-brightest in the night sky, and the brightest in the northern celestial hemisphere. Similarly, in the world of digital transactions based on blockchain technology, ARCTURUS, as a cryptocurrency is aimed at transforming transactions in the hospitality and travel industry secured and seamless to redefine them to the next levels.<br />
+                    Born a couple of years ago with the idea lurking in mind to fill the gap between financial and crypto world and the hospitality and travel industry, our boarder aim is tobe licensed cryptocurrency exchange platform, providing a full service suite for all institutional and private hospitality and travel business clients.<br />
+                    Our target is to ensure that after 5 months people should be able to buy the ARCTURUS token using BTC and withdrawal can only be performed after 6 months.<br />
+                    The cryptocurrency ARCTURUS is destined to empower any crypto related projects to overcome any existing barrier in investment and adoption, while being fully regulation compliant and banking-friendly.<br />
+                    </p>
+                </div>
+                <h1 class="section-header">
+                     Cryprocurrency: A boost for hospitality sector
+                </h1>
+                <div class="section-mater">
+                    <br/>
+                    There are several reasons why cryptocurrency and crypto payments are well-matched for the hospitality sector. With Bitcoins as the future of payments, incorporation with hospitality businesses has many promises for growth and increased sales.
+                    <br/>
+                    <ul>
+                    <blockquote class="section-mater">
+                        <strong>
+                            <br/>
+                                <h5>Upsurge in value:</h5>
+                        </strong>
+                    </blockquote>
+                    <div>
+                        <ul class="section-mater">
+                            Just a few years ago, retailers and major chains were reluctant to accepting cryptocurrency payments. Had they been doing so in 2017, where one Bitcoin was worth over £2K, the value of that same Bitcoin would be above £7K now. We should point out that from then, till date, Bitcoin against GBP has risen to £8K. Thus it evident that it’s a constantly evolving market!<br/>
+                            Though it was undoubtedly a disadvantage for retailers that could not allow crypto payments. But with the evolution of new users and digital wallets created every day, it’s tough to ignore the popularity of cryptocurrency and how it has the potential to erase fiat currency (government regulated money i.e. GBP, USD) altogether.<br/>
+
+                        </ul>
+                    </div>
+                </ul>
+                <ul>
+                    <blockquote class="section-mater">
+                        <strong>
+                            <br/>
+                                <h5>Prospective customers:</h5>
+                        </strong>
+                    </blockquote>
+                    <div>
+                        <ul class="section-mater">
+                            An EPOS attuned with cryptocurrency would widen your customer base and drive more sales to a business. Not only will Bitcoin users be transformed as your customer base, but non-users will also be titillated by a business accepting crypto payments. It will also be a promotional opportunity for your business, by taking this ground-breaking approach and catering to a market on the rise.<br/>
+                            We have highlighted on how there are new users and wallets created every day – these are people with Bitcoin to spend. For those who have been Bitcoin users since its earliest days, they will have a considerable amount of Bitcoins, all of which have increased in value over the past few years. These are potential prospective customers that would fetch in more sales as well as new customers to your business too.<br/>
+
+
+                        </ul>
+                    </div>
+                </ul>
+
+                <ul>
+                    <blockquote class="section-mater">
+                        <strong>
+                            <br/>
+                                <h5>Future Payments:</h5>
+                        </strong>
+                    </blockquote>
+                    <div>
+                        <ul class="section-mater">
+                           With ARCTURUS, the process is unpretentious and accessible. We’re always looking for new innovations and ideas that will benefit hospitality businesses with the use of cryptocurrencies. 
+                            <br/>
+                            Cryptocurrency is a topic of interest and has the potential to be implemented in hospitality to allow a newer form of payment easing all worries enabling them to travel all over the world without carrying any physical cash. The worries of currency conversions, devaluations and upsurges while conversions etc. also do not exist here. 
+                            <br/>
+                            Thus ARCTURUScan be a ground-breaking yet robust crypto mode of payment to transform the future of payments for hospitality and fooding industry.
+                            <br/>
+                        </ul>
+                    </div>
+                </ul>
+                </div>
+<!--             	<div class="section-button">
+            		<a href="#" class="btn btn-navbar-brown mrg5A">Read More</a>
+            		<a href="#" class="btn btn-navbar-brown-border mrg5A">Get Demo</a>
+            	</div> -->
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!--How to work-->
+<div class="container-fluid footer-bg-back pad40T pad10B">
+	<div class="container pad20T">
+		<div class="row">
+		
+			<div class="col-lg-4 mrg30B">
+			  <div class="work-container">
+					<div class="image">
+						<img src="{% static 'UserApp/assets/img/icon-wallet-2.png' %}" width="180" height="180" class="img-fluid" alt=""/>
+					</div>
+					<div class="header">Create Wallet</div>
+					<div class="mater">Comming Soon...</div>
+			  </div>
+			</div>
+			
+			<div class="col-lg-4 mrg30B">
+			  <div class="work-container">
+					<div class="image">
+						<img src="{% static 'UserApp/assets/img/icon-bitcoin.png' %}" width="180" height="180" class="img-fluid" alt=""/>
+					</div>
+					<div class="header">Create Wallet</div>
+					<div class="mater">Comming Soon...</div>
+			  </div>
+			</div>
+			
+			<div class="col-lg-4 mrg30B">
+			  <div class="work-container">
+					<div class="image">
+						<img src="{% static 'UserApp/assets/img/icon-send-received.png' %}" width="180" height="180" class="img-fluid" alt=""/>
+					</div>
+					<div class="header">Create Wallet</div>
+					<div class="mater">Comming Soon....</div>
+			  </div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<!--Why Choose Section-->
+<div class="container-fluid pad40T pad0B">
+	<div class="container">
+        
+        <div class="row">
+            <h2 class="border-heading">Why Choose US</h2>
+            <!-- <div class="col">
+                <div class="body-text text-center pad20T">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip dantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem</div>
+            </div> -->
+        </div>
+        
+        <div class="row pad40T pad40B">
+            <div class="col-lg-5 col-md-6 mrg30B order-md-7">
+                <img src="{% static 'UserApp/assets/img/hands-4348717_1920_Edit.jpg' %}" width="100%" alt=""/>
+            </div>
+            <div class="col-lg-7 col-md-6 mrg30B">
+                
+                <div class="choose-table-row">
+                    <div class="choose-table-cell">
+                        <img src="{% static 'UserApp/assets/img/icon-team.png' %}" width="92" height="92" alt=""/>
+                    </div>
+                    <div class="choose-table-cell">
+                        <div class="header">Expert TEAM</div>
+                        <div class="mater">Our dedicated and seasoned cryptocurrency developers deploy cutting edge blockchain technology to build the most reliablecryptocurrency and provide reliable support for the entire process.</div>
+                    </div>
+                </div>
+                
+                <div class="choose-table-row">
+                    <div class="choose-table-cell">
+                        <img src="{% static 'UserApp/assets/img/icon-service.png' %}" width="92" height="92" alt=""/>
+                    </div>
+                    <div class="choose-table-cell">
+                        <div class="header">Fast Service</div>
+                        <div class="mater">We ensure timely delivery of our projects with efficient project planning and management.</div>
+                    </div>
+                </div>
+                
+                <div class="choose-table-row">
+                    <div class="choose-table-cell">
+                        <img src="{% static 'UserApp/assets/img/icon-access.png' %}" width="92" height="92" alt=""/>
+                    </div>
+                    <div class="choose-table-cell">
+                        <div class="header">Easy Access</div>
+                        <div class="mater">An industry-proven yet custom-made algorithm has been employed to ensure broad adoption by existing GPU miners. Arcturuscomes with an extensive array of tools for running and managing mining nodes.</div>
+                    </div>
+                </div>
+                
+                <div class="choose-table-row">
+                    <div class="choose-table-cell">
+                        <img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
+                    </div>
+                    <div class="choose-table-cell">
+                        <div class="header">Learge Wallet</div>
+                        <div class="mater">A wallet for desktop and mobile, designed to support day-to-day usage for both individual and small business users. The built-in dashboard makes budget management easy, featuring actionable spend and earning insights</div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+<!--Our Vision Section-->
+<!-- <div class="container-fluid pad20T pad0B">
+	<div class="container">
+   	
+    	<div class="row">
+        	<h2 class="border-heading">Our Vission</h2>
+            <div class="col">
+            	<div class="body-text text-center pad20T">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la bore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip dantium, totam rem aperiam, eaque ipsa quae ab illo </div>
+            </div>
+        </div>
+        
+        <div class="row pad40T pad40B">
+        	<div class="col-lg-5 order-lg-7 mrg30B">
+            	<img src="{% static 'UserApp/assets/img/about-img-2.png' %}" width="100%" alt=""/>
+            </div>
+            <div class="col-lg-7 mrg30B">
+                <div class="section-mater"> 
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis iusto architecto nisi quo laboriosam dolorem fugiat sed officia hic obcaecati nostrum dolor eum, cum voluptas voluptatibus voluptatum, veniam eius, aliquid.</p>
+					<p>Maxime et amet, quibusdam rem magnam dolore eos suscipit reiciendis. Nihil adipisci voluptatum eos tempore quaerat dolore officia vel, facilis dolores ad ipsa veniam sed minus repellendus. Vitae, quis, provident.</p>
+					<p>Sed dolore pariatur, ipsum ullam voluptate recusandae esse ipsa quas! Ea nostrum unde consequuntur ab, labore minima vitae repudiandae saepe eaque accusamus, blanditiis aperiam atque porro neque repellendus. Ratione, odio!</p>
+					<p>Ratione magni repellat odio, ab labore id itaque quis voluptate cum velit non, quod, quo voluptatum minus doloribus quidem quasi veniam perspiciatis unde assumenda! Ea eveniet expedita voluptas aliquid ad.</p>
+					<p>Autem nobis magnam vel recusandae, quidem voluptate delectus excepturi officiis laudantium saepe dolore repellat, fugiat vitae, ducimus minus commodi necessitatibus dolorem quas quaerat, qui sunt inventore culpa error molestias est?</p>
+            </div>
+        </div>
+        
+    </div>
+</div> -->
+
+<!--Join Section-->
+<div class="container-fluid join-section-bg pad40T pad10B">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mrg30B">
+				<div class="join-left-text">Join our subscription and get instant updates about offers and discounts.</div>
+			</div>
+			<div class="col-lg-6 mrg30B">
+				<div class="join-right-input">
+					<div class="input-group mb-0">
+						<input type="text" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
+						<div class="input-group-append">
+							<span class="input-group-text">Submit</span>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Footer top-->
+<div class="container-fluid footer-bg-back pad40T pad10B">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 mrg30B">
+				<div class="footer-logo">
+					<a href="#">
+						<img src="{% static 'UserApp/assets/img/logo-bw.png' %}" width="222" class="img-fluid" alt=""/>
+					</a>
+				</div>
+				<div class="footer-logo-mater">Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit lobortis augue duis dolore te feugait nulla facilisi mazim placerat</div>
+				<ul class="footer-list">
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+							<span>Street, 11000 Helsinki, Finland</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+							<span>(+123)11 123 4567</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+							<span>office@example.com</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		  	<div class="col-lg-4">
+		  		<div class="footer-heading">Latest News</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-news-container">
+		  			<div class="footer-news-col">
+		  				<div class="image">
+		  					<img src="{% static 'UserApp/assets/img/news-img-01.jpg' %}" width="100%" alt=""/>
+		  				</div>
+		  			</div>
+		  			<div class="footer-news-col">
+		  				<div class="top">Lorem ipsum dolor sit amet, consectetur aliquam quaerat</div>
+		  				<a href="#" class="bot">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+			</div>
+			<div class="col-lg-4">
+				<div class="footer-heading">Twitter Feed</div>
+				
+				<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="footer-twitter-table">
+		  			<div class="footer-twitter-table-col">
+		  				<div class="image">
+		  					<i class="fa fa-twitter" aria-hidden="true"></i>
+		  				</div>
+		  			</div>
+		  			<div class="footer-twitter-table-col">
+		  				<div class="top">Discover true #WooCommerce elegance with Eola! https://t.co/TbrKHayxJ2 This #WordPress masterpiece is perfect for…</div>
+		  				<div class="bot">https://t.co/lgZNiJgZMe</div>
+		  				<a href="#">April 12, 2019</a>
+		  			</div>
+		  		</div>
+		  		
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Footer Bottom-->
+<div class="container-fluid bg-footer-bot">
+	<div class="row">
+		<div class="col">
+			<div class="footer-bot-text">
+				<a href="#">© 2011 Yourcompany.com, All Rights Reserved</a>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!-- Bootstrap core JavaScript --> 
+<script src="{% static 'UserApp/assets/js/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/css3-animate-it.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.input-mask.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2-2.3.4.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2.thumbs.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/highcharts.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.raty-fa.js' %}"></script>
+
+<script src="{% static 'UserApp/assets/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-colorpicker.min.js' %}"></script>
+	
+<script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+
+<script>
+	
+</script> 
+
+</body>
+</html>
