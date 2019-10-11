@@ -5,7 +5,6 @@ from django.urls import path
 urlpatterns = [
     # url(r'^$', views.index, name="homePage"),
     path('test/', views.Test, name="Test Url For Pages"),  # Tesing Purpose
-
     path('', views.AdminLogin, name="AdminLogin"),
     path('admin-dashboard/', views.AdminDashboardPanel, name="AdminDashboard"),
     path('logout/', views.LogoutAdmin, name="AdminLogout"),
