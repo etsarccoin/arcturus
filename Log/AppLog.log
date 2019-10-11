@@ -1,0 +1,75 @@
+2019-10-11 07:22:52,418 <---------------- Log File ---------------->
+2019-10-11 07:49:03,454 Not Found: /static/Admin2019-10-11 07:49:12,316 Not Fo2019-10-11 07:49:15,382 Not Found: /static/Admin2019-10-11 07:49:39,137 Internal Server Error: /user-admin/home-page-edit/
+Traceback (most recent call last)2019-10-11 07:50:57,999 Not Found: /favicon.ico
+2019-10-11 07:56:11,939 Not Found: /static/UserApp/assets/css/bootstrap-datepicker3.standalone.css.map
+2019-10-11 09:36:55,069 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 09:37:11,158 Not Found: /favicon.ico
+2019-10-11 09:37:18,062 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 09:39:53,892 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 09:39:59,142 Not Found: /static/AdminApp/assets/css/iCheck/all.css
+2019-10-11 09:40:01,680 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 09:40:02,843 Not Found: /static/AdminApp/assets/css/iCheck/all.css
+2019-10-11 10:16:02,720 Not Found: /static/AdminApp/assets/css/iCheck/all.css
+2019-10-11 11:42:15,175 Not Found: /static/UserApp/assets/css/bootstrap.css.map
+2019-10-11 11:42:32,291 Not Found: /favicon.ico
+query-jvectormap.css
+2019-10-11 09:40:01,685 Not Found: /static/AdminApp/assets/css/iCheck/all.css
+2019-10-11 09:40:02,829 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 10:17:34,232 Not Found: /static/UserApp/assets/css/bootstrap.css.map
+2019-10-11 11:42:15,167 Not Found: /static/UserApp/assets/js/bootstrap.bundle.js.map
+2019-10-11 11:42:15,204 Not Found: /static/UserApp/assets/css/bootstrap-colorpicker.min.css.map
+ner
+    response = get_response(request)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/CryptoCoin/AdminApp/views.py", line 456, in HomePageEditView
+    home_page.save()
+  File "/home/ubuntu/CryptoCoin/AdminApp/models.py", line 58, in save
+    if len(all_obj > 1):
+TypeError: '>' not supported between instances of 'QuerySet' and 'int'
+2019-10-11 09:39:40,860 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 10:16:02,713 Not Found: /static/AdminApp/assets/css/jquery-jvectormap.css
+2019-10-11 11:42:15,203 Not Found: /static/UserApp/assets/css/bootstrap-datepicker3.standalone.css.map
+2019-10-11 13:23:49,197 Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/ubuntu/CryptoCoin/UserApp/views.py", line 77, in UserIndex
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/contrib/sessions/backends/base.py", line 54, in __getitem__
+    return self._session[key]
+KeyError: 'user_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/CryptoCoin/UserApp/views.py", line 92, in index
+    return render(request, 'UserApp/index.html', context=context)
+  File "/home/ubuntu/CryptoCoin/UserApp/views.py", line 88, in UserIndex
+    except Exception as e:
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/template/defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/ubuntu/my_env/lib/python3.6/site-packages/django/urls/resolvers.py", line 673, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'white' not found. 'white' is not a valid view function or pattern name.
