@@ -30,11 +30,7 @@ urlpatterns = [
     path('user-subccription/', views.ShowSubcribeUser, name="SubcriptionTable"),
     path('social-link/', views.SocialURLManagement, name="SocialUrlMNGT"),
     path('social-link/update/', views.SocialURLUpdate, name="SocialUrlUpdate"),
-<<<<<<< HEAD
     path('image/',views.changeimage,name="image"),
     path('body/',views.update_context,name="body"),
-
-    path('home-page-edit/',views.HomePageEditView, name = 'HomePageEdit')
-=======
->>>>>>> 1a802fcedf47283f8cc03cc3d51fc873db10205b
+    path('home-page-edit/',views.HomePageEditView, name = 'HomePageEdit'),
 ]
