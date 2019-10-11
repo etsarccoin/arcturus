@@ -40,7 +40,7 @@
 }
 
 .highcharts-background {
-  fill: #ffffff;
+  fill: transparent;
 }
 
 .highcharts-plot-border, .highcharts-plot-background {
@@ -68,7 +68,7 @@
 /* Axes */
 .highcharts-axis-line {
   fill: none;
-  stroke: #ccd6eb;
+  stroke: #FFF;
 }
 
 .highcharts-yaxis .highcharts-axis-line {
@@ -87,15 +87,16 @@
 
 .highcharts-grid-line {
   fill: none;
-  stroke: #e6e6e6;
+  stroke: #FFF;
 }
 
 .highcharts-xaxis-grid .highcharts-grid-line {
-  stroke-width: 0;
+  stroke-width: 1;
 }
 
 .highcharts-tick {
   stroke: #ccd6eb;
+	display: none
 }
 
 .highcharts-yaxis .highcharts-tick {
@@ -122,6 +123,7 @@
   fill: #999999;
   font-size: 0.7em;
   transition: fill 250ms, font-size 250ms;
+	display: none !important;
 }
 
 .highcharts-credits:hover {
