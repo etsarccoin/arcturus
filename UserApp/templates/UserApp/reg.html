@@ -324,19 +324,19 @@ function mailcheck()
                   let is_taken = response['is_taken'];
                   if(is_taken == 1)
 				  {
-					  //alert("Email Already Exist !! ");
-					  $(this).addClass('is-invalid');
+					  alert("Email Already Exist !! ");
+					  /*$(this).addClass('is-invalid');
 				      $(this).removeClass('is-valid');
-				      $(this).('<div class="invalid-feedbac" style="font-weight:600;color:red">Email Already Exist !!</div>').insertAfter($(this));
-					  //$('#s_data').attr("disabled", true);
+				      $('<div class="invalid-feedbac" style="font-weight:600;color:red">Email Already Exist !!</div>').insertAfter($(this));
+					  $('#s_data').attr("disabled", true);*/
 				  }
 				  else
 				  {
-				  	$(this).addClass('is-invalid');
+				  	/*$(this).addClass('is-invalid');
 				    $(this).removeClass('is-valid');
 				    $('<div class="valid-feedbac" style="font-weight:600;color:green">Email Is Okay !! </div>').insertAfter($(this));
-					//$('#s_data').attr("disabled", false);
-					//alert("Email Is Okay !! ");
+					$('#s_data').attr("disabled", false);*/
+					alert("Email Is Okay !! ");
 				  }
                },
 			error: function ()

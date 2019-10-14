@@ -147,19 +147,19 @@ def register(request):
                             mac=mac, last_login_time=last_login_time, browser_history="Empty !!",reference_id=user_src_code).save()
                 UserCredintials(user_id=email, password=password).save()
 
-                logger.info(email.upper() + " --> User Registered Just Now ")
+                # logger.info(email.upper() + " --> User Registered Just Now ")
 
-                email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
-                email_veri.save()
+                # email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
+                # email_veri.save()
 
-                mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
-                            "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
-                SendMail(email, mail_body)
-                logger.info("Email Send With Code : " + num)
+                # mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
+                #             "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
+                # SendMail(email, mail_body)
+                # logger.info("Email Send With Code : " + num)
 
-                logger.info("mail_body : " + mail_body)
+                # logger.info("mail_body : " + mail_body)
 
-                msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
+                # msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
                 context = {'msg': msg}
                 return render(request, 'UserApp/login.html', context=context)
 
@@ -372,6 +372,17 @@ def more(request):
         logged_in = False
         context = {'logged_in': logged_in}
         return render(request, 'UserApp/more.html', context=context)
+def sucess(request):
+    try:
+        user_id = request.session['user_id']
+        logged_in = True
+        context = {'logged_in': logged_in}
+        return render(request, 'UserApp/sucess.html', context=context)
+    
+    except Exception as e:
+        logged_in = False
+        context = {'logged_in': logged_in}
+        return render(request, 'UserApp/sucess.html', context=context)
 
 def service(request):
     try:
