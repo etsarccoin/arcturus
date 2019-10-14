@@ -31,7 +31,16 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+<script type="text/javascript">
+  window.onload = function() {
+  Particles.init({
+    selector: '.particle',
+    connectParticles: true,
+    color:'#619932',
+  });
+};
+</script>
 </head>
 
 <body role="document">
@@ -96,7 +105,22 @@
         </div>
     </nav>
 </div>
-
+<div class="container-fluid baner-bg2 pad40B">
+    <div class="row" style="position: relative;">
+       <div class="embed-responsive embed-responsive-4by1 particle-back">
+            <canvas class="particle embed-responsive-item"></canvas>
+        </div>
+        <div class="text-container">
+            <div class="text-row">
+                <div class="text-top">Welcome to Arcturus world !!!</div>
+                    <text class="text-bot">
+                         ARCTURUS  is a start-up company specializing in creating cryptocurrencies for smoother transactions.
+                    </text>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--About Section-->
 <div class="container-fluid pad40T pad0B">
 	<div class="container">

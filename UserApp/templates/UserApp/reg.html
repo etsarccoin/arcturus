@@ -324,13 +324,19 @@ function mailcheck()
                   let is_taken = response['is_taken'];
                   if(is_taken == 1)
 				  {
-					  alert("Email Already Exist !! ");
-					  $('#s_data').attr("disabled", true);
+					  //alert("Email Already Exist !! ");
+					  $(this).addClass('is-invalid');
+				      $(this).removeClass('is-valid');
+				      $('<div class="invalid-feedbac" style="font-weight:600;color:red">Email Already Exist !!</div>').insertAfter($(this));
+					  //$('#s_data').attr("disabled", true);
 				  }
 				  else
 				  {
-					$('#s_data').attr("disabled", false);
-					alert("Email Is Okay !! ");
+				  	$(this).addClass('is-invalid');
+				    $(this).removeClass('is-valid');
+				    $('<div class="valid-feedbac" style="font-weight:600;color:green">Email Is Okay !! </div>').insertAfter($(this));
+					//$('#s_data').attr("disabled", false);
+					//alert("Email Is Okay !! ");
 				  }
                },
 			error: function ()
@@ -356,12 +362,18 @@ function mailcheck()
 			var p1 = $('#psw').val();
 			if (p1.length >= 5) 
 			{
-				alert("Password Format Is Correct !!");
+				//alert("Password Format Is Correct !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green">Password Format Is Correct !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", false);
 			}
 			else
 			{
-				alert("Password Must min have 5 and Max 16 Letters !!");
+				//alert("Password Must min have 5 and Max 16 Letters !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">Password Must min have 5 and Max 16 Letters !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 	  });
@@ -375,12 +387,18 @@ function mailcheck()
 			let p1 = $('#psw').val();
 			if(p1 == p2)
 			{
-				alert("Password Matched !!");
+				//alert("Password Matched !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green">Password Matched !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", false);
 			}
 			else
 			{
-				alert("Password Did Not Matched !!");
+				//alert("Password Did Not Matched !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">Password Did Not Matched !!!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 		});
@@ -394,17 +412,25 @@ function mailcheck()
 			let fn = $('#firstName').val();
 			if(fn.length == 0)
 			{
-				alert("FirstName Can Be Empty !!");
+				// alert("FirstName Can Be Empty !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">FirstName Can not Be Empty !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 			else if(fn.length >= 3)
 			{
-				alert("FirstName Is Okay !!");
+				// alert("FirstName Is Okay !!");
+				$(this).removeClass('is-invalid');
+				$(this).addClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green">FirstName is ok!!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", false);
 			}
 			else
 			{
-				alert("FirstName Should be Min 3 Letters !!");
+				//alert("FirstName Should be Min 3 Letters !!");
+				$(this).removeClass('is-invalid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">FirstName Should be Min 3 Letters!!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 		});
@@ -418,17 +444,26 @@ function mailcheck()
 			let ln = $('#lastName').val();
 			if(ln.length == 0)
 			{
-				alert("LastName Can Be Empty !!");
+				//alert("LastName Can Be Empty !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">LastName Can Be Empty !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 			else if(ln.length >= 3)
 			{
-				alert("LastName Is Okay !!");
+				//alert("LastName Is Okay !!");
+				$(this).removeClass('is-invalid');
+				$(this).addClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green">LastName is ok!!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", false);
 			}
 			else
 			{
-				alert("LastName Should be Min 3 Letters !!");
+				//alert("LastName Should be Min 3 Letters !!");
+				$(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:red">LastName Should be Min 3 Letters !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);
 			}
 		});
@@ -440,10 +475,16 @@ function mailcheck()
     $(document).ready(function(){
         $('input[type="checkbox"]').click(function(){
             if($(this).is(":checked")){
-                alert("You Agree Terms and Condition !!");
+                //alert("You Agree Terms and Condition !!");
+                $(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green">You Agree Terms and Condition !!</div>').insertAfter($(this));
             }
             else if($(this).is(":not(:checked)")){
-                alert("Please Agree Terms and Condition !!");
+                //alert("Please Agree Terms and Condition !!");
+                $(this).addClass('is-invalid');
+				$(this).removeClass('is-valid');
+				$('<div class="invalid-feedbac" style="font-weight:600;color:green">Please Agree Terms and Condition !!</div>').insertAfter($(this));
             }
         });
     });
