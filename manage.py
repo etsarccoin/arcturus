@@ -3,8 +3,10 @@
 import os
 import sys
 import numpy as np
-os.system('cls')
-os.system("color {}".format(("02","03","04","05","06","07","08","0a","0b","0c","0d","0e","0f")[np.random.randint(0,13)]))
+try:
+    os.system('cls')
+except:
+    os.system("clear")
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CryptoCoin.settings')
     try:

@@ -17,10 +17,10 @@
 body {
 	padding-top: 0px;
 	padding-bottom: 0px;
-	-webkit-user-select: none;
+	/*-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	user-select: none;
+	user-select: none;*/
 	font-family: 'Lato', sans-serif;
 	position: relative;
 	font-size: 14px;
@@ -1822,10 +1822,59 @@ nav.bg-white.navbar-light .navbar-toggler {
 }
 /********************************************************
 ********************************************************/
-
+.particle-back {
+	background: #000;
+}
+.embed-responsive-4by1::before {
+  padding-top: 25%;
+}
 /********************************************************
 ********************************************************/
-
+.zoom .zoom-hover {
+	overflow: hidden;
+}
+.zoom .zoom-hover img {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+	
+	-webkit-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
+.zoom:hover .zoom-hover img {
+	-webkit-transform: scale(1.4);
+	-ms-transform: scale(1.4);
+	-o-transform: scale(1.4);
+	transform: scale(1.4);
+	
+	-webkit-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
+.zoom .zoom-hover .link-icon,
+.zoom .zoom-hover .link-icon img {
+	-webkit-transform: scale(1.4);
+	-ms-transform: scale(1.4);
+	-o-transform: scale(1.4);
+	transform: scale(1.4);
+	
+	-webkit-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
+.zoom:hover .zoom-hover .link-icon,
+.zoom:hover .zoom-hover .link-icon img {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+	
+	-webkit-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
 /********************************************************
 ********************************************************/
 
