@@ -58,6 +58,9 @@ def food(request):
     print(request.path_info)
     return render(request, 'UserApp/fooding.html', context={})
 
+def more(request):
+    print(request.path_info)
+    return render(request, 'UserApp/more.html', context={})
 
 def payment(request):
     print(request.path_info)

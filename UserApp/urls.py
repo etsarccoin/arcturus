@@ -32,4 +32,5 @@ urlpatterns = [
     path('tour/', views.tour, name="tour"),
     path('recreation/', views.recreation, name="recreation"),
     path("white/",views.white12,name="white"),
+    path('more/',views.more,name='more'),
 ]

@@ -13,7 +13,7 @@ class UsersDetail(models.Model):
     country = models.CharField(max_length=50)
     state = models.CharField(max_length=40)
     zipcode = models.CharField(max_length=15)
-    active_user = models.BooleanField()
+    active_user = models.BooleanField(default=True)
     created_at = models.DateTimeField()
     account_conf = models.DateTimeField()
     updated_at = models.DateTimeField()
