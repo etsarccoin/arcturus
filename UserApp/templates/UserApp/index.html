@@ -31,7 +31,16 @@
     
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+<script type="text/javascript">
+  window.onload = function() {
+  Particles.init({
+    selector: '.particle',
+    connectParticles: true,
+    color:'#619932',
+  });
+};
+</script>
 </head>
 <body role="document">
 
@@ -117,9 +126,9 @@
 <!--Banner Slider-->
 <div class="container-fluid baner-bg2 pad40B">
     <div class="row" style="position: relative;">
-        <video class="embed-responsive embed-responsive-16by9" poster="https://www.paypalobjects.com/webstatic/mktg/wright/videos/home-signup.jpg" muted autoplay loop >
-            <source class="embed-responsive-item"  type="video/mp4" src="{% static 'UserApp/assets/video/banner-video-01.mp4' %}"/>
-        </video>
+       <div class="embed-responsive embed-responsive-4by1 particle-back">
+            <canvas class="particle embed-responsive-item"></canvas>
+        </div>
         <div class="text-container">
             <div class="text-row">
                 <div class="text-top">Welcome to Arcturus world !!!</div>
@@ -153,8 +162,8 @@
 	<div class="container">
     	<div class="row justify-content-center">
         	<div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
                     	<img src="{% static 'UserApp/assets/img/service-img-01stimg.jpg' %}" width="100%" alt=""/>
                         <div class="image-overlay">
  
@@ -180,8 +189,8 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
  
                     	<img src="{% static 'UserApp/assets/img/service_02.png' %}" width="100%" alt=""/>
  
@@ -206,8 +215,8 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
                     	<img src="{% static 'UserApp/assets/img/bitcoin-2057405_1920_Edit.jpg' %}" width="100%" alt=""/>
                         <div class="image-overlay">
                         	<a href="{% url 'food' %}" class="link-icon">
@@ -228,8 +237,8 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
                     	<img src="{% static 'UserApp/assets/img/ethereum-3818348_1920_Edit.jpg' %}" width="100%" alt=""/>
                         <div class="image-overlay">
                         	<a href="{% url 'payment' %}" class="link-icon">
@@ -250,8 +259,8 @@
                 </div>
             </div>            
             <div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
                     	<img src="{% static 'UserApp/assets/img/bitcoin-2665932_1920_Edit.jpg' %}" width="100%" alt=""/>
                         <div class="image-overlay">
                         	<a href="{% url 'tour' %}" class="link-icon">
@@ -272,8 +281,8 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mrg30B">
-            	<div class="service-panel-container">
-                	<div class="image">
+            	<div class="service-panel-container zoom">
+                	<div class="image zoom-hover">
                     	<img src="{% static 'UserApp/assets/img/bitcoin-4253759_1920_Edit.jpg' %}" width="100%" alt=""/>
                         <div class="image-overlay">
                         	<a href="{% url 'recreation' %}" class="link-icon">
@@ -623,7 +632,7 @@
 					<li>
 						<a href="#">
 							<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
-							<span>arcturuscoin@gmail.com</span>
+							<span>support@arcturus.world</span>
 						</a>
 					</li>
 				</ul>
@@ -633,7 +642,7 @@
 		  		
 		  		<div class="footer-news-container">
 		  			<div class="footer-news-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
 		  				</div>
 		  			</div>
@@ -645,7 +654,7 @@
 		  		
 		  		<div class="footer-news-container">
 		  			<div class="footer-news-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
 		  				</div>
 		  			</div>
@@ -657,7 +666,7 @@
 		  		
 		  		<div class="footer-news-container">
 		  			<div class="footer-news-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
 		  				</div>
 		  			</div>
@@ -673,7 +682,7 @@
 				
 				<div class="footer-twitter-table">
 		  			<div class="footer-twitter-table-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<i class="fa fa-twitter" aria-hidden="true"></i>
 		  				</div>
 		  			</div>
@@ -686,7 +695,7 @@
 		  		
 		  		<div class="footer-twitter-table">
 		  			<div class="footer-twitter-table-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<i class="fa fa-twitter" aria-hidden="true"></i>
 		  				</div>
 		  			</div>
@@ -699,7 +708,7 @@
 		  		
 		  		<div class="footer-twitter-table">
 		  			<div class="footer-twitter-table-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<i class="fa fa-twitter" aria-hidden="true"></i>
 		  				</div>
 		  			</div>
@@ -712,7 +721,7 @@
 		  		
 		  		<div class="footer-twitter-table">
 		  			<div class="footer-twitter-table-col">
-		  				<div class="image">
+		  				<div class="image zoom-hover">
 		  					<i class="fa fa-twitter" aria-hidden="true"></i>
 		  				</div>
 		  			</div>
