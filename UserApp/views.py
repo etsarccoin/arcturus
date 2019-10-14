@@ -21,12 +21,15 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 
 
 base_url = 'www.arturus.world/user/'
-logging.basicConfig(filename="Log/AppLog.log",
-                    format='%(asctime)s %(message)s',
-                    filemode='w')
-logger=logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.info("<---------------- Log File ---------------->")
+try:
+    logging.basicConfig(filename="Log/AppLog.log",
+                        format='%(asctime)s %(message)s',
+                        filemode='w')
+    logger=logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    logger.info("<---------------- Log File ---------------->")
+except:
+    pass
 
 
 
