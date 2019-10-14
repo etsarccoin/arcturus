@@ -358,6 +358,17 @@ def about(request):
         context = {'logged_in': logged_in}
         return render(request, 'UserApp/about.html', context=context)
 
+def more(request):
+    try:
+        user_id = request.session['user_id']
+        logged_in = True
+        context = {'logged_in': logged_in}
+        return render(request, 'UserApp/more.html', context=context)
+    
+    except Exception as e:
+        logged_in = False
+        context = {'logged_in': logged_in}
+        return render(request, 'UserApp/more.html', context=context)
 
 def service(request):
     try:

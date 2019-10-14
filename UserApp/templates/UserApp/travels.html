@@ -31,7 +31,16 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+<script type="text/javascript">
+  window.onload = function() {
+  Particles.init({
+    selector: '.particle',
+    connectParticles: true,
+    color:'#619932',
+  });
+};
+</script>
 </head>
 
 <body role="document">
@@ -44,16 +53,16 @@
                 <span class="header-top-text">Welcome to Arcturus</span>
             </div>
             <div class="col-md-6 text-right-to-center pad5T pad5B">
-            	<a href="#" class="top-socila-icon">
+            	<a href="https://www.facebook.com/arcturus.coin.3" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
                 </a>
-                <a href="#" class="top-socila-icon">
+                <a href="https://twitter.com/ArcturusCoin" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
                 </a>
                 <a href="#" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
                 </a>
-                <a href="#" class="top-socila-icon">
+                <a href="https://www.linkedin.com/in/arcturus-coin-544806194/" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
                 </a>
             </div>
@@ -98,9 +107,9 @@
 </div>
 <div class="container-fluid baner-bg2 pad40B">
     <div class="row" style="position: relative;">
-        <video class="embed-responsive embed-responsive-16by9" poster="https://www.paypalobjects.com/webstatic/mktg/wright/videos/home-signup.jpg" muted autoplay loop >
-            <source class="embed-responsive-item"  type="video/mp4" src="{% static 'UserApp/assets/video/banner-video-01.mp4' %}"/>
-        </video>
+        <div class="embed-responsive embed-responsive-4by1 particle-back">
+            <canvas class="particle embed-responsive-item"></canvas>
+        </div>
         <div class="text-container">
             <div class="text-row">
                 <div class="text-top">Welcome to Arcturus world !!!</div>
