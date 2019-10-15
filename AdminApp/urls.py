@@ -18,7 +18,7 @@ urlpatterns = [
     path('show-graph/', views.DemoGraphControler, name="Demograph"),
     path('admin-calendar/', views.AdminCalenderControler, name="AdminCalender"),
     path('to-do-list/', views.AdminToDoListControler, name="AdminToDoList"),
-    path('terms-and-conditions/', views.TermsAndConditionsControler, name="Termsandconditions"),
+    path('terms-and-con  ditions/', views.TermsAndConditionsControler, name="Termsandconditions"),
     path('policy/', views.PolicyControler, name="Adminpolicy"),
     path('update/terms-and-conditions/', views.UpdateAdminContentControler, name="Updateadmincontent"),
     path('quick-email/', views.QuickEmailControler, name="AdminQuickEmail"),
@@ -31,5 +31,5 @@ urlpatterns = [
     path('social-link/update/', views.SocialURLUpdate, name="SocialUrlUpdate"),
     path('image/',views.changeimage,name="image"),
     path('body/',views.update_context,name="body"),
-    path('home-page-edit/',views.HomePageEditView, name = 'HomePageEdit'),
+    path('home-page-edit/',views.HomePageEditView,name='HomePageEdit'),
 ]
