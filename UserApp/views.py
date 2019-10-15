@@ -141,13 +141,17 @@ def register(request):
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                UsersDetail(first_name=first_name, middle_name="", last_name=last_name, email=email,
+                newu_obj = UsersDetail(first_name=first_name, middle_name="", last_name=last_name, email=email,
                             ph=0, fax="Unknown", country="Unknown", state="Unknown", zipcode="Unknown",
                             active_user=active_user, created_at=created_at, account_conf=created_at,
                             updated_at=created_at, last_login_hostpc=last_login_hostpc,
                             last_login_ip=last_login_ip, last_login_browser=last_login_browser, 
-                            mac=mac, last_login_time=last_login_time, browser_history="Empty !!",reference_id=user_src_code).save()
-                UserCredintials(user_id=email, password=password).save()
+                            mac=mac, last_login_time=last_login_time, browser_history="Empty !!",reference_id=user_src_code)
+                newu_obj.save()
+                newu_cre_obj = UserCredintials(user_id=email, password=password)
+                newu_cre_obj.save()
+
+                logger.info("New User Reg : ", newu_obj, "Cre :", newu_cre_obj)
 
                 # logger.info(email.upper() + " --> User Registered Just Now ")
 
