@@ -34,4 +34,5 @@ urlpatterns = [
     path("white/",views.white12,name="white"),
     path('more/',views.more,name='more'),
     path('sucess/',views.sucess,name='sucess'),
+    path('download-white-paper/', views.DownloadWhitePaper, name="whitepaperdownloadlink")
 ]

@@ -158,3 +158,7 @@ class CoinPriceChangeHistory(models.Model):
 
 
 # ----------------------------------------------------- Admin Control End --------------------------------------------------
+
+
+class AdminWhitePaper(models.Model):
+    white_pdf = models.FileField(upload_to='WhitePaperFolder')

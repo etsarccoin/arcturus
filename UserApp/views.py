@@ -12,11 +12,13 @@ import datetime
 import socket
 import httpagentparser
 import logging
+from django.http import FileResponse
+
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser, GetMacAddress
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
-    SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials
+    SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper
 
 
 
@@ -454,3 +456,14 @@ def UserWalletPage(request):
     
     except Exception as e:
         return UserIndex(request)
+
+
+def DownloadWhitePaper(req):
+    try:
+        obj = AdminWhitePaper.objects.get(id=1)
+        print(obj)
+        return FileResponse(req, as_attachment=True, filename=obj.white_pdf.url)
+    
+    except Exception as e:
+        print("Exception ---> ", e)
+        return HttpResponse("PPP")
