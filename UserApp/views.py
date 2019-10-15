@@ -126,7 +126,7 @@ def register(request):
             last_name = request.POST['lastName']
             email = request.POST['e_mail']
             password = request.POST['psw']
-            active_user = False
+            active_user = True
             last_login_hostpc = GetHostNamePC()
             last_login_ip = GetIPLocationPC(request)
             created_at = datetime.datetime.now()
@@ -161,13 +161,13 @@ def register(request):
 
                 # msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
                 context = {'msg': msg}
-                return render(request, 'UserApp/login.html', context=context)
+                return render(request, 'UserApp/sucess.html', context=context)
 
             except Exception as e:
                 print("register() > ", e)
                 msg = "Data Error !!"
                 context = {'msg': msg}
-                return render(request, 'UserApp/reg.html', context=context)
+                return render(request, 'UserApp/sucess.html', context=context)
 
         else:
             msg = "Registration Error !!" + "\n\n" + "Please Try Again !!"
@@ -195,11 +195,11 @@ def accountConfirmation(request, slug):
             return render(request, 'UserApp/login.html', context=context)
 
         else:
-            msg = 'Unauthorized Access !!'
+            msg = 'Email Verified !!!'
             context = {'msg': msg, 'chk': False}
             return render(request, 'UserApp/login.html', context=context)
 
-    except:
+    except: 
         msg = "User Not Registered Yet !!"
         context = {'msg': msg, 'chk': False}
         return render(request, 'UserApp/reg.html', context=context)
