@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
+from .models import EmailVerifyCodes, ForgetPasswordTable, \
     CoinRequest, CoinPrice, SubscriptionTable, UserAccountCoin, UserCredintials,AdminWhitePaper
-
+from .models import UsersD as UsersDetail
 
 admin.site.register(UsersDetail)
 admin.site.register(EmailVerifyCodes)

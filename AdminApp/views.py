@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
-from UserApp.models import CoinRequest, UsersDetail, UserAccountCoin, CoinPrice, CoinPriceChangeHistory, SubscriptionTable
+from UserApp.models import CoinRequest, UserAccountCoin, CoinPrice, CoinPriceChangeHistory, SubscriptionTable
 from django.http import HttpResponse, JsonResponse
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 import datetime
+from UserApp.models import UsersD as UsersDetail
 # from .models import SocialMedialLink,image_change,change_body
 from django.core.files.storage import FileSystemStorage
 from .models import SocialMedialLink
