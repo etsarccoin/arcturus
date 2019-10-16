@@ -140,7 +140,7 @@ def register(request):
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,active_user=True)
+                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,active_user=False)
                             # ph=0, fax="Unknown", country="Unknown", state="Unknown", zipcode="Unknown",
                             # active_user=active_user, created_at=created_at, account_conf=created_at,
                             # updated_at=created_at, last_login_hostpc=last_login_hostpc,
@@ -190,7 +190,7 @@ def accountConfirmation(request, slug):
         if obj.code == code:
             u_obj = UsersDetail.objects.get(email=obj.user_email)
             u_obj.active_user = True
-            u_obj.account_conf = datetime.datetime.now()
+            # u_obj.account_conf = datetime.datetime.now()
 
             # Wallet Creation For User with 0.0 Coin
             UserAccountCoin(email=u_obj.email, no_of_coin=0.0).save()
