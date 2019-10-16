@@ -25,12 +25,12 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 
 base_url = 'www.arturus.world/user/'
 
-logging.basicConfig(filename="Log/AppLog.log",
-                        format='%(asctime)s %(message)s',
-                        filemode='w')
-logger=logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.info("<---------------- Log File ---------------->")
+# logging.basicConfig(filename="Log/AppLog.log",
+#                         format='%(asctime)s %(message)s',
+#                         filemode='w')
+# logger=logging.getLogger()
+# logger.setLevel(logging.DEBUG)
+# logger.info("<---------------- Log File ---------------->")
 
 
 
@@ -151,7 +151,7 @@ def register(request):
                 newu_cre_obj = UserCredintials(user_id=email, password=password)
                 newu_cre_obj.save()
 
-                logger.info("New User Reg : ", newu_obj, "Cre :", newu_cre_obj)
+                # logger.info("New User Reg : ", newu_obj, "Cre :", newu_cre_obj)
 
                 # logger.info(email.upper() + " --> User Registered Just Now ")
 
