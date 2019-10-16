@@ -161,7 +161,7 @@ def register(request):
                 mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
                             "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
                 SendMail(email, mail_body)
-                logger.info("Email Send With Code : " + num)
+                # logger.info("Email Send With Code : " + num)
 
                 # logger.info("mail_body : " + mail_body)
 
