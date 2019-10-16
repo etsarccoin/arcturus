@@ -8,22 +8,22 @@ class UsersDetail(models.Model):
     middle_name = models.CharField(max_length=255,blank=True)
     last_name = models.CharField(max_length=255, blank=False)
     email = models.EmailField(primary_key=True, unique=True)
-    # ph = models.BigIntegerField()
-    # fax = models.CharField(max_length=30)
-    # country = models.CharField(max_length=50)
-    # state = models.CharField(max_length=40)
-    # zipcode = models.CharField(max_length=15)
+    ph = models.BigIntegerField()
+    fax = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    state = models.CharField(max_length=40)
+    zipcode = models.CharField(max_length=15)
     active_user = models.BooleanField()
-    # created_at = models.DateTimeField()
-    # account_conf = models.DateTimeField()
-    # updated_at = models.DateTimeField()
-    # last_login_hostpc = models.CharField(max_length=50) # remove
-    # last_login_ip = models.GenericIPAddressField()
-    # last_login_browser = models.CharField(max_length=100)
-    # mac = models.CharField(max_length=20) # remove
-    # last_login_time = models.DateTimeField()
-    # browser_history = models.TextField()  # remove
-    # reference_id = models.CharField(max_length=65, unique=True)
+    created_at = models.DateTimeField()
+    account_conf = models.DateTimeField()
+    updated_at = models.DateTimeField()
+    last_login_hostpc = models.CharField(max_length=50) # remove
+    last_login_ip = models.GenericIPAddressField()
+    last_login_browser = models.CharField(max_length=100)
+    mac = models.CharField(max_length=20) # remove
+    last_login_time = models.DateTimeField()
+    browser_history = models.TextField()  # remove
+    reference_id = models.CharField(max_length=65, unique=True)
 
     def __str__(self):
         return self.email
