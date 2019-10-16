@@ -23,7 +23,7 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 # from .models import UsersD as UsersDetail
 
 
-base_url = 'www.arturus.world/user/'
+base_url = 'www.arturus.world/'
 
 # logging.basicConfig(filename="Log/AppLog.log",
 #                         format='%(asctime)s %(message)s',
@@ -155,17 +155,17 @@ def register(request):
 
                 # logger.info(email.upper() + " --> User Registered Just Now ")
 
-                # email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
-                # email_veri.save()
+                email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
+                email_veri.save()
 
-                # mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
-                #             "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
-                # SendMail(email, mail_body)
-                # logger.info("Email Send With Code : " + num)
+                mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
+                            "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
+                SendMail(email, mail_body)
+                logger.info("Email Send With Code : " + num)
 
                 # logger.info("mail_body : " + mail_body)
 
-                # msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
+                msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
                 context = {'msg': msg}
                 return render(request, 'UserApp/sucess.html', context=context)
 
