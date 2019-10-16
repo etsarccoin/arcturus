@@ -140,7 +140,7 @@ def register(request):
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                newu_obj = UsersDetail(first_name=first_name, middle_name="Uknown", last_name=last_name, email=email,
+                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,
                             ph=0, fax="Unknown", country="Unknown", state="Unknown", zipcode="Unknown",
                             active_user=active_user, created_at=created_at, account_conf=created_at,
                             updated_at=created_at, last_login_hostpc=last_login_hostpc,
