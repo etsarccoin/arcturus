@@ -23,7 +23,7 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 # from .models import UsersD as UsersDetail
 
 
-base_url = 'http://www.arturus.world/'
+base_url = 'http://www.arcturus.world/'
 # base_url = 'http://127.0.0.1:8000/'
 
 # logging.basicConfig(filename="Log/AppLog.log",
