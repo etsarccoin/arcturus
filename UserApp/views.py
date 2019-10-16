@@ -16,11 +16,11 @@ from django.http import FileResponse
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser, GetMacAddress
-from .models import EmailVerifyCodes, ForgetPasswordTable, \
+from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper
 
-from .models import UsersD as UsersDetail
+# from .models import UsersD as UsersDetail
 
 
 base_url = 'www.arturus.world/user/'

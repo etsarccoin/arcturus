@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import EmailVerifyCodes, ForgetPasswordTable, \
+from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     CoinRequest, CoinPrice, SubscriptionTable, UserAccountCoin, UserCredintials,AdminWhitePaper
-from .models import UsersD
+# from .models import UsersD
 
-admin.site.register(UsersD)
+admin.site.register(UsersDetail)
 admin.site.register(EmailVerifyCodes)
 admin.site.register(ForgetPasswordTable)
 admin.site.register(CoinRequest)
