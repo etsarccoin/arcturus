@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.apps import apps
-from UserApp.models import UsersDetail, CoinRequest, UserAccountCoin, CoinPrice, CoinPriceChangeHistory, SubscriptionTable
+from UserApp.models import UsersDetail, CoinRequest, UserAccountCoin, CoinPrice,\
+     CoinPriceChangeHistory, SubscriptionTable, ContactUSFormData
 from django.http import HttpResponse, JsonResponse
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 import datetime
@@ -460,3 +461,16 @@ def HomePageEditView(request):
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
     return render(request,'AdminApp/Admin-home-page-edit.html',{'form':form})
+
+
+
+def ShowContactUSFormData(req):
+    try:
+        admin_id = req.session['admin_id']
+        obj = ContactUSFormData.objects.all()
+        context = {'obj': obj}
+        return render(req, 'AdminApp/ContactUsData.html', context=context)
+    
+    except Exception as e:
+        print(e)
+        return AdminLogin(request)

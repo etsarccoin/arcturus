@@ -32,4 +32,5 @@ urlpatterns = [
     path('image/',views.changeimage,name="image"),
     path('body/',views.update_context,name="body"),
     path('home-page-edit/',views.HomePageEditView,name='HomePageEdit'),
+    path('user-contact-us-data/', views.ShowContactUSFormData, name="UserWanttocontactData"),
 ]

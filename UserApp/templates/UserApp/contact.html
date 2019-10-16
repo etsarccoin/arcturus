@@ -156,41 +156,49 @@
             <div class="col">
             	<div class="body-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la bore et dolore magna aliqua.</div>
             </div>
-        </div>
-		<form class="baner-form-container mrg40B">
+		</div>
+		
+		<form class="baner-form-container mrg40B" onsubmit="return false">
+				{% csrf_token %}
 			<div class="body">
 				<div class="row pad10L pad10R">
 					<div class="col-lg-6 pad5L pad5R mrg10B">
-						<input type="text" class="form-control" placeholder="Name">
+						<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Name" required>
 					</div>
+
 					<div class="col-lg-6 pad5L pad5R mrg10B">
-						<input type="text" class="form-control" placeholder="Phone">
+						<input type="number" name="phone" id="phone" class="form-control" placeholder="Phone" required>
 					</div>
 				</div>
+
 				<div class="row pad10L pad10R">
 					<div class="col-lg-6 pad5L pad5R mrg10B">
-						<input type="text" class="form-control" placeholder="E-mail">
+						<input type="email" name="mal" id="mal" class="form-control" placeholder="E-mail" required>
 					</div>
+
 					<div class="col-lg-6 pad5L pad5R mrg10B">
-						<select name="" id="" class="custom-select">
-							<option value="">Service</option>
-							<option value="">option 01</option>
-							<option value="">option 02</option>
-							<option value="">option 03</option>
-							<option value="">option 04</option>
+						<select name="servicename" id="servicename" class="custom-select">
+							<option value="Crypto">Service</option>
+							<option value="Buy Coin">Buy Coin</option>
+							<option value="Coin Price">Coin Price </option>
+							<option value="Contact to Admin">Contact to Admin</option>
+							<option value="Others">Others</option>
 						</select>
 					</div>
 				</div>
+
 				<div class="row pad10L pad10R pad10B">
 					<div class="col-12 pad5L pad5R mrg10B">
-						<input type="text" class="form-control" placeholder="Additional Information">
+						<input type="text" name="AddInfo" id="AddInfo" class="form-control" placeholder="Additional Information" required>
 					</div>
 				</div>
+
 				<div class="row pad10L pad10R">
 					<div class="col-12 pad5L pad5R mrg10B text-center">
-						<button type="button" href="#" class="btn font_16 btn-navbar-brown pad40L pad40R">Send Request</button>
+						<button type="submit" onclick="sendmyquerytoadmin()" class="btn font_16 btn-navbar-brown pad40L pad40R">Send Request</button>
 					</div>
 				</div>
+
 			</div>
 		</form>
 	</div>
@@ -329,6 +337,116 @@
 	
 <script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+
+
+
+<script type="text/javascript">
+    function sendmyquerytoadmin()
+    {
+    $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "GetintouchDataComing" %}',
+            async: true,
+            data: {
+                fullname: $('#fullname').val(),
+                phone: $('#phone').val(),
+				mal: $('#mal').val(),
+				servicename: $('#servicename').val(),
+				AddInfo: $('#AddInfo').val(),
+               },
+            success: function (response)
+                {
+                  console.log(response['is_okay']);
+                  if (response['is_okay'])
+				  {
+					$('#fullname').val("");
+					$('#phone').val("");
+					$('#mal').val("");
+					$('#servicename').val("");
+					$('#AddInfo').val("");
+					alert("Request Send successfully !!");
+				  }
+				  else
+				  {
+					alert("Please Try Again !!")
+				  }
+               },
+    error: function ()
+    {
+     alert('Something went wrong !!');
+     }
+});
+}
+</script>
+
+
+
+<script type="text/JavaScript">
+	$(document).ready(function(){
+		$("#phone").change(function(){
+			let phone = $('#phone').val();
+			if(phone.length == 10)
+			{
+				$('.valid-feedbac').hide();
+				$(this).addClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
+			}
+			else if(phone.length > 10)
+			{
+				$('.valid-feedbac').hide();
+				$('<div class="valid-feedbac" style="font-weight:600;color:red">Can not be more than 10 digit !!</div>').insertAfter($(this));
+			}
+			else
+			{
+				$('.valid-feedbac').hide();
+				$('<div class="valid-feedbac" style="font-weight:600;color:red">Must be 10 digit !!</div>').insertAfter($(this));
+			}
+		});
+	});
+</script>
+
+
+<script type="text/JavaScript">
+	$(document).ready(function(){
+		$("#fullname").change(function(){
+			let fullname = $('#fullname').val();
+			if(fullname.length >= 3)
+			{
+				$('.valid-feedbac').hide();
+				$(this).addClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
+			}
+			else
+			{
+				$('.valid-feedbac').hide();
+				$('<div class="valid-feedbac" style="font-weight:600;color:red">Should be Min 3 Letters !!</div>').insertAfter($(this));
+			}
+		});
+	});
+</script>
+
+
+<script type="text/JavaScript">
+	$(document).ready(function(){
+		$("#AddInfo").change(function(){
+			let AddInfo = $('#AddInfo').val();
+			if(AddInfo.length >= 5)
+			{
+				$('.valid-feedbac').hide();
+				$(this).addClass('is-valid');
+				$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
+			}
+			else
+			{
+				$('.valid-feedbac').hide();
+				$('<div class="valid-feedbac" style="font-weight:600;color:red">Should be Min 5 Letters !!</div>').insertAfter($(this));
+			}
+		});
+	});
+</script>
+
+
 
 
 </body>

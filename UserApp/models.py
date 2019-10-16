@@ -168,3 +168,15 @@ class CoinPriceChangeHistory(models.Model):
 
 class AdminWhitePaper(models.Model):
     white_pdf = models.FileField(upload_to='WhitePaperFolder')
+
+
+
+class ContactUSFormData(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=11)
+    mail = models.EmailField()
+    servie = models.CharField(max_length=100)
+    add_info = models.TextField()
+
+    def __str__(self):
+        return self.mail

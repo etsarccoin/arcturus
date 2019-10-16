@@ -42,6 +42,8 @@
 <h1>{{msg}}</h1>
 {% endif %}
 
+
+
 <div class="container-fluid bg-header-top">
 	<div class="container pad10T pad10B">
     	<div class="row">
@@ -256,18 +258,23 @@
 						  {
 							  if(auth_user == 0)
 							  {
+								$('.valid-feedbac').hide();
+								$('<div class="valid-feedbac" style="font-weight:600;color:red">Please Verify Your Email Id !!</div>').insertAfter($(this));
 								$('#s_data').attr("disabled", true);
-								alert("Please Verify Your Email Id !!");
 							  }
 							  else
 							  {
+								$('.valid-feedbac').hide();
+								$(this).addClass('is-valid');
+								$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
 								$('#s_data').attr("disabled", false);
 							  }
 						  }
 						  else
 						  {
+							$('.valid-feedbac').hide();
+							$('<div class="valid-feedbac" style="font-weight:600;color:red">Email Not Registered Yet !!</div>').insertAfter($(this));
 							$('#s_data').attr("disabled", true);
-							alert("Email Not Registered Yet");
 						  }
 					   },
 					error: function ()

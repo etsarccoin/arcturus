@@ -18,7 +18,8 @@ from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser, GetMacAddress
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
-    SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper
+    SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
+        ContactUSFormData
 
 # from .models import UsersD as UsersDetail
 
@@ -238,7 +239,7 @@ def login(request):
 
                 else:
                     msg = "Hey, Password Did Not Matched !!"
-                    context = {'msg': msg}
+                    context = {'msg': msg, 'chk': True}
                     return render(request, 'UserApp/login.html', context=context)
 
             except:
@@ -246,7 +247,7 @@ def login(request):
 
         else:
             msg = "User Not Registered Yet !!"
-            context = {'msg': msg}
+            context = {'msg': msg, 'chk': False}
             return render(request, 'UserApp/login.html', context=context)
 
 
@@ -472,3 +473,28 @@ def DownloadWhitePaper(req):
     except Exception as e:
         print("Exception ---> ", e)
         return HttpResponse("PPP")
+
+
+def ContactUsFormDataControler(request):
+    data = {}
+    is_okay = False
+    try:
+        fullname = request.GET.get('fullname')
+        phone = request.GET.get('phone')
+        mal = request.GET.get('mal')
+        servicename = request.GET.get('servicename')
+        AddInfo = request.GET.get('AddInfo')
+
+        if fullname == '' and phone == '' and mal == '' and AddInfo == '':
+            is_okay = False
+        else:
+            obj = ContactUSFormData(name=fullname, phone=phone, mail=mal, servie=servicename, add_info=AddInfo)
+            obj.save()
+            is_okay = True
+    
+    except Exception as e:
+        print(e)
+        is_okay = False 
+
+    data = {'is_okay': is_okay}
+    return JsonResponse(data)
