@@ -31,15 +31,24 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-
+<!-- CSS Author Kuntal -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/MyCSS/mystyletag.css' %}">
 
 </head>
 
 <body role="document">
 <!--Header Top-->
 
+<div class="alertsuccess" id="successmsg" style="display: none;">
+	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	{{msg}}
+</div>
+
+
 {% if chk %}
-<h1>{{msg}}</h1>
+<script>
+document.getElementById('successmsg').style.display = 'block';
+</script>
 {% endif %}
 
 

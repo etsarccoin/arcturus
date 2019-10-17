@@ -31,6 +31,8 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+<!-- CSS Author Kuntal -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/MyCSS/mystyletag.css' %}">
 
 </head>
 
@@ -91,7 +93,8 @@
         </div>
     </nav>
 </div>
-	
+
+
 <!--Registration Section-->
 <div class="container-fluid pad40T pad40B">
 	<div class="container">
@@ -99,10 +102,10 @@
 			<div class=" col-lg-8 col-md-10 col-sm-12">
 				<div class="signup-form">
 					<form method="post" action="{% url 'UserRegister' %}">
+							{% csrf_token %}
 						<h2>
 							<span>Register</span>
 						</h2>
-						{% csrf_token %}
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-6">
@@ -113,9 +116,15 @@
 								</div>
 							</div>        	
 						</div>
+
 						<div class="form-group">
+							<div class="alertforemail" id="errormsg" style="display: none;">
+								<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+								Email Already Exist 
+							</div>
 							<input name="e_mail" id="e_mail" type="email" class="form-control" required="required" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 3}$">
 						</div>
+
 						<div class="form-group">
 							<input name="psw" id="psw" type="password" class="form-control" placeholder="Password" required="required">
 						</div>
@@ -273,16 +282,13 @@ function mailcheck()
                   let is_taken = response['is_taken'];
                   if(is_taken == 1)
 				  {
-					$('.valid-feedbac').hide();
-					$(this).addClass('is-valid');
-					$('<div class="valid-feedbac" style="font-weight:600;color:red">Email Already Taken</div>').insertAfter($(this));
-					$('#s_data').attr("disabled", false);
+					document.getElementById('errormsg').style.display = 'block';
+					$('#s_data').attr("disabled", true);
 				  }
 				  else
 				  {
-					$('.valid-feedbac').hide();
-					$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
-					$('#s_data').attr("disabled", true);
+					document.getElementById('errormsg').style.display = 'none';
+					$('#s_data').attr("disabled", false);
 				  }
                },
 			error: function ()
@@ -337,7 +343,7 @@ function mailcheck()
 				$('#s_data').attr("disabled", false);
 			}
 			else
-			{
+			{	$('#confirm_password').val("");
 				$('.valid-feedbac').hide();
 				$('<div class="valid-feedbac" style="font-weight:600;color:red">Should be Min 5 Letters !!</div>').insertAfter($(this));
 				$('#s_data').attr("disabled", true);

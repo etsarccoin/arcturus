@@ -153,23 +153,17 @@ def register(request):
                 newu_cre_obj = UserCredintials(user_id=email, password=password)
                 newu_cre_obj.save()
 
-                # logger.info("New User Reg : ", newu_obj, "Cre :", newu_cre_obj)
-
-                # logger.info(email.upper() + " --> User Registered Just Now ")
-
                 email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
                 email_veri.save()
 
                 mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
                             "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
                 SendMail(email, mail_body)
-                # logger.info("Email Send With Code : " + num)
-
-                # logger.info("mail_body : " + mail_body)
 
                 msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
-                context = {'msg': msg}
-                return render(request, 'UserApp/sucess.html', context=context)
+                context = {'msg': msg, 'chk': True}
+                print("Sending to Login Page >>>>>>>")
+                return render(request, 'UserApp/login.html', context=context)
 
             except Exception as e:
                 print("register() > ", e)
@@ -247,7 +241,7 @@ def login(request):
 
         else:
             msg = "User Not Registered Yet !!"
-            context = {'msg': msg, 'chk': False}
+            context = {'msg': msg}
             return render(request, 'UserApp/login.html', context=context)
 
 
