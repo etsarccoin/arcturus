@@ -485,7 +485,7 @@ def ContactUsFormDataControler(request):
         servicename = request.GET.get('servicename')
         AddInfo = request.GET.get('AddInfo')
 
-        if fullname == '' and phone == '' and mal == '' and AddInfo == '':
+        if fullname == '' or phone == '' or mal == '' or AddInfo == '' or servicename == '':
             is_okay = False
         else:
             obj = ContactUSFormData(name=fullname, phone=phone, mail=mal, servie=servicename, add_info=AddInfo)

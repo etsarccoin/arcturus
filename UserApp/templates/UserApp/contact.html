@@ -30,7 +30,11 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+<!-- CSS Author Kuntal -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/MyCSS/mystyletag.css' %}">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+
 <script type="text/javascript">
   window.onload = function() {
   Particles.init({
@@ -40,6 +44,7 @@
   });
 };
 </script>
+
 </head>
 
 <body role="document">
@@ -193,10 +198,22 @@
 					</div>
 				</div>
 
+				<div class="alerterror" id="errormsg" style="display: none;">
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+					Please Fill Out Form 
+				</div>
+				<br>
+
 				<div class="row pad10L pad10R">
 					<div class="col-12 pad5L pad5R mrg10B text-center">
 						<button type="submit" onclick="sendmyquerytoadmin()" class="btn font_16 btn-navbar-brown pad40L pad40R">Send Request</button>
 					</div>
+				</div>
+				
+				<br>
+				<div class="alertsuccess" id="successmsg" style="display: none;">
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+					Request Send successfully !!
 				</div>
 
 			</div>
@@ -339,6 +356,7 @@
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
 
 
+<!-- Author Kuntal -->
 
 <script type="text/javascript">
     function sendmyquerytoadmin()
@@ -365,11 +383,11 @@
 					$('#mal').val("");
 					$('#servicename').val("");
 					$('#AddInfo').val("");
-					alert("Request Send successfully !!");
+					document.getElementById('successmsg').style.display = 'block';
 				  }
 				  else
 				  {
-					alert("Please Try Again !!")
+					document.getElementById('errormsg').style.display = 'block';
 				  }
                },
     error: function ()
