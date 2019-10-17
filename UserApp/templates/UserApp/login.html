@@ -121,6 +121,10 @@ document.getElementById('successmsg').style.display = 'block';
 						</h2>
 						{% csrf_token %}
 						<div class="form-group">
+								<div class="alertforemail" id="errormsg" style="display: none;">
+									<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+									<div id="showmymsg"></div> 
+								</div>
 							<input name="e_mail" id="e_mail" type="text" class="form-control" required="required" placeholder="E-mail">
 						</div>
 						<div class="form-group">
@@ -191,7 +195,32 @@ document.getElementById('successmsg').style.display = 'block';
 		  				<a href="#" class="bot">April 12, 2019</a>
 		  			</div>
 		  		</div>
-		  		
+				  
+				  <div>
+						<ul>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+									<span>Street, 11000 Helsinki, Finland</span>
+								</a>
+							</li>
+							<br>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+									<span>(+123)11 123 4567</span>
+								</a>
+							</li>
+							<br>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+									<span>support@arcturus.world</span>
+								</a>
+							</li>		
+						</ul>	
+					  </div>
+
 			</div>
 			<div class="col-lg-4">
                 <div class="footer-heading">Twitter Feed</div>
@@ -263,22 +292,21 @@ document.getElementById('successmsg').style.display = 'block';
 						  {
 							  if(auth_user == 0)
 							  {
-								$('.valid-feedbac').hide();
-								$('<div class="valid-feedbac" style="font-weight:600;color:red">Please Verify Your Email Id !!</div>').insertAfter($(this));
+								document.getElementById('errormsg').style.display = 'block';
+								document.getElementById('showmymsg').innerText = "Please Verify Your Email Id !!";
 								$('#s_data').attr("disabled", true);
 							  }
 							  else
 							  {
-								$('.valid-feedbac').hide();
-								$(this).addClass('is-valid');
-								$('<div class="valid-feedbac" style="font-weight:600;color:green"></div>').insertAfter($(this));
+								document.getElementById('errormsg').style.display = 'none';
+								document.getElementById('showmymsg').innerText = "";
 								$('#s_data').attr("disabled", false);
 							  }
 						  }
 						  else
 						  {
-							$('.valid-feedbac').hide();
-							$('<div class="valid-feedbac" style="font-weight:600;color:red">Email Not Registered Yet !!</div>').insertAfter($(this));
+							document.getElementById('errormsg').style.display = 'block';
+							document.getElementById('showmymsg').innerText = "Email Not Registered Yet !!";
 							$('#s_data').attr("disabled", true);
 						  }
 					   },
