@@ -23,7 +23,7 @@ def SendMail(toaddr, message):
         server.starttls()
         server.ehlo()
         server.login(fromaddr, password)
-        server.sendmail(fromaddr, toaddr, message)
+        server.sendmail(fromaddr, toaddr, message, )
         server.quit()
     except SMTPException:
         print("Mail id is Invalid !!")
