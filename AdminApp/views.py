@@ -477,6 +477,7 @@ def CommonEdit(request):
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
     return render(request,'AdminApp/common.html',{'form':form})
+    
 def feedback_edit(request):
     form = feed_back_edit()
     if request.method == "POST":

@@ -13,6 +13,8 @@ import socket
 import httpagentparser
 import logging
 from django.http import FileResponse
+# Coming From Admin Model
+from AdminApp.models import HomePage
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
@@ -25,8 +27,8 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 # from .models import UsersD as UsersDetail
 
 
-base_url = 'http://www.arcturus.world/'
-# base_url = 'http://127.0.0.1:8000/'
+# base_url = 'http://www.arcturus.world/'
+base_url = 'http://127.0.0.1:8000/'
 
 # logging.basicConfig(filename="Log/AppLog.log",
 #                         format='%(asctime)s %(message)s',
@@ -129,20 +131,21 @@ def register(request):
             last_name = request.POST['lastName']
             email = request.POST['e_mail']
             password = request.POST['psw']
-            active_user = True
-            last_login_hostpc = GetHostNamePC()
-            last_login_ip = GetIPLocationPC(request)
-            created_at = datetime.datetime.now()
-            last_login_browser = DetectBrowser(request)
-            mac = GetMacAddress(request)
-            last_login_time = datetime.datetime.now()
+
+            # last_login_hostpc = GetHostNamePC()
+            # last_login_ip = GetIPLocationPC(request)
+            # created_at = datetime.datetime.now()
+            # last_login_browser = DetectBrowser(request)
+            # mac = GetMacAddress(request)
+            # last_login_time = datetime.datetime.now()
+            now_time_date = datetime.datetime.now()
 
             try:
                 msg = ''
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,active_user=False)
+                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,active_user=False,created_at=now_time_date,reference_id=user_src_code,activation_link=base_url)
                             # ph=0, fax="Unknown", country="Unknown", state="Unknown", zipcode="Unknown",
                             # active_user=active_user, created_at=created_at, account_conf=created_at,
                             # updated_at=created_at, last_login_hostpc=last_login_hostpc,
@@ -156,21 +159,18 @@ def register(request):
                 email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
                 email_veri.save()
 
-                mail_body = '''
-                            <br>Hi, {firstname} <br>Please click on below link to activate your account <br>
-                            [*NOTE: Don't share this code with anyone]<br><br><br>  
-                        '''.format(firstname = first_name)
-
-
-                temp1 = base_url + "confirmation/" + user_src_code + '-' + num + '/'
-
-                mail_body = mail_body + temp1
-
-                #mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
-                #            "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
+                mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
+                           "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
+                
                 SendMail(email, mail_body)
 
-                msg = 'Registration Successful !! ' + '\n\n' + "Please Check Your Email !!"
+                generated_link = base_url + "confirmation/" + user_src_code + "-" + num + "/"
+                
+                link_obj = UsersDetail.objects.get(email=email)
+                link_obj.activation_link = generated_link
+                link_obj.save()
+
+                msg = 'Registration Successful !!' + " Please Check Your Email !! "
 
                 context = {'msg': msg, 'chk': True}
                 return render(request, 'UserApp/login.html', context=context)

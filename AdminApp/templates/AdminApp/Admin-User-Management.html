@@ -520,7 +520,7 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Your List<small></small> </h1>
+				<h1>All User List<small></small> </h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 				</ol>
@@ -536,7 +536,6 @@
 										<th>Name</th>
 										<th>Email</th>
 										<th>Active User</th>
-										<th>Last Login IP</th>
 										<th>Created Time</th>
 										<th>Action</th>
 									</tr>
@@ -547,9 +546,8 @@
 										<td>{{ i.first_name }} {{ i.last_name }}</td>
 										<td>{{ i.email }}</td>
 										<td>{{ i.active_user }}</td>
-										<td>{{ i.last_login_ip }}</td>
 										<td>{{ i.created_at }}</td>
-										<td><a href="#">Approve </a> | <a href="#">View</a></td>
+										<td>{% if not i.active_user %}<a href="{{i.activation_link}}" target="_blank">Approve </a>{% else %}<a href="#">View</a>{% endif %}</td>
 									</tr>
 										{% endfor %}
 								</tbody>

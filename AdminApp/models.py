@@ -1,4 +1,5 @@
 from django.db import models
+
 class HomePage(models.Model):
     our_services = models.TextField(default = "our services here",max_length = 1024,blank = True)
     services_pic_1 = models.ImageField(upload_to = "AdminApp/homepage/service/",blank=True)

@@ -22,9 +22,11 @@
 	}
 
 .alertsuccess {
-	  padding-left: 20px;
+      padding-left: 40px;
+	  padding-top: 10px;
 	  background-color: green;
 	  color: white;
+	  height: 45px;
 	}
 
 .alertforemail {
