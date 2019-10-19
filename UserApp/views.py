@@ -15,7 +15,8 @@ import logging
 from django.http import FileResponse
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
-     Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser, GetMacAddress
+     Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
+     GetMacAddress
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
@@ -33,7 +34,6 @@ base_url = 'http://www.arcturus.world/'
 # logger=logging.getLogger()
 # logger.setLevel(logging.DEBUG)
 # logger.info("<---------------- Log File ---------------->")
-
 
 
 
@@ -156,27 +156,15 @@ def register(request):
                 email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
                 email_veri.save()
 
-                mail_body = '''<!DOCTYPE html><br>
-                            <html lang="en">
-                            <head>
-                            <meta charset="utf-8">
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                            <meta name="viewport" content="width=device-width, initial-scale=1">
-                            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-                            <meta name="description" content="">
-                            <meta name="author" content="">
-                            </head>
-                            <body role="document">
-                            '''
-                temp1 = '''
-                        <br>Hi, {firstname} <br>Please click on below link to activate your account <br>
-
-                        [*NOTE: Don't share this code with anyone]<br><br><br>  
+                mail_body = '''
+                            <br>Hi, {firstname} <br>Please click on below link to activate your account <br>
+                            [*NOTE: Don't share this code with anyone]<br><br><br>  
                         '''.format(firstname = first_name)
 
-                temp2 = '''<a href="''' + base_url + "confirmation/" + user_src_code + '-' + num + '/' + "\"" + ">Click Here</a>"
 
-                mail_body = mail_body + temp1 + temp2
+                temp1 = base_url + "confirmation/" + user_src_code + '-' + num + '/'
+
+                mail_body = mail_body + temp1
 
                 #mail_body = "Hi" + first_name + "," + "\nPlease click on below link to activate your account" + "\n" \
                 #            "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
