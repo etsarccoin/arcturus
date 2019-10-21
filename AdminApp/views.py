@@ -595,7 +595,7 @@ def about_edit(request):
 
     return render(request,'AdminApp/about.html',{'form':form})
 
-def white_page_edit(request):
+def white_page_edit1(request):
     form = white_page_edit()
     if request.method == "POST":
         form_data = white_page_edit(request.POST,request.FILES)

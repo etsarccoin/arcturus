@@ -42,6 +42,6 @@ urlpatterns = [
     path("recretaion/",views.recretaion,name="recretaion"),
     path("edittravel/",views.travel_edit,name="cedittravel"),
     path("editabout/",views.about_edit,name="editabout"),
-    path("editwhitepage/",views.white_page_edit,name="editwhitepage"),
+    path("editwhitepage/",views.white_page_edit1,name="editwhitepage"),
     path("editroadmap/",views.roadmap_edit,name="editroadmap"),
 ]
