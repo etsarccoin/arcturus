@@ -5,6 +5,7 @@ from UserApp.models import UsersDetail, CoinRequest, UserAccountCoin, CoinPrice,
 from django.http import HttpResponse, JsonResponse
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 import datetime
+from django.http import JsonResponse
 # from UserApp.models import UsersD as UsersDetail
 # from .models import SocialMedialLink,image_change,change_body
 from django.core.files.storage import FileSystemStorage
@@ -13,6 +14,10 @@ from .forms import HomePageEditForm,common_field, feed_back_edit,hotels_edit,foo
     tour_edit,recreation_edit,travel_edit,about_us_edit,white_page_edit,edit_road_map
 from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit_feedback,edit_hotel,edit_fooding,\
     edit_payment,edit_tour,edit_recreation,edit_travel,edit_about,edit_white_page,road_map_edit
+
+# DB For CMS
+from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS
+
 
 def Test(request):
     return render(request, 'AdminApp/demo-blank.html', context={})
@@ -633,3 +638,148 @@ def ShowContactUSFormData(req):
     except Exception as e:
         print(e)
         return AdminLogin(request)
+
+
+def CMSForWebsite(req):
+    try:
+        serviceobj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        reviewbgobj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
+        aboutusobj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj}
+        return render(req, 'AdminApp/CMS/HomePage.html', context=context)
+    
+    except Exception as e:
+        print(e)
+        return render(req, 'AdminApp/CMS/HomePage.html', context={})
+
+
+def OurServiceDataControler(req):
+    if req.method == 'POST':
+        content1, img1, img2, img3, img4, img5, img6 = None, None, None, None, None, None, None
+
+        try:
+            content1 = req.POST['servicepagecontent']
+        except Exception as e:
+            print(e)
+
+        try:
+            img1 = req.FILES['serviceimg1']
+        except Exception as e:
+            print(e)
+        
+        try:
+            img2 = req.FILES['serviceimg2']
+        except Exception as e:
+            print(e)
+
+        try:
+            img3 = req.FILES['serviceimg3']
+        except Exception as e:
+            print(e)
+        
+        try:
+            img4 = req.FILES['serviceimg4']
+        except Exception as e:
+            print(e)
+
+        try:
+            img5 = req.FILES['serviceimg5']
+        except Exception as e:
+            print(e)
+
+        try:
+            img6 = req.FILES['serviceimg6']
+        except Exception as e:
+            print(e)
+
+        try:
+            obj = OURSERVICECMS1.objects.get(service_uni_key=1)
+            if content1 != None:
+                obj.OurSericeContent = content1
+            if img1 != None:
+                obj.OurSericeImg1 = img1
+            if img2 != None:
+                obj.OurSericeImg2 = img2
+            if img3 != None:
+                obj.OurSericeImg3 = img3
+            if img4 != None:
+                obj.OurSericeImg4 = img4
+            if img5 != None:
+                obj.OurSericeImg5 = img5
+            if img6 != None:
+                obj.OurSericeImg6 = img6
+            obj.save()
+
+        except Exception as e:
+            print(e)
+            obj = OURSERVICECMS1(service_uni_key=1, OurSericeContent=content1, OurSericeImg1=img1, OurSericeImg2=img2,\
+            OurSericeImg3=img3, OurSericeImg4=img4, OurSericeImg5=img5, OurSericeImg6=img6)
+            obj.save()
+
+        return CMSForWebsite(req)
+    
+    else:
+        return CMSForWebsite(req)
+
+
+def ReviewBackgroundDataControler(req):
+    if req.method == 'POST':
+        rimg = None
+        try:
+            rimg = req.FILES['reviewbgimg']
+        except Exception as e:
+            print(e)
+        
+        try:
+            obj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
+            if rimg != None:
+                obj.OurSericeImg1 = rimg
+            obj.save()
+        except Exception as e:
+            print(e)
+            obj = ReviewBackgroundCMS1(review_bg_uni_key=1, OurSericeImg1=rimg)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)
+
+
+def AboutUSDataControler(req):
+    if req.method == 'POST':
+        heading, inerdata, img1 = None, None, None
+        try:
+            heading = req.POST['aboutusheading']
+        except Exception as e:
+            print(e)
+        
+        try:
+            inerdata = req.POST['aboutusheadingArcturus']
+        except Exception as e:
+            print(e)
+
+        try:
+            img1 = req.FILES['aboutUSImg1']
+        except Exception as e:
+            print(e)
+
+        try:
+            obj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+            if heading != None:
+                obj.AboutHeading = heading
+            if inerdata != None:
+                obj.AboutArcturusContent = inerdata
+            if img1 != None:
+                obj.AboutUSImage = img1
+            obj.save()
+        
+        except Exception as e:
+            print(e)
+            obj = ABOUTUSCMS(about_us_uni_key=1,AboutHeading=heading,AboutArcturusContent=inerdata,AboutUSImage=img1)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)

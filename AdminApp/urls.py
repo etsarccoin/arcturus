@@ -44,4 +44,11 @@ urlpatterns = [
     path("editabout/",views.about_edit,name="editabout"),
     path("editwhitepage/",views.white_page_edit1,name="editwhitepage"),
     path("editroadmap/",views.roadmap_edit,name="editroadmap"),
+
+    path('cms-home/', views.CMSForWebsite, name="cmsweburl"),
+    path('cms/our-service/', views.OurServiceDataControler, name=""),
+    path('cms/review-Bg-change/', views.ReviewBackgroundDataControler, name=""),
+    path('cms/about-us-edit/', views.AboutUSDataControler, name="")
+
+
 ]

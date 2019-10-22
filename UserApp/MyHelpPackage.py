@@ -1,5 +1,6 @@
 import smtplib
 from smtplib import SMTPException
+from email.mime.text import MIMEText
 import secrets
 import string
 from .models import EmailVerifyCodes
@@ -17,14 +18,16 @@ def SendMail(toaddr, message):
     toaddr = toaddr
     subject = 'Arcturus'
     message = 'Subject: {}\n\n{}'.format(subject, message)
+    # msg = MIMEText(u'message', 'html')
     
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)  ## smtp.mail.yahoo.com
         server.starttls()
         server.ehlo()
         server.login(fromaddr, password)
-        server.sendmail(fromaddr, toaddr, message, )
+        server.sendmail(fromaddr, toaddr, message)
         server.quit()
+
     except SMTPException:
         print("Mail id is Invalid !!")
         

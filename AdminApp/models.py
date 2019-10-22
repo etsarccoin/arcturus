@@ -164,3 +164,72 @@ class road_map_edit(models.Model):
         if len(all_obj) > 1:
             road_map_edit.objects.all().delete()
         super().save(*args, **kwargs) 
+
+
+
+# CMS DataBase System By Kuntal
+
+class OURSERVICECMS1(models.Model):
+    service_uni_key = models.SmallIntegerField(primary_key=True)
+    OurSericeContent = models.TextField()
+    OurSericeImg1 = models.ImageField(upload_to="CMS/OUR Service Image/")
+    OurSericeImg2 = models.ImageField(upload_to="CMS/OUR Service Image/")
+    OurSericeImg3 = models.ImageField(upload_to="CMS/OUR Service Image/")
+    OurSericeImg4 = models.ImageField(upload_to="CMS/OUR Service Image/")
+    OurSericeImg5 = models.ImageField(upload_to="CMS/OUR Service Image/")
+    OurSericeImg6 = models.ImageField(upload_to="CMS/OUR Service Image/")
+
+
+class ReviewBackgroundCMS1(models.Model):
+    review_bg_uni_key = models.SmallIntegerField(primary_key=True)
+    OurSericeImg1 = models.ImageField(upload_to="CMS/Review BackGround Image/")
+
+
+class ABOUTUSCMS(models.Model):
+    about_us_uni_key = models.SmallIntegerField(primary_key=True)
+    AboutHeading = models.TextField()
+    AboutArcturusContent = models.TextField()
+    AboutUSImage = models.ImageField(upload_to="CMS/About US Image/")
+
+
+# class WHYCHOOSEUSCMS(models.Model):
+#     why_coose_us_uni_key = models.SmallIntegerField(primary_key=True)
+#     ChooseUSImage = models.ImageField(upload_to="CMS/Choose US Image/")
+#     ChooseUsHeading1 = models.TextField()
+#     ChooseUsHeading1Content = models.TextField()
+#     ChooseUsHeading2 = models.TextField()
+#     ChooseUsHeading2Content = models.TextField()
+#     ChooseUsHeading3 = models.TextField()
+#     ChooseUsHeading3Content = models.TextField()
+#     ChooseUsHeading4 = models.TextField()
+#     ChooseUsHeading4Content = models.TextField()
+
+
+# class DEVELOPMENTROADMAPCMS(models.Model):
+#     road_map_uni_key = models.SmallIntegerField(primary_key=True)
+#     Heading1EditMonth = models.TextField()
+#     Heading1EditLabel = models.TextField()
+#     Heading2EditMonth = models.TextField()
+#     Heading2EditLabel = models.TextField()
+#     Heading3EditMonth = models.TextField()
+#     Heading3EditLabel = models.TextField()
+#     Heading4EditMonth = models.TextField()
+#     Heading4EditLabel = models.TextField()
+#     Heading5EditMonth = models.TextField()
+#     Heading5EditLabel = models.TextField()
+#     Heading6EditMonth = models.TextField()
+#     Heading6EditLabel = models.TextField()
+
+
+# class HeaderCMS(models.Model):
+#     header_uni_key = models.SmallIntegerField(primary_key=True)
+#     HeaderHeading = models.TextField()
+#     HeaderHeadingContent = models.TextField()
+
+
+# class FooterCMS(models.Model):
+#     footer_uni_key = models.SmallIntegerField(primary_key=True)
+#     FooterContent = models.TextField()
+#     FooterAddress = models.TextField()
+#     FooterPhone = models.TextField()
+#     FooterMail = models.TextField()

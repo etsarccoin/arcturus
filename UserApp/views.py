@@ -177,9 +177,9 @@ def register(request):
 
             except Exception as e:
                 print("register() > ", e)
-                msg = "Data Error !!"
-                context = {'msg': msg}
-                return render(request, 'UserApp/sucess.html', context=context)
+                msg = "Registation Not Successful !! Please Try Again !! "
+                context = {'msg': msg, 'chk': True}
+                return render(request, 'UserApp/login.html', context=context)
 
         else:
             msg = "Registration Error !!" + "\n\n" + "Please Try Again !!"
@@ -207,7 +207,7 @@ def accountConfirmation(request, slug):
             return render(request, 'UserApp/login.html', context=context)
 
         else:
-            msg = 'Email Verified !!!'
+            msg = 'Email Not Verified !!!'
             context = {'msg': msg, 'chk': False}
             return render(request, 'UserApp/login.html', context=context)
 
