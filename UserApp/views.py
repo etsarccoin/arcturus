@@ -13,8 +13,6 @@ import socket
 import httpagentparser
 import logging
 from django.http import FileResponse
-# Coming From Admin Model
-from AdminApp.models import HomePage
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
@@ -23,6 +21,10 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
         ContactUSFormData, UserFeedbackTable
+
+# Coming From Admin Model
+from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
+     DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable
 
 # from .models import UsersD as UsersDetail
 
@@ -82,8 +84,13 @@ def recreation(request):
     return render(request, 'UserApp/recreation.html', context={})
 
 def white12(request):
-    print(request.path_info)
-    return render(request, 'UserApp/white.html', context={})
+    headerObj = HeaderCMS.objects.get(header_uni_key=1)
+    guideObj = AboutPageStepGuideTable.objects.get(uni_key=1)
+    whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+    footerObj = FooterCMS.objects.get(footer_uni_key=1)
+
+    context = {'headerObj': headerObj, 'guideObj': guideObj, 'whychooseObj': whychooseObj, 'footerObj': footerObj}
+    return render(request, 'UserApp/white.html', context=context)
 
     
 # Home Page After Login
@@ -93,13 +100,24 @@ def UserIndex(request):
         logged_in = True
         u_obj = UsersDetail.objects.get(email=user_id)
         u_name = u_obj.first_name + " " + u_obj.last_name
-        context = {'logged_in': logged_in, 'u_name': u_name}
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+
+        context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
     except Exception as e:
         print("User Is LogOut !!")
         logged_in = False
-        context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        serviceObj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        reviewObj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapObj = DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+        
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
+            'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj}
         return render(request, 'UserApp/index.html', context=context)
 
 
@@ -111,7 +129,16 @@ def UserHomeControler(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-        context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        serviceObj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        reviewObj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapObj = DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
+            'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj}
         return render(request, 'UserApp/index.html', context=context)
     
     except Exception as e:
@@ -172,18 +199,21 @@ def register(request):
 
                 msg = 'Registration Successful !!' + " Please Check Your Email !! "
 
-                context = {'msg': msg, 'chk': True}
+                footerObj = FooterCMS.objects.get(footer_uni_key=1)
+                context = {'msg': msg, 'chk': True, 'footerObj':footerObj}
                 return render(request, 'UserApp/login.html', context=context)
 
             except Exception as e:
                 print("register() > ", e)
                 msg = "Registation Not Successful !! Please Try Again !! "
-                context = {'msg': msg, 'chk': True}
+                footerObj = FooterCMS.objects.get(footer_uni_key=1)
+                context = {'msg': msg, 'chk': True, 'footerObj': footerObj}
                 return render(request, 'UserApp/login.html', context=context)
 
         else:
             msg = "Registration Error !!" + "\n\n" + "Please Try Again !!"
-            context = {'msg': msg}
+            footerObj = FooterCMS.objects.get(footer_uni_key=1)
+            context = {'msg': msg, 'footerObj': footerObj}
             return render(request, 'UserApp/reg.html', context=context)
 
 
@@ -208,12 +238,14 @@ def accountConfirmation(request, slug):
 
         else:
             msg = 'Email Not Verified !!!'
-            context = {'msg': msg, 'chk': False}
+            footerObj = FooterCMS.objects.get(footer_uni_key=1)
+            context = {'msg': msg, 'chk': False, 'footerObj': footerObj}
             return render(request, 'UserApp/login.html', context=context)
 
     except: 
         msg = "User Not Registered Yet !!"
-        context = {'msg': msg, 'chk': False}
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        context = {'msg': msg, 'chk': False, 'footerObj': footerObj}
         return render(request, 'UserApp/reg.html', context=context)
 
 
@@ -243,15 +275,18 @@ def login(request):
 
                 else:
                     msg = "Hey, Password Did Not Matched !!"
-                    context = {'msg': msg, 'chk': True}
+                    footerObj = FooterCMS.objects.get(footer_uni_key=1)
+                    context = {'msg': msg, 'chk': True, 'footerObj': footerObj}
                     return render(request, 'UserApp/login.html', context=context)
 
             except:
-                return render(request, 'UserApp/reg.html', context={})
+                footerObj = FooterCMS.objects.get(footer_uni_key=1)
+                return render(request, 'UserApp/reg.html', context={'footerObj': footerObj})
 
         else:
             msg = "User Not Registered Yet !!"
-            context = {'msg': msg}
+            footerObj = FooterCMS.objects.get(footer_uni_key=1)
+            context = {'msg': msg, 'footerObj': footerObj}
             return render(request, 'UserApp/login.html', context=context)
 
 
@@ -361,16 +396,30 @@ def SubscriptionReqest(request):
     return JsonResponse(data)
 
 
-def about(request):
+def about(request): ##
     try:
         user_id = request.session['user_id']
         logged_in = True
-        context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        guideObj = AboutPageStepGuideTable.objects.get(uni_key=1)
+
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj,\
+             'aboutUsObj':aboutUsObj, 'whychooseObj':whychooseObj, 'guideObj': guideObj}
         return render(request, 'UserApp/about.html', context=context)
     
     except Exception as e:
         logged_in = False
-        context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        guideObj = AboutPageStepGuideTable.objects.get(uni_key=1)
+
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj,\
+             'aboutUsObj':aboutUsObj, 'whychooseObj':whychooseObj, 'guideObj': guideObj}
         return render(request, 'UserApp/about.html', context=context)
 
 def more(request):
@@ -396,29 +445,50 @@ def sucess(request):
         context = {'logged_in': logged_in}
         return render(request, 'UserApp/sucess.html', context=context)
 
-def service(request):
+def service(request): #$$
     try:
         user_id = request.session['user_id']
         logged_in = True
         context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        serviceObj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapObj =DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'serviceObj': serviceObj, 'aboutUsObj': aboutUsObj,\
+            'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj, 'footerObj': footerObj}
         return render(request,'UserApp/service.html', context=context)
     
     except Exception as e:
         logged_in = False
-        context = {'logged_in': logged_in}
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        serviceObj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapObj =DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'serviceObj': serviceObj, 'aboutUsObj': aboutUsObj,\
+            'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj, 'footerObj': footerObj}
         return render(request,'UserApp/service.html', context=context)
 
 
-def ContactControler(request):
+def ContactControler(request): # #
     try:
         user_id = request.session['user_id']
         logged_in = True
-        context = {'logged_in': logged_in}
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        context = {'logged_in': logged_in, 'footerObj': footerObj, 'headerObj': headerObj}
         return render(request,'UserApp/contact.html', context=context)
     
     except Exception as e:
         logged_in = False
-        context = {'logged_in': logged_in}
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
+        context = {'logged_in': logged_in, 'footerObj': footerObj, 'headerObj': headerObj}
         return render(request,'UserApp/contact.html', context=context)
 
 
@@ -429,7 +499,8 @@ def UserFeedbackControler(request):
         u_mail = u_obj.email
         u_name = u_obj.first_name + " " + u_obj.last_name
         logged_in = True
-        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name,'feedback_submitted':False}
+
+        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name}
         if request.method == 'POST':
             print("gfghjkgkjgh djkdghddkfskjfdgdjk")
             feedback_obj = UserFeedbackTable(
@@ -447,6 +518,10 @@ def UserFeedbackControler(request):
             feedback_obj.save()
             context.update({'feedback_submitted':True})
 
+
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+
+        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name, 'footerObj': footerObj,'feedback_submitted':False}
 
         return render(request,'UserApp/user-feedback.html', context=context)
     
@@ -483,7 +558,9 @@ def UserWalletPage(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-        context = {'logged_in': logged_in}
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+
+        context = {'logged_in': logged_in, 'footerObj': footerObj}
         return render(request,'UserApp/user-wallet.html', context=context)
     
     except Exception as e:

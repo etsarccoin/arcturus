@@ -465,6 +465,7 @@
 					<a href="#roadmapxx" class="mylinkliststyle">ROADMAP</a> |
 					<a href="#headerxx" class="mylinkliststyle">Header</a> |
 					<a href="#footerxx" class="mylinkliststyle">Footer</a> |
+					<a href="#aboutusextraxx" class="mylinkliststyle">Guide Edit</a> |
 				</h4>
 			</section>
 			
@@ -638,23 +639,30 @@
 
 										<h3 align="center" id="choosexx" class="myhedingcolor">WHY CHOOSE US Content</h3>
 
+										<form action="/user-admin/cms/why-chhose-us-edit/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
+												<label class="myheadingstyle">Current Service Imgae 6 :</label>
+												<img src="{{ whychooseusobj.ChooseUSImage.url }}" width="100" height="100">
+											</div>
+											<div class="form-group">
 												<label class="myheadingstyle">Why Choose Us Image :</label>
-												<input type="file">
+												<input type="file" name="whychooseusimg1" id="whychooseusimg1">
 											</div>
 										</div>
 
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Choose Us Heading 1 :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ whychooseusobj.ChooseUsHeading1 }}" name="whychooseusheading1" id="whychooseusheading1" placeholder="Heading 1">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Heading1 Content:</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="whychooseusheading1content" id="whychooseusheading1content"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+												{{ whychooseusobj.ChooseUsHeading1Content }}
 												</textarea>
 											</div>
 										</div>
@@ -662,13 +670,14 @@
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Choose Us Heading 2 :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 2">
+												<input type="text" class="form-control" value="{{ whychooseusobj.ChooseUsHeading2 }}" placeholder="Heading 2" name="whychooseusheading2" id="whychooseusheading2">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Heading2 Content:</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="whychooseusheading2content" id="whychooseusheading2content"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{ whychooseusobj.ChooseUsHeading2Content }}
 												</textarea>
 											</div>
 										</div>
@@ -676,13 +685,14 @@
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Choose Us Heading 3 :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 3">
+												<input type="text" class="form-control" value="{{ whychooseusobj.ChooseUsHeading3 }}" name="whychooseusheading3" id="whychooseusheading3" placeholder="Heading 3">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Heading3 Content:</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="whychooseusheading3content" id="whychooseusheading3content"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{ whychooseusobj.ChooseUsHeading3Content }}
 												</textarea>
 											</div>
 										</div>
@@ -690,156 +700,235 @@
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Choose Us Heading 4 :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 4">
+												<input type="text" class="form-control" value="{{ whychooseusobj.ChooseUsHeading4 }}" placeholder="Heading 4" name="whychooseusheading4" id="whychooseusheading4">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Heading4 Content:</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="whychooseusheading4content" id="whychooseusheading4content"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{ whychooseusobj.ChooseUsHeading4Content }}
 												</textarea>
 											</div>
 										</div>
 
 										<div class="box-footer clearfix">
-											<button type="button" class="pull-right btn btn-success mystylebutton" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+											<button type="submit" class="pull-right btn btn-success mystylebutton" >Send <i class="fa fa-arrow-circle-right"></i></button>
 										</div>
+										</form>
 
 										<hr><hr>
 										<br>
 
 										<h3 align="center" id="roadmapxx" class="myhedingcolor">DEVELOPMENT ROADMAP</h3>
 
+										<form action="/user-admin/cms/road-map-edit/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading1 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading1EditMonth }}" name="Heading1EditMonth" placeholder="Heading 1">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading1 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading1EditLabel }}" name="Heading1EditLabel" placeholder="Label 1">
 											</div>
 										</div>
 
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading2 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading2EditMonth }}" name="Heading2EditMonth" placeholder="Heading 2">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading2 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading2EditLabel }}" name="Heading2EditLabel" placeholder="Label 2">
 											</div>
 										</div>
 
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading3 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading3EditMonth }}" name="Heading3EditMonth" placeholder="Heading 3">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading3 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading3EditLabel }}" name="Heading3EditLabel" placeholder="Label 3">
 											</div>
 										</div>
 
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading4 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading4EditMonth }}" name="Heading4EditMonth" placeholder="Heading 4">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading4 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading4EditLabel }}" name="Heading4EditLabel" placeholder="Label 4">
 											</div>
 										</div>
 
-									
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading5 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading5EditMonth }}" name="Heading5EditMonth" placeholder="Heading 5">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading5 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading5EditLabel }}" name="Heading5EditLabel" placeholder="Label 5">
 											</div>
 										</div>
 
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading6 Edit Month :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading6EditMonth }}" name="Heading6EditMonth" placeholder="Heading 6">
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">RoadMap Heading6 Edit Label :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading 1">
+												<input type="text" class="form-control" value="{{ roadmapobj.Heading6EditLabel }}" name="Heading6EditLabel" placeholder="Label 6">
 											</div>
 										</div>
 
 										<div class="box-footer clearfix">
-											<button type="button" class="pull-right btn btn-success mystylebutton" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
 										</div>
+										</form>
 
 										<hr><hr>
 										<br>
 
 										<h3 align="center" id="headerxx" class="myhedingcolor">Header Content</h3>
 
+										<form action="/user-admin/cms/header-content-edit/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Header Heading :</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="HeaderHeading"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{ headerobj.HeaderHeading }}
 												</textarea>
 											</div>
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Header Content :</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="HeaderHeadingContent"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+												{{ headerobj.HeaderHeadingContent }}
 												</textarea>
 											</div>
 										</div>
 
 										<div class="box-footer clearfix">
-											<button type="button" class="pull-right btn btn-success mystylebutton" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
 										</div>
+										</form>
 
 										<hr><hr>
 										<br>
 
 										<h3 align="center" id="footerxx" class="myhedingcolor">Footer Content</h3>
 
+										<form action="/user-admin/cms/footer-content-edit/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Footer Content :</label>
-												<textarea class="wysi-editor" placeholder="Message"
+												<textarea class="wysi-editor" placeholder="Message" name="FooterContent"
 													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+												{{ footerobj.FooterContent }}
 												</textarea>
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Address :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading Content">
+												<input type="text" value="{{ footerobj.FooterAddress }}" name="FooterAddress" class="form-control" placeholder="Heading Content">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Phone :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading Content">
+												<input type="text" value="{{ footerobj.FooterPhone }}" name="FooterPhone" class="form-control" placeholder="Heading Content">
 											</div>
 
 											<div class="form-group">
 												<label class="myheadingstyle">Edit Support Email :</label>
-												<input type="text" class="form-control" name="" placeholder="Heading Content">
+												<input type="text" value="{{ footerobj.FooterMail }}" name="FooterMail" class="form-control"  placeholder="Heading Content">
 											</div>
 										</div>
 
 										<div class="box-footer clearfix">
-											<button type="button" class="pull-right btn btn-success mystylebutton" id="sendEmail">Send <i class="fa fa-arrow-circle-right"></i></button>
+											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
 										</div>
-										
-										
+										</form>
 
+										<hr><hr>
+										<br>
+
+										<h3 align="center" id="aboutusextraxx" class="myhedingcolor">User Guide Step Content</h3>
+
+										<form action="/user-admin/cms/edit-about-guide/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Current Guide Background Image :</label>
+												<img src="{{ guideobj.BgImg.url }}" width="100" height="100">
+											</div>
+											<div class="form-group">
+												<label class="myheadingstyle">Background Image :</label>
+												<input type="file" name="BgImg" id="BgImg">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 1 :</label>
+												<input type="text" value="{{ guideobj.Heading1 }}" name="Heading1" class="form-control" placeholder="Heading Content">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 1 Content:</label>
+												<input type="text" value="{{ guideobj.Heading1Content }}" name="Heading1Content" class="form-control" placeholder="Heading Content">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 2 :</label>
+												<input type="text" value="{{ guideobj.Heading2 }}" name="Heading2" class="form-control" placeholder="Heading Content">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 2 Content:</label>
+												<input type="text" value="{{ guideobj.Heading2Content }}" name="Heading2Content" class="form-control"  placeholder="Heading Content">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 3 :</label>
+												<input type="text" value="{{ guideobj.Heading3 }}" name="Heading3" class="form-control" placeholder="Heading Content">
+											</div>
+
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Heading 3 Content:</label>
+												<input type="text" value="{{ guideobj.Heading3Content }}" name="Heading3Content" class="form-control"  placeholder="Heading Content">
+											</div>
+										</div>
+
+										<div class="box-footer clearfix">
+											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+										</div>
+										</form>
+										
+										<br><hr>
+										<section class="content-header">
+											<h4>
+												<a href="#serxx" class="mylinkliststyle">Edit Service</a> |
+												<a href="#rebg" class="mylinkliststyle">Edit Review Background</a> |
+												<a href="#aboutxx" class="mylinkliststyle">Edit About Us</a> |
+												<a href="#choosexx" class="mylinkliststyle">Edit Why Choose Us</a> |
+												<a href="#roadmapxx" class="mylinkliststyle">ROADMAP</a> |
+												<a href="#headerxx" class="mylinkliststyle">Header</a> |
+												<a href="#footerxx" class="mylinkliststyle">Footer</a> |
+												<a href="#aboutusextraxx" class="mylinkliststyle">Guide Edit</a> |
+											</h4>
+										</section>
+										<br>
+										<hr>
 
 									</div>
 								</div>

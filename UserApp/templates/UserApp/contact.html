@@ -118,9 +118,9 @@
         </div>
         <div class="text-container">
             <div class="text-row">
-                <div class="text-top">Welcome to Arcturus world !!!</div>
+                <div class="text-top">{{headerObj.HeaderHeading|safe}}</div>
                     <text class="text-bot">
-                         ARCTURUS is a start-up company specializing in creating cryptocurrencies for smoother transactions.
+                         {{headerObj.HeaderHeadingContent|safe}}
                     </text>
                 </div>
             </div>
@@ -136,7 +136,7 @@
 					<div class="img">
 						<img src="{% static 'UserApp/assets/img/icon-footer-location-big.png' %}" width="119" height="119" alt=""/>
 					</div>
-					<div class="text">Street, 11000 Helsinki, Finland</div>
+					<div class="text">{{footerObj.FooterAddress|safe}}</div>
 				</div>
 			</div>
 			<div class="col-lg-4 mrg30B">
@@ -144,7 +144,7 @@
 					<div class="img">
 						<img src="{% static 'UserApp/assets/img/icon-footer-phone-big.png' %}" width="119" height="119" alt=""/>
 					</div>
-					<div class="text">(+123)11 123 4567</div>
+					<div class="text">{{footerObj.FooterPhone|safe}}</div>
 				</div>
 			</div>
 			<div class="col-lg-4 mrg30B">
@@ -152,15 +152,12 @@
 					<div class="img">
 						<img src="{% static 'UserApp/assets/img/icon-footer-mail-big.png' %}" width="119" height="119" alt=""/>
 					</div>
-					<div class="text">support@arcturus.world</div>
+					<div class="text">{{footerObj.FooterMail|safe}}</div>
 				</div>
 			</div>
 		</div>
 		<div class="row pad40T">
         	<h2 class="border-heading">Get in Touch</h2>
-            <div class="col">
-            	<div class="body-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la bore et dolore magna aliqua.</div>
-            </div>
 		</div>
 		
 		<form class="baner-form-container mrg40B" onsubmit="return false">
@@ -254,13 +251,7 @@
 					</a>
 				</div>
 				<div class="footer-logo-mater">
-						ARCTURUS is the next generation future-ready cryptocurrency developed
-						using the stout blockchain technology with own custom-made algorithms.The name ‘ARCTURUS’ has 
-						been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.
-						Significantly, it is the brightest star in the constellation of Boötes, the fourth-brightest in the night sky,
-						 and the brightest in the northern celestial hemisphere. Similarly, in the world of digital transactions 
-						 based on blockchain technology, ARCTURUS, as a cryptocoin is aimed at transforming transactions in the 
-						 hospitality and travel industry secured and seamless to redefine them to the next levels.
+						{{footerObj.FooterContent|safe}}
 				</div>
 				
 			</div>
@@ -284,21 +275,21 @@
 							<li>
 								<a href="#">
 									<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
-									<span>Street, 11000 Helsinki, Finland</span>
+									<span>{{footerObj.FooterAddress|safe}}</span>
 								</a>
 							</li>
 							<br>
 							<li>
 								<a href="#">
 									<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
-									<span>(+123)11 123 4567</span>
+									<span>{{footerObj.FooterPhone|safe}}</span>
 								</a>
 							</li>
 							<br>
 							<li>
 								<a href="#">
 									<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
-									<span>support@arcturus.world</span>
+									<span>{{footerObj.FooterMail|safe}}</span>
 								</a>
 							</li>		
 						</ul>	
