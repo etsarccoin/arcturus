@@ -22,7 +22,7 @@ from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
-        ContactUSFormData
+        ContactUSFormData, UserFeedbackTable
 
 # from .models import UsersD as UsersDetail
 
@@ -429,7 +429,25 @@ def UserFeedbackControler(request):
         u_mail = u_obj.email
         u_name = u_obj.first_name + " " + u_obj.last_name
         logged_in = True
-        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name}
+        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name,'feedback_submitted':False}
+        if request.method == 'POST':
+            print("gfghjkgkjgh djkdghddkfskjfdgdjk")
+            feedback_obj = UserFeedbackTable(
+                user_name=request.POST['user_name'],
+                user_mail = request.POST['user_email'],
+                user_ph = request.POST['phone_no'],
+                overall_rating = request.POST['s1'],
+                timely_response = request.POST['s2'],
+                our_support = request.POST['s3'],
+                satisfaction_level = request.POST['s4'],
+                customer_service = request.POST['rating'],
+                description = request.POST['description']
+                )
+            print(feedback_obj)
+            feedback_obj.save()
+            context.update({'feedback_submitted':True})
+
+
         return render(request,'UserApp/user-feedback.html', context=context)
     
     except Exception as e:
@@ -437,7 +455,11 @@ def UserFeedbackControler(request):
 
 
 def SubmitUserFeedBack(request):
-    pass
+    print(request)
+        # except Exception as e:
+        #     print(e)
+        #     return UserIndex(request)    
+    pass    
 
 
 def UserProfileSettingPage(request):

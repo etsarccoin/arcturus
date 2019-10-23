@@ -107,8 +107,9 @@ class UserWalletTable(models.Model):
 
 # ------------------------------------------------------- Others Tables ---------------------------------------------------
 class UserFeedbackTable(models.Model):
+    id = models.AutoField(primary_key= True, default=0)
     user_name = models.CharField(max_length=30)
-    user_mail = models.EmailField(primary_key=True)
+    user_mail = models.EmailField()
     user_ph = models.BigIntegerField()
     overall_rating = models.SmallIntegerField()
     timely_response = models.SmallIntegerField()
@@ -117,8 +118,8 @@ class UserFeedbackTable(models.Model):
     customer_service = models.SmallIntegerField()
     description = models.TextField()
 
-    def __str__(self):
-        return self.user_mail
+    # def __str__(self):
+    #     return self.user_mail
 
 
 class SubscriptionTable(models.Model):

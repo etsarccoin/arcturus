@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     CoinRequest, CoinPrice, SubscriptionTable, UserAccountCoin, UserCredintials,AdminWhitePaper, \
-        ContactUSFormData
+        ContactUSFormData, UserFeedbackTable
 # from .models import UsersD
 
 admin.site.register(UsersDetail)
@@ -14,4 +14,5 @@ admin.site.register(UserAccountCoin)
 admin.site.register(UserCredintials)
 admin.site.register(AdminWhitePaper)
 admin.site.register(ContactUSFormData)
+admin.site.register(UserFeedbackTable)
 
