@@ -114,9 +114,9 @@
         </div>
         <div class="text-container">
             <div class="text-row">
-                <div class="text-top">Welcome to Arcturus world !!!</div>
+                <div class="text-top">{{headerObj.HeaderHeading|safe}}</div>
                     <text class="text-bot">
-                         ARCTURUS  is a start-up company specializing in creating cryptocurrencies for smoother transactions.
+                         {{headerObj.HeaderHeadingContent|safe}}
                     </text>
                 </div>
             </div>
@@ -128,40 +128,23 @@
 	<div class="container">
    	
     	<div class="row">
-        	<h2 class="border-heading">about us</h2>
+        	<h2 class="border-heading">About us</h2>
             <div class="col">
             	<div class="body-text text-center pad20T">
-            	<p>
-            		<strong>WHO ARE WE?</strong>
-            	</p>
-					We are a pioneering startup in the field of cryptocurrency development and also stepping in the world of digital transactions based on blockchain technology.
-					We have engineered are own cryptocurrency called ARCTURUS. Our website design, name and logo has also been inspired from the same.
+            	   {{aboutUsObj.AboutHeading|safe}}
 			    </div>
             </div>
         </div>
         
         <div class="row pad40T pad40B">
         	<div class="col-lg-5 mrg30B">
-            	<img src="{% static 'UserApp/assets/img/about-img.png' %}" width="100%" alt=""/>
+            	<img src="{{aboutUsObj.AboutUSImage.url}}" width="100%" alt=""/>
             </div>
             <div class="col-lg-7 mrg30B">
             	<h1 class="section-header">About ARCTURUS:</h1>
                 <div class="section-mater"> 
-					<p>ARCTURUS is the next generation future-ready cryptocurrency developed using the stout blockchain technology with own custom-made algorithms.The name ‘ARCTURUS’ has been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.</p>
-                    <p>Significantly, it is the brightest star in the constellation of Boötes, the fourth-brightest in the night sky, and the brightest in the northern celestial hemisphere. Similarly, in the world of digital transactions based on blockchain technology, ARCTURUS, as a cryptocoin is aimed at transforming transactions in the hospitality and travel industry secured and seamless to redefine them to the next levels.</p>
-                    <p>
-                    	Born a couple of years ago with the idea lurking in mind to fill the gap between financial and crypto world and the hospitality and travel industry, our boarder aim is tobe licensed cryptocurrency exchange platform, providing a full service suite for all institutional and private hospitality and travel business clients.
-                    </p>
-                    <p>
-                    	Our target is to ensure that after 5 months people should be able to buy the ARCTURUS token using BTC and withdrawal can only be performed after 6 months.
-                    </p><p>
-						The cryptocurrency ARCTURUS is destined to empower any crypto related projects to overcome any existing barrier in investment and adoption, while being fully regulation compliant and banking-friendly.
-                    </p>
+					{{aboutUsObj.AboutArcturusContent|safe}}
             	</div>
-            	<!-- <div class="section-button">
-            		<a href="#" class="btn btn-navbar-brown mrg5A">Read More</a>
-            		<a href="#" class="btn btn-navbar-brown-border mrg5A">Get Demo</a>
-            	</div> -->
             </div>
         </div>
         
@@ -178,8 +161,8 @@
 					<div class="image">
 						<img src="{% static 'UserApp/assets/img/icon-wallet-2.png' %}" width="180" height="180" class="img-fluid" alt=""/>
 					</div>
-					<div class="header">Create Wallet</div>
-					<div class="mater">t dolor sit amet, consectetur adipisicing elit, sed do eiusmod</div>
+					<div class="header">{{guideObj.Heading1|safe}}</div>
+					<div class="mater">{{guideObj.Heading1Content|safe}}</div>
 			  </div>
 			</div>
 			
@@ -188,8 +171,8 @@
 					<div class="image">
 						<img src="{% static 'UserApp/assets/img/icon-bitcoin.png' %}" width="180" height="180" class="img-fluid" alt=""/>
 					</div>
-					<div class="header">Create Wallet</div>
-					<div class="mater">t dolor sit amet, consectetur adipisicing elit, sed do eiusmod</div>
+					<div class="header">{{guideObj.Heading2}}</div>
+					<div class="mater">{{guideObj.Heading2Content|safe}}</div>
 			  </div>
 			</div>
 			
@@ -198,8 +181,8 @@
 					<div class="image">
 						<img src="{% static 'UserApp/assets/img/icon-send-received.png' %}" width="180" height="180" class="img-fluid" alt=""/>
 					</div>
-					<div class="header">Create Wallet</div>
-					<div class="mater">t dolor sit amet, consectetur adipisicing elit, sed do eiusmod</div>
+					<div class="header">{{guideObj.Heading3}}</div>
+					<div class="mater">{{guideObj.Heading3Content}}</div>
 			  </div>
 			</div>
 			
@@ -217,27 +200,20 @@
         
         <div class="row pad40T pad40B">
         	<div class="col-lg-5 col-md-6 mrg30B order-md-7">
-        		<img src="{% static 'UserApp/assets/img/service-img-07.jpg' %}" width="100%" alt=""/>
+        		<img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
         	</div>
         	<div class="col-lg-7 col-md-6 mrg30B">
 				
        			<div class="choose-table-row">
-        			<!-- <div class="choose-table-cell">
-        				<img src="{% static 'UserApp/assets/img/icon-team.png' %}" width="92" height="92" alt=""/>
-        			</div> -->
-        			<!-- <div class="choose-table-cell">
-        				<div class="header">Expert TEAM</div>
-        				<div class="mater">Our dedicated and seasoned cryptocurrency developers deploy cutting edge blockchain technology to build the most reliablecryptocurrency and provide reliable support for the entire process.
-        			</div>
-        		</div> -->
-        		
         		<div class="choose-table-row">
         			<div class="choose-table-cell">
         				<img src="{% static 'UserApp/assets/img/icon-service.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
-        				<div class="header">Fast Service</div>
-        				<div class="mater">We ensure timely delivery of our projects with efficient project planning and management.</div>
+        				<div class="header">{{whychooseObj.ChooseUsHeading1|safe}}</div>
+        				<div class="mater">
+							{{whychooseObj.ChooseUsHeading1Content|safe}}
+						</div>
         			</div>
         		</div>
         		
@@ -246,8 +222,10 @@
         				<img src="{% static 'UserApp/assets/img/icon-access.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
-        				<div class="header">Easy Access</div>
-        				<div class="mater">An industry-proven yet custom-made algorithm has been employed to ensure broad adoption by existing GPU miners. Arcturuscomes with an extensive array of tools for running and managing mining nodes.</div>
+        				<div class="header">{{whychooseObj.ChooseUsHeading2|safe}}</div>
+        				<div class="mater">
+								{{whychooseObj.ChooseUsHeading2Content|safe}}
+						</div>
         			</div>
         		</div>
         		
@@ -256,8 +234,10 @@
         				<img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
-        				<div class="header">Learge Wallet</div>
-        				<div class="mater">A wallet for desktop and mobile, designed to support day-to-day usage for both individual and small business users. The built-in dashboard makes budget management easy, featuring actionable spend and earning insights.</div>
+        				<div class="header">{{whychooseObj.ChooseUsHeading3|safe}}</div>
+        				<div class="mater">
+								{{whychooseObj.ChooseUsHeading2Content|safe}}
+						</div>
         			</div>
         		</div>
         		
@@ -267,34 +247,6 @@
         
     </div>
 </div>
-
-<!--Our Vision Section-->
-<!-- <div class="container-fluid pad20T pad0B">
-	<div class="container">
-   	
-    	<div class="row">
-        	<h2 class="border-heading">Our Vission</h2>
-            <div class="col">
-            	<div class="body-text text-center pad20T">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la bore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip dantium, totam rem aperiam, eaque ipsa quae ab illo </div>
-            </div>
-        </div>
-        
-        <div class="row pad40T pad40B">
-        	<div class="col-lg-5 order-lg-7 mrg30B">
-            	<img src="{% static 'UserApp/assets/img/about-img-2.png' %}" width="100%" alt=""/>
-            </div>
-            <div class="col-lg-7 mrg30B">
-                <div class="section-mater"> 
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis iusto architecto nisi quo laboriosam dolorem fugiat sed officia hic obcaecati nostrum dolor eum, cum voluptas voluptatibus voluptatum, veniam eius, aliquid.</p>
-					<p>Maxime et amet, quibusdam rem magnam dolore eos suscipit reiciendis. Nihil adipisci voluptatum eos tempore quaerat dolore officia vel, facilis dolores ad ipsa veniam sed minus repellendus. Vitae, quis, provident.</p>
-					<p>Sed dolore pariatur, ipsum ullam voluptate recusandae esse ipsa quas! Ea nostrum unde consequuntur ab, labore minima vitae repudiandae saepe eaque accusamus, blanditiis aperiam atque porro neque repellendus. Ratione, odio!</p>
-					<p>Ratione magni repellat odio, ab labore id itaque quis voluptate cum velit non, quod, quo voluptatum minus doloribus quidem quasi veniam perspiciatis unde assumenda! Ea eveniet expedita voluptas aliquid ad.</p>
-					<p>Autem nobis magnam vel recusandae, quidem voluptate delectus excepturi officiis laudantium saepe dolore repellat, fugiat vitae, ducimus minus commodi necessitatibus dolorem quas quaerat, qui sunt inventore culpa error molestias est?</p>
-            </div>
-        </div>
-        
-    </div>
-</div> -->
 
 <!--Join Section-->
 <div class="container-fluid join-section-bg pad40T pad10B">
@@ -329,13 +281,7 @@
 					</a>
 				</div>
 				<div class="footer-logo-mater">
-						ARCTURUS is the next generation future-ready cryptocurrency developed
-						using the stout blockchain technology with own custom-made algorithms.The name ‘ARCTURUS’ has 
-						been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.
-						Significantly, it is the brightest star in the constellation of Boötes, the fourth-brightest in the night sky,
-						 and the brightest in the northern celestial hemisphere. Similarly, in the world of digital transactions 
-						 based on blockchain technology, ARCTURUS, as a cryptocoin is aimed at transforming transactions in the 
-						 hospitality and travel industry secured and seamless to redefine them to the next levels.
+						{{footerObj.FooterContent|safe}}
 				</div>
 			</div>
 		  	<div class="col-lg-4">
@@ -357,23 +303,23 @@
 				<div>
 						<ul>
 							<li>
-								<a href="#">
+								<a href="javascript:">
 									<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
-									<span>Street, 11000 Helsinki, Finland</span>
+									<span>{{footerObj.FooterAddress|safe}}</span>
 								</a>
 							</li>
 							<br>
 							<li>
-								<a href="#">
+								<a href="javascript:">
 									<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
-									<span>(+123)11 123 4567</span>
+									<span>{{footerObj.FooterPhone|safe}}</span>
 								</a>
 							</li>
 							<br>
 							<li>
-								<a href="#">
+								<a href="javascript:">
 									<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
-									<span>support@arcturus.world</span>
+									<span>{{footerObj.FooterMail|safe}}</span>
 								</a>
 							</li>		
 						</ul>	
@@ -404,7 +350,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="footer-bot-text">
-				<a href="#">© 2011 Yourcompany.com, All Rights Reserved</a>
+				<a href="#">© 2019 Yourcompany.com, All Rights Reserved</a>
 			</div>
 		</div>
 	</div>

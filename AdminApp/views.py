@@ -16,7 +16,8 @@ from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit
     edit_payment,edit_tour,edit_recreation,edit_travel,edit_about,edit_white_page,road_map_edit
 
 # DB For CMS
-from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS
+from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
+    AboutPageStepGuideTable
 
 
 def Test(request):
@@ -645,7 +646,14 @@ def CMSForWebsite(req):
         serviceobj = OURSERVICECMS1.objects.get(service_uni_key=1)
         reviewbgobj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
         aboutusobj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
-        context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj}
+        whychooseusobj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapobj = DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+        headerobj = HeaderCMS.objects.get(header_uni_key=1)
+        footerobj = FooterCMS.objects.get(footer_uni_key=1)
+        guideobj = AboutPageStepGuideTable.objects.get(uni_key=1)
+
+        context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj, 'whychooseusobj': whychooseusobj,\
+             'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj}
         return render(req, 'AdminApp/CMS/HomePage.html', context=context)
     
     except Exception as e:
@@ -781,5 +789,323 @@ def AboutUSDataControler(req):
 
         return CMSForWebsite(req)
 
+    else:
+        return CMSForWebsite(req)
+
+
+def WhyChooseUSDataControler(req):
+    if req.method == 'POST':
+        ChooseUSImage, ChooseUsHeading1, ChooseUsHeading1Content = None, None, None
+        ChooseUsHeading2, ChooseUsHeading2Content, ChooseUsHeading3 = None, None, None
+        ChooseUsHeading3Content, ChooseUsHeading4, ChooseUsHeading4Content = None, None, None
+
+        try:
+            ChooseUSImage = req.FILES['whychooseusimg1']
+        except Exception as e:
+            print(e)
+        
+        try:
+            ChooseUsHeading1 = req.POST['whychooseusheading1']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading1Content = req.POST['whychooseusheading1content']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading2 = req.POST['whychooseusheading2']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading2Content = req.POST['whychooseusheading2content']
+        except Exception as e:
+            print(e)
+    
+        try:
+            ChooseUsHeading3 = req.POST['whychooseusheading3']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading3Content = req.POST['whychooseusheading3content']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading4 = req.POST['whychooseusheading4']
+        except Exception as e:
+            print(e)
+
+        try:
+            ChooseUsHeading4Content = req.POST['whychooseusheading4content']
+        except Exception as e:
+            print(e)
+
+        try:
+            obj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+            if ChooseUSImage != None:
+                obj.ChooseUSImage = ChooseUSImage
+            if ChooseUsHeading1 != None:
+                obj.ChooseUsHeading1 = ChooseUsHeading1
+            if ChooseUsHeading1Content != None:
+                obj.ChooseUsHeading1Content = ChooseUsHeading1Content
+            if ChooseUsHeading2 != None:
+                obj.ChooseUsHeading2 = ChooseUsHeading2
+            if ChooseUsHeading2Content != None:
+                obj.ChooseUsHeading2Content = ChooseUsHeading2Content
+            if ChooseUsHeading3 != None:
+                obj.ChooseUsHeading3 = ChooseUsHeading3
+            if ChooseUsHeading3Content != None:
+                obj.ChooseUsHeading3Content = ChooseUsHeading3Content
+            if ChooseUsHeading4 != None:
+                obj.ChooseUsHeading4 = ChooseUsHeading4
+            if ChooseUsHeading4Content != None:
+                obj.ChooseUsHeading4Content = ChooseUsHeading4Content
+            obj.save()
+        
+        except Exception as e:
+            print(e)
+            obj = WHYCHOOSEUSCMS(why_coose_us_uni_key=1,ChooseUSImage=ChooseUSImage,ChooseUsHeading1=ChooseUsHeading1,\
+                ChooseUsHeading1Content=ChooseUsHeading1Content, ChooseUsHeading2=ChooseUsHeading2,ChooseUsHeading2Content=ChooseUsHeading2Content,\
+                ChooseUsHeading3=ChooseUsHeading3,ChooseUsHeading3Content=ChooseUsHeading3Content,ChooseUsHeading4=ChooseUsHeading4,\
+                ChooseUsHeading4Content=ChooseUsHeading4Content)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)
+
+
+def RoadMapDataControler(req):
+    if req.method == 'POST':
+        Heading1EditMonth, Heading1EditLabel, Heading2EditMonth, Heading2EditLabel = None, None, None, None
+        Heading3EditMonth, Heading3EditLabel, Heading4EditMonth, Heading4EditLabel = None, None, None, None
+        Heading5EditMonth, Heading5EditLabel, Heading6EditMonth, Heading6EditLabel = None, None, None, None
+
+        try:
+            Heading1EditMonth = req.POST['Heading1EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading1EditLabel = req.POST['Heading1EditLabel']
+        except Exception as e:
+            print(e)
+        try:
+            Heading2EditMonth = req.POST['Heading2EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading2EditLabel = req.POST['Heading2EditLabel']
+        except Exception as e:
+            print(e)
+        try:
+            Heading3EditMonth = req.POST['Heading3EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading3EditLabel = req.POST['Heading3EditLabel']
+        except Exception as e:
+            print(e)
+        try:
+            Heading4EditMonth = req.POST['Heading4EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading4EditLabel = req.POST['Heading4EditLabel']
+        except Exception as e:
+            print(e)
+        try:
+            Heading5EditMonth = req.POST['Heading5EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading5EditLabel = req.POST['Heading5EditLabel']
+        except Exception as e:
+            print(e)
+        try:
+            Heading6EditMonth = req.POST['Heading6EditMonth']
+        except Exception as e:
+            print(e)
+        try:
+            Heading6EditLabel = req.POST['Heading6EditLabel']
+        except Exception as e:
+            print(e)
+        
+        try:
+            obj = DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
+            if Heading1EditMonth != None:
+                obj.Heading1EditMonth = Heading1EditMonth
+            if Heading1EditLabel != None:
+                obj.Heading1EditLabel = Heading1EditLabel
+            if Heading2EditMonth != None:
+                obj.Heading2EditMonth = Heading2EditMonth
+            if Heading2EditLabel != None:
+                obj.Heading2EditLabel = Heading2EditLabel
+            if Heading3EditMonth != None:
+                obj.Heading3EditMonth = Heading3EditMonth
+            if Heading3EditLabel != None:
+                obj.Heading3EditLabel = Heading3EditLabel
+            if Heading4EditMonth != None:
+                obj.Heading4EditMonth = Heading4EditMonth
+            if Heading4EditLabel != None:
+                obj.Heading4EditLabel = Heading4EditLabel
+            if Heading5EditMonth != None:
+                obj.Heading5EditMonth = Heading5EditMonth
+            if Heading5EditLabel != None:
+                obj.Heading5EditLabel = Heading5EditLabel
+            if Heading6EditMonth != None:
+                obj.Heading6EditMonth = Heading6EditMonth
+            if Heading6EditLabel != None:
+                obj.Heading6EditLabel = Heading6EditLabel
+            obj.save()
+        except Exception as e:
+            print(e)
+            obj = DEVELOPMENTROADMAPCMS(road_map_uni_key=1,Heading1EditMonth=Heading1EditMonth,Heading1EditLabel=Heading1EditLabel,\
+                Heading2EditMonth=Heading2EditMonth,Heading2EditLabel=Heading2EditLabel,Heading3EditMonth=Heading3EditMonth,Heading3EditLabel=Heading3EditLabel,\
+                Heading4EditMonth=Heading4EditMonth,Heading4EditLabel=Heading4EditLabel,Heading5EditMonth=Heading5EditMonth,\
+                Heading5EditLabel=Heading5EditLabel,Heading6EditMonth=Heading6EditMonth,Heading6EditLabel=Heading6EditLabel)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)
+
+
+def HeaderContentDataControler(req):
+    if req.method == 'POST':
+        HeaderHeading, HeaderHeadingContent = None, None
+        try:
+            HeaderHeading = req.POST['HeaderHeading']
+        except Exception as e:
+            print(e)
+        try:
+            HeaderHeadingContent = req.POST['HeaderHeadingContent']
+        except Exception as e:
+            print(e)
+        
+        try:
+            obj = HeaderCMS.objects.get(header_uni_key=1)
+            if HeaderHeading != None:
+                obj.HeaderHeading = HeaderHeading
+            if HeaderHeadingContent != None:
+                onj.HeaderHeadingContent = HeaderHeadingContent
+            obj.save()
+        except Exception as e:
+            print(e)
+            obj = HeaderCMS(header_uni_key=1,HeaderHeading=HeaderHeading,HeaderHeadingContent=HeaderHeadingContent)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)
+
+
+def FootercontentDataControler(req):
+    if req.method == 'POST':
+        FooterContent, FooterAddress, FooterPhone, FooterMail = None, None, None, None
+        try:
+            FooterContent = req.POST['FooterContent']
+        except Exception as e:
+            print(e)
+        try:
+            FooterAddress = req.POST['FooterAddress']
+        except Exception as e:
+            print(e)
+        try:
+            FooterPhone = req.POST['FooterPhone']
+        except Exception as e:
+            print(e)
+        try:
+            FooterMail = req.POST['FooterMail']
+        except Exception as e:
+            print(e)
+
+        try:
+            obj = FooterCMS.objects.get(footer_uni_key=1)
+            if FooterContent != None:
+                obj.FooterContent = FooterContent
+            if FooterAddress != None:
+                obj.FooterAddress = FooterAddress
+            if FooterPhone != None:
+                obj.FooterPhone = FooterPhone
+            if FooterMail != None:
+                obj.FooterMail = FooterMail
+            obj.save()
+        
+        except Exception as e:
+            print(e)
+            obj = FooterCMS(footer_uni_key=1,FooterContent=FooterContent,FooterAddress=FooterAddress,FooterPhone=FooterPhone,FooterMail=FooterMail)
+            obj.save()
+
+        return CMSForWebsite(req)
+
+    else:
+        return CMSForWebsite(req)
+
+
+def AboutUSStepGuideDataControler(req):
+    if req.method == 'POST':
+        BgImg, Heading1, Heading1Content, Heading2, Heading2Content, Heading3, Heading3Content = None, None, None, None, None, None, None
+        try:
+            BgImg = req.FILES['BgImg']
+        except Exception as e:
+            print(e)
+        try:
+            Heading1 = req.POST['Heading1']
+        except Exception as e:
+            print(e)
+        try:
+            Heading1Content = req.POST['Heading1Content']
+        except Exception as e:
+            print(e)
+        try:
+            Heading2 = req.POST['Heading2']
+        except Exception as e:
+            print(e)
+        try:
+            Heading2Content = req.POST['Heading2Content']
+        except Exception as e:
+            print(e)
+        try:
+            Heading3 = req.POST['Heading3']
+        except Exception as e:
+            print(e)
+        try:
+            Heading3Content = req.POST['Heading3Content']
+        except Exception as e:
+            print(e)
+        
+        try:
+            obj = AboutPageStepGuideTable.objects.get(uni_key=1)
+            if BgImg != None:
+                obj.BgImg = BgImg
+            if Heading1 != None:
+                obj.Heading1 = Heading1
+            if Heading1Content != None:
+                obj.Heading1Content = Heading1Content
+            if Heading2 != None:
+                obj.Heading2 = Heading2
+            if Heading2Content != None:
+                obj.Heading2Content = Heading2Content
+            if Heading3 != None:
+                obj.Heading3 = Heading3
+            if Heading3Content != None:
+                obj.Heading3Content = Heading3Content
+            obj.save()
+        
+        except Exception as e:
+            print(e)
+            obj = AboutPageStepGuideTable(uni_key=1,BgImg=BgImg,Heading1=Heading1,Heading1Content=Heading1Content,Heading2=Heading2,Heading2Content=Heading2Content,\
+                Heading3=Heading3, Heading3Content=Heading3Content)
+            obj.save()
+
+        return CMSForWebsite(req)
+    
     else:
         return CMSForWebsite(req)

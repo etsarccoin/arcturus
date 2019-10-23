@@ -48,7 +48,10 @@ urlpatterns = [
     path('cms-home/', views.CMSForWebsite, name="cmsweburl"),
     path('cms/our-service/', views.OurServiceDataControler, name=""),
     path('cms/review-Bg-change/', views.ReviewBackgroundDataControler, name=""),
-    path('cms/about-us-edit/', views.AboutUSDataControler, name="")
-
-
+    path('cms/about-us-edit/', views.AboutUSDataControler, name=""),
+    path('cms/why-chhose-us-edit/', views.WhyChooseUSDataControler, name=""),
+    path('cms/road-map-edit/', views.RoadMapDataControler, name=""),
+    path('cms/header-content-edit/', views.HeaderContentDataControler, name=""),
+    path('cms/footer-content-edit/', views.FootercontentDataControler, name=""),
+    path('cms/edit-about-guide/', views.AboutUSStepGuideDataControler, name=""),
 ]
