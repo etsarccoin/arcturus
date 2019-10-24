@@ -78,7 +78,7 @@
 						<a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
 				</li>
 				<li class="nav-item mrg5A">
-					<a class="nav-link" href="{% url 'Userservice' %}">Service</a>
+					<a class="nav-link" href="{% url 'white' %}">White Paper</a>
 				</li>
 				<li class="nav-item mrg5A">
 					<a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -135,7 +135,7 @@
 							<div class="checkbox">
 								<input type="checkbox" class="styled" id="1" required="required" />
 								<label for="1" class="text-default">
-									I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a>
+									I accept the <a href="{% url 'UserTermsConditionsurl' %}">Terms of Use</a> &amp; <a href="{% url 'Userpolicyurl' %}">Privacy Policy</a>
 								</label>
 							</div>
 							
@@ -165,6 +165,12 @@
 						{{footerObj.FooterContent|safe}}
 				</div>
 				
+				<ul>
+						<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+						<br>
+						<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+					</ul>
+
 			</div>
 		  	<div class="col-lg-4">
                 <div class="footer-heading">Latest News</div>

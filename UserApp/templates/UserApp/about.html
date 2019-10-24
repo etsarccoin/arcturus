@@ -86,7 +86,7 @@
                     <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
                 </li>
                 <li class="nav-item mrg5A">
-                    <a class="nav-link" href="{% url 'Userservice' %}">Service</a>
+                    <a class="nav-link" href="{% url 'white' %}">White Paper</a>
                 </li>
                 <li class="nav-item mrg5A">
                     <a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -236,10 +236,22 @@
         			<div class="choose-table-cell">
         				<div class="header">{{whychooseObj.ChooseUsHeading3|safe}}</div>
         				<div class="mater">
-								{{whychooseObj.ChooseUsHeading2Content|safe}}
+								{{whychooseObj.ChooseUsHeading3Content|safe}}
 						</div>
         			</div>
-        		</div>
+				</div>
+				
+				<div class="choose-table-row">
+						<div class="choose-table-cell">
+							<img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
+						</div>
+						<div class="choose-table-cell">
+							<div class="header">{{whychooseObj.ChooseUsHeading4|safe}}</div>
+							<div class="mater">
+									{{whychooseObj.ChooseUsHeading4Content|safe}}
+							</div>
+						</div>
+					</div>
         		
         	</div>
         	
@@ -258,9 +270,9 @@
 			<div class="col-lg-6 mrg30B">
 				<div class="join-right-input">
 					<div class="input-group mb-0">
-						<input type="text" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
+						<input type="text" name="s_u_val" id="s_u_val" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
 						<div class="input-group-append">
-							<span class="input-group-text">Submit</span>
+							<span class="input-group-text" onclick="SubcriberFunction()">Submit</span>
 						</div>
 						
 					</div>
@@ -283,6 +295,13 @@
 				<div class="footer-logo-mater">
 						{{footerObj.FooterContent|safe}}
 				</div>
+
+				<ul>
+						<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+						<br>
+						<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+					</ul>
+					
 			</div>
 		  	<div class="col-lg-4">
                 <div class="footer-heading">Latest News</div>
@@ -377,8 +396,36 @@
 <script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
 
-<script>
-	
+<script type="text/javascript">
+	function SubcriberFunction()
+    {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "Subscription" %}',
+            async: true,
+            data: {
+                mail: $('#s_u_val').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['submitted'];
+                  if(submitted == true)
+				  {
+					alert("Succefully Submitted");
+                    $('#s_u_val').val("");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
 </script> 
 
 </body>

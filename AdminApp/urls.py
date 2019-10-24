@@ -54,4 +54,6 @@ urlpatterns = [
     path('cms/header-content-edit/', views.HeaderContentDataControler, name=""),
     path('cms/footer-content-edit/', views.FootercontentDataControler, name=""),
     path('cms/edit-about-guide/', views.AboutUSStepGuideDataControler, name=""),
+    path('cms/edit-white-paper/', views.AboutUSStepGuideDataControler, name=""),
+    path('cms/edit-copy-right/', views.CopyRightDataControler, name=""),
 ]

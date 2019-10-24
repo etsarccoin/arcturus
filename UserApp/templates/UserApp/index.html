@@ -84,7 +84,6 @@
                     <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
                 </li>
                 <li class="nav-item mrg5A">
-
                     <a class="nav-link" href="{% url 'white' %}">White Paper</a>
                 </li>
                 <li class="nav-item mrg5A">
@@ -608,7 +607,13 @@
 				</div>
 				<div class="footer-logo-mater">
 					{{footerObj.FooterContent|safe}}
-                </div>
+				</div>
+				
+			<ul>
+				<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+				<br>
+				<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+			</ul>
 			</div>
 
 		  	<div class="col-lg-4">

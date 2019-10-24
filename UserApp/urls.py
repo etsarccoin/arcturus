@@ -20,10 +20,11 @@ urlpatterns = [
     path("about/", views.about, name="Userabout"),
     path("service/", views.service, name="Userservice"),
     path('user-profile-setting/', views.UserProfileSettingPage, name="UserProfileSettingPage"),
+    path('user-profile/edit/', views.EditUserProfileDataControler, name="UserProfileEditPageUrl"),
     path('user-wallet-view/', views.UserWalletPage, name="UserWalletView"),
     path("user-contact/", views.ContactControler, name="UserContact"),
     path('user-feedback/', views.UserFeedbackControler, name="UserFeedback"),
-    path('user-feedback/submit/', views.SubmitUserFeedBack, name="SubmitUserFeedback"),
+    path('submit/user-feedback/', views.SubmitUserFeedBack, name="SubmitUserFeedback"),
     path("logout/",views.logout,name="UserLogout"),
     path('hotel/', views.hotel, name="hotel"),
     path('travel/', views.travel, name="travel"),
@@ -36,4 +37,10 @@ urlpatterns = [
     path('sucess/',views.sucess,name='sucess'),
     path('download-white-paper/', views.DownloadWhitePaper, name="whitepaperdownloadlink"),
     path('get-in-touch/', views.ContactUsFormDataControler, name="GetintouchDataComing"),
+
+    path('user/Terms-Conditions/', views.UserTermsConditions, name="UserTermsConditionsurl"),
+    path('user/Policy-View/', views.UserPolicy, name="Userpolicyurl"),
+
+    # For Testing
+    path('kuntal/', views.Test, name=""),
 ]

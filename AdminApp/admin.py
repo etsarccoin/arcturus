@@ -4,7 +4,7 @@ edit_tour,edit_recreation,edit_travel,edit_about,edit_white_page,road_map_edit
 
 # Author Kuntal
 from .models import OURSERVICECMS1, ReviewBackgroundCMS1, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS
 
 # Register your models here.
 admin.site.register(HomePage)
@@ -28,3 +28,7 @@ admin.site.register(DEVELOPMENTROADMAPCMS)
 admin.site.register(HeaderCMS)
 admin.site.register(FooterCMS)
 admin.site.register(AboutPageStepGuideTable)
+admin.site.register(WhitePaperCMS)
+admin.site.register(CopyRightCMS)
+
+

@@ -128,218 +128,27 @@
 <!--About Section-->
 <div class="container-fluid pad40T pad0B">
 	<div class="container">
-
-        <a href="/media/WhitePaperFolder/WhitePaper.pdf" download="WhitePaper.pdf">
-        <img src="{% static 'UserApp/assets/img/pdf-icon.jpg' %}" alt="pdf-icon">
-        <strong>Click Here to Download White Paper</strong></a>
    	
     	<div class="row">
-            <h2 class="border-heading">{{Whiteobj.mainhead|safe}}</h2>
+        	<h2 class="border-heading">Policy</h2>
             <br><br><br>
             <div class="col">
             	<div class="row">
-            	<p>
-            		<strong>
-                        <h1 class="section-header">
-                            {{Whiteobj.Headsub1|safe}}
-                        </h1>
-                    </strong>
-            	</p>
-                <p class="section-mater">
-					{{Whiteobj.Headsub1Content|safe}}
-                </p>
-			    </div>
+                    <br><br>
+                    ARCTURUS is the next generation future-ready cryptocurrency developed using the stout blockchain technology
+                     with own custom-made algorithms.The name ‘ARCTURUS’ has been inspirationally taken from name of 
+                     the brightest star of the same name in the northern hemisphere. Significantly, it is the brightest 
+                     star in the constellation of Boötes, the fourth-brightest in the night sky, and the brightest in the 
+                     northern celestial hemisphere. Similarly, in the world of digital transactions based on blockchain technology, 
+                     ARCTURUS, as a cryptocoin is aimed at transforming transactions in the hospitality and travel industry 
+                     secured and seamless to redefine them to the next levels 
+                </div>
             </div>
         </div>
-        
-        <div class="row pad40T pad40B">
-            <div class="col-lg-7 mrg30B">
-            	<h1 class="section-header">{{Whiteobj.Headsub2|safe}}</h1>
-                <div class="section-mater"> 
-					{{Whiteobj.Headsub2Content|safe}}
-                </div>
-                <br>
-                
-                <h1 class="section-header">{{Whiteobj.Headsub3|safe}}</h1>
-                <div class="section-mater">
-                    {{Whiteobj.Headsub3Content|safe}}
-                </div>
-
-                <br>
-                <h1 class="section-header">
-                    {{Whiteobj.Headsub4|safe}}
-                </h1>
-                <div class="section-mater">
-                    {{Whiteobj.Headsub4Content|safe}}
-                </div>
-
-                <br>
-                <h1 class="section-header">
-                     {{Whiteobj.Headsub5|safe}}
-                </h1>
-                <div class="section-mater">
-                    {{Whiteobj.Headsub5Content|safe}}
-                </div>
-                <br>
-            </div>
-        </div>
-        
     </div>
-</div>
 
-<!--How to work-->
-<div class="container-fluid footer-bg-back pad40T pad10B">
-	<div class="container pad20T">
-		<div class="row">
-		
-			<div class="col-lg-4 mrg30B">
-			  <div class="work-container">
-					<div class="image">
-						<img src="{% static 'UserApp/assets/img/icon-wallet-2.png' %}" width="180" height="180" class="img-fluid" alt=""/>
-					</div>
-					<div class="header">{{guideObj.Heading1|safe}}</div>
-					<div class="mater">{{guideObj.Heading1Content|safe}}</div>
-			  </div>
-			</div>
-			
-			<div class="col-lg-4 mrg30B">
-			  <div class="work-container">
-					<div class="image">
-						<img src="{% static 'UserApp/assets/img/icon-bitcoin.png' %}" width="180" height="180" class="img-fluid" alt=""/>
-					</div>
-					<div class="header">{{guideObj.Heading2|safe}}</div>
-					<div class="mater">{{guideObj.Heading1Content|safe}}</div>
-			  </div>
-			</div>
-			
-			<div class="col-lg-4 mrg30B">
-			  <div class="work-container">
-					<div class="image">
-						<img src="{% static 'UserApp/assets/img/icon-send-received.png' %}" width="180" height="180" class="img-fluid" alt=""/>
-					</div>
-					<div class="header">{{guideObj.Heading3|safe}}</div>
-					<div class="mater">{{guideObj.Heading3Content|safe}}</div>
-			  </div>
-			</div>
-			
-		</div>
-	</div>
-</div>
+    <br><br>
 
-<!--Why Choose Section-->
-<div class="container-fluid pad40T pad0B">
-	<div class="container">
-        
-        <div class="row">
-            <h2 class="border-heading">Why Choose US</h2>
-            <!-- <div class="col">
-                <div class="body-text text-center pad20T">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip dantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem</div>
-            </div> -->
-        </div>
-        
-        <div class="row pad40T pad40B">
-            <div class="col-lg-5 col-md-6 mrg30B order-md-7">
-                <img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
-            </div>
-            <div class="col-lg-7 col-md-6 mrg30B">
-                
-                <div class="choose-table-row">
-                    <div class="choose-table-cell">
-                        <img src="{% static 'UserApp/assets/img/icon-team.png' %}" width="92" height="92" alt=""/>
-                    </div>
-                    <div class="choose-table-cell">
-                        <div class="header">{{whychooseObj.ChooseUsHeading1|safe}}</div>
-                        <div class="mater">
-                            {{whychooseObj.ChooseUsHeading1Content|safe}}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="choose-table-row">
-                    <div class="choose-table-cell">
-                        <img src="{% static 'UserApp/assets/img/icon-service.png' %}" width="92" height="92" alt=""/>
-                    </div>
-                    <div class="choose-table-cell">
-                        <div class="header">{{whychooseObj.ChooseUsHeading2|safe}}</div>
-                        <div class="mater">{{whychooseObj.ChooseUsHeading2Content|safe}}</div>
-                    </div>
-                </div>
-                
-                <div class="choose-table-row">
-                    <div class="choose-table-cell">
-                        <img src="{% static 'UserApp/assets/img/icon-access.png' %}" width="92" height="92" alt=""/>
-                    </div>
-                    <div class="choose-table-cell">
-                        <div class="header">{{whychooseObj.ChooseUsHeading2|safe}}</div>
-                        <div class="mater">{{whychooseObj.ChooseUsHeading2Content|safe}}</div>
-                    </div>
-                </div>
-                
-                <div class="choose-table-row">
-                    <div class="choose-table-cell">
-                        <img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
-                    </div>
-                    <div class="choose-table-cell">
-                        <div class="header">{{whychooseObj.ChooseUsHeading2|safe}}</div>
-                        <div class="mater">{{whychooseObj.ChooseUsHeading2Content|safe}}</div>
-                    </div>
-                </div>
-                
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-<!--Our Vision Section-->
-<!-- <div class="container-fluid pad20T pad0B">
-	<div class="container">
-   	
-    	<div class="row">
-        	<h2 class="border-heading">Our Vission</h2>
-            <div class="col">
-            	<div class="body-text text-center pad20T">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la bore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip dantium, totam rem aperiam, eaque ipsa quae ab illo </div>
-            </div>
-        </div>
-        
-        <div class="row pad40T pad40B">
-        	<div class="col-lg-5 order-lg-7 mrg30B">
-            	<img src="{% static 'UserApp/assets/img/about-img-2.png' %}" width="100%" alt=""/>
-            </div>
-            <div class="col-lg-7 mrg30B">
-                <div class="section-mater"> 
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis iusto architecto nisi quo laboriosam dolorem fugiat sed officia hic obcaecati nostrum dolor eum, cum voluptas voluptatibus voluptatum, veniam eius, aliquid.</p>
-					<p>Maxime et amet, quibusdam rem magnam dolore eos suscipit reiciendis. Nihil adipisci voluptatum eos tempore quaerat dolore officia vel, facilis dolores ad ipsa veniam sed minus repellendus. Vitae, quis, provident.</p>
-					<p>Sed dolore pariatur, ipsum ullam voluptate recusandae esse ipsa quas! Ea nostrum unde consequuntur ab, labore minima vitae repudiandae saepe eaque accusamus, blanditiis aperiam atque porro neque repellendus. Ratione, odio!</p>
-					<p>Ratione magni repellat odio, ab labore id itaque quis voluptate cum velit non, quod, quo voluptatum minus doloribus quidem quasi veniam perspiciatis unde assumenda! Ea eveniet expedita voluptas aliquid ad.</p>
-					<p>Autem nobis magnam vel recusandae, quidem voluptate delectus excepturi officiis laudantium saepe dolore repellat, fugiat vitae, ducimus minus commodi necessitatibus dolorem quas quaerat, qui sunt inventore culpa error molestias est?</p>
-            </div>
-        </div>
-        
-    </div>
-</div> -->
-
-<!--Join Section-->
-<div class="container-fluid join-section-bg pad40T pad10B">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-6 mrg30B">
-				<div class="join-left-text">Join our subscription and get instant updates about offers and discounts.</div>
-			</div>
-			<div class="col-lg-6 mrg30B">
-				<div class="join-right-input">
-					<div class="input-group mb-0">
-						<input type="text" name="s_u_val" id="s_u_val" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
-						<div class="input-group-append">
-							<span class="input-group-text" onclick="SubcriberFunction()">Submit</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 <!--Footer top-->
 <div class="container-fluid footer-bg-back pad40T pad10B">
@@ -453,36 +262,8 @@
 <script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
 
-<script type="text/javascript">
-	function SubcriberFunction()
-    {
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '{% url "Subscription" %}',
-            async: true,
-            data: {
-                mail: $('#s_u_val').val()
-               },
-            success: function (response)
-                {
-                  let submitted = response['submitted'];
-                  if(submitted == true)
-				  {
-					alert("Succefully Submitted");
-                    $('#s_u_val').val("");
-				  }
-				  else
-				  {
-					alert("Try Again");
-				  }
-               },
-			error: function ()
-			{
-			notify('Something went wrong');
-			}
-		});
-    }
+<script>
+	
 </script> 
 
 </body>

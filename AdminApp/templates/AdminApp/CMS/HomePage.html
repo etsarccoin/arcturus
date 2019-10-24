@@ -466,6 +466,8 @@
 					<a href="#headerxx" class="mylinkliststyle">Header</a> |
 					<a href="#footerxx" class="mylinkliststyle">Footer</a> |
 					<a href="#aboutusextraxx" class="mylinkliststyle">Guide Edit</a> |
+					<a href="#whitepaperxx" class="mylinkliststyle">Edit White Paper</a> | 
+					<a href="#copyrightxx" class="mylinkliststyle">Copy Right</a>
 				</h4>
 			</section>
 			
@@ -913,6 +915,152 @@
 											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
 										</div>
 										</form>
+
+										<hr><hr>
+										<br>
+
+										<h3 align="center" id="whitepaperxx" class="myhedingcolor">White Paper Content</h3>
+
+										<form action="/user-admin/cms/edit-white-paper/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Main Heading :</label>
+												<textarea class="wysi-editor" placeholder="Message" name="mainhead"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.mainhead|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Sub Heading 1:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub1"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub1|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Sub Heading 1 Content:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub1Content"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub1Content|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Sub Heading 2:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub2"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub2|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Sub Heading 2 Content:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub2Content"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub2Content|safe}}
+												</textarea>
+											</div>
+										</div>
+
+											
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Sub Heading 3:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub3"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub3|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Sub Heading 3 Content:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub3Content"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub3Content|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Sub Heading 4:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub4"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub4|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Sub Heading 4 Content:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub4Content"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub4Content|safe}}
+												</textarea>
+											</div>
+										</div>
+										
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Edit Sub Heading 5:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub5"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub5|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-body">
+											<div class="form-group">
+												<label class="myheadingstyle">Sub Heading 5 Content:</label>
+												<textarea class="wysi-editor" placeholder="Message" name="Headsub5Content"
+													style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													{{Whiteobj.Headsub5Content|safe}}
+												</textarea>
+											</div>
+										</div>
+
+										<div class="box-footer clearfix">
+											<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+										</div>
+										</form>
+
+										<hr><hr>
+										<br>
+
+										<h3 align="center" id="copyrightxx" class="myhedingcolor">Copy Right Content</h3>
+
+										<form action="/user-admin/cms/edit-copy-right/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Edit Copy Right</label>
+													<textarea class="wysi-editor" placeholder="Message" name="copyRightData"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{copyObj.copyRightData|safe}}
+													</textarea>
+												</div>
+											</div>
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
 										
 										<br><hr>
 										<section class="content-header">
@@ -925,6 +1073,8 @@
 												<a href="#headerxx" class="mylinkliststyle">Header</a> |
 												<a href="#footerxx" class="mylinkliststyle">Footer</a> |
 												<a href="#aboutusextraxx" class="mylinkliststyle">Guide Edit</a> |
+												<a href="#whitepaperxx" class="mylinkliststyle">Edit White Paper</a>|
+												<a href="#copyrightxx" class="mylinkliststyle">Copy Right</a>
 											</h4>
 										</section>
 										<br>

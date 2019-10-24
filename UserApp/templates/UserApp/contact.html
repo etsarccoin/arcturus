@@ -90,7 +90,7 @@
 						<a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
 					</li>
 					<li class="nav-item mrg5A">
-						<a class="nav-link" href="{% url 'Userservice' %}">Service</a>
+						<a class="nav-link" href="{% url 'white' %}">White Paper</a>
 					</li>
 					<li class="nav-item mrg5A">
 						<a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -197,7 +197,7 @@
 
 				<div class="alerterror" id="errormsg" style="display: none;">
 					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-					Please Fill Out Form 
+					Please Fill Out Form Correctly
 				</div>
 				<br>
 
@@ -228,11 +228,10 @@
 			<div class="col-lg-6 mrg30B">
 				<div class="join-right-input">
 					<div class="input-group mb-0">
-						<input type="text" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
+						<input type="text" name="s_u_val" id="s_u_val" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
 						<div class="input-group-append">
-							<span class="input-group-text">Submit</span>
+							<span class="input-group-text" onclick="SubcriberFunction()">Submit</span>
 						</div>
-						
 					</div>
 				</div>
 			</div>
@@ -253,6 +252,12 @@
 				<div class="footer-logo-mater">
 						{{footerObj.FooterContent|safe}}
 				</div>
+
+				<ul>
+						<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+						<br>
+						<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+					</ul>
 				
 			</div>
 		  	<div class="col-lg-4">
@@ -455,7 +460,37 @@
 	});
 </script>
 
-
+<script type="text/javascript">
+	function SubcriberFunction()
+    {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "Subscription" %}',
+            async: true,
+            data: {
+                mail: $('#s_u_val').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['submitted'];
+                  if(submitted == true)
+				  {
+					alert("Succefully Submitted");
+                    $('#s_u_val').val("");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
+</script> 
 
 
 </body>

@@ -8,8 +8,8 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="{% static 'UserApp/assets/img/favicon.ico' %}">
-<title>User Wallet</title>
+<link rel="icon" href="{% static 'UserApp/assets/img/title.ico' %}">
+<title>Feedback Form</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
@@ -44,16 +44,16 @@
                 <span class="header-top-text">Welcome to Arcturus</span>
             </div>
             <div class="col-md-6 text-right-to-center pad5T pad5B">
-            	<a href="https://www.facebook.com/arcturus.coin.3" class="top-socila-icon">
+            	<a href="#" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
                 </a>
-                <a href="https://twitter.com/ArcturusCoin" class="top-socila-icon">
+                <a href="#" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
                 </a>
                 <a href="#" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
                 </a>
-                <a href="https://www.linkedin.com/in/arcturus-coin-544806194/" class="top-socila-icon">
+                <a href="#" class="top-socila-icon">
                 	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
                 </a>
             </div>
@@ -64,7 +64,7 @@
 <!-- Navbar Start -->
 <div class="container pad0L pad0R">
 	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'Userindex' %}">
             <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
@@ -72,12 +72,12 @@
         </button>
     
         <div class="collapse navbar-collapse" id="navbar">
-			<ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item mrg5A active">
                     <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
                 </li>
                 <li class="nav-item mrg5A">
-						<a class="nav-link" href="{% url 'white' %}">White Paper</a>
+					<a class="nav-link" href="{% url 'white' %}">White Paper</a>
                 </li>
                 <li class="nav-item mrg5A">
                     <a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -125,13 +125,9 @@
 											<span>Login IP</span>
 											<span>192.168.1.5</span>
 										</div>
-										<!-- <div class="info-col">
+										<div class="info-col">
 											<span>Browser</span>
 											<span>Mozila Firefox</span>
-										</div> -->
-										<div class="info-col">
-											<span>Country</span>
-											<span>INDIA</span>
 										</div>
 									</div>
 								</div>
@@ -238,48 +234,79 @@
 			</div>
 		
 		
-		
-		<div class="row pad20T pad20B">
-			<div class="col">
-				<div class="card upload-card">
-					<div class="row justify-content-center pad15L pad15R" align="center">
-						<div class="col profile-info">
-							<div class="table-header">Wallet Operation</div>
-							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="profile-table">
-								<thead>
-									<tr>
-										<th>Coin Name</th>
-										<th>Unique Txn ID</th>
-										<th>Coin Price</th>
-										<th>No Coin</th>
-										<th>Total Amount</th>
-										<th>Request Date</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-										{% for i in coin_req_obj %}
-									<tr>
-									  <td>
-									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
-									  	<span> Arcturus</span>
-									  </td>
-									  <td>{{i.unique_id}}</td>
-									  <td>{{i.coin_price}}</td>
-									  <td>{{i.no_coin}}</td>
-									  <td>{{i.total_amount}}</td>
-									  <td>{{i.req_date}}</td>
-									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
-									</tr>
-									{% endfor %}
-									
-								</tbody>
-							</table>
-						</div>						
+			<div class="row pad20T pad20B">
+					<div class="col">
+						<div class="card upload-card">
+							<div class="row justify-content-center pad15L pad15R" align="center">
+								<div class="col profile-info">
+									<form onsubmit="return false">
+							
+										<div class="from-heading">Personal Information</div>								
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<input type="text" value="{{u_obj.first_name}}" class="form-control" placeholder="First Name" readonly>
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" value="{{userAddressObj.mdName}}" name="mdName" id="mdName" class="form-control" placeholder="Middle Name">
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" value="{{u_obj.last_name}}" class="form-control" placeholder="Last Name" readonly>
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<input type="text" value="{{u_obj.email}}" class="form-control" placeholder="Email" readonly>
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" name="phone" value="{{userAddressObj.phone}}" id="phone" class="form-control" placeholder="Phone">
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" name="fax" value="{{userAddressObj.fax}}" id="fax" class="form-control" placeholder="Fax">
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<input type="text" value="{{userAddressObj.country}}" name="country" id="country" class="form-control" placeholder="Country">
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" value="{{userAddressObj.state_name}}" name="state_name" id="state_name" class="form-control" placeholder="State">
+											</div>
+											<div class="form-group col-md-4">
+												<input type="text" value="{{userAddressObj.zipcode}}" name="zipcode" id="zipcode" class="form-control" placeholder="Zip Code">
+											</div>
+										</div>
+										
+										<div class="form-row">
+											<div class="form-group col-12 pad0L pad0R mrg0B" align="right">
+												<button type="submit" onclick="SubcriberFunction()" class="btn btn-navbar-brown pad30L pad30R mrg5A">Save</button>
+											</div>
+										</div>
+										
+									</form>
+								</div>						
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			
+				<div class="row pad20T pad20B">
+						<div class="col">
+							<div class="card upload-card">
+								<div class="row justify-content-center pad15L pad15R" align="center">
+									<div class="col profile-info">
+										<div class="from-heading">Referrel Link</div>
+										<div class="form-row">
+											<div class="form-group col-md-8">
+												<input type="text" class="form-control" value="{{u_obj.reference_id}}" readonly>
+											</div>
+										</div>
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
+		
+		
 	</div>
 </div>
 
@@ -339,8 +366,8 @@
                         <a href="#" class="bot">October 11, 2019</a>
                     </div>
                 </div>
-			
-				<div>
+                
+                <div>
 						<ul>
 							<li>
 								<a href="#">
@@ -364,7 +391,7 @@
 							</li>		
 						</ul>	
 					  </div>
-
+                
             </div>
 			<div class="col-lg-4">
                 <div class="footer-heading">Twitter Feed</div>
@@ -417,6 +444,52 @@
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
 
 <script>
+	Highcharts.chart('coinGraph', {
+		chart: {
+			type: 'line',
+			backgroundColor: '#f4f4f4',
+			marginBottom: 30
+		},
+		title: {
+			text: false
+		},
+		subtitle: {
+			text: false
+		},
+		legend: {
+			margin: 0,
+			verticalAlign: 'bottom',
+			y: 15
+		},
+		xAxis: {
+			title: false,
+			tickInterval:1,
+			labels: false
+		},
+		yAxis: {
+			title: false,
+			tickInterval:1,
+			labels: false
+		},
+		plotOptions: {
+			line: {
+				dataLabels: {
+					enabled: true
+				},
+				enableMouseTracking: false
+			}
+		},
+		series: [{
+			name: 'Stock',
+			data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 23.2, 23.5, 22.3, 19.3, 13.9, 9.6],
+			color: '#6b3008'
+		}, {
+			name: 'Sale',
+			data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8],
+			color: '#ff7d00'
+		}]
+	});
+
 	$(document).ready(function() {	
 		"use strict";
 		$('#profile-table').DataTable( {
@@ -428,6 +501,42 @@
 		});
 	});
 </script> 
+
+
+<!-- JS Added by Kuntal -->
+<script>
+		function submitFeedBack()
+		{
+			$.ajax({
+					type: "GET",
+					contentType: "application/json; charset=utf-8",
+					url: '{% url "EmailExistChecking" %}',
+					async: true,
+					data: {
+						mail: $('#e_mail').val()
+					   },
+					success: function (response)
+						{
+						  let is_taken = response['is_taken'];
+						  if(is_taken == 1)
+						  {
+							  alert("Email Already Exist !! ");
+							  $('#s_data').attr("disabled", true);
+						  }
+						  else
+						  {
+							$('#s_data').attr("disabled", false);
+							alert("Email Is Okay !! ");
+						  }
+					   },
+					error: function ()
+					{
+					notify('Something went wrong');
+					}
+				});
+		}
+		</script>
+
 
 <script type="text/javascript">
 	function SubcriberFunction()
@@ -460,6 +569,45 @@
 		});
     }
 </script> 
+
+
+
+<script type="text/javascript">
+	function SubcriberFunction()
+    {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "UserProfileEditPageUrl" %}',
+            async: true,
+            data: {
+                mdName: $('#mdName').val(),
+				phone: $('#phone').val(),
+				fax: $('#fax').val(),
+				country: $('#country').val(),
+				state_name: $('#state_name').val(),
+				zipcode: $('#zipcode').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['submitted'];
+                  if(submitted == true)
+				  {
+					alert("Profile Updated Successfully !!");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
+</script> 
+
 
 </body>
 </html>

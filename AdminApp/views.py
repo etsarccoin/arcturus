@@ -17,7 +17,7 @@ from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit
 
 # DB For CMS
 from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS
 
 
 def Test(request):
@@ -643,6 +643,7 @@ def ShowContactUSFormData(req):
 
 def CMSForWebsite(req):
     try:
+		admin_id = req.session['admin_id']
         serviceobj = OURSERVICECMS1.objects.get(service_uni_key=1)
         reviewbgobj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
         aboutusobj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
@@ -651,14 +652,17 @@ def CMSForWebsite(req):
         headerobj = HeaderCMS.objects.get(header_uni_key=1)
         footerobj = FooterCMS.objects.get(footer_uni_key=1)
         guideobj = AboutPageStepGuideTable.objects.get(uni_key=1)
+        Whiteobj = WhitePaperCMS.objects.get(white_uni_key=1)
+        copyObj = CopyRightCMS.objects.get(uni_key=1)
 
         context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj, 'whychooseusobj': whychooseusobj,\
-             'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj}
+             'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj, 'Whiteobj': Whiteobj,\
+                 'copyObj': copyObj}
         return render(req, 'AdminApp/CMS/HomePage.html', context=context)
     
     except Exception as e:
         print(e)
-        return render(req, 'AdminApp/CMS/HomePage.html', context={})
+        return AdminLogin(request)
 
 
 def OurServiceDataControler(req):
@@ -1107,5 +1111,116 @@ def AboutUSStepGuideDataControler(req):
 
         return CMSForWebsite(req)
     
+    else:
+        return CMSForWebsite(req)
+
+
+def WhitePaperDataControler(req):
+    if req.method == 'POST':
+        mainhead, Headsub1, Headsub1Content, Headsub2, Headsub2Content = None, None, None, None, None
+        Headsub3, Headsub3Content, Headsub4, Headsub4Content, Headsub5, Headsub5Content = None, None, None, None, None, None
+
+        try:
+            mainhead = req.POST['mainhead']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub1 = req.POST['Headsub1']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub1Content = req.POST['Headsub1Content']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub2 = req.POST['Headsub2']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub2Content = req.POST['Headsub2Content']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub3 = req.POST['Headsub3']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub3Content = req.POST['Headsub3Content']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub4 = req.POST['Headsub4']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub4Content = req.POST['Headsub4Content']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub5 = req.POST['Headsub5']
+        except Exception as e:
+            print(e)
+        try:
+            Headsub5Content = req.POST['Headsub5Content']
+        except Exception as e:
+            print(e)
+        
+        try:
+            obj = WhitePaperCMS.objects.get(white_uni_key=1)
+            if mainhead != None:
+                obj.mainhead = mainhead
+            if Headsub1 != None:
+                obj.Headsub1 = Headsub1
+            if Headsub1Content != None:
+                obj.Headsub1Content = Headsub1Content
+            if Headsub2 != None:
+                obj.Headsub2 = Headsub2
+            if Headsub2Content != None:
+                obj.Headsub2Content = Headsub2Content
+            if Headsub3 != None:
+                obj.Headsub3 = Headsub3
+            if Headsub3Content != None:
+                obj.Headsub3Content = Headsub3Content
+            if Headsub4 != None:
+                obj.Headsub4 = Headsub4
+            if Headsub4Content != None:
+                obj.Headsub4Content = Headsub4Content
+            if Headsub5 != None:
+                obj.Headsub5 = Headsub5
+            if Headsub5Content != None:
+                obj.Headsub5Content = Headsub5Content
+            obj.save()
+        
+        except Exception as e:
+            print(e)
+            obj = WhitePaperCMS(white_uni_key=1,mainhead=mainhead,Headsub1=Headsub1,Headsub1Content=Headsub1Content,Headsub2=Headsub2,\
+                 Headsub2Content=Headsub2Content,Headsub3=Headsub3,Headsub3Content=Headsub3Content,Headsub4=Headsub4,\
+                     Headsub4Content=Headsub4Content,Headsub5=Headsub5,Headsub5Content=Headsub5Content)
+            obj.save()
+            
+        return CMSForWebsite(req)
+    else:
+        return CMSForWebsite(req)
+
+
+def CopyRightDataControler(req):
+    if req.method == 'POST':
+        copyRightData = None
+
+        try:
+            copyRightData = req.POST['copyRightData']
+        except Exception as e:
+            print(e)
+        try:
+            obj = CopyRightCMS.objects.get(uni_key=1)
+            if copyRightData != None:
+                obj.copyRightData = copyRightData
+            obj.save()
+        except Exception as e:
+            print(e)
+            obj = CopyRightCMS(uni_key=1,copyRightData=copyRightData)
+            obj.save()
+
+        return CMSForWebsite(req)
     else:
         return CMSForWebsite(req)

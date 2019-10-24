@@ -244,3 +244,23 @@ class AboutPageStepGuideTable(models.Model):
     Heading2Content = models.TextField()
     Heading3 = models.TextField()
     Heading3Content = models.TextField()
+
+
+class WhitePaperCMS(models.Model):
+    white_uni_key = models.SmallIntegerField(primary_key=1)
+    mainhead = models.TextField()
+    Headsub1 = models.TextField()
+    Headsub1Content = models.TextField()
+    Headsub2 = models.TextField()
+    Headsub2Content = models.TextField()
+    Headsub3 = models.TextField()
+    Headsub3Content = models.TextField()
+    Headsub4 = models.TextField()
+    Headsub4Content = models.TextField()
+    Headsub5 = models.TextField()
+    Headsub5Content = models.TextField()
+
+
+class CopyRightCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=1)
+    copyRightData = models.TextField()
