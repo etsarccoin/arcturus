@@ -643,7 +643,7 @@ def ShowContactUSFormData(req):
 
 def CMSForWebsite(req):
     try:
-		admin_id = req.session['admin_id']
+        admin_id = req.session['admin_id']
         serviceobj = OURSERVICECMS1.objects.get(service_uni_key=1)
         reviewbgobj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
         aboutusobj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
