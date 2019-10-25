@@ -264,3 +264,15 @@ class WhitePaperCMS(models.Model):
 class CopyRightCMS(models.Model):
     uni_key = models.SmallIntegerField(primary_key=1)
     copyRightData = models.TextField()
+
+
+class LatestNewsCMS(models.Model):
+    news_uni_key = models.SmallIntegerField(primary_key=1)
+    LatestNewsImg1 = models.ImageField(upload_to='CMS/Latest News/')
+    LatestNewsContent1 = models.TextField()
+    LatestNewsDate1 = models.TextField()
+
+
+class WhitePaperPDFCMS(models.Model):
+    pdf_uni_key = models.SmallIntegerField(primary_key=True)
+    pdffile = models.FileField(upload_to='CMS/White Paper PDF/')

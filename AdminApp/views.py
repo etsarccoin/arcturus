@@ -17,7 +17,7 @@ from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit
 
 # DB For CMS
 from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS
 
 
 def Test(request):
@@ -654,15 +654,16 @@ def CMSForWebsite(req):
         guideobj = AboutPageStepGuideTable.objects.get(uni_key=1)
         Whiteobj = WhitePaperCMS.objects.get(white_uni_key=1)
         copyObj = CopyRightCMS.objects.get(uni_key=1)
+        NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
 
         context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj, 'whychooseusobj': whychooseusobj,\
              'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj, 'Whiteobj': Whiteobj,\
-                 'copyObj': copyObj}
+                 'copyObj': copyObj, 'NewsObj': NewsObj}
         return render(req, 'AdminApp/CMS/HomePage.html', context=context)
     
     except Exception as e:
         print(e)
-        return AdminLogin(request)
+        return AdminLogin(req)
 
 
 def OurServiceDataControler(req):
@@ -1220,6 +1221,62 @@ def CopyRightDataControler(req):
             print(e)
             obj = CopyRightCMS(uni_key=1,copyRightData=copyRightData)
             obj.save()
+
+        return CMSForWebsite(req)
+    else:
+        return CMSForWebsite(req)
+
+
+def LatestNewsDataControler(req):
+    if req.method == 'POST':
+        LatestNewsImg1, LatestNewsContent1, LatestNewsDate1 = None, None, None
+        try:
+            LatestNewsImg1 = req.FILES['LatestNewsImg1']
+        except Exception as e:
+            print(e)
+        try:
+            LatestNewsContent1 = req.POST['LatestNewsContent1']
+        except Exception as e:
+            print(e)
+        try:
+            LatestNewsDate1 = req.POST['LatestNewsDate1']
+        except Exception as e:
+            print(e)
+        try:
+            obj = LatestNewsCMS.objects.get(news_uni_key=1)
+            if LatestNewsImg1 != None:
+                obj.LatestNewsImg1 = LatestNewsImg1
+            if LatestNewsContent1 != None:
+                obj.LatestNewsContent1 = LatestNewsContent1
+            if LatestNewsDate1 != None:
+                obj.LatestNewsDate1 = LatestNewsDate1
+            obj.save()
+        except Exception as e:
+            print(e)
+            obj = LatestNewsCMS(news_uni_key=1,LatestNewsImg1=LatestNewsImg1,LatestNewsContent1=LatestNewsContent1,LatestNewsDate1=LatestNewsDate1)
+            obj.save()
+
+        return CMSForWebsite(req)
+    else:
+        return CMSForWebsite(req)
+
+
+def WhitePaperDataControler(req):
+    if req.method == 'POST':
+        pdffile = None
+        try:
+            pdffile = req.FILES['pdffile']
+        except Exception as e:
+            print(e)
+        try:
+            obj = WhitePaperPDFCMS.objects.get(pdf_uni_key=1)
+            if pdffile != None:
+                obj.pdffile = pdffile
+            obj.save()
+        except Exception as e:
+            print(e)
+        obj = WhitePaperPDFCMS(pdf_uni_key=1,pdffile=pdffile)
+        obj.save()
 
         return CMSForWebsite(req)
     else:

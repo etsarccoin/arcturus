@@ -20,11 +20,11 @@ from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
-        ContactUSFormData, UserProfileData
+        ContactUSFormData, UserProfileData, UserFeedbackTable
 
 # Coming From Admin Model
 from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
-     DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS
+     DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, WhitePaperPDFCMS
 
 # from .models import UsersD as UsersDetail
 
@@ -118,9 +118,10 @@ def white12(request):
     footerObj = FooterCMS.objects.get(footer_uni_key=1)
     Whiteobj = WhitePaperCMS.objects.get(white_uni_key=1)
     copyObj = CopyRightCMS.objects.get(uni_key=1)
+    WhitePObj = WhitePaperPDFCMS.objects.get(pdf_uni_key=1)
 
     context = {'headerObj': headerObj, 'guideObj': guideObj, 'whychooseObj': whychooseObj, 'footerObj': footerObj,\
-         'Whiteobj': Whiteobj, 'copyObj': copyObj}
+         'Whiteobj': Whiteobj, 'copyObj': copyObj, 'WhitePObj': WhitePObj}
     return render(request, 'UserApp/white.html', context=context)
 
     
@@ -316,11 +317,11 @@ def login(request):
                     request.session['user_id'] = user_id
                     # Updating Last Login and Host PC
                     user_obj = UsersDetail.objects.get(email=user_id)
-                    user_obj.last_login_ip = GetIPLocationPC(request)
-                    user_obj.last_login_hostpc = GetHostNamePC()
-                    user_obj.last_login_browser = DetectBrowser(request)
-                    u_obj.last_login_time = datetime.datetime.now()
-                    u_obj.mac = GetMacAddress(request)
+                    # user_obj.last_login_ip = GetIPLocationPC(request)
+                    # user_obj.last_login_hostpc = GetHostNamePC()
+                    # user_obj.last_login_browser = DetectBrowser(request)
+                    # u_obj.last_login_time = datetime.datetime.now()
+                    # u_obj.mac = GetMacAddress(request)
                     user_obj.save()
                     return UserIndex(request)
 
@@ -561,6 +562,7 @@ def UserFeedbackControler(request):
         u_obj = UsersDetail.objects.get(email=user_id)
         u_mail = u_obj.email
         u_name = u_obj.first_name + " " + u_obj.last_name
+        UPObjPhone = UserProfileData.objects.get(email=user_id).phone
 
         no_of_coin_obj = UserAccountCoin.objects.get(email=user_id)
         temp_val = no_of_coin_obj.no_of_coin
@@ -572,17 +574,40 @@ def UserFeedbackControler(request):
         logged_in = True
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
 
-        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name, 'footerObj': footerObj,\
+        context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name, 'UPObjPhone':UPObjPhone, 'footerObj': footerObj,\
             'noCoin': noCoin, 'no_of_coin_obj': no_of_coin_obj}
         return render(request,'UserApp/user-feedback.html', context=context)
     
     except Exception as e:
         return UserIndex(request)
 
-
+import json
 def SubmitUserFeedBack(request):
-    pass
+    if request.method == 'GET':
+        try:
+            form_data = json.loads(request.GET.get('feedbackdata'))
+            print(form_data)
+            feedback_obj = UserFeedbackTable(
+            user_name=form_data['user_name'],
+            user_mail = form_data['user_mail'],
+            user_ph = int(form_data['user_ph']),
+            overall_rating = int(form_data['overall_rating']),
+            timely_response = int(form_data['timely_response']),
+            our_support = int(form_data['our_support']),
+            satisfaction_level = int(form_data['satisfaction_level']),
+            customer_service = int(form_data['score']),
+            description = form_data['description']
+            )
+            print(feedback_obj)
+            feedback_obj.save()
 
+            data = {'is_taken': 1}
+            return JsonResponse(data)
+        except Exception as e:
+            print(e)
+            data = {'is_taken': 2}
+            return JsonResponse(data)
+        
 
 def UserProfileSettingPage(request): # @@
     try:
