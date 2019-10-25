@@ -33,6 +33,8 @@ urlpatterns = [
     path('body/',views.update_context,name="body"),
     path('home-page-edit/',views.HomePageEditView,name='HomePageEdit'),
     path('user-contact-us-data/', views.ShowContactUSFormData, name="UserWanttocontactData"),
+
+    # No Needed
     path("commonedit/",views.CommonEdit,name="commonedit"),
     path("feedbackedit/",views.feedback_edit,name="feedbackedit"),
     path("edithotel/",views.hotel_edit,name="edithotel"),
@@ -45,6 +47,7 @@ urlpatterns = [
     path("editwhitepage/",views.white_page_edit1,name="editwhitepage"),
     path("editroadmap/",views.roadmap_edit,name="editroadmap"),
 
+    # Link For CMS
     path('cms-home/', views.CMSForWebsite, name="cmsweburl"),
     path('cms/our-service/', views.OurServiceDataControler, name=""),
     path('cms/review-Bg-change/', views.ReviewBackgroundDataControler, name=""),

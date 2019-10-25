@@ -44,18 +44,18 @@
                 <span class="header-top-text">Welcome to Arcturus</span>
             </div>
             <div class="col-md-6 text-right-to-center pad5T pad5B">
-            	<a href="https://www.facebook.com/arcturus.coin.3" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://twitter.com/ArcturusCoin" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="#" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://www.linkedin.com/in/arcturus-coin-544806194/" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
-                </a>
+					<a href="{{SocialMObj.facebook_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.twitter_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.googleplus|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.linkedin|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+						</a>
             </div>
         </div>
     </div>	
@@ -240,14 +240,13 @@
 								
 								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
 									<div class="input-group-prepend">
-										<button class="btn dropdown-toggle" id="selected-crypto" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
-										<div class="crypto-type-selector dropdown-menu">
-											<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">BTC</a>
-											<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">USD</a>
-										</div>
+										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+										<!-- <div class="dropdown-menu">
+											<a class="dropdown-item" href="#">USD</a>
+											<a class="dropdown-item" href="#">INR</a>
+										</div> -->
 									</div>
 									<input type="text" name="Money" id="money" class="form-control" aria-label="Text input with dropdown button">
-                        			<input type="hidden" id="crypto-type" name="crypto-type">
 								</div>
 
 								<div class="pad20T pad20B">
@@ -346,16 +345,17 @@
                 <div class="footer-heading">Latest News</div>
                 
                 <div class="footer-news-container">
-                    <div class="footer-news-col">
-                        <div class="image">
-                            <img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
-                        </div>
-                    </div>
-                    <div class="footer-news-col">
-                        <div class="top">Comming soon...</div>
-                        <a href="#" class="bot">October 11, 2019</a>
-                    </div>
-                </div>
+						<div class="footer-news-col">
+							<div class="image">
+								<img src="{{NewsObj.LatestNewsImg1.url}}" width="100%" alt=""/>
+							</div>
+						</div>
+						<div class="footer-news-col">
+							<div class="top">{{NewsObj.LatestNewsContent1|safe}}</div>
+							<a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
+						</div>
+					</div>
+					
                 <div>
 						<ul>
 							<li>
@@ -405,7 +405,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="footer-bot-text">
-				<a href="javascript:">{{copyObj.copyRightData|safe}}</a>
+					<a href="javascript:">{{CopyObj.copyRightData|safe}}</a>
 			</div>
 		</div>
 	</div>
@@ -551,34 +551,37 @@
 
 
 <script type="text/javascript">
-    function checkcoinprice()
+    function buymycoinfunction()
     {
-    $.ajax({
+        $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: '{% url "CoinValueCalling" %}',
+            url: '{% url "CoinRequestLink" %}',
             async: true,
             data: {
-                		c_val: $('#money').val(),
-                		c_type: $('#selected-crypto').text(),
-               		},
-            success: function (response){
-                  	console.log(response['no_coin']);
-                  	let no_coin = response['no_coin'];
-				  	if(response['is_taken'] == 1){
-						$("#c_data").val();
-                  		$("#c_data").val(no_coin);
-				  	}
-				 	else{
-						 alert("Give a Numeric Value !!");
-				  	}
-                  
-               	},
-    		error: function (){
-    			           alert('Something went wrong !!');
-     				}
-     			});
-}
+				no_coin: $('#money').val(),
+                total_amountw: $('#c_data').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['is_taken'];
+                  if(submitted == 1)
+				  {
+					alert("Request Succefully Submitted");
+                    $('#money').val("");
+					$('#c_data').val("");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
 </script>
 
 

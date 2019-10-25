@@ -17,7 +17,7 @@ from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit
 
 # DB For CMS
 from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS, SocialMedialCMS
 
 
 def Test(request):
@@ -404,6 +404,9 @@ def SocialURLManagement(request):
     context = {}
     try:
         admin_id = request.session['admin_id']
+        SocalMediaObj = SocialMedialCMS.objects.get(social_uni_key=1)
+
+        context = {'SocalMediaObj': SocalMediaObj}
         return render(request, 'AdminApp/SocailMediaURL.html', context=context)
     
     except Exception as e:
@@ -419,28 +422,32 @@ def SocialURLUpdate(request):
         m_val = int(m_val)
         if m_val == 1:
             fb_id = request.GET.get('fb_id')
-            obj = SocialMedialLink.objects.get(id=1)
+            obj = SocialMedialCMS.objects.get(social_uni_key=1)
             obj.facebook_link = fb_id
             obj.save()
             submitted = True
+
         elif m_val == 2:
             tw_id = request.GET.get('tw_id')
-            obj = SocialMedialLink.objects.get(id=1)
+            obj = SocialMedialCMS.objects.get(social_uni_key=1)
             obj.twitter_link = tw_id
             obj.save()
             submitted = True
+
         elif m_val == 3:
             gp_id = request.GET.get('gp_id')
-            obj = SocialMedialLink.objects.get(id=1)
+            obj = SocialMedialCMS.objects.get(social_uni_key=1)
             obj.googleplus = gp_id
             obj.save()
             submitted = True
+
         elif m_val == 4:
             linkin_id = request.GET.get('linkin_id')
-            obj = SocialMedialLink.objects.get(id=1)
+            obj = SocialMedialCMS.objects.get(social_uni_key=1)
             obj.linkedin = linkin_id
             obj.save()
             submitted = True
+
         else:
             pass
 
@@ -448,7 +455,7 @@ def SocialURLUpdate(request):
         return JsonResponse(data)
 
     except Exception as e:
-        data = {'submitted': False}
+        data = {'submitted': submitted}
         return JsonResponse(data)
 
 

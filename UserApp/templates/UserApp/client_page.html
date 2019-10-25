@@ -44,18 +44,18 @@
                 <span class="header-top-text">Welcome to Arcturus</span>
             </div>
             <div class="col-md-6 text-right-to-center pad5T pad5B">
-            	<a href="https://www.facebook.com/arcturus.coin.3" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://twitter.com/ArcturusCoin" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="#" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://www.linkedin.com/in/arcturus-coin-544806194/" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
-                </a>
+					<a href="{{SocialMObj.facebook_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.twitter_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.googleplus|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.linkedin|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+						</a>
             </div>
         </div>
     </div>	
@@ -246,36 +246,55 @@
 					</a>
 				</div>
 				<div class="footer-logo-mater">
-						ARCTURUS is the next generation future-ready cryptocurrency developed
-						using the stout blockchain technology with own custom-made algorithms.The name ‘ARCTURUS’ has 
-						been inspirationally taken from name of the brightest star of the same name in the northern hemisphere.
-						Significantly, it is the brightest star in the constellation of Boötes, the fourth-brightest in the night sky,
-						 and the brightest in the northern celestial hemisphere. Similarly, in the world of digital transactions 
-						 based on blockchain technology, ARCTURUS, as a cryptocoin is aimed at transforming transactions in the 
-						 hospitality and travel industry secured and seamless to redefine them to the next levels.
-				</div>
+						{{footerObj.FooterContent|safe}}
+					</div>
 
-				<ul>
-					<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
-					<br>
-					<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
-				</ul>
+					<ul>
+							<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+							<br>
+							<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+						</ul>
 				
 			</div>
 		  	<div class="col-lg-4">
                 <div class="footer-heading">Latest News</div>
                 
                 <div class="footer-news-container">
-                    <div class="footer-news-col">
-                        <div class="image">
-                            <img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
-                        </div>
-                    </div>
-                    <div class="footer-news-col">
-                        <div class="top">Comming soon...</div>
-                        <a href="#" class="bot">October 11, 2019</a>
-                    </div>
-                </div>
+						<div class="footer-news-col">
+							<div class="image">
+								<img src="{{NewsObj.LatestNewsImg1.url}}" width="100%" alt=""/>
+							</div>
+						</div>
+						<div class="footer-news-col">
+							<div class="top">{{NewsObj.LatestNewsContent1|safe}}</div>
+							<a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
+						</div>
+					</div>
+
+					<div>
+							<ul>
+								<li>
+									<a href="#">
+										<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+										<span>{{footerObj.FooterAddress|safe}}</span>
+									</a>
+								</li>
+								<br>
+								<li>
+									<a href="#">
+										<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+										<span>{{footerObj.FooterPhone|safe}}</span>
+									</a>
+								</li>
+								<br>
+								<li>
+									<a href="#">
+										<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+										<span>{{footerObj.FooterMail|safe}}</span>
+									</a>
+								</li>		
+							</ul>	
+						  </div>
               
 			</div>
 			
@@ -283,17 +302,15 @@
 				<div class="footer-heading">Twitter Feed</div>
 				
 				<div class="footer-twitter-table">
-		  			<div class="footer-twitter-table-col">
-		  				<div class="image">
-		  					<i class="fa fa-twitter" aria-hidden="true"></i>
-		  				</div>
-		  			</div>
-		  			<div class="footer-twitter-table-col">
-		  				<div class="top">Comming Soon…</div>
-		  				<div class="bot">https://twitter.com/ArcturusCoin</div>
-		  				<a href="#">April 12, 2019</a>
-		  			</div>
-		  		</div>
+						<div class="footer-twitter-table-col">
+							<div class="image">
+								<i class="fa fa-twitter" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div class="footer-twitter-table-col">
+							<div class="top"><a class="twitter-timeline" href="https://twitter.com/ArcturusCoin?ref_src=twsrc%5Etfw">Tweets by ArcturusCoin</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+						</div>
+					</div>  
 		  		
 		  		
 			</div>
@@ -306,7 +323,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="footer-bot-text">
-				<a href="#">© 2011 Yourcompany.com, All Rights Reserved</a>
+					<a href="javascript:">{{CopyObj.copyRightData|safe}}</a>
 			</div>
 		</div>
 	</div>

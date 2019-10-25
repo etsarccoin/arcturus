@@ -53,18 +53,18 @@
                 <span class="header-top-text">Welcome to Arcturus</span>
             </div>
             <div class="col-md-6 text-right-to-center pad5T pad5B">
-            	<a href="https://www.facebook.com/arcturus.coin.3" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://twitter.com/ArcturusCoin" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="#" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
-                </a>
-                <a href="https://www.linkedin.com/in/arcturus-coin-544806194/" class="top-socila-icon">
-                	<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
-                </a>
+                    <a href="{{SocialMObj.facebook_link|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.twitter_link|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.googleplus|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.linkedin|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+                        </a>
             </div>
         </div>
     </div>	
@@ -173,16 +173,16 @@
                 <div class="footer-heading">Latest News</div>
                 
                 <div class="footer-news-container">
-                    <div class="footer-news-col">
-                        <div class="image">
-                            <img src="{% static 'UserApp/assets/img/bitcoin-2008262_1920_Edit.jpg' %}" width="100%" alt=""/>
+                        <div class="footer-news-col">
+                            <div class="image">
+                                <img src="{{NewsObj.LatestNewsImg1.url}}" width="100%" alt=""/>
+                            </div>
+                        </div>
+                        <div class="footer-news-col">
+                            <div class="top">{{NewsObj.LatestNewsContent1|safe}}</div>
+                            <a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
                         </div>
                     </div>
-                    <div class="footer-news-col">
-                        <div class="top">Comming soon...</div>
-                        <a href="#" class="bot">October 11, 2019</a>
-                    </div>
-                </div>
                  
                 <div>
                         <ul>
@@ -233,7 +233,7 @@
 	<div class="row">
 		<div class="col">
 			<div class="footer-bot-text">
-				<a href="#">© 2011 Yourcompany.com, All Rights Reserved</a>
+                    <a href="javascript:">{{CopyObj.copyRightData|safe}}</a>
 			</div>
 		</div>
 	</div>

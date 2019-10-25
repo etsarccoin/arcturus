@@ -442,68 +442,7 @@
 								</li>
 							</ul>
 						</li>
-						<li class="treeview">
-							<a href="#">
-								<i class="fa fa-pie-chart"></i>
-								<span>Edit Pages</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-								<li>
-									<a href="{% url 'HomePageEdit' %}">
-										<i class="fa fa-circle-o"></i> Home Page
-									</a>
-								</li>
-								<li>
-								<a href="{% url 'commonedit' %}">
-										<i class="fa fa-circle-o"></i> Upload All Common Data
-									</a>
-								</li>
-								<li>
-								<a href="{% url 'feedbackedit' %}">
-										<i class="fa fa-circle-o"></i> Add feedback
-									</a>
-								</li><li>
-								<a href="{% url 'edithotel' %}">
-										<i class="fa fa-circle-o"></i> Edit hotel service
-									</a>
-								</li><li>
-								<a href="{% url 'foodedit' %}">
-										<i class="fa fa-circle-o"></i> Edit Food Price
-									</a>
-								</li><li>
-								<a href="{% url 'paymentedit' %}">
-										<i class="fa fa-circle-o"></i> Edit Payment Service page.
-									</a>
-								</li><li>
-								<a href="{% url 'edittour' %}">
-										<i class="fa fa-circle-o"></i> Edit Tour service page.
-									</a>
-								</li><li>
-								<a href="{% url 'recretaion' %}">
-										<i class="fa fa-circle-o"></i> Edit recreation Service page.
-									</a>
-								</li><li>
-								<a href="{% url 'cedittravel' %}">
-										<i class="fa fa-circle-o"></i> Edit tarvel service page.
-									</a>
-								</li><li>
-								<a href="{% url 'editabout' %}">
-										<i class="fa fa-circle-o"></i> Edit about us.
-									</a>
-								</li><li>
-								<a href="{% url 'editwhitepage' %}">
-										<i class="fa fa-circle-o"></i> edit the white page
-									</a>
-								</li><li>
-								<a href="{% url 'editroadmap' %}">
-										<i class="fa fa-circle-o"></i> Edit road map.
-									</a>
-								</li>
-							</ul>
-						</li>
+						
 					<li class="header">LABELS</li>
 					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
 					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -532,25 +471,29 @@
 							
 							<div class="box-body">
 									<div class="form-group">
-										<input type="email" class="form-control" id="fb_id" name="fb_id" placeholder="FaceBook URL">
+										<label>FaceBook</label>
+										<input type="text" value="{{SocalMediaObj.facebook_link}}" class="form-control" id="fb_id" name="fb_id" placeholder="FaceBook URL">
 									</div>
 									<div class="form-group"><button type="submit" id="fb_sub" onclick="sociallinkupdate1()">Submit</button></div>
 
 								
 									<div class="form-group">
-										<input type="email" class="form-control" id="tw_id" name="tw_id" placeholder="Twitter URL">
+										<label>Twitter</label>
+										<input type="text" value="{{SocalMediaObj.twitter_link}}" class="form-control" id="tw_id" name="tw_id" placeholder="Twitter URL">
 									</div>
 									<div class="form-group"><button type="submit" id="tw_sub" onclick="sociallinkupdate2()">Submit</button></div>
 								
 								
 									<div class="form-group">
-										<input type="email" class="form-control" id="gp_id" name="gp_id" placeholder="Google Plus URL">
+										<label>Google Plus</label>
+										<input type="text" value="{{SocalMediaObj.googleplus}}" class="form-control" id="gp_id" name="gp_id" placeholder="Google Plus URL">
 									</div>
 									<div class="form-group"><button type="submit" id="gp_sub" onclick="sociallinkupdate3()">Submit</button></div>
 								
 								
 									<div class="form-group">
-										<input type="email" class="form-control" id="linkin_id" name="linkin_id" placeholder="LinkedIn URL">
+										<label>LinkedIN</label>
+										<input type="text" value="{{SocalMediaObj.linkedin}}" class="form-control" id="linkin_id" name="linkin_id" placeholder="LinkedIn URL">
 									</div>
 									<div class="form-group"><button type="submit" id="linkin_sub" onclick="sociallinkupdate4()">Submit</button></div>
 								
