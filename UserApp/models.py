@@ -146,6 +146,7 @@ class SubscriptionTable(models.Model):
 # -------------------------------------------------------- Admin Control --------------------------------------------------
 
 # Setting Coin Price Only By Admin
+# Himalay
 class CoinPrice(models.Model):
     price_in_usd = models.FloatField()
 

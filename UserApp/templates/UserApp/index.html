@@ -310,13 +310,14 @@
 
 					<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
 						<div class="input-group-prepend">
-							<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
-							<!-- <div class="dropdown-menu">
-								<a class="dropdown-item" href="#">USD</a>
-								<a class="dropdown-item" href="#">INR</a>
-							</div> -->
+							<button class="btn dropdown-toggle" id="selected-crypto" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
+							<div class="crypto-type-selector dropdown-menu">
+								<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">BTC</a>
+								<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">USD</a>
+							</div>
 						</div>
 						<input type="text" name="Money" id="money" class="form-control" aria-label="Text input with dropdown button">
+                        <input type="hidden" id="crypto-type" name="crypto-type">
 					</div>
 					
 					<div class="pad20T pad20B">
@@ -723,7 +724,7 @@
             async: true,
             data: {
                 c_val: $('#money').val(),
-                mval: 5,
+                c_type: $('#selected-crypto').text(),
                },
             success: function (response)
                 {
