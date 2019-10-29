@@ -137,8 +137,8 @@ def arcturus_cal(money,arcturus_rate,c_type,bonus=0):
         else:
             return {"no_of_arcturus":"Error... Minimum transaction should be more then 100 usd"}
     elif c_type.upper()=="BTC":
-        if int(money)>=100:
-            usd=b.convert_btc_to_cur(float(money), 'USD')
+        usd=b.convert_btc_to_cur(float(money), 'USD')
+        if int(usd)>=100:
             usd=float(usd)+(float(usd)*(bonus/100))
             return {"no_of_arcturus":float(usd)/float(arcturus_rate)}
         else:
