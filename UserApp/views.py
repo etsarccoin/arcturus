@@ -9,6 +9,7 @@ from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, Http404
 from django.core.cache import cache
 import datetime
+from datetime import date
 import socket
 import httpagentparser
 import logging
@@ -16,7 +17,8 @@ from django.http import FileResponse
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
-     GetMacAddress
+     GetMacAddress, GenerateOnlyNumber
+
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
@@ -25,7 +27,7 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 # Coming From Admin Model
 from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
      DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, WhitePaperPDFCMS, SocialMedialCMS,\
-     LatestNewsCMS
+     LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration
 
 # from .models import UsersD as UsersDetail
 
@@ -261,6 +263,13 @@ def register(request):
                 
                 SendMail(email, mail_body)
 
+                # Creating Notification
+                NotiTime = datetime.datetime.now()
+                RandNo = GenerateOnlyNumber()
+                Noti_msg = first_name + " " + last_name + " Just Registered"
+                NotiObj = NotificationForNewUserRegistration(Noti_id=RandNo,Noti_msg=Noti_msg,Noti_time=NotiTime,check=False,New_User_Mail=email)
+                NotiObj.save()
+
                 generated_link = base_url + "confirmation/" + user_src_code + "-" + num + "/"
                 
                 link_obj = UsersDetail.objects.get(email=email)
@@ -307,7 +316,6 @@ def accountConfirmation(request, slug):
         obj = EmailVerifyCodes.objects.get(user_src_code=user_src_code)
 
         if obj.code == code:
-            print(">>>>>>>>>>>>>>>>>>>>>>")
             u_obj = UsersDetail.objects.get(email=obj.user_email)
             u_obj.active_user = True
             # u_obj.account_conf = datetime.datetime.now()
@@ -315,9 +323,17 @@ def accountConfirmation(request, slug):
             # Wallet Creation For User with 0.0 Coin
             UserAccountCoin(email=u_obj.email, no_of_coin=0.0).save()
             u_obj.save()
+
             # User Profile Data
             UPobj = UserProfileData(email=u_obj.email,mdName="Unknown",phone="Unknown",fax="Unknown",country="Unknown",state_name="Unknown",zipcode="Unknown")
             UPobj.save()
+
+            RandNo = GenerateOnlyNumber()
+            Noti_msg = obj.user_email + " Account Confirmed Now"
+            NotiTime = datetime.datetime.now()
+            email = obj.user_email
+            NotiObj = NotificationForNewUserRegistration(Noti_id=RandNo,Noti_msg=Noti_msg,Noti_time=NotiTime,check=False,New_User_Mail=email)
+            NotiObj.save()
 
             msg = 'Email Verified !!'
             context = {'msg': msg, 'chk': True}
@@ -419,8 +435,6 @@ def CoinRequestControler(request):
         no_coin = request.GET.get('no_coin')
         total_amount = request.GET.get('total_amountw')
 
-        print(">>>>>>>", user_id, no_coin, total_amount)
-
         # Getting CoinPrice now
         c_obj = CoinPrice.objects.get(id=1)
         coin_price = c_obj.price_in_usd
@@ -430,7 +444,7 @@ def CoinRequestControler(request):
         # Inserting Coin Into DB
         req_date = datetime.datetime.now()
         approved_date = req_date
-        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=total_amount, approved=False, req_date=req_date, approved_date=approved_date)
+        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=total_amount, approved=False, reject=False, req_date=req_date, approved_date=approved_date)
         s.save()
 
         data =  {'is_taken': 1}
@@ -786,10 +800,11 @@ def UserTermsConditions(req):
     try:
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        TermsOnj = TermsAndConditionCMS.objects.get(uni_key=1)
     except:
-        headerObj, footerObj, guideObj = None, None, None
+        headerObj, footerObj, guideObj, TermsOnj = None, None, None, None
     
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'TermsOnj': TermsOnj}
     return render(req,'UserApp/terms-conditiond.html', context=context)
 
 
@@ -806,8 +821,9 @@ def UserPolicy(req):
     try:
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        PolicyObj = PolicyCMS.objects.get(uni_key=1)
     except:
-        headerObj, footerObj, guideObj = None, None, None
+        headerObj, footerObj, guideObj, PolicyObj = None, None, None, None
     
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'PolicyObj': PolicyObj}
     return render(req,'UserApp/user-policy.html', context=context)

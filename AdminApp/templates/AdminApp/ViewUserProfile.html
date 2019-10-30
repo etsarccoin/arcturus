@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Admin Dashboard</title>
+<title>User Management</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->
@@ -58,7 +58,7 @@
 <div class="wrapper">
     <header class="main-header"> 
         <!-- Logo --> 
-        <a href="{% url 'AdminDashboard' %}" class="logo"> 
+        <a href="{% url 'AdminDashboard' %}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels --> 
         <span class="logo-mini"><b>A</b>LT</span> 
         <!-- logo for regular state and mobile devices --> 
@@ -268,7 +268,6 @@
 								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
                                 <p> {{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}} </p>
                             </li>
-                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -453,42 +452,81 @@
 					</ul>
 			</section>
 			<!-- /.sidebar --> 
-	</aside>
+		</aside>
     
     <!-- Main content -->
     <div class="content-wrapper"> 
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Demo Graph<small></small> </h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				</ol>
-			</section>
+                <h1 align="center">{{UsersDetailObj.first_name}} {{UsersDetailObj.last_name}}</h1>
+                <br>
+            </section>
+
+            <section class="content">
+                <div class="box box-primary pad30T pad30L pad30R pad10B">
+                    <label><h4>Wallet Balance :</h4></label> <input class="form-control" type="text" value="{{UserAccCoinObj.no_of_coin}}" readonly>
+                </div>
+            </section>
+            <br>
+
+            <section class="content">
+                    <div class="box box-primary pad30T pad30L pad30R pad10B">
+                        <label>First Name :</label> <input class="form-control" type="text" value="{{UsersDetailObj.first_name}}" readonly>
+                        <label>Middle Name :</label> <input class="form-control" type="text" value="{{UserProfileObj.mdName}}" readonly>
+                        <label>Last Name :</label> <input class="form-control" type="text" value="{{UsersDetailObj.last_name}}" readonly>
+                        <label>Email :</label> <input class="form-control" type="text" value="{{UsersDetailObj.email}}" readonly>
+                        <label>Reference ID :</label> <input class="form-control" type="text" value="{{UsersDetailObj.reference_id}}" readonly>
+                        <label>Phone :</label> <input class="form-control" type="text" value="{{UserProfileObj.phone}}" readonly>
+                        <label>Fax :</label> <input class="form-control" type="text" value="{{UserProfileObj.fax}}" readonly>
+                        <label>Country :</label> <input class="form-control" type="text" value="{{UserProfileObj.country}}" readonly>
+                        <label>State :</label> <input class="form-control" type="text" value="{{UserProfileObj.state_name}}" readonly>
+                        <label>Zip Code :</label> <input class="form-control" type="text" value="{{UserProfileObj.zipcode}}" readonly>
+                    </div>
+            </section>
+            
 			
 			<section class="content"> 
 					<div class="col-md-13">
-						<!-- Form Section -->
+                        <!-- Form Section -->
+                        <h3 align="center">Coin Request History</h3>
 						<div class="box box-primary pad30T pad30L pad30R pad10B">
-							<!-- solid sales graph -->
-							<div class="box box-solid bg-teal-gradient">
-									<div class="box-header"> <i class="fa fa-th"></i>
-										<h3 class="box-title">Demo Graph</h3>
-										<div class="pull-right box-tools"> 
-											<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-											<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
-										</div>
-									</div>
-									<div class="box-body border-radius-none">
-										<div class="chart" id="line-chart" style="height: 400px;"></div>
-									</div>
-							</div>
-						</div>
+							<table id="table-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Coin Name</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>Request Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in CoinReqObj %}
+                                        <tr>
+                                            <td>
+                                                <img src="{% static 'AdminApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+                                                <span> Arcturus</span>
+                                            </td>
+                                            <td>{{i.unique_id}}</td>
+                                            <td>{{i.coin_price}}</td>
+                                            <td>{{i.no_coin}}</td>
+                                            <td>{{i.total_amount}}</td>
+                                            <td>{{i.req_date}}</td>
+                                            <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
+                                        </tr>
+										{% endfor %}
+								</tbody>
+                            </table> 
+                        </div>
+                        <br><br><br>
 					</div>
-			</section>
+				</div>
+            </section>
 		</div>
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>
+    
 </div>
 <!-- ./wrapper --> 
 

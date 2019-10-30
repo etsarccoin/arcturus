@@ -5,14 +5,8 @@ from django.db import models
 # Storing Data For A New User and Existing User
 class UsersDetail(models.Model):
     first_name = models.CharField(max_length=255, blank=False)
-    # middle_name = models.CharField(max_length=255,blank=True)
     last_name = models.CharField(max_length=255, blank=False)
     email = models.EmailField(primary_key=True, unique=True)
-    # ph = models.BigIntegerField()
-    # fax = models.CharField(max_length=30)
-    # country = models.CharField(max_length=50)
-    # state = models.CharField(max_length=40)
-    # zipcode = models.CharField(max_length=15)
     active_user = models.BooleanField()
     created_at = models.DateTimeField()
     # account_conf = models.DateTimeField()
@@ -23,8 +17,8 @@ class UsersDetail(models.Model):
     reference_id = models.CharField(max_length=65, unique=True)
     activation_link = models.CharField(max_length=300)
 
-    # def __str__(self):
-    #     return self.email
+    def __str__(self):
+        return self.email
 
 
 class UserProfileData(models.Model):
@@ -85,6 +79,7 @@ class CoinRequest(models.Model):
     no_coin = models.FloatField()
     total_amount = models.FloatField()
     approved = models.BooleanField()
+    reject = models.BooleanField(default=False)
     req_date = models.DateTimeField()
     approved_date = models.DateTimeField()
 

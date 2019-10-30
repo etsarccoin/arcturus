@@ -331,18 +331,18 @@
 				
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
-					
-					<li class="header">MAIN NAVIGATION</li>
-					
-					<li class="active treeview">
-						<a href="#">
-							<i class="fa fa-dashboard"></i>
-							<span>Dashboard</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
+				
+						<li class="header">MAIN NAVIGATION</li>
+						
+						<li class="active treeview">
+							<a href="#">
+								<i class="fa fa-dashboard"></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
 								<li class="active">
 									<a href="{% url 'cmsweburl' %}">
 										<i class="fa fa-circle-o"></i> CMS
@@ -384,85 +384,85 @@
 									</a>
 								</li>
 							</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-pie-chart"></i>
-							<span>Charts</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Coin Price Chart
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Report
-								</a>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-edit"></i>
-							<span>Forms</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Special Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Normal Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Promotional Email
-									</a>
-								</li>
-						</ul>
-					</li>
-					
-					<li class="treeview active menu-open">
+						</li>
+						
+						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Documentation</span>
+								<i class="fa fa-pie-chart"></i>
+								<span>Charts</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="">
-										<i class="fa fa-circle-o"></i>Terms & Conditions
-									</a>
-								</li>
-								<li class="active">
-									<a href="">
-										<i class="fa fa-circle-o"></i> Policy
+									<a href="{% url 'Demograph' %}">
+										<i class="fa fa-circle-o"></i> Coin Price Chart
 									</a>
 								</li>
 							</ul>
 						</li>
-					
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-					
-				</ul>
+						
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-edit"></i>
+								<span>Forms</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'AdminQuickEmail' %}">
+											<i class="fa fa-circle-o"></i> Quick Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminMultipleEmail' %}">
+											<i class="fa fa-circle-o"></i> Multiple Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminPromoEmail' %}">
+											<i class="fa fa-circle-o"></i> Promotional Email
+										</a>
+									</li>
+							</ul>
+						</li>
+						
+						<li class="treeview active menu-open">
+								<a href="#">
+									<i class="fa fa-folder"></i>
+									<span>Documentation</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'Termsandconditions' %}">
+											<i class="fa fa-circle-o"></i>Terms & Conditions
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'Adminpolicy' %}">
+											<i class="fa fa-circle-o"></i> Policy
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminCalender' %}">
+											<i class="fa fa-circle-o"></i> Calender
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminToDoList' %}">
+											<i class="fa fa-circle-o"></i> To Do List
+										</a>
+									</li>
+								</ul>
+							</li>
+						
+					</ul>
 			</section>
 			<!-- /.sidebar --> 
 	</aside>
@@ -515,33 +515,33 @@
 	
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 1 :</label>
+													<label class="myheadingstyle">Current Service Image 1 :</label>
 													<img src="{{ serviceobj.OurSericeImg1.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 1 :</label>
+													<label class="myheadingstyle">Change Service Image 1 :</label>
 													<input type="file" name="serviceimg1" id="serviceimg1">
 												</div>
 											</div>
 	
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 2 :</label>
+													<label class="myheadingstyle">Current Service Image 2 :</label>
 													<img src="{{ serviceobj.OurSericeImg2.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 2 :</label>
+													<label class="myheadingstyle">Change Service Image 2 :</label>
 													<input type="file" name="serviceimg2" id="serviceimg2">
 												</div>
 											</div>
 											
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 3 :</label>
+													<label class="myheadingstyle">Current Service Image 3 :</label>
 													<img src="{{ serviceobj.OurSericeImg3.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 3 :</label>
+													<label class="myheadingstyle">Change Service Image 3 :</label>
 													<input type="file" name="serviceimg3" id="serviceimg3">
 												</div>
 											</div>
@@ -549,33 +549,33 @@
 											
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 4 :</label>
+													<label class="myheadingstyle">Current Service Image 4 :</label>
 													<img src="{{ serviceobj.OurSericeImg4.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 4 :</label>
+													<label class="myheadingstyle">Change Service Image 4 :</label>
 													<input type="file" name="serviceimg4" id="serviceimg4">
 												</div>
 											</div>
 										
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 5 :</label>
+													<label class="myheadingstyle">Current Service Image 5 :</label>
 													<img src="{{ serviceobj.OurSericeImg5.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 5 :</label>
+													<label class="myheadingstyle">Change Service Image 5 :</label>
 													<input type="file" name="serviceimg5" id="serviceimg5">
 												</div>
 											</div>
 											
 											<div class="box-body">
 												<div class="form-group">
-													<label class="myheadingstyle">Current Service Imgae 6 :</label>
+													<label class="myheadingstyle">Current Service Image 6 :</label>
 													<img src="{{ serviceobj.OurSericeImg6.url }}" width="100" height="100">
 												</div>
 												<div class="form-group">
-													<label class="myheadingstyle">Change Service Imgae 6 :</label>
+													<label class="myheadingstyle">Change Service Image 6 :</label>
 													<input type="file" name="serviceimg6" id="serviceimg6">
 												</div>
 											</div>
@@ -595,7 +595,7 @@
 											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
-												<label class="myheadingstyle">Current Service Imgae 6 :</label>
+												<label class="myheadingstyle">Current Service Image 6 :</label>
 												<img src="{{ reviewbgobj.OurSericeImg1.url }}" width="100" height="100">
 											</div>
 											<div class="form-group">
@@ -639,7 +639,7 @@
 
 										<div class="box-body">
 											<div class="form-group">
-												<label class="myheadingstyle">Current Service Imgae 6 :</label>
+												<label class="myheadingstyle">Current Service Image 6 :</label>
 												<img src="{{ aboutusobj.AboutUSImage.url }}" width="100" height="100">
 											</div>
 											<div class="form-group">
@@ -662,7 +662,7 @@
 											{% csrf_token %}
 										<div class="box-body">
 											<div class="form-group">
-												<label class="myheadingstyle">Current Service Imgae 6 :</label>
+												<label class="myheadingstyle">Current Service Image 6 :</label>
 												<img src="{{ whychooseusobj.ChooseUSImage.url }}" width="100" height="100">
 											</div>
 											<div class="form-group">

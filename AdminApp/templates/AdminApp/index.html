@@ -146,38 +146,20 @@
                     <li class="dropdown notifications-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-bell-o"></i>
-							<span class="label label-warning">10</span>
+							<span class="label label-warning">{{NoOfNoti}}</span>
 						</a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">You have {{NoOfNoti}} notifications</li>
                             <li> 
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
+                                    {% for i in NewUserNotiObj %}
                                     <li>
 										<a href="#">
-											<i class="fa fa-users text-aqua"></i> 5 new members joined today
+											<i class="fa fa-users text-aqua"></i>{{i.Noti_msg}}
 										</a>
-									</li>
-                                    <li>
-										<a href="#">
-											<i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
-										</a>
-									</li>
-                                    <li>
-										<a href="#">
-											<i class="fa fa-users text-red"></i> 5 new members joined
-										</a>
-									</li>
-                                    <li>
-										<a href="#">
-											<i class="fa fa-shopping-cart text-green"></i> 25 sales made
-										</a>
-									</li>
-                                    <li>
-										<a href="#">
-											<i class="fa fa-user text-red"></i> You changed your username
-										</a>
-									</li>
+                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="footer">
@@ -190,7 +172,7 @@
                     <li class="dropdown tasks-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-flag-o"></i>
-							<span class="label label-danger">9</span>
+							<span class="label label-danger">10</span>
 						</a>
                         <ul class="dropdown-menu">
                             <li class="header">You have 9 tasks</li>
@@ -255,28 +237,14 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
-							<span class="hidden-xs">Alexander Pierce</span>
+							<img src="{{AdminProfileObj.img.url}}" class="user-image" alt="User Image">
+							<span class="hidden-xs">{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</span>
 						</a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-								<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
-                                <p> Alexander Pierce - Web Developer <small>Member since Nov. 2012</small> </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Sales</a> </div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-                                </div>
-                                <!-- /.row --> 
+                                <img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
+                                <p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -304,10 +272,10 @@
             <!-- Sidebar user info -->
             <div class="user-panel">
                 <div class="pull-left image">
-					<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+					<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
 				</div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
                     <a href="#">
 						<i class="fa fa-circle text-success"></i> Online
 					</a>
@@ -458,72 +426,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="treeview">
-							<a href="#">
-								<i class="fa fa-pie-chart"></i>
-								<span>Edit Pages</span>
-								<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-							</a>
-							<ul class="treeview-menu">
-								<li>
-									<a href="{% url 'HomePageEdit' %}">
-										<i class="fa fa-circle-o"></i> Home Page
-									</a>
-								</li>
-								<li>
-								<a href="{% url 'commonedit' %}">
-										<i class="fa fa-circle-o"></i> Upload All Common Data
-									</a>
-								</li>
-								<li>
-								<a href="{% url 'feedbackedit' %}">
-										<i class="fa fa-circle-o"></i> Add feedback
-									</a>
-								</li><li>
-								<a href="{% url 'edithotel' %}">
-										<i class="fa fa-circle-o"></i> Edit hotel service
-									</a>
-								</li><li>
-								<a href="{% url 'foodedit' %}">
-										<i class="fa fa-circle-o"></i> Edit Food Price
-									</a>
-								</li><li>
-								<a href="{% url 'paymentedit' %}">
-										<i class="fa fa-circle-o"></i> Edit Payment Service page.
-									</a>
-								</li><li>
-								<a href="{% url 'edittour' %}">
-										<i class="fa fa-circle-o"></i> Edit Tour service page.
-									</a>
-								</li><li>
-								<a href="{% url 'recretaion' %}">
-										<i class="fa fa-circle-o"></i> Edit recreation Service page.
-									</a>
-								</li><li>
-								<a href="{% url 'cedittravel' %}">
-										<i class="fa fa-circle-o"></i> Edit tarvel service page.
-									</a>
-								</li><li>
-								<a href="{% url 'editabout' %}">
-										<i class="fa fa-circle-o"></i> Edit about us.
-									</a>
-								</li><li>
-								<a href="{% url 'editwhitepage' %}">
-										<i class="fa fa-circle-o"></i> edit the white page
-									</a>
-								</li><li>
-								<a href="{% url 'editroadmap' %}">
-										<i class="fa fa-circle-o"></i> Edit road map.
-									</a>
-								</li>
-							</ul>
-						</li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
 				
             </ul>
         </section>
@@ -535,351 +437,201 @@
         
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1> Dashboard <small>Control panel</small> </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+            <h1>Dashboard</h1>
         </section>
         
-        <!-- Pannel Style 01 -->
+        <!-- Section 01 -->
         <section class="content">
             <div class="row">
                 <div class="col-lg-3 col-sm-6 col-xs-12">
                     <div class="info-box"> <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">CPU Traffic</span> <span class="info-box-number">90<small>%</small></span> </div>
-                        <!-- /.info-box-content --> 
+                        <div class="info-box-content"> 
+                            <span class="info-box-text"></span>
+                            <span class="info-box-number"><a href="{% url 'UserManagement' %}">User Management</a></span> 
+                        </div>
                     </div>
-                    <!-- /.info-box --> 
                 </div>
-                <!-- /.col -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="info-box"> <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Likes</span> <span class="info-box-number">41,410</span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="info-box"> <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Sales</span> <span class="info-box-number">760</span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col -->
                 <div class="col-lg-3 col-sm-6 col-xs-12">
                     <div class="info-box"> <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">New Members</span> <span class="info-box-number">2,000</span> </div>
-                        <!-- /.info-box-content --> 
+                        <div class="info-box-content"> 
+                            <span class="info-box-text"></span> 
+                            <span class="info-box-number"><a href="{% url 'SubcriptionTable' %}">New &nbsp;&nbsp; Subscribers</a></span> 
+                        </div>
                     </div>
-                    <!-- /.info-box --> 
                 </div>
-                <!-- /.col --> 
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="info-box"> <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                        <div class="info-box-content"> 
+                            <span class="info-box-text"></span> 
+                            <span class="info-box-number"><a href="{% url 'UserWanttocontactData' %}">Get In &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; Touch Data</a></span> 
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="info-box"> <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                        <div class="info-box-content"> 
+                            <span class="info-box-text"></span> 
+                            <span class="info-box-number"><a href="{% url 'cmsweburl' %}">CMS</a></span> 
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <!-- Pannel Style 02 -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-aqua"> <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Bookmarks</span> <span class="info-box-number">41,410</span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description"> 70% Increase in 30 Days </span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green"> <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Likes</span> <span class="info-box-number">41,410</span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description"> 70% Increase in 30 Days </span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-yellow"> <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Events</span> <span class="info-box-number">41,410</span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description"> 70% Increase in 30 Days </span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-red"> <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-                        <div class="info-box-content"> <span class="info-box-text">Comments</span> <span class="info-box-number">41,410</span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description"> 70% Increase in 30 Days </span> </div>
-                        <!-- /.info-box-content --> 
-                    </div>
-                    <!-- /.info-box --> 
-                </div>
-                <!-- /.col --> 
-            </div>
-        </section>
-        
-        <!-- Pannel Style 03 -->
+        <!-- Section 02 -->
         <section class="content">
             <div class="row">
                 <div class="col-lg-3 col-xs-6"> 
-                    <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>150</h3>
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon"> <i class="ion ion-bag"></i> </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6"> 
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-                            <p>Bounce Rate</p>
+                            <h4>Coin Request</h4>
                         </div>
                         <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
+                        <a href="{% url 'UsermadeCoinRequest' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
                 </div>
-                <!-- ./col -->
+
                 <div class="col-lg-3 col-xs-6"> 
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
+                    <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>44</h3>
-                            <p>User Registrations</p>
+                            <h4>Coin Price History</h3>
                         </div>
-                        <div class="icon"> <i class="ion ion-person-add"></i> </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'CoinPriceHistory' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
                 </div>
-                <!-- ./col -->
+
+                <div class="col-lg-3 col-xs-6"> 
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h4>Rejected Coin Request</h4>
+                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'RejectedCoinReqUrl' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6"> 
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h4>Set Coin Price</h4>
+                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'EditCoinPricePage' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="content">
+            <div class="row">
+        
                 <div class="col-lg-3 col-xs-6"> 
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>65</h3>
-                            <p>Unique Visitors</p>
+                            <h4>Calender</h4>
                         </div>
-                        <div class="icon"> <i class="ion ion-pie-graph"></i> </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> </div>
-                </div>
-                <!-- ./col --> 
-            </div>
-        </section>
-        
-        <!--Monthly Recap Report-->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Monthly Recap Report</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-wrench"></i></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p class="text-center"><strong>Goal Completion</strong></p>
-                                    <div class="progress-group"> <span class="progress-text">Add Products to Cart</span> <span class="progress-number"><b>160</b>/200</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Complete Purchase</span> <span class="progress-number"><b>310</b>/400</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Visit Premium Page</span> <span class="progress-number"><b>480</b>/800</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Send Inquiries</span> <span class="progress-number"><b>250</b>/500</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Add Products to Cart</span> <span class="progress-number"><b>160</b>/200</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-primary" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Complete Purchase</span> <span class="progress-number"><b>310</b>/400</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Visit Premium Page</span> <span class="progress-number"><b>480</b>/800</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-success" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-group"> <span class="progress-text">Send Inquiries</span> <span class="progress-number"><b>250</b>/500</span>
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-warning" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="info-box bg-yellow"> <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-                                        <div class="info-box-content"> <span class="info-box-text">Inventory</span> <span class="info-box-number">5,200</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 50%"></div>
-                                            </div>
-                                            <span class="progress-description"> 50% Increase in 30 Days </span> </div>
-                                        <!-- /.info-box-content --> 
-                                    </div>
-                                    <div class="info-box bg-green"> <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-                                        <div class="info-box-content"> <span class="info-box-text">Mentions</span> <span class="info-box-number">92,050</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 20%"></div>
-                                            </div>
-                                            <span class="progress-description"> 20% Increase in 30 Days </span> </div>
-                                        <!-- /.info-box-content --> 
-                                    </div>
-                                    <div class="info-box bg-red"> <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-                                        <div class="info-box-content"> <span class="info-box-text">Downloads</span> <span class="info-box-number">114,381</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%"></div>
-                                            </div>
-                                            <span class="progress-description"> 70% Increase in 30 Days </span> </div>
-                                        <!-- /.info-box-content --> 
-                                    </div>
-                                    <div class="info-box bg-aqua"> <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-                                        <div class="info-box-content"> <span class="info-box-text">Direct Messages</span> <span class="info-box-number">163,921</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 40%"></div>
-                                            </div>
-                                            <span class="progress-description"> 40% Increase in 30 Days </span> </div>
-                                        <!-- /.info-box-content --> 
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-green"> <i class="fa fa-caret-up"></i> 17% </span>
-                                                <h5 class="description-header">$35,210.43</h5>
-                                                <span class="description-text">TOTAL REVENUE</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-yellow"> <i class="fa fa-caret-left"></i> 0% </span>
-                                                <h5 class="description-header">$10,390.90</h5>
-                                                <span class="description-text">TOTAL COST</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-green"> <i class="fa fa-caret-up"></i> 20% </span>
-                                                <h5 class="description-header">$24,813.53</h5>
-                                                <span class="description-text">TOTAL PROFIT</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block"> <span class="description-percentage text-red"> <i class="fa fa-caret-down"></i> 18% </span>
-                                                <h5 class="description-header">1200</h5>
-                                                <span class="description-text">GOAL COMPLETIONS</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-green"> <i class="fa fa-caret-up"></i> 17% </span>
-                                                <h5 class="description-header">$35,210.43</h5>
-                                                <span class="description-text">TOTAL REVENUE</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-yellow"> <i class="fa fa-caret-left"></i> 0% </span>
-                                                <h5 class="description-header">$10,390.90</h5>
-                                                <span class="description-text">TOTAL COST</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-green"> <i class="fa fa-caret-up"></i> 20% </span>
-                                                <h5 class="description-header">$24,813.53</h5>
-                                                <span class="description-text">TOTAL PROFIT</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block"> <span class="description-percentage text-red"> <i class="fa fa-caret-down"></i> 18% </span>
-                                                <h5 class="description-header">1200</h5>
-                                                <span class="description-text">GOAL COMPLETIONS</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-green"> <i class="fa fa-caret-up"></i> 17% </span>
-                                                <h5 class="description-header">$35,210.43</h5>
-                                                <span class="description-text">TOTAL REVENUE</span> </div>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <div class="description-block border-right"> <span class="description-percentage text-yellow"> <i class="fa fa-caret-left"></i> 0% </span>
-                                                <h5 class="description-header">$10,390.90</h5>
-                                                <span class="description-text">TOTAL COST</span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'AdminCalender' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <!--Form and Application Button-->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-custom">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Application Buttons</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-                            </div>
+
+                <div class="col-lg-3 col-xs-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h4>Create Task</h4>
                         </div>
-                        <div class="box-body"> 
-                            <a class="btn btn-app"> <i class="fa fa-edit"></i> Edit </a>
-                            <a class="btn btn-app"> <i class="fa fa-play"></i> Play </a> 
-                            <a class="btn btn-app"> <i class="fa fa-repeat"></i> Repeat </a> 
-                            <a class="btn btn-app"> <i class="fa fa-pause"></i> Pause </a> 
-                            <a class="btn btn-app"> <i class="fa fa-save"></i> Save </a> 
-                            <a class="btn btn-app"> <span class="badge bg-yellow">3</span> <i class="fa fa-bullhorn"></i> Notifications </a> 
-                            <a class="btn btn-app"> <span class="badge bg-green">300</span> <i class="fa fa-barcode"></i> Products </a> 
-                            <a class="btn btn-app"> <span class="badge bg-purple">891</span> <i class="fa fa-users"></i> Users </a> 
-                            <a class="btn btn-app"> <span class="badge bg-teal">67</span> <i class="fa fa-inbox"></i> Orders </a> 
-                            <a class="btn btn-app"> <span class="badge bg-aqua">12</span> <i class="fa fa-envelope"></i> Inbox </a> 
-                            <a class="btn btn-app"> <span class="badge bg-red">531</span> <i class="fa fa-heart-o"></i> Likes </a> 
-                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'AdminToDoList' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-xs-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h4>Terms & Conditions</h4>
+                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'Termsandconditions' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h4>Policy</h3>
+                        </div>
+                        <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                        <a href="{% url 'Adminpolicy' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                    </div>
+                </div>
+
             </div>
         </section>
+
+        <!-- Section 4 -->
+        <section class="content">
+                <div class="row">
+            
+                    <div class="col-lg-3 col-xs-6"> 
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h4>Admin Profile</h4>
+                            </div>
+                            <div class="icon"> <i class="ion ion-person-add"></i> </div>
+                            <a href="{% url 'AdminImgUpdateurl' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-xs-6"> 
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h4>Quick Email</h3>
+                            </div>
+                            <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                            <a href="{% url 'AdminQuickEmail' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-3 col-xs-6"> 
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h4>User Account Notifications</h4>
+                            </div>
+                            <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                            <a href="{% url 'AdminUserAccNotiUrl' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                    </div>
+    
+                    <!-- <div class="col-lg-3 col-xs-6"> 
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h4>Quick Email</h3>
+                            </div>
+                            <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                            <a href="{% url 'AdminQuickEmail' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-xs-6"> 
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h4>Calender</h4>
+                            </div>
+                            <div class="icon"> <i class="ion ion-stats-bars"></i> </div>
+                            <a href="{% url 'AdminCalender' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> 
+                        </div>
+                    </div> -->
+    
+                </div>
+            </section>
+
+
     </div>
     
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="index.html">ETS</a>.</strong> All rights reserved. </footer>
 </div>
 <!-- ./wrapper --> 
 

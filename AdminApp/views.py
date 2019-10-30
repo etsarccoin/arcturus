@@ -1,23 +1,31 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+
 from django.apps import apps
 from UserApp.models import UsersDetail, CoinRequest, UserAccountCoin, CoinPrice,\
-     CoinPriceChangeHistory, SubscriptionTable, ContactUSFormData
-from django.http import HttpResponse, JsonResponse
+     CoinPriceChangeHistory, SubscriptionTable, ContactUSFormData, UserProfileData
+
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
+
+# DB For CMS
+from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS, SocialMedialCMS
+
+from .models import AdminProfileData, AdminToDoListTable, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration
+
 import datetime
-from django.http import JsonResponse
+from datetime import date
+
 # from UserApp.models import UsersD as UsersDetail
 # from .models import SocialMedialLink,image_change,change_body
 from django.core.files.storage import FileSystemStorage
 from .models import SocialMedialLink
 from .forms import HomePageEditForm,common_field, feed_back_edit,hotels_edit,fooding_edit, payments_edit,\
     tour_edit,recreation_edit,travel_edit,about_us_edit,white_page_edit,edit_road_map
+
 from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit_feedback,edit_hotel,edit_fooding,\
     edit_payment,edit_tour,edit_recreation,edit_travel,edit_about,edit_white_page,road_map_edit
-
-# DB For CMS
-from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS, SocialMedialCMS
 
 
 def Test(request):
@@ -27,12 +35,20 @@ def Test(request):
 def AdminDashboardPanel(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/index.html', context={})
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj, 'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+        return render(request, 'AdminApp/index.html', context=context)
 
     except Exception as e:
         print(e)
         return AdminLogin(request)
     
+
+
+
 def changeimage(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:
@@ -78,6 +94,9 @@ def AdminLogin(request):
             return render(request, 'AdminApp/admin-login.html', context={})
 
 
+
+
+
 def LogoutAdmin(request):
     try:
         admin_id = request.session['admin_id']
@@ -91,22 +110,21 @@ def LogoutAdmin(request):
 
 def UserManagementControler(request):
     u_obj = ''
+    AdminProfileObj = ''
     try:
         admin_id = request.session['admin_id']
         try:
-            u_obj = UsersDetail.objects.all().order_by('email')
+            u_obj = UsersDetail.objects.all().order_by('-created_at')
+            AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
         except:
             u_obj = "No User Found !!"
-        context = {'u_obj': u_obj, 'logged_in': True}
+        context = {'u_obj': u_obj, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
         return render(request, 'AdminApp/Admin-User-Management.html', context=context)
 
     except Exception as e:
         print(e)
         return AdminLogin(request)
-
-
-def AdminProfilePage(request):
-    return render(request, 'AdminApp/admin-profile.html', context={})
 
 
 def CoinRequestApprove(request, slug):
@@ -130,27 +148,57 @@ def CoinRequestApprove(request, slug):
             updated_coin_no = no_of_coin_now + no_coin_to_add
             old_wallet_obj.no_of_coin = updated_coin_no
             old_wallet_obj.save()
+            
+            return UserCoinRequestControler(request)
 
         except:
             HttpResponse("Something Went Wrong !!")
-
-        return AdminDashboardPanel(request)
+            return AdminDashboardPanel(request)
 
     except Exception as e:
         print(e)
         return AdminLogin(request)
 
 
+def CoinRequestRejectAction(req, slug):
+    try:
+        obj1 = CoinRequest.objects.get(unique_id=slug)
+        obj1.reject = True
+        approved_date = datetime.datetime.now()
+        obj1.save()
+        return UserCoinRequestControler(req)
+    
+    except:
+        return AdminDashboardPanel(req)
+
+
 def UserCoinRequestControler(request):
     try:
         admin_id = request.session['admin_id']
-        coin_req_obj = CoinRequest.objects.all().filter(approved=False).order_by('req_date')
-        context = {'coin_req_obj': coin_req_obj, 'logged_in': True}
+        coin_req_obj = CoinRequest.objects.all().filter(approved=False).filter(reject=False).order_by('req_date')
+        RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'coin_req_obj': coin_req_obj, 'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
         return render(request, 'AdminApp/Admin-User-Coin-Request.html', context=context)
 
     except Exception as e:
         print("UserCoinRequestControler >> ", e)
         return AdminLogin(request)
+
+
+def RejectedCoinRequestByAdmin(req):
+    try:
+        admin_id = req.session['admin_id']
+        RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
+        return render(req, 'AdminApp/RejectedCoinRequest.html', context=context)
+    
+    except Exception as e:
+        print(e)
+        return AdminLogin(req)
 
 
 def CoinPricePage(request):
@@ -160,11 +208,14 @@ def CoinPricePage(request):
         try:
             c_obj = CoinPrice.objects.get(id=1)
             current_val = c_obj.price_in_usd
-            context = {'current_val': current_val, 'logged_in': True}
+            AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+            context = {'current_val': current_val, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
+
         except Exception as e:
             print("CoinPricePage >> ", e)
             CoinPrice(price_in_usd=0).save()
             context = {'current_val': 0, 'logged_in': True}
+
         return render(request, 'AdminApp/Admin-Edit-Coin-Price.html', context=context)
 
     except Exception as e:
@@ -211,7 +262,8 @@ def CoinHistoryPage(request):
         admin_id = request.session['admin_id']
         try:
             coin_hist = CoinPriceChangeHistory.objects.all().order_by('-changed_date')
-            context = {'c_obj': coin_hist, 'logged_in': True}
+            AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+            context = {'c_obj': coin_hist, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
         
         except Exception as e:
             context = {'c_obj': "No Data", 'logged_in': True}
@@ -226,7 +278,11 @@ def CoinHistoryPage(request):
 def TermsAndConditionsControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Terms-and-Conditions.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        TermsObj = TermsAndConditionCMS.objects.get(uni_key=1)
+
+        context = {'AdminProfileObj': AdminProfileObj, 'TermsObj': TermsObj}
+        return render(request, 'AdminApp/Admin-Terms-and-Conditions.html', context=context)
 
     except Exception as e:
         print(e)
@@ -236,7 +292,11 @@ def TermsAndConditionsControler(request):
 def PolicyControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Policy.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        PolicyObj = PolicyCMS.objects.get(uni_key=1)
+
+        context = {'AdminProfileObj': AdminProfileObj, 'PolicyObj': PolicyObj}
+        return render(request, 'AdminApp/Admin-Policy.html', context=context)
 
     except Exception as e:
         print(e)
@@ -253,10 +313,16 @@ def UpdateAdminContentControler(request):
             cval = int(cval)
             if(cval==1):
                 updated_content = request.GET.get('TermsconditionsDB')
+                obj = TermsAndConditionCMS.objects.get(uni_key=1)
+                obj.Data = updated_content
+                obj.save()
                 updated = True
 
             elif cval == 2:
                 updated_content = request.GET.get('policyDB')
+                obj = PolicyCMS.objects.get(uni_key=1)
+                obj.Data = updated_content
+                obj.save()
                 updated = True
 
             else:
@@ -264,11 +330,11 @@ def UpdateAdminContentControler(request):
         
         except Exception as e:
             print(e)
-            context = {'updated': False}
+            updated = False
     
     except Exception as e:
         print(e)
-        context = {'updated': False}
+        updated = False
 
     context = {'updated': updated}
     return JsonResponse(context)
@@ -278,7 +344,10 @@ def QuickEmailControler(request):
     context = {} 
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Quick-Email.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/Admin-Quick-Email.html', context=context)
 
     except Exception as e:
         print(e)
@@ -305,7 +374,10 @@ def QuickEmailSend(request):
 def MultipleEmailControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Multiple-Email.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/Admin-Multiple-Email.html', context=context)
     except Exception as e:
         print(e)
         return AdminLogin(request)
@@ -346,7 +418,10 @@ def PromoEmailControler(request):
     context = {}
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Promo-Email.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/Admin-Promo-Email.html', context=context)
     
     except Exception as e:
         print(e)
@@ -356,7 +431,10 @@ def PromoEmailControler(request):
 def DemoGraphControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Demo-Graph.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/Admin-Demo-Graph.html', context=context)
     
     except Exception as e:
         print(e)
@@ -366,17 +444,55 @@ def DemoGraphControler(request):
 def AdminToDoListControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-To-Do-List.html', context={})
+        today = date.today()
+        end_date = datetime.date(today.year, today.month, today.day)
+        ToDoObj = AdminToDoListTable.objects.all().filter(Status=False).filter(DeadLineAt__lte=end_date)
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj, 'ToDoObj': ToDoObj}
+        return render(request, 'AdminApp/Admin-To-Do-List.html', context=context)
     
     except Exception as e:
         print(e)
         return AdminLogin(request)
 
 
+def AdminCreateNewTaskLast(req):
+    try:
+        TaskDesc = req.POST['TaskDesc']
+        CreatedAt = datetime.datetime.now()
+        DeadLineAt = req.POST['DeadLineAt']
+        SpecialNote = req.POST['SpecialNote']
+        status = False
+        TaskNo = Number_Generator()
+        obj = AdminToDoListTable(TaskNo=TaskNo,TaskDesc=TaskDesc,CreatedAt=CreatedAt,DeadLineAt=DeadLineAt,SpecialNote=SpecialNote,Status=status)
+        obj.save()
+        return AdminToDoListControler(req)
+
+    except Exception as e:
+        print(e)
+        return AdminLogin(req)
+
+
+def AdminToDoTaskDelete(req, slug):
+    try:
+        obj = AdminToDoListTable.objects.get(TaskNo=slug)
+        obj.Status = True
+        obj.save()
+        return AdminToDoListControler(req)
+    
+    except Exception as e:
+        print(e)
+        return AdminLogin(req)
+
+
 def AdminCalenderControler(request):
     try:
         admin_id = request.session['admin_id']
-        return render(request, 'AdminApp/Admin-Calender.html', context={})
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/Admin-Calender.html', context=context)
     
     except Exception as e:
         print(e)
@@ -389,11 +505,13 @@ def ShowSubcribeUser(request):
         admin_id = request.session['admin_id']
         try:
             sub_obj = SubscriptionTable.objects.all()
-            context = {'sub_obj': sub_obj}
+            AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+            sub_obj = sub_obj
 
         except Exception as e:
-            context = {'sub_obj': "No Data Found !!"}
+            sub_obj = "No Data Found !!"
 
+        context = {'sub_obj': sub_obj, 'AdminProfileObj': AdminProfileObj}
         return render(request, 'AdminApp/Admin-User-Subcription.html', context=context)
 
     except Exception as e:
@@ -405,8 +523,9 @@ def SocialURLManagement(request):
     try:
         admin_id = request.session['admin_id']
         SocalMediaObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
-        context = {'SocalMediaObj': SocalMediaObj}
+        context = {'SocalMediaObj': SocalMediaObj, 'AdminProfileObj': AdminProfileObj}
         return render(request, 'AdminApp/SocailMediaURL.html', context=context)
     
     except Exception as e:
@@ -636,11 +755,17 @@ def roadmap_edit(request):
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
     return render(request,'AdminApp/roadmapedit.html',{'form':form})
+
+
+
+
 def ShowContactUSFormData(req):
     try:
         admin_id = req.session['admin_id']
         obj = ContactUSFormData.objects.all()
-        context = {'obj': obj}
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'obj': obj, 'AdminProfileObj': AdminProfileObj}
         return render(req, 'AdminApp/ContactUsData.html', context=context)
     
     except Exception as e:
@@ -1288,3 +1413,130 @@ def WhitePaperDataControler(req):
         return CMSForWebsite(req)
     else:
         return CMSForWebsite(req)
+
+
+def AdminProfilePage(request):
+    try:
+        admin_id = request.session['admin_id']
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        context = {'AdminProfileObj': AdminProfileObj}
+        return render(request, 'AdminApp/admin-profile.html', context=context)
+    
+    except Exception as e:
+        print(e)
+        return AdminLogin(request)
+
+
+# obj = AdminProfileData.objects.get(email='admin@gmail.com')
+# obj.img = 
+def EditAdminProfile(req):
+    context = {}
+    try:
+        # admin_id = request.session['admin_id']
+        pdtype = 0
+        img = None
+        if req.method == 'POST':
+            try:
+                pdtype = req.POST['pd1']
+                pdtype = int(pdtype)
+            except Exception as e:
+                return AdminLogin(req)
+
+            if pdtype == 1:
+                try:
+                    img = req.FILES['adminProfileImg1']
+                    AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+                    AdminProfileObj.img = img
+                    AdminProfileObj.save()
+
+                except Exception as e:
+                    print(e)
+            
+            if pdtype == 2:
+                try:
+                    firstname = req.POST['firstname']
+                    lastname = req.POST['lastname']
+                    email = req.POST['email']
+                    dob = req.POST['dob']
+                    contact = req.POST['contact']
+                    address = req.POST['address']
+                    AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+                    AdminProfileObj.firstname = firstname
+                    AdminProfileObj.lastname = lastname
+                    AdminProfileObj.dob = dob
+                    AdminProfileObj.contact = contact
+                    AdminProfileObj.address = address
+                    AdminProfileObj.save()
+
+                except Exception as e:
+                    print(e)
+            
+            if pdtype == 3:
+                try:
+                    education = req.POST['education']
+                    education = education.lstrip().rstrip()
+                    skills = req.POST['skills']
+                    skills = skills.lstrip().rstrip()
+                    AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+                    AdminProfileObj.education = education
+                    AdminProfileObj.skills = skills
+                    AdminProfileObj.save()
+
+                except Exception as e:
+                    print(e)
+    
+        return AdminProfilePage(req)
+                    
+    except:
+        print("--------------------------")
+        return AdminLogin(req)
+
+
+def AdminViewUserProfileData(req, slug):
+    try:
+        UsersDetailObj = UsersDetail.objects.get(reference_id=slug)
+        UserProfileObj = UserProfileData.objects.get(email=UsersDetailObj.email)
+        CoinReqObj = CoinRequest.objects.all().filter(user_mail=UsersDetailObj.email)
+        UserAccCoinObj = UserAccountCoin.objects.get(email=UsersDetailObj.email)
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'UserAccCoinObj': UserAccCoinObj, 'UsersDetailObj': UsersDetailObj, 'UserProfileObj': UserProfileObj, 'CoinReqObj': CoinReqObj,\
+             'AdminProfileObj': AdminProfileObj}
+
+        return render(req, 'AdminApp/ViewUserProfile.html', context=context)
+
+    except:
+        return AdminLogin(req)
+
+
+def CoinRequestMakerProfileData(req, slug):
+    try:
+        CoinReqObj = CoinRequest.objects.get(unique_id=slug)
+        user_mail = CoinReqObj.user_mail
+        UsersDetailObj = UsersDetail.objects.get(email=user_mail)
+        UserProfileObj = UserProfileData.objects.get(email=user_mail)
+        CoinReqObj = CoinRequest.objects.all().filter(user_mail=user_mail)
+        UserAccCoinObj = UserAccountCoin.objects.get(email=user_mail)
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'UserAccCoinObj': UserAccCoinObj, 'UsersDetailObj': UsersDetailObj, 'UserProfileObj': UserProfileObj, 'CoinReqObj': CoinReqObj,\
+             'AdminProfileObj': AdminProfileObj}
+    
+        return render(req, 'AdminApp/ViewUserProfile.html', context=context)
+
+    except:
+        return AdminLogin(req)
+
+    
+def AdminNewUserNotificationControler(req):
+    try:
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj, 'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+        return render(req, 'AdminApp/UserAccNotification.html', context=context)
+    
+    except Exception as e:
+        print(e)
+        return AdminDashboardPanel(req)

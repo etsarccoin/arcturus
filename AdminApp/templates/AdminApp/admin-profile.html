@@ -44,12 +44,9 @@
 <link rel="stylesheet" href="{% static 'AdminApp/assets/css/dataTables.bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'AdminApp/assets/css/fixedHeader.bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'AdminApp/assets/css/responsive.bootstrap.min.css' %}">
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+
+<!-- Kuntal Added CSS -->
+<link rel="stylesheet" href="{% static 'AdminApp/MyAdminCSS/adminmystylecss.css' %}">
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -259,28 +256,14 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
-							<span class="hidden-xs">Alexander Pierce</span>
+							<img src="{{AdminProfileObj.img.url}}" class="user-image" alt="User Image">
+							<span class="hidden-xs">{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</span>
 						</a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-								<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
-                                <p> Alexander Pierce - Web Developer <small>Member since Nov. 2012</small> </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Sales</a> </div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-                                </div>
-                                <!-- /.row --> 
+								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
+                                <p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -300,18 +283,14 @@
         </nav>
     </header>
 	
-    <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar"> 
-			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar"> 
-				
-				<!-- Sidebar user info -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+						<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
 						<a href="#">
 							<i class="fa fa-circle text-success"></i> Online
 						</a>
@@ -332,18 +311,18 @@
 				
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
-					
-					<li class="header">MAIN NAVIGATION</li>
-					
-					<li class="active treeview">
-						<a href="#">
-							<i class="fa fa-dashboard"></i>
-							<span>Dashboard</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
+				
+						<li class="header">MAIN NAVIGATION</li>
+						
+						<li class="active treeview">
+							<a href="#">
+								<i class="fa fa-dashboard"></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
 								<li class="active">
 									<a href="{% url 'cmsweburl' %}">
 										<i class="fa fa-circle-o"></i> CMS
@@ -385,86 +364,85 @@
 									</a>
 								</li>
 							</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-pie-chart"></i>
-							<span>Charts</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Coin Price Chart
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Report
-								</a>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-edit"></i>
-							<span>Forms</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Special Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Normal Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Promotional Email
-									</a>
-								</li>
-						</ul>
-					</li>
-					
-					<li class="treeview active menu-open">
+						</li>
+						
+						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Documentation</span>
+								<i class="fa fa-pie-chart"></i>
+								<span>Charts</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="">
-										<i class="fa fa-circle-o"></i>Terms & Conditions
-									</a>
-								</li>
-								<li class="active">
-									<a href="">
-										<i class="fa fa-circle-o"></i> Policy
+									<a href="{% url 'Demograph' %}">
+										<i class="fa fa-circle-o"></i> Coin Price Chart
 									</a>
 								</li>
 							</ul>
 						</li>
 						
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-edit"></i>
+								<span>Forms</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'AdminQuickEmail' %}">
+											<i class="fa fa-circle-o"></i> Quick Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminMultipleEmail' %}">
+											<i class="fa fa-circle-o"></i> Multiple Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminPromoEmail' %}">
+											<i class="fa fa-circle-o"></i> Promotional Email
+										</a>
+									</li>
+							</ul>
+						</li>
 						
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-					
-				</ul>
+						<li class="treeview active menu-open">
+								<a href="#">
+									<i class="fa fa-folder"></i>
+									<span>Documentation</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'Termsandconditions' %}">
+											<i class="fa fa-circle-o"></i>Terms & Conditions
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'Adminpolicy' %}">
+											<i class="fa fa-circle-o"></i> Policy
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminCalender' %}">
+											<i class="fa fa-circle-o"></i> Calender
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminToDoList' %}">
+											<i class="fa fa-circle-o"></i> To Do List
+										</a>
+									</li>
+								</ul>
+							</li>
+						
+					</ul>
 			</section>
 			<!-- /.sidebar --> 
 	</aside>
@@ -484,47 +462,101 @@
 		
         <section class="content"> 
 			<div class="row">
-				<div class="col-md-3"> 
+				<div class="col-md-12"> 
     
 					<!-- Profile Image -->
 					<div class="box box-primary">
-						<div class="box-body box-profile"> <img class="profile-user-img img-responsive img-circle" src="{% static 'AdminApp/assets/img/user5-128x128.jpg' %}" alt="User profile picture">
-							<h3 class="profile-username text-center">Nina Mcintire</h3>
-							<p class="text-muted text-center">Software Engineer</p>
-							<ul class="list-group list-group-unbordered">
-								<li class="list-group-item"> <b>Followers</b> <a class="label bg-red pull-right">1,322</a> </li>
-								<li class="list-group-item"> <b>Following</b> <a class="label bg-yellow pull-right">543</a> </li>
-								<li class="list-group-item"> <b>Friends</b> <a class="label bg-green pull-right">13,287</a> </li>
-							</ul>
-							<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> </div>
-						<!-- /.box-body --> 
-					</div>
-					<!-- /.box --> 
+						<div class="box-body box-profile"> 
+							<img class="profile-user-img img-responsive img-circle" src="{{AdminProfileObj.img.url}}" alt="User profile picture">
+							<h3 class="profile-username text-center">{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</h3>
 
-					<!-- About Me Box -->
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">About Me</h3>
+							<form method="POST" action="/user-admin/superadmin/profile/edit/" enctype="multipart/form-data">
+								{% csrf_token %}
+								<input type="text" name="pd1" value="1" hidden><br>
+								<input type="file" name="adminProfileImg1"><br>
+								<button class="updateButtonstyle" type="submit">Update</button>
+							</form>
+
+							<br><br>
 						</div>
-						<!-- /.box-header -->
-						<div class="box-body"> <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-							<p class="text-muted"> B.S. in Computer Science from the University of Tennessee at Knoxville </p>
-							<hr>
-							<strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-							<p class="text-muted">Malibu, California</p>
-							<hr>
-							<strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-							<p> <span class="label label-danger">UI Design</span> <span class="label label-success">Coding</span> <span class="label label-info">Javascript</span> <span class="label label-warning">PHP</span> <span class="label label-primary">Node.js</span> </p>
-							<hr>
-							<strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-						</div>
-						<!-- /.box-body --> 
 					</div>
-					<!-- /.box --> 
 				</div>
 			</div>
 		</section>
+
+
+		<section class="content">
+				<div class="row">
+					<div class="col-md-12"> 
+
+						<div class="box box-primary">
+								<div class="box-header with-border">
+									<h3 class="box-title">Personal Details</h3>
+								</div>
+								<form method="POST" action="/user-admin/superadmin/profile/edit/" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="box-body">
+											<input type="text" name="pd1" value="2" hidden><br>
+											<label>First Name : </label>
+											<input class="form-control" value="{{AdminProfileObj.firstname}}" type="text" placeholder="FirstName" name="firstname" >
+											<label>Last Name : </label>
+											<input class="form-control" value="{{AdminProfileObj.lastname}}" type="text" placeholder="LastName" name="lastname" >
+											<label>Email : </label>
+											<input class="form-control" value="{{AdminProfileObj.email}}" type="email" placeholder="Email" name="email" readonly>
+											<label>DOB : </label>
+											<input class="form-control" value="{{AdminProfileObj.dob}}" type="date" placeholder="DOB" name="dob" >
+											<label>Contact Number : </label>
+											<input class="form-control" value="{{AdminProfileObj.contact}}" type="number" placeholder="Contact" name="contact" >
+											<label>Address : </label>
+											<textarea class="form-control" name="address" rows="5">
+												{{AdminProfileObj.address}}
+											</textarea>
+											<br>
+											<button type="submit" class="updateButtonstyle">Update</button>
+											<br><br>
+										</div>
+								</form>
+							</div>
+						</div>
+				</div>
+		</section>
+
+
+		<section class="content">
+				<div class="row">
+					<div class="col-md-12"> 
+
+						<div class="box box-primary">
+								<div class="box-header with-border">
+									<h3 class="box-title">About Me</h3>
+								</div>
+
+								<form method="POST" action="/user-admin/superadmin/profile/edit/" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="box-body"> 
+										<input type="text" name="pd1" value="3" hidden><br>
+										<strong><i class="fa fa-book margin-r-5"></i></strong>
+										<label>Education : </label>
+										<textarea class="form-control" name="education" rows="5">
+												{{AdminProfileObj.education}}
+										</textarea>
+	
+										<label><i class="fa fa-pencil margin-r-5"></i>Skills : </label>
+										<textarea class="form-control" name="skills" rows="5">
+												{{AdminProfileObj.skills}}
+										</textarea>
+	
+										<br>
+										<button class="updateButtonstyle" type="submit">Update</button>
+										<br><br>
+									</div>
+								</form>
+
+							</div>
+						</div>
+				</div>
+		</section>
+
 	</div>
     <!--Footer-->
     <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>

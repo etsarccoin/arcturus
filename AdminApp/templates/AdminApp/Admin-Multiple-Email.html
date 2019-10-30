@@ -259,29 +259,16 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
-							<span class="hidden-xs">Alexander Pierce</span>
+							<img src="{{AdminProfileObj.img.url}}" class="user-image" alt="User Image">
+							<span class="hidden-xs">{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</span>
 						</a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-								<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
-                                <p> Alexander Pierce - Web Developer <small>Member since Nov. 2012</small> </p>
+								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
+                                <p> {{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}} </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Sales</a> </div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-                                </div>
-                                <!-- /.row --> 
-                            </li>
+                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -308,10 +295,10 @@
 				<!-- Sidebar user info -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+						<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
 						<a href="#">
 							<i class="fa fa-circle text-success"></i> Online
 						</a>
@@ -332,18 +319,18 @@
 				
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
-					
-					<li class="header">MAIN NAVIGATION</li>
-					
-					<li class="active treeview">
-						<a href="#">
-							<i class="fa fa-dashboard"></i>
-							<span>Dashboard</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
+				
+						<li class="header">MAIN NAVIGATION</li>
+						
+						<li class="active treeview">
+							<a href="#">
+								<i class="fa fa-dashboard"></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
 								<li class="active">
 									<a href="{% url 'cmsweburl' %}">
 										<i class="fa fa-circle-o"></i> CMS
@@ -385,86 +372,85 @@
 									</a>
 								</li>
 							</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-pie-chart"></i>
-							<span>Charts</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Coin Price Chart
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Report
-								</a>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-edit"></i>
-							<span>Forms</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Special Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Normal Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Promotional Email
-									</a>
-								</li>
-						</ul>
-					</li>
-					
-					<li class="treeview active menu-open">
+						</li>
+						
+						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Documentation</span>
+								<i class="fa fa-pie-chart"></i>
+								<span>Charts</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="">
-										<i class="fa fa-circle-o"></i>Terms & Conditions
-									</a>
-								</li>
-								<li class="active">
-									<a href="">
-										<i class="fa fa-circle-o"></i> Policy
+									<a href="{% url 'Demograph' %}">
+										<i class="fa fa-circle-o"></i> Coin Price Chart
 									</a>
 								</li>
 							</ul>
 						</li>
 						
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-edit"></i>
+								<span>Forms</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'AdminQuickEmail' %}">
+											<i class="fa fa-circle-o"></i> Quick Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminMultipleEmail' %}">
+											<i class="fa fa-circle-o"></i> Multiple Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminPromoEmail' %}">
+											<i class="fa fa-circle-o"></i> Promotional Email
+										</a>
+									</li>
+							</ul>
+						</li>
 						
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-					
-				</ul>
+						<li class="treeview active menu-open">
+								<a href="#">
+									<i class="fa fa-folder"></i>
+									<span>Documentation</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'Termsandconditions' %}">
+											<i class="fa fa-circle-o"></i>Terms & Conditions
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'Adminpolicy' %}">
+											<i class="fa fa-circle-o"></i> Policy
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminCalender' %}">
+											<i class="fa fa-circle-o"></i> Calender
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminToDoList' %}">
+											<i class="fa fa-circle-o"></i> To Do List
+										</a>
+									</li>
+								</ul>
+							</li>
+						
+					</ul>
 			</section>
 			<!-- /.sidebar --> 
 	</aside>

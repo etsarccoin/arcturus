@@ -268,7 +268,7 @@
 								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
                                 <p> {{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}} </p>
                             </li>
-                            
+                        
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -460,35 +460,51 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Demo Graph<small></small> </h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				</ol>
+                <h1 align="center">Rejected Coin Request</h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'UsermadeCoinRequest' %}"><h4><u>Pending Coin Request</u></h4></a></li>
+                </ol>
 			</section>
 			
 			<section class="content"> 
 					<div class="col-md-13">
 						<!-- Form Section -->
 						<div class="box box-primary pad30T pad30L pad30R pad10B">
-							<!-- solid sales graph -->
-							<div class="box box-solid bg-teal-gradient">
-									<div class="box-header"> <i class="fa fa-th"></i>
-										<h3 class="box-title">Demo Graph</h3>
-										<div class="pull-right box-tools"> 
-											<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-											<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
-										</div>
-									</div>
-									<div class="box-body border-radius-none">
-										<div class="chart" id="line-chart" style="height: 400px;"></div>
-									</div>
-							</div>
+							<table id="table-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>SL</th>
+										<th>Order Id</th>
+										<th>Email</th>
+										<th>Coin Price</th>
+										<th>No Of Coin</th>
+										<th>Total Amount</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in RejectedCoinReqObj %}
+									<tr>
+										<td><b>{{ forloop.counter }}</b></td>
+										<td><b>{{ i.unique_id }}</b></td>
+										<td>{{ i.user_mail }}</td>
+										<td>$ {{ i.coin_price }}</td>
+										<td>{{ i.no_coin }}</td>
+										<td>{{ i.total_amount }}</td>
+										<td><a href="{% url 'CoinRequestApprove' i.unique_id %}">Approve</a> | <a href="{% url 'CoinRequestRejectUrl' i.unique_id %}">Reject</a> | <a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
+									</tr>
+										{% endfor %}
+								</tbody>
+							</table> 
 						</div>
+						<br><br>
 					</div>
-			</section>
+            </section>
+            
 		</div>
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>
+
+
+		</div>
 </div>
 <!-- ./wrapper --> 
 

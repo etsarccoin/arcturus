@@ -167,8 +167,42 @@ class road_map_edit(models.Model):
 
 
 
-# CMS DataBase System By Kuntal
+# Admin Profile
+class AdminProfileData(models.Model):
+    img = models.ImageField(upload_to="Admin Profile Image/")
+    firstname = models.TextField()
+    lastname = models.TextField()
+    dob = models.TextField()
+    contact = models.TextField()
+    address = models.TextField()
+    education = models.TextField()
+    skills = models.TextField()
+    email = models.EmailField(primary_key=True)
+    password = models.TextField()
+    uni_key = models.TextField()
 
+    def __str__(self):
+        return self.email
+
+
+class AdminToDoListTable(models.Model):
+    TaskNo = models.TextField(primary_key=True)
+    TaskDesc = models.TextField()
+    CreatedAt = models.DateTimeField()
+    DeadLineAt = models.DateTimeField()
+    SpecialNote = models.TextField()
+    Status = models.BooleanField()
+
+
+class NotificationForNewUserRegistration(models.Model):
+    Noti_id = models.BigIntegerField(primary_key=True)
+    Noti_msg = models.TextField()
+    Noti_time = models.DateTimeField()
+    check = models.BooleanField()
+    New_User_Mail = models.EmailField()
+
+
+# CMS DataBase System By Kuntal
 class OURSERVICECMS1(models.Model):
     service_uni_key = models.SmallIntegerField(primary_key=True)
     OurSericeContent = models.TextField()
@@ -277,10 +311,21 @@ class WhitePaperPDFCMS(models.Model):
     pdf_uni_key = models.SmallIntegerField(primary_key=True)
     pdffile = models.FileField(upload_to='CMS/White Paper PDF/')
 
-#######
+
 class SocialMedialCMS(models.Model):
     social_uni_key = models.SmallIntegerField(primary_key=True)
     facebook_link = models.TextField()
     twitter_link = models.TextField()
     googleplus = models.TextField()
     linkedin = models.TextField()
+
+
+class TermsAndConditionCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    Data = models.TextField()
+
+
+class PolicyCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    Data = models.TextField()
+

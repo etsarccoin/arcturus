@@ -259,29 +259,16 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
-							<span class="hidden-xs">Alexander Pierce</span>
+							<img src="{{AdminProfileObj.img.url}}" class="user-image" alt="User Image">
+							<span class="hidden-xs">{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</span>
 						</a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-								<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
-                                <p> Alexander Pierce - Web Developer <small>Member since Nov. 2012</small> </p>
+								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
+                                <p> {{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}} </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Sales</a> </div>
-                                    <div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-                                </div>
-                                <!-- /.row --> 
-                            </li>
+                            
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -308,10 +295,10 @@
 				<!-- Sidebar user info -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="{% static 'AdminApp/assets/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+						<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>Alexander Pierce</p>
+						<p>{{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}}</p>
 						<a href="#">
 							<i class="fa fa-circle text-success"></i> Online
 						</a>
@@ -332,18 +319,18 @@
 				
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
-					
-					<li class="header">MAIN NAVIGATION</li>
-					
-					<li class="active treeview">
-						<a href="#">
-							<i class="fa fa-dashboard"></i>
-							<span>Dashboard</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
+				
+						<li class="header">MAIN NAVIGATION</li>
+						
+						<li class="active treeview">
+							<a href="#">
+								<i class="fa fa-dashboard"></i>
+								<span>Dashboard</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
 								<li class="active">
 									<a href="{% url 'cmsweburl' %}">
 										<i class="fa fa-circle-o"></i> CMS
@@ -385,86 +372,85 @@
 									</a>
 								</li>
 							</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-pie-chart"></i>
-							<span>Charts</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Coin Price Chart
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-circle-o"></i> Report
-								</a>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-edit"></i>
-							<span>Forms</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Special Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Normal Email
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-circle-o"></i> Promotional Email
-									</a>
-								</li>
-						</ul>
-					</li>
-					
-					<li class="treeview active menu-open">
+						</li>
+						
+						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-folder"></i>
-								<span>Documentation</span>
+								<i class="fa fa-pie-chart"></i>
+								<span>Charts</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="">
-										<i class="fa fa-circle-o"></i>Terms & Conditions
-									</a>
-								</li>
-								<li class="active">
-									<a href="">
-										<i class="fa fa-circle-o"></i> Policy
+									<a href="{% url 'Demograph' %}">
+										<i class="fa fa-circle-o"></i> Coin Price Chart
 									</a>
 								</li>
 							</ul>
 						</li>
 						
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-edit"></i>
+								<span>Forms</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'AdminQuickEmail' %}">
+											<i class="fa fa-circle-o"></i> Quick Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminMultipleEmail' %}">
+											<i class="fa fa-circle-o"></i> Multiple Email
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminPromoEmail' %}">
+											<i class="fa fa-circle-o"></i> Promotional Email
+										</a>
+									</li>
+							</ul>
+						</li>
 						
-					<li class="header">LABELS</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-					<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-					
-				</ul>
+						<li class="treeview active menu-open">
+								<a href="#">
+									<i class="fa fa-folder"></i>
+									<span>Documentation</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'Termsandconditions' %}">
+											<i class="fa fa-circle-o"></i>Terms & Conditions
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'Adminpolicy' %}">
+											<i class="fa fa-circle-o"></i> Policy
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminCalender' %}">
+											<i class="fa fa-circle-o"></i> Calender
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'AdminToDoList' %}">
+											<i class="fa fa-circle-o"></i> To Do List
+										</a>
+									</li>
+								</ul>
+							</li>
+						
+					</ul>
 			</section>
 			<!-- /.sidebar --> 
 	</aside>
@@ -474,88 +460,98 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Your List<small></small> </h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				</ol>
+				<h1 align="center">To Do List</h1>
 			</section>
 			
 			<section class="content"> 
 					<div class="col-md-13">
-							<!--To Do List and Direct Chat-->
-							<section class="content">
-									<div class="row">
-										<div class=".col-md-9"> 
-											<!-- TO DO List -->
-											<div class="box box-primary">
-												<div class="box-header"> <i class="ion ion-clipboard"></i>
-													<h3 class="box-title">To Do List</h3>
-													<div class="box-tools pull-right">
-														<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-														<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-													</div>
-												</div>
-												<!-- /.box-header -->
-												<div class="box-body"> 
-													<!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-													<ul class="todo-list">
-														<li> 
-															<!-- drag handle --> 
-															<span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span> 
-															<!-- checkbox -->
-															<input type="checkbox" value="">
-															<!-- todo text --> 
-															<span class="text">Design a nice theme</span> 
-															<!-- Emphasis label --> 
-															<small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small> 
-															<!-- General tools such as edit or delete-->
-															<div class="tools"> <i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i> </div>
-														</li>
-														<li> <span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span>
-															<input type="checkbox" value="">
-															<span class="text">Make the theme responsive</span> <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-															<div class="tools"> <i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i> </div>
-														</li>
-														<li> <span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span>
-															<input type="checkbox" value="">
-															<span class="text">Let theme shine like a star</span> <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-															<div class="tools"> <i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i> </div>
-														</li>
-														<li> <span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span>
-															<input type="checkbox" value="">
-															<span class="text">Let theme shine like a star</span> <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-															<div class="tools"> <i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i> </div>
-														</li>
-														<li> <span class="handle"> <i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i> </span>
-															<input type="checkbox" value="">
-															<span class="text">Check your messages and notifications</span> <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-															<div class="tools"> <i class="fa fa-edit"></i> <i class="fa fa-trash-o"></i> </div>
-														</li>
-													</ul>
-												</div>
-												<!-- /.box-body -->
-												<div class="box-footer clearfix no-border">
-													<div class="box-tools pull-right">
-														<ul class="pagination pagination-sm inline">
-															<li><a href="#">&laquo;</a></li>
-															<li><a href="#">1</a></li>
-															<li><a href="#">2</a></li>
-															<li><a href="#">3</a></li>
-															<li><a href="#">&raquo;</a></li>
-														</ul>
-													</div>
-													<button type="button" class="btn btn-default pull-left"><i class="fa fa-plus"></i> Add item</button>
-												</div>
+
+						<section class="content"> 
+							<div class="col-md-13">
+									<!-- Form Section -->
+								<div class="box box-primary pad30T pad30L pad30R pad10B">
+									<table id="table-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th scope="col">Task Number</th>
+												<th scope="col">Task</th>
+												<th scope="col">Created At</th>
+												<th scope="col">Deadline</th>
+												<th scope="col">Special Note</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for i in ToDoObj %}
+											<tr>
+												<td>{{ i.TaskNo }}</td>
+												<td>{{ i.TaskDesc|safe }}</td>
+												<td>{{ i.CreatedAt }}</td>
+												<td>{{ i.DeadLineAt }}</td>
+												<td>{{ i.SpecialNote|safe }}</td>
+												<td><a href="{% url 'DeleteToDoTaskUrl' i.TaskNo %}">Delete</a></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table> 
+								</div>
+							</div>
+						</section>
+
+						<br><br><br>
+						<h3 align="center">Create New Task</h3>
+							
+						<section class="content">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="box box-success">
+										<div class="box-header">
+
+											<div class="box-tools pull-right">
+												<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
+												<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 											</div>
+											
+										</div>
+
+										<div class="box-body">
+											<form action="{% url 'CreateTaskListUrl' %}" method="post">
+													{% csrf_token %}
+												<div class="form-group">
+													<label>Deadline Date</label>
+													<input type="date" class="form-control" name="DeadLineAt">
+												</div>
+
+												<div>
+													<label>Task Description</label>
+													<textarea class="wysi-editor" placeholder="Message" name="TaskDesc"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													
+													</textarea>
+												</div>
+
+												<div>
+													<label>Special Note</label>
+													<textarea class="wysi-editor" placeholder="Message" name="SpecialNote"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+													
+													</textarea>
+												</div>
+
+												<div class="box-footer clearfix">
+													<button type="submit" class="pull-right btn btn-success">Send <i class="fa fa-arrow-circle-right"></i></button>
+												</div>
+											</form>
 										</div>
 									</div>
-								</section>
+								</div>
+							</div>
+						</section>
+
 					</div>
 				</div>
 			</section>
 		</div>
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>
 </div>
 <!-- ./wrapper --> 
 

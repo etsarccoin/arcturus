@@ -70,6 +70,16 @@ def Number_Generator():
     return num
 
 
+def GenerateOnlyNumber():
+    letters = string.digits + string.digits + string.digits + string.digits + string.digits + string.digits
+    l = [secrets.choice(letters) for i in range(10)]
+    num = ''
+    for i in l:
+        num = num + i
+
+    return num
+
+
 def Big_Number_Generator():
     letters = string.ascii_letters + string.digits + string.hexdigits
     l = [secrets.choice(letters) for i in range(20)]
