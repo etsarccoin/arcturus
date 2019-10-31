@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 from django.apps import apps
 from UserApp.models import UsersDetail, CoinRequest, UserAccountCoin, CoinPrice,\
-     CoinPriceChangeHistory, SubscriptionTable, ContactUSFormData, UserProfileData
+     CoinPriceChangeHistory, SubscriptionTable, ContactUSFormData, UserProfileData, UserFeedbackTable
 
 from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMailWithSubject
 
@@ -35,7 +35,7 @@ def Test(request):
 def AdminDashboardPanel(request):
     try:
         admin_id = request.session['admin_id']
-        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
         NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
@@ -261,7 +261,7 @@ def CoinHistoryPage(request):
     try:
         admin_id = request.session['admin_id']
         try:
-            coin_hist = CoinPriceChangeHistory.objects.all().order_by('-changed_date')
+            coin_hist = CoinPriceChangeHistory.objects.all().order_by('changed_date')
             AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
             context = {'c_obj': coin_hist, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
         
@@ -1393,7 +1393,7 @@ def LatestNewsDataControler(req):
         return CMSForWebsite(req)
 
 
-def WhitePaperDataControler(req):
+def AdminUploadWhitePaperData(req):
     if req.method == 'POST':
         pdffile = None
         try:
@@ -1407,8 +1407,8 @@ def WhitePaperDataControler(req):
             obj.save()
         except Exception as e:
             print(e)
-        obj = WhitePaperPDFCMS(pdf_uni_key=1,pdffile=pdffile)
-        obj.save()
+            obj = WhitePaperPDFCMS(pdf_uni_key=1,pdffile=pdffile)
+            obj.save()
 
         return CMSForWebsite(req)
     else:
@@ -1536,7 +1536,38 @@ def AdminNewUserNotificationControler(req):
 
         context = {'AdminProfileObj': AdminProfileObj, 'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/UserAccNotification.html', context=context)
-    
+
+    except Exception as e:
+        print(e)
+        return AdminDashboardPanel(req)
+
+
+def AdminActivateUserProfileData(req, slug):
+    try:
+        Uobj = UsersDetail.objects.get(reference_id=slug)
+        Uobj.active_user = True
+        Uobj.save()
+        # Wallet Creation For User with 0.0 Coin
+        CoinAllocateObj = UserAccountCoin(email=Uobj.email, no_of_coin=0.0)
+        CoinAllocateObj.save()
+        # User Profile Data
+        UPobj = UserProfileData(email=Uobj.email,mdName="Unknown",phone="Unknown",fax="Unknown",country="Unknown",state_name="Unknown",zipcode="Unknown")
+        UPobj.save()
+
+        return UserManagementControler(req)
+    except Exception as e:
+        print(e)
+        return AdminDashboardPanel(req)
+
+
+def AdminCheckUserFeedback(req):
+    try:
+        FeedbackObj = UserFeedbackTable.objects.all()
+        NoOfFeedback = UserFeedbackTable.objects.all().count()
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+
+        context = {'AdminProfileObj': AdminProfileObj, 'FeedbackObj': FeedbackObj, 'NoOfFeedback': NoOfFeedback}
+        return render(req, 'AdminApp/UserFeedBack.html', context=context)
     except Exception as e:
         print(e)
         return AdminDashboardPanel(req)

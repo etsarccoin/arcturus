@@ -362,7 +362,7 @@
 								</li>
 								<li>
 									<a href="{% url 'SubcriptionTable' %}">
-										<i class="fa fa-circle-o"></i> SubCriber
+										<i class="fa fa-circle-o"></i> Subscriber
 									</a>
 								</li>
 								<li>
@@ -486,7 +486,7 @@
 										<td>{{ i.email }}</td>
 										<td>{{ i.active_user }}</td>
 										<td>{{ i.created_at }}</td>
-										<td>{% if not i.active_user %}<a href="{{i.activation_link}}" target="_blank">Approve </a>{% else %}<a href="{% url 'UserProfileViewUrl' i.reference_id %}">View</a>{% endif %}</td>
+										<td>{% if not i.active_user %}<a href="{% url 'ActivateUserProfileUrl' i.reference_id %}">Approve </a>{% else %}<a href="{% url 'UserProfileViewUrl' i.reference_id %}">View</a>{% endif %}</td>
 									</tr>
 										{% endfor %}
 								</tbody>

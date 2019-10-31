@@ -31,6 +31,10 @@ class UserProfileData(models.Model):
     zipcode = models.TextField()
 
 
+class UserProfileImage(models.Model):
+    user_mail = models.EmailField(primary_key=True)
+    UImg = models.ImageField(upload_to='User Profile Image/')
+
 
 # User Credintials
 class UserCredintials(models.Model):

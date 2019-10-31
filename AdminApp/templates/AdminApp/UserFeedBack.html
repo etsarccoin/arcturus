@@ -459,10 +459,7 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-                <h1 align="center">User Account Activity Notifications</h1>
-                <ol class="breadcrumb">
-                    <li><a href="{% url 'UsermadeCoinRequest' %}"><h4><u>Pending Coin Request</u></h4></a></li>
-                </ol>
+                <h1 align="center">User FeedBack</h1>
 			</section>
 			
 			<section class="content"> 
@@ -473,20 +470,30 @@
 								<thead>
 									<tr>
 										<th>SL</th>
-										<th>Notification Id</th>
-										<th>Message</th>
-										<th>Time</th>
-										<th>User Id</th>
+										<th>User Name</th>
+										<th>User Mail</th>
+										<th>User Phone</th>
+										<th>Overall Rating</th>
+										<th>Timely Response</th>
+										<th>Our Support</th>
+										<th>Overall Satisfaction</th>
+										<th>customer Services</th>
+										<th>Suggestion</th>
 									</tr>
 								</thead>
 								<tbody>
-										{% for i in NewUserNotiObj %}
+										{% for i in FeedbackObj %}
 									<tr>
-										<td><b>{{ forloop.counter }}</b></td>
-										<td><b>{{ i.Noti_id }}</b></td>
-										<td>{{ i.Noti_msg }}</td>
-										<td>$ {{ i.Noti_time }}</td>
-										<td>{{ i.New_User_Mail }}</td>
+										<td>{{ forloop.counter }}</td>
+										<td>{{ i.user_name }}</td>
+										<td>{{ i.user_mail }}</td>
+										<td>{{ i.user_ph }}</td>
+										<td>{{ i.overall_rating }}</td>
+										<td>{{ i.timely_response }}</td>
+										<td>{{ i.our_support }}</td>
+										<td>{{ i.satisfaction_level }}</td>
+										<td>{{ i.customer_service }}</td>
+										<td>{{ i.description }}</td>
 									</tr>
 										{% endfor %}
 								</tbody>

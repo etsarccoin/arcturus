@@ -106,18 +106,25 @@
 							<div class="profile-table">
 								<div class="profile-col">
 									<div class="image-warp">
-										<a href="#" class="image">
+										<a href="javascript:" class="image">
+											{% if not UImgObj %}
 											<img src="{% static 'UserApp/assets/img/upload-01.jpg' %}" alt="">
+											{% else %}
+											<img src="{{UImgObj.UImg.url}}" alt="" height="140" width="130">
+											{% endif %}
 										</a>
 									</div>
 								</div>
 								<div class="profile-col">
 									<div class="top">{{u_name}}</div>
 									<div class="link">
-										<a href="{% url 'UserProfileSettingPage' %}">Edit Profile</a>
+										<a href="{% url 'UserProfileSettingPage' %}"><u>Edit Profile</u></a>
 									</div>
 									<div class="link">
-										<a href="#">View Profile</a>
+										<a href="{% url 'UserFeedback' %}"><u>Feedback</u></a>
+									</div>
+									<div class="link">
+										<a href="{% url 'UserWalletView' %}"><u>Wallet</u></a>
 									</div>
 								</div>
 							</div>
@@ -129,19 +136,14 @@
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b><i>User Wallet</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b><i>User Profile</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b><i>User Feedback</i></b></a>
+											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
+											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
+											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
 										</div>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{% url 'UserLogout' %}">
 											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'UserApp/assets/img/icon-notification.png' %}" width="28" height="28" alt=""/>
 										</a>
 									</li>
 								</ul>
@@ -240,14 +242,13 @@
 								
 								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
 									<div class="input-group-prepend">
-										<button class="btn dropdown-toggle" id="selected-crypto" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
-										<div class="crypto-type-selector dropdown-menu">
-											<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">BTC</a>
-											<a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">USD</a>
-										</div>
+										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD</button>
+										<!-- <div class="dropdown-menu">
+											<a class="dropdown-item" href="#">USD</a>
+											<a class="dropdown-item" href="#">INR</a>
+										</div> -->
 									</div>
 									<input type="text" name="Money" id="money" class="form-control" aria-label="Text input with dropdown button">
-                        			<input type="hidden" id="crypto-type" name="crypto-type">
 								</div>
 
 								<div class="pad20T pad20B">
@@ -524,25 +525,29 @@
             url: '{% url "CoinValueCalling" %}',
             async: true,
             data: {
-                		c_val: $('#money').val(),
-                		c_type: $('#selected-crypto').text(),
-               		},
-            success: function (response){
-                  	console.log(response['no_coin']);
-                  	let no_coin = response['no_coin'];
-				  	if(response['is_taken'] == 1){
-						$("#c_data").val();
-                  		$("#c_data").val(no_coin);
-				  	}
-				 	else{
-						 alert("Give a Numeric Value !!");
-				  	}
+                c_val: $('#money').val(),
+                mval: 5,
+               },
+            success: function (response)
+                {
+                  console.log(response['no_coin']);
+                  let no_coin = response['no_coin'];
+				  if(response['is_taken'] == 1)
+				  {
+					$("#c_data").val();
+                  	$("#c_data").val(no_coin);
+				  }
+				  else
+				  {
+					  alert("Give a Numeric Value !!");
+				  }
                   
-               	},
-    		error: function (){
-    			           alert('Something went wrong !!');
-     				}
-     			});
+               },
+    error: function ()
+    {
+     alert('Something went wrong !!');
+     }
+});
 }
 </script>
 

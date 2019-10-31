@@ -17,6 +17,7 @@ urlpatterns = [
     path("service/", views.service, name="Userservice"),
     path('user-profile-setting/', views.UserProfileSettingPage, name="UserProfileSettingPage"),
     path('user-profile/edit/', views.EditUserProfileDataControler, name="UserProfileEditPageUrl"),
+    path('user/profile/image/upload/', views.UserProfileImageChangeData, name="EditUserProfileImageUrl"),
     path('user-wallet-view/', views.UserWalletPage, name="UserWalletView"),
     path("user-contact/", views.ContactControler, name="UserContact"),
     path('user-feedback/', views.UserFeedbackControler, name="UserFeedback"),

@@ -363,7 +363,7 @@
 								</li>
 								<li>
 									<a href="{% url 'SubcriptionTable' %}">
-										<i class="fa fa-circle-o"></i> SubCriber
+										<i class="fa fa-circle-o"></i> Subscriber
 									</a>
 								</li>
 								<li>
@@ -491,7 +491,7 @@
 										<td>$ {{ i.coin_price }}</td>
 										<td>{{ i.no_coin }}</td>
 										<td>{{ i.total_amount }}</td>
-										<td><a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
+										<td><a href="{% url 'CoinRequestApprove' i.unique_id %}">Approve</a> | <a href="{% url 'CoinRequestRejectUrl' i.unique_id %}">Reject</a> | <a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
 									</tr>
 										{% endfor %}
 								</tbody>

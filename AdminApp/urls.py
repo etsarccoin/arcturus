@@ -12,6 +12,8 @@ urlpatterns = [
     path('view/coin-request/profile/<slug:slug>/', views.CoinRequestMakerProfileData, name="CoinRequestMakerProfileUrl"),
     path('user-subccription/', views.ShowSubcribeUser, name="SubcriptionTable"),
     path('user-contact-us-data/', views.ShowContactUSFormData, name="UserWanttocontactData"),
+    path('activate/user/profile/<slug:slug>/', views.AdminActivateUserProfileData, name="ActivateUserProfileUrl"),
+    path('user/feedback-data/', views.AdminCheckUserFeedback, name="AdminUserFeebackUrl"),
 
     # Coin Request Action
     path('view-coin-request/', views.UserCoinRequestControler, name="UsermadeCoinRequest"),
@@ -61,7 +63,7 @@ urlpatterns = [
     path('cms/edit-white-paper/', views.WhitePaperDataControler, name=""),
     path('cms/edit-copy-right/', views.CopyRightDataControler, name=""),
     path('cms/edit-Latest-News/', views.LatestNewsDataControler, name=""),
-    path('cms/upload/white-paper/', views.WhitePaperDataControler, name=""),
+    path('cms/upload/white-paper/', views.AdminUploadWhitePaperData, name=""),
 
     # Admin Profile and Session
     path('admin-profile/', views.AdminProfilePage, name="AdminProfile"),

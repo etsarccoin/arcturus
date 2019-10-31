@@ -86,9 +86,6 @@
                     <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
 				</li>
 				<li class="nav-item mrg5A">
-					<a class="nav-link" href="{% url 'UserDashboard' %}">DashBoard</a>
-				</li>
-				<li class="nav-item mrg5A">
 					{% if logged_in %}
 					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
 					{% endif %}
@@ -144,22 +141,17 @@
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b><i>User Wallet</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b><i>User Profile</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b><i>User Feedback</i></b></a>
+												<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
+												<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
+												<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
 										</div>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{% url 'UserLogout' %}">
 											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
 										</a>
 									</li>
-									<li>
-										<a href="#" class="notification">
-											<img src="{% static 'UserApp/assets/img/icon-notification.png' %}" width="28" height="28" alt=""/>
-											<span class="pop"></span>
-										</a>
-									</li>
+					
 								</ul>
 							</div>
 						</div>

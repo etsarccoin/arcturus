@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="{% static 'UserApp/assets/img/title.ico' %}">
-<title>Feedback Form</title>
+<title>User Profile</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
@@ -86,9 +86,6 @@
                     <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
 				</li>
 				<li class="nav-item mrg5A">
-					<a class="nav-link" href="{% url 'UserDashboard' %}">DashBoard</a>
-				</li>
-				<li class="nav-item mrg5A">
 					{% if logged_in %}
 					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
 					{% endif %}
@@ -110,25 +107,24 @@
 								<div class="profile-col">
 									<div class="image-warp">
 										<a href="#" class="image">
+											{% if not UImgObj %}
 											<img src="{% static 'UserApp/assets/img/upload-01.jpg' %}" alt="">
+											{% else %}
+											<img src="{{UImgObj.UImg.url}}" alt="" height="140" width="130">
+											{% endif %}
 										</a>
 									</div>
 								</div>
 								<div class="profile-col">
 									<div class="top">{{u_name}}</div>
-									<div class="info">
-										<div class="info-col">
-											<span>Last Login</span>
-											<span>25-08-2019 19:20 P.M.</span>
-										</div>
-										<div class="info-col">
-											<span>Login IP</span>
-											<span>192.168.1.5</span>
-										</div>
-										<div class="info-col">
-											<span>Browser</span>
-											<span>Mozila Firefox</span>
-										</div>
+									<div class="link">
+										<a href="{% url 'Userindex' %}"><u>Dashboard</u></a>
+									</div>
+									<div class="link">
+										<a href="{% url 'UserFeedback' %}"><u>Feedback</u></a>
+									</div>
+									<div class="link">
+										<a href="{% url 'UserWalletView' %}"><u>Wallet</u></a>
 									</div>
 								</div>
 							</div>
@@ -140,22 +136,17 @@
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b><i>User Wallet</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b><i>User Profile</i></b></a>
-											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b><i>User Feedback</i></b></a>
+												<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
+												<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
+												<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
 										</div>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{% url 'UserLogout' %}">
 											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
 										</a>
 									</li>
-									<li>
-										<a href="#" class="notification">
-											<img src="{% static 'UserApp/assets/img/icon-notification.png' %}" width="28" height="28" alt=""/>
-											<span class="pop"></span>
-										</a>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
@@ -278,7 +269,7 @@
 										
 										<div class="form-row">
 											<div class="form-group col-12 pad0L pad0R mrg0B" align="right">
-												<button type="submit" onclick="SubcriberFunction()" class="btn btn-navbar-brown pad30L pad30R mrg5A">Save</button>
+												<button type="submit" onclick="UpadteProfileFunction()" class="btn btn-navbar-brown pad30L pad30R mrg5A">Update</button>
 											</div>
 										</div>
 										
@@ -288,6 +279,34 @@
 						</div>
 					</div>
 				</div>
+
+
+				<!-- Profile Image -->
+				<div class="row pad20T pad20B">
+					<div class="col">
+						<div class="card upload-card">
+							<div class="row justify-content-center pad15L pad15R" align="center">
+								<div class="col profile-info">
+									<form action="{% url 'EditUserProfileImageUrl' %}" enctype="multipart/form-data" method="POST">
+										{% csrf_token %}
+							
+										<div class="from-heading">Profile Img</div>								
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<input name="userImg" type="file" class="form-control">
+											</div>
+											<div class="form-group col-md-4">
+												<button type="submit" class="btn btn-navbar-brown pad30L pad30R mrg5A">Update</button>
+											</div>
+										</div>
+										
+									</form>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>
+
 			
 				<div class="row pad20T pad20B">
 						<div class="col">
@@ -573,7 +592,7 @@
 
 
 <script type="text/javascript">
-	function SubcriberFunction()
+	function UpadteProfileFunction()
     {
         $.ajax({
             type: "GET",

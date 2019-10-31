@@ -22,7 +22,7 @@ from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
-        ContactUSFormData, UserProfileData, UserFeedbackTable
+        ContactUSFormData, UserProfileData, UserFeedbackTable, UserProfileImage
 
 # Coming From Admin Model
 from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
@@ -189,9 +189,13 @@ def UserIndex(request):
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except:
+            UImgObj = False
 
         context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': noCoin, 'footerObj': footerObj, 'CopyObj': CopyObj,\
-            'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+            'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
     except Exception as e:
@@ -410,20 +414,26 @@ def logout(request):
 
 def CoinBuyCheckStatus(request):
     try:
-        user_id = request.session['user_id']
-        coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
-        u_a_coin_obj = UserAccountCoin.objects.get(email=user_id)
-        u_a_coin = u_a_coin_obj.no_of_coin
-        logged_in = True
-
+        try:
+            user_id = request.session['user_id']
+            logged_in = True
+        except:
+            logged_in = False
+        headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        serviceObj = OURSERVICECMS1.objects.get(service_uni_key=1)
+        reviewObj = ReviewBackgroundCMS1.objects.get(review_bg_uni_key=1)
+        aboutUsObj = ABOUTUSCMS.objects.get(about_us_uni_key=1)
+        whychooseObj = WHYCHOOSEUSCMS.objects.get(why_coose_us_uni_key=1)
+        roadmapObj = DEVELOPMENTROADMAPCMS.objects.get(road_map_uni_key=1)
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
-
-        context = {'coin_req_obj': coin_req_obj, 'u_a_coin': u_a_coin, 'logged_in': logged_in, 'footerObj': footerObj,\
-            'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
-        return render(request, 'UserApp/client_page.html', context=context)
+        
+        context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
+            'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj,\
+             'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+        return render(request, 'UserApp/index.html', context=context)
 
     except:
          return UserIndex(request)
@@ -463,10 +473,9 @@ def CoinValueCalculate(request):
     try:
         a = request.GET.get('c_val')
         a = float(a)
-        c_type = request.GET.get('c_type')
-        c_obj = CoinPrice.objects.get(id=1).price_in_usd
-        print("c_val",a,"c_type",c_type,"c_obj",c_obj)
-        no_coin = arcturus_cal(money=a,bonus=50,c_type=c_type,arcturus_rate=float(c_obj))['no_of_arcturus']
+        c_obj = CoinPrice.objects.get(id=1)
+        a = a/c_obj.price_in_usd
+        no_coin = a
         is_taken = 1
     except Exception as e:
         print("CoinValueCalculate >> ", e)
@@ -627,9 +636,13 @@ def UserFeedbackControler(request):
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except:
+            UImgObj = False
 
         context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name, 'UPObjPhone':UPObjPhone, 'footerObj': footerObj,\
-            'noCoin': noCoin, 'no_of_coin_obj': no_of_coin_obj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+            'noCoin': noCoin, 'no_of_coin_obj': no_of_coin_obj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
         return render(request,'UserApp/user-feedback.html', context=context)
     
     except Exception as e:
@@ -681,9 +694,13 @@ def UserProfileSettingPage(request):
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except:
+            UImgObj = False
 
         context = {'logged_in': logged_in, 'u_obj':u_obj, 'userAddressObj': userAddressObj, 'u_name': u_name, 'no_of_coin_obj': no_of_coin_obj,
-            'noCoin': noCoin, 'footerObj': footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+            'noCoin': noCoin, 'footerObj': footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
         return render(request,'UserApp/Edit-User-Profile.html', context=context)
     
     except Exception as e:
@@ -735,9 +752,14 @@ def UserWalletPage(request):
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except:
+            UImgObj = False
 
         context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
-             'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+             'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
+             'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
         return render(request,'UserApp/user-wallet.html', context=context)
     
     except Exception as e:
@@ -828,3 +850,21 @@ def UserPolicy(req):
     
     context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'PolicyObj': PolicyObj}
     return render(req,'UserApp/user-policy.html', context=context)
+
+
+def UserProfileImageChangeData(req):
+    try:
+        user_id = req.session['user_id']
+        userImg = None
+        userImg = req.FILES['userImg']
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+            UImgObj.UImg = userImg
+            UImgObj.save()
+        except:
+            UImgObj = UserProfileImage(user_mail=user_id,UImg=userImg)
+            UImgObj.save()
+
+        return UserProfileSettingPage(req)
+    except:
+        return UserIndex(req)
