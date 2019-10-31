@@ -10,7 +10,12 @@ import httpagentparser
 import re, uuid
 import os, sys
 from getmac import get_mac_address
-
+from forex_python.bitcoin import BtcConverter
+from coinmarketcap import Market
+import urllib, json
+import requests as r
+from forex_python.converter import CurrencyRates
+from forex_python.bitcoin import BtcConverter
 
 def SendMail(toaddr, message):
     fromaddr = "arcturuscoin@gmail.com"
@@ -131,3 +136,35 @@ def DetectBrowser(request):
         browser = browser_name + " " + browser_version
 
     return browser
+
+
+def arcturus_cal(money,arcturus_rate,c_type,bonus=0):
+    c = CurrencyRates()
+    b = BtcConverter()
+    print(c_type)
+    if c_type=="USD":
+        if int(money)>=100:
+            usd=float(money)+(float(money)*(bonus/100))
+            no_of_btc=b.convert_to_btc(usd,'USD')
+            return {"no_of_arcturus":float(usd)/float(arcturus_rate)}
+        else:
+            return {"no_of_arcturus":"Error... Minimum transaction should be more then 100 usd"}
+    elif c_type.upper()=="BTC":
+        usd=b.convert_btc_to_cur(float(money), 'USD')
+        if int(usd)>=100:
+            usd=float(usd)+(float(usd)*(bonus/100))
+            return {"no_of_arcturus":float(usd)/float(arcturus_rate)}
+        else:
+            return {"no_of_arcturus":"Minimum transaction should be more then 100 usd"}
+    else:
+        return {"no_of_arcturus":"Usupported cryptotype.... "}
+
+
+
+def price():
+    b = BtcConverter()
+    bitcoin_price=b.get_latest_price('USD')
+    print(bitcoin_price)
+    coinmarketcap = Market()
+    y=coinmarketcap.ticker(start=0, limit=2, convert='USD')
+    return {"btc":bitcoin_price,"eth":y["data"]["1027"]["quotes"]['USD']['price']}

@@ -17,7 +17,7 @@ from django.http import FileResponse
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
-     GetMacAddress, GenerateOnlyNumber
+     GetMacAddress, GenerateOnlyNumber,arcturus_cal
 
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
@@ -473,9 +473,10 @@ def CoinValueCalculate(request):
     try:
         a = request.GET.get('c_val')
         a = float(a)
-        c_obj = CoinPrice.objects.get(id=1)
-        a = a/c_obj.price_in_usd
-        no_coin = a
+        c_type = request.GET.get('c_type')
+        c_obj = CoinPrice.objects.get(id=1).price_in_usd
+        print("c_val",a,"c_type",c_type,"c_obj",c_obj)
+        no_coin = arcturus_cal(money=a,bonus=50,c_type=c_type,arcturus_rate=float(c_obj))['no_of_arcturus']
         is_taken = 1
     except Exception as e:
         print("CoinValueCalculate >> ", e)
