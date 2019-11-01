@@ -53,6 +53,15 @@
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<style>
+.xxx{
+		height: 400;
+		width: 400;
+	}
+</style>
+
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -460,10 +469,7 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Demo Graph<small></small> </h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				</ol>
+				<h1 align="center">17 Lastest Crypto Coin Graph</h1>
 			</section>
 			
 			<section class="content"> 
@@ -473,24 +479,29 @@
 							<!-- solid sales graph -->
 							<div class="box box-solid bg-teal-gradient">
 									<div class="box-header"> <i class="fa fa-th"></i>
-										<h3 class="box-title">Demo Graph</h3>
+										<h3 class="box-title">Coin Price Today</h3>
 										<div class="pull-right box-tools"> 
 											<button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i> </button>
 											<button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i> </button>
 										</div>
 									</div>
 									<div class="box-body border-radius-none">
-										<div class="chart" id="line-chart" style="height: 400px;"></div>
+											<canvas id="bar-chart1"></canvas>
 									</div>
 							</div>
 						</div>
 					</div>
 			</section>
+
+			
+
 		</div>
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>
+
 </div>
 <!-- ./wrapper --> 
+
+
+
 
 <!-- jQuery 3 --> 
 <script src="{% static 'AdminApp/assets/js/jquery-3.3.1.js' %}"></script> 
@@ -542,6 +553,11 @@
 <script src="{% static 'AdminApp/assets/js/adminlte.min.js' %}"></script> 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) --> 
 <script src="{% static 'AdminApp/assets/js/dashboard.js' %}"></script>
+
+<!-- Chart Js Lib -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
 <script>
 	$(document).ready(function() {
 		"use strict";
@@ -553,5 +569,82 @@
 		});
 	});
 </script>
+
+
+<script>
+	setInterval(function()
+	{
+		SetNewCoinForGraph();
+	},4000);
+</script>
+		
+		
+<script type="text/javascript">
+	function SetNewCoinForGraph()
+	{
+	$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: '{% url "mytest" %}',
+			async: true,
+			data: {
+					
+				},
+			success: function (response)
+			{
+				new Chart(document.getElementById("bar-chart1"), {
+					type: 'bar',
+					data: {
+						labels: response['coin_id'],
+						datasets: [
+						{
+							label: "USD",
+							backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2"],
+							data: response['coin_price']
+						}
+						]
+					},
+					options: {
+						legend: { display: false },
+						title: {
+						display: true,
+						text: 'Crypto Coin Price'
+						}
+					}
+				});
+
+
+				// new Chart(document.getElementById("bar-chart1"), {
+				// type: 'bar',
+				// data: {
+				// labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+				// datasets: [
+				// 	{
+				// 	label: "Population (millions)",
+				// 	backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+				// 	data: [2478,5267,734,784,433]
+				// 	}
+				// ]
+				// },
+				// options: {
+				// legend: { display: false },
+				// title: {
+				// 	display: true,
+				// 	text: 'Predicted world population (millions) in 2050'
+				// }
+				// }
+				// });
+
+
+			},
+			error: function ()
+			{
+				alert('Something went wrong !!');
+			}
+		});
+	}
+</script>
+
+
 </body>
 </html>

@@ -19,6 +19,8 @@ from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
      GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
 
+from .CoinPriceChecker import SupplyCoinData20, SupplyCoinData2140
+
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
@@ -45,10 +47,24 @@ base_url = 'http://www.arcturus.world/'
 
 
 def Test(request):
-    a= price()
-    print("------------------------------------------------")
-    print(a['btc'])
-    return render(request, 'UserApp/Edit-User-Profile.html', context={})
+    try:
+        coin_id, coin_price = SupplyCoinData20()
+    except Exception as e:
+        coin_id, coin_price = SupplyCoinData2140()
+
+    context = {'coin_id': coin_id, 'coin_price': coin_price}
+    return JsonResponse(context)
+
+
+def ShowGraph(req):
+    try:
+        coin_id, coin_price = SupplyCoinData20()
+    except Exception as e:
+        coin_id, coin_price = SupplyCoinData2140()
+        
+    context = {'coin_id': coin_id, 'coin_price': coin_price}
+    # context = {'a': 1}
+    return JsonResponse(context)
 
 
 def hotel(request):

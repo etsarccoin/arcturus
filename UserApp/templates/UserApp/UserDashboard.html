@@ -31,7 +31,14 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-	
+
+<style>
+.xxx{
+		height: 400;
+		width: 400;
+	}
+</style>
+
 </head>
 
 <body role="document">
@@ -229,11 +236,12 @@
 					<div class="row justify-content-center pad15L pad15R" align="center">
 						<div class="col-md-8">
 							<div class="graph-cont">
-								<div class="header">Coin Graph</div>
+								<div class="header">Latest Crypto Coin Graph</div>
 								<div class="body">
-									<div id="coinGraph" style="width: 100%; height: 298px; margin: 0 auto"></div>
+									<div id="coinGraph" style="width: 100%; height: 340px; margin: 0 auto">
+										<canvas id="bar-chart1"></canvas>
+									</div>
 								</div>
-								<div class="footer">Coin Price Chart</div>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -434,6 +442,7 @@
 	
 <script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script type="text/javascript">
 	function SubcriberFunction()
@@ -466,56 +475,6 @@
 		});
     }
 </script> 
-
-
-<script>
-	Highcharts.chart('coinGraph', {
-		chart: {
-			type: 'line',
-			backgroundColor: '#f4f4f4',
-			marginBottom: 30
-		},
-		title: {
-			text: false
-		},
-		subtitle: {
-			text: false
-		},
-		legend: {
-			margin: 0,
-			verticalAlign: 'bottom',
-			y: 15
-		},
-		xAxis: {
-			title: false,
-			tickInterval:1,
-			labels: false
-		},
-		yAxis: {
-			title: false,
-			tickInterval:1,
-			labels: false
-		},
-		plotOptions: {
-			line: {
-				dataLabels: {
-					enabled: true
-				},
-				enableMouseTracking: false
-			}
-		},
-		series: [{
-			name: 'Stock',
-			data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 23.2, 23.5, 22.3, 19.3, 13.9, 9.6],
-			color: '#6b3008'
-		}, {
-			name: 'Sale',
-			data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8],
-			color: '#ff7d00'
-		}]
-	});
-</script> 
-
 
 
 <script type="text/javascript">
@@ -583,6 +542,108 @@
 		});
     }
 </script>
+
+
+
+<script>
+	setInterval(function()
+	{
+		SetNewCoinForGraph();
+	},4000);
+</script>
+	
+	
+<script type="text/javascript">
+		function SetNewCoinForGraph()
+		{
+		$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				url: '{% url "mytest" %}',
+				async: true,
+				data: {
+						
+					},
+				success: function (response)
+				{
+					
+
+					new Chart(document.getElementById("bar-chart1"), {
+						type: 'bar',
+						data: {
+							labels: response['coin_id'],
+							datasets: [
+							{
+								label: "USD",
+								backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2"],
+								data: response['coin_price']
+							}
+							]
+						},
+						options: {
+							legend: { display: false },
+							title: {
+							display: true,
+							text: 'Crypto Coin Price'
+							}
+						}
+					});
+
+
+					// Highcharts.chart('coinGraph', {
+					// 	chart: {
+					// 		type: 'line',
+					// 		backgroundColor: '#f4f4f4',
+					// 		marginBottom: 30
+					// 	},
+					// 	title: {
+					// 		text: 'Top 17 Coin Price Graph'
+					// 	},
+					// 	subtitle: {
+					// 		text: false
+					// 	},
+					// 	legend: {
+					// 		margin: 0,
+					// 		verticalAlign: 'bottom',
+					// 		y: 15
+					// 	},
+					// 	xAxis: {
+					// 		title: false,
+					// 		tickInterval:1,
+					// 		labels: false
+					// 	},
+					// 	yAxis: {
+					// 		title: false,
+					// 		tickInterval:1,
+					// 		labels: false
+					// 	},
+					// 	plotOptions: {
+					// 		line: {
+					// 			dataLabels: {
+					// 				enabled: true
+					// 			},
+					// 			enableMouseTracking: false
+					// 		}
+					// 	},
+					// 	series: [{
+					// 		name: 'Price',
+					// 		data: response['coin_price'],
+					// 		color: '#6b3008'
+					// 	}, {
+					// 		name: 'Coin',
+					// 		data: response['coin_id'],
+					// 		color: '#ff7d00'
+					// 	}]
+					// });
+	
+				},
+				error: function (){
+							   alert('Something went wrong !!');
+						}
+					});
+	}
+</script>
+
 
 
 </body>
