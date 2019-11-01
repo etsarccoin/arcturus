@@ -164,7 +164,6 @@ def arcturus_cal(money,arcturus_rate,c_type,bonus=0):
 def price():
     b = BtcConverter()
     bitcoin_price=b.get_latest_price('USD')
-    print(bitcoin_price)
     coinmarketcap = Market()
     y=coinmarketcap.ticker(start=0, limit=2, convert='USD')
     return {"btc":bitcoin_price,"eth":y["data"]["1027"]["quotes"]['USD']['price']}

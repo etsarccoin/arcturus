@@ -17,7 +17,7 @@ from django.http import FileResponse
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
-     GetMacAddress, GenerateOnlyNumber,arcturus_cal
+     GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
 
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
@@ -45,6 +45,9 @@ base_url = 'http://www.arcturus.world/'
 
 
 def Test(request):
+    a= price()
+    print("------------------------------------------------")
+    print(a['btc'])
     return render(request, 'UserApp/Edit-User-Profile.html', context={})
 
 
