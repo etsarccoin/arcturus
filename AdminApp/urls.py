@@ -64,6 +64,13 @@ urlpatterns = [
     path('cms/edit-copy-right/', views.CopyRightDataControler, name=""),
     path('cms/edit-Latest-News/', views.LatestNewsDataControler, name=""),
     path('cms/upload/white-paper/', views.AdminUploadWhitePaperData, name=""),
+    path('cms/hotel/content/', views.AdminHotelContent, name=""),
+    path('cms/travels/content/', views.AdminTravelsContent, name=""),
+    path('cms/fooding/content/', views.AdminFoodingContent, name=""),
+    path('cms/payments/content/', views.AdminPaymentsContent, name=""),
+    path('cms/tours/content/', views.AdminToursContent, name=""),
+    path('cms/recreation/content/', views.AdminRecreationContent, name=""),
+
 
     # Admin Profile and Session
     path('admin-profile/', views.AdminProfilePage, name="AdminProfile"),

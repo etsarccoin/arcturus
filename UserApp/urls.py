@@ -19,9 +19,12 @@ urlpatterns = [
     path('user-profile/edit/', views.EditUserProfileDataControler, name="UserProfileEditPageUrl"),
     path('user/profile/image/upload/', views.UserProfileImageChangeData, name="EditUserProfileImageUrl"),
     path('user-wallet-view/', views.UserWalletPage, name="UserWalletView"),
+    path('user/wallet/withdrawl/', views.UserAccountWitdrawlData, name="UserWalletWithdrawlUrl"),
+
     path("user-contact/", views.ContactControler, name="UserContact"),
     path('user-feedback/', views.UserFeedbackControler, name="UserFeedback"),
     path('user-feedback/submit/', views.SubmitUserFeedBack, name="SubmitUserFeedback"),
+    
     path("logout/",views.logout,name="UserLogout"),
     path('hotel/', views.hotel, name="hotel"),
     path('travel/', views.travel, name="travel"),

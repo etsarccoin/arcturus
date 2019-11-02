@@ -484,7 +484,8 @@
 					<a href="#whitepaperxx" class="mylinkliststyle">Edit White Paper</a> | 
 					<a href="#copyrightxx" class="mylinkliststyle">Copy Right</a>|
 					<a href="#LatestNewsxx" class="mylinkliststyle">News Edit</a>|
-					<a href="#WhitePaperPDFEditxx" class="mylinkliststyle">Uplaod White Paper</a>
+					<a href="#WhitePaperPDFEditxx" class="mylinkliststyle">Uplaod White Paper</a>|
+					<a href="#HotelTourxx" class="mylinkliststyle">Hotel>Food>Tour>Payment</a>
 				</h4>
 			</section>
 			
@@ -1138,6 +1139,121 @@
 											</div>
 										</form>
 
+										<hr><hr>
+										<br>
+
+										<h3 align="center" id="HotelTourxx" class="myhedingcolor">Hotels | Travels | Fooding | Payments | Tours | Recreation</h3>
+
+										<form action="/user-admin/cms/hotel/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Hotels Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="HotelContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{HotelObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
+										<br>
+										<form action="/user-admin/cms/travels/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Travels Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="TravelsContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{TravelObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+										
+
+										<br>
+										<form action="/user-admin/cms/fooding/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Fooding Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="FoodingContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{FoodObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
+										<br>
+										<form action="/user-admin/cms/payments/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Payments Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="PaymentsContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{PaymentObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
+
+										<br>
+										<form action="/user-admin/cms/tours/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Tours Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="ToursContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{TourObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
+
+										<br>
+										<form action="/user-admin/cms/recreation/content/" enctype="multipart/form-data" method="POST">
+											{% csrf_token %}
+											<div class="box-body">
+												<div class="form-group">
+													<label class="myheadingstyle">Recreation Content :</label>
+													<textarea class="wysi-editor" placeholder="Message" name="RecreationContent"
+														style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+														{{RecObj.data|safe}}
+													</textarea>
+												</div>
+											</div>
+
+											<div class="box-footer clearfix">
+												<button type="submit" class="pull-right btn btn-success mystylebutton">Send <i class="fa fa-arrow-circle-right"></i></button>
+											</div>
+										</form>
+
 										
 										<br><hr>
 										<section class="content-header">
@@ -1153,7 +1269,8 @@
 												<a href="#whitepaperxx" class="mylinkliststyle">Edit White Paper</a>|
 												<a href="#copyrightxx" class="mylinkliststyle">Copy Right</a>|
 												<a href="#LatestNewsxx" class="mylinkliststyle">News Edit</a>|
-												<a href="#WhitePaperPDFEditxx" class="mylinkliststyle">Uplaod White Paper</a>
+												<a href="#WhitePaperPDFEditxx" class="mylinkliststyle">Uplaod White Paper</a>|
+												<a href="#HotelTourxx" class="mylinkliststyle">Hotel>Food>Tour>Payment</a>
 											</h4>
 										</section>
 										<br>

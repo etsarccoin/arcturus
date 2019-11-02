@@ -159,13 +159,14 @@
 				<div class="col">
 					<div class="card upload-card pad0T pad0B">
 						<div class="row">
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<div class="col-lg-6 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header">
 										<div class="row align-items-center">
 											<div class="col">Arcturus Wallet</div>
 											<div class="col text-right">
-												<a href="#">Withdrawl</a>
+												<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 											</div>
 										</div>
 									</div>
@@ -179,13 +180,14 @@
 									</div>
 								</div>	
 							</div>
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<div class="col-lg-6 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header bg-brown">
 										<div class="row align-items-center">
 											<div class="col">No Of Coin</div>
 											<div class="col text-right">
-												<a href="#">History</a>
+												<a href="{% url 'UserWalletView' %}">History</a>
 											</div>
 										</div>
 									</div>
@@ -199,7 +201,8 @@
 									</div>
 								</div>	
 							</div>
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<!-- <div class="col-lg-4 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header">
 										<div class="row align-items-center">
@@ -218,7 +221,8 @@
 										</div>
 									</div>
 								</div>	
-							</div>						
+							</div>	 -->
+
 						</div>
 					</div>
 				</div>

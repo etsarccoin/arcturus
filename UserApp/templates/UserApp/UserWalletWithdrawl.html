@@ -8,8 +8,8 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="{% static 'UserApp/assets/img/title.ico' %}">
-<title>User Dashboard</title>
+<link rel="icon" href="{% static 'UserApp/assets/img/favicon.ico' %}">
+<title>Withdrawl Money</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
@@ -31,14 +31,7 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-
-<style>
-.xxx{
-		height: 400;
-		width: 400;
-	}
-</style>
-
+	
 </head>
 
 <body role="document">
@@ -71,7 +64,7 @@
 <!-- Navbar Start -->
 <div class="container pad0L pad0R">
 	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
-        <a class="navbar-brand" href="{% url 'Userindex' %}">
+        <a class="navbar-brand" href="#">
             <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
@@ -79,18 +72,18 @@
         </button>
     
         <div class="collapse navbar-collapse" id="navbar">
-				<ul class="navbar-nav ml-auto">
-				<li class="nav-item mrg5A active">
-					<a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
-				</li>
-				<li class="nav-item mrg5A">
+			<ul class="navbar-nav ml-auto">
+                <li class="nav-item mrg5A active">
+                    <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+                </li>
+                <li class="nav-item mrg5A">
 						<a class="nav-link" href="{% url 'white' %}">White Paper</a>
-				</li>
-				<li class="nav-item mrg5A">
-					<a class="nav-link" href="{% url 'Userabout' %}">About</a>
-				</li>
-				<li class="nav-item mrg5A">
-					<a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userabout' %}">About</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
 				</li>
 				<li class="nav-item mrg5A">
 					{% if logged_in %}
@@ -113,7 +106,7 @@
 							<div class="profile-table">
 								<div class="profile-col">
 									<div class="image-warp">
-										<a href="javascript:" class="image">
+										<a href="#" class="image">
 											{% if not UImgObj %}
 											<img src="{% static 'UserApp/assets/img/upload-01.jpg' %}" alt="">
 											{% else %}
@@ -131,7 +124,7 @@
 										<a href="{% url 'UserFeedback' %}"><u>Feedback</u></a>
 									</div>
 									<div class="link">
-										<a href="{% url 'UserWalletView' %}"><u>Wallet</u></a>
+										<a href="{% url 'Userindex' %}"><u>Dashboard</u></a>
 									</div>
 								</div>
 							</div>
@@ -143,9 +136,9 @@
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
-											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
-											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
+												<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
+												<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
+												<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
 										</div>
 									</li>
 									<li>
@@ -153,6 +146,7 @@
 											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
 										</a>
 									</li>
+									
 								</ul>
 							</div>
 						</div>
@@ -160,83 +154,82 @@
 				</div>
 			</div>
 		</div>
-
 		
 		<div class="row pad20T pad20B">
-			<div class="col">
-				<div class="card upload-card pad0T pad0B">
-					<div class="row">
+				<div class="col">
+					<div class="card upload-card pad0T pad0B">
+						<div class="row">
 
-						<div class="col-lg-6 mrg15T mrg15B">
-							<div class="info-panel-container">
-								<div class="header">
-									<div class="row align-items-center">
-										<div class="col">Arcturus Wallet</div>
-										<div class="col text-right">
-											<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
+							<div class="col-lg-6 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header">
+										<div class="row align-items-center">
+											<div class="col">Arcturus Wallet</div>
+											<div class="col text-right">
+												<a href="#">Withdrawl</a>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="body">
-									<div class="row align-items-center">
-										<div class="col">
-											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+									<div class="body">
+										<div class="row align-items-center">
+											<div class="col">
+												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+											</div>
+											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
 										</div>
-										<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
 									</div>
-								</div>
-							</div>	
+								</div>	
+							</div>
+
+							<div class="col-lg-6 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header bg-brown">
+										<div class="row align-items-center">
+											<div class="col">No Of Coin</div>
+											<div class="col text-right">
+												<a href="{% url 'UserWalletView' %}">History</a>
+											</div>
+										</div>
+									</div>
+									<div class="body">
+										<div class="row align-items-center">
+											<div class="col">
+												<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
+											</div>
+											<div class="col">{{noCoin}}</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+
+							<!-- <div class="col-lg-4 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header">
+										<div class="row align-items-center">
+											<div class="col">Requests Funds</div>
+											<div class="col text-right">
+												<a href="#">Requests</a>
+											</div>
+										</div>
+									</div>
+									<div class="body">
+										<div class="row align-items-center">
+											<div class="col">
+												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+											</div>
+											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
+										</div>
+									</div>
+								</div>	
+							</div>	 -->
+
 						</div>
-
-						<div class="col-lg-6 mrg15T mrg15B">
-							<div class="info-panel-container">
-								<div class="header bg-brown">
-									<div class="row align-items-center">
-										<div class="col">No Of Coin</div>
-										<div class="col text-right">
-											<a href="{% url 'UserWalletView' %}">History</a>
-										</div>
-									</div>
-								</div>
-								<div class="body">
-									<div class="row align-items-center">
-										<div class="col">
-											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
-										</div>
-										<div class="col">{{noCoin}}</div>
-									</div>
-								</div>
-							</div>	
-						</div>
-
-						<!-- <div class="col-lg-4 mrg15T mrg15B">
-							<div class="info-panel-container">
-								<div class="header">
-									<div class="row align-items-center">
-										<div class="col">Requests Funds</div>
-										<div class="col text-right">
-											<a href="#">Requests</a>
-										</div>
-									</div>
-								</div>
-								<div class="body">
-									<div class="row align-items-center">
-										<div class="col">
-											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
-										</div>
-										<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
-									</div>
-								</div>
-							</div>	
-						</div>		 -->
-
 					</div>
 				</div>
 			</div>
-		</div>
 
 
-		<div class="row pad20T pad20B">
+			<div class="row pad20T pad20B">
 				<div class="col">
 					<div class="card upload-card pad0T pad0B">
 						<div class="row">
@@ -246,17 +239,30 @@
 									<div class="header">
 										<div class="row align-items-center">
 											<div class="col">
-												Arcturus Coin Investment Rules
+												Arcturus Coin Withdrawl Rules
 											</div>
 										</div>
 									</div>
 									<div class="body">
 										<div class="row align-items-center">
 											<strong>
-													&nbsp; &nbsp;	Minimum investment will be $100 US and Instant benefit will be 50% .
+													&nbsp; &nbsp;   Withdraw can only be Performed after 6 Months From the Date of 1st Investment.<br><br>
+													&nbsp; &nbsp; 	Withdraw could only be done as 25% of the total coin. If a user is withdrawing after 1 year then he can withdraw 50%. Similarly, after 1.5 years 75% and after 2 years 100%.
+													<br>
 											</strong> 
 										</div>
 									</div>
+									
+									<div class="body">
+										<div class="row align-items-center">
+											<strong>
+													&nbsp; &nbsp;   
+													<h2 style="padding-left: 20px;">You Can Withdrawl Your Coin On or After : &nbsp; {% if not date_withdrawl %}You Not Invested Anything Yet{% else %}{{date_withdrawl}}{% endif %}</h2>
+													<br>
+											</strong> 
+										</div>
+									</div>
+
 								</div>	
 							</div>
 
@@ -264,88 +270,51 @@
 					</div>
 				</div>
 			</div>
-
+		
 		
 		<div class="row pad20T pad20B">
 			<div class="col">
 				<div class="card upload-card">
 					<div class="row justify-content-center pad15L pad15R" align="center">
-						<div class="col-md-8">
-							<div class="graph-cont">
-								<div class="header">Latest Crypto Coin Graph</div>
-								<div class="body">
-									<div id="coinGraph" style="width: 100%; height: 340px; margin: 0 auto">
-										<canvas id="bar-chart1"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="live-left-bg border-radious-2">
-								<h3 class="border-heading-white">Calculate Live Cryptocurrency</h3>
-								
-								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
-		                        <div class="input-group-prepend">
-		                            <button class="btn dropdown-toggle" id="selected-crypto" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
-		                            <div class="crypto-type-selector dropdown-menu">
-		                                <a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">BTC</a>
-		                                <a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">USD</a>
-		                            </div>
-		                        </div>
-		                        <input type="text" name="Money" id="money" class="form-control" aria-label="Text input with dropdown button">
-		                        <input type="hidden" id="crypto-type" name="crypto-type">
-		                    </div>
-
-								<div class="pad20T pad20B">
-									<button onclick="checkcoinprice()"><img src="{% static 'UserApp/assets/img/toggle-switch-bg.png' %}" width="33" height="33" alt=""/></button>
-								</div>
-
-								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
-									<div class="input-group-prepend">
-										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyCoin</button>
-										<!-- <div class="dropdown-menu">
-											<a class="dropdown-item" href="#">INR</a>
-											<a class="dropdown-item" href="#">BTC</a>
-										</div> -->
-									</div>
-									<input type="text" id="c_data" class="form-control" aria-label="Text input with dropdown button">
-								</div>
-								<br>
-								<div class="pad20T pad20B">
-									<button class="btn btn-primary" onclick="buymycoinfunction()">Click Here To Buy</button>
-								</div>
-								<br><br>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- <div class="row pad20T pad20B">
-			<div class="col">
-				<div class="card upload-card">
-					<div class="row justify-content-center pad15L pad15R" align="center">
-						<div class="col">
-							<div class="text-container">
-								<h4>Lorem ipsum dolor sit amet</h4>
-								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
-								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
-								<h4>Lorem ipsum dolor sit amet</h4>
-								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
-								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
-								<h4>Lorem ipsum dolor sit amet</h4>
-								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
-								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
-							</div>
+						<div class="col profile-info">
+							<div class="table-header">Wallet Operation</div>
+							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="profile-table">
+								<thead>
+									<tr>
+										<th>Coin Name</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>Request Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in coin_req_obj %}
+									<tr>
+									  <td>
+									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+									  	<span> Arcturus</span>
+									  </td>
+									  <td>{{i.unique_id}}</td>
+									  <td>{{i.coin_price}}</td>
+									  <td>{{i.no_coin}}</td>
+									  <td>{{i.total_amount}}</td>
+									  <td>{{i.req_date}}</td>
+									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+							</table>
 						</div>						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div> -->
+</div>
 
 <!--Join Section-->
 <div class="container-fluid join-section-bg pad40T pad10B">
@@ -381,7 +350,7 @@
 				<div class="footer-logo-mater">
 						{{footerObj.FooterContent|safe}}
 				</div>
-				
+
 				<ul>
 						<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
 						<br>
@@ -403,8 +372,8 @@
 							<a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
 						</div>
 					</div>
-					
-                <div>
+			
+				<div>
 						<ul>
 							<li>
 								<a href="#">
@@ -428,7 +397,7 @@
 							</li>		
 						</ul>	
 					  </div>
-                
+
             </div>
 			<div class="col-lg-4">
                 <div class="footer-heading">Twitter Feed</div>
@@ -479,7 +448,19 @@
 	
 <script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
 <script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+	$(document).ready(function() {	
+		"use strict";
+		$('#profile-table').DataTable( {
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+			"bLengthChange": false,
+			"bFilter": false,
+		});
+	});
+</script> 
 
 <script type="text/javascript">
 	function SubcriberFunction()
@@ -512,176 +493,6 @@
 		});
     }
 </script> 
-
-
-<script type="text/javascript">
-    function checkcoinprice()
-    {
-    $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '{% url "CoinValueCalling" %}',
-            async: true,
-            data: {
-                        c_val: $('#money').val(),
-                        c_type: $('#selected-crypto').text(),
-                    },
-            success: function (response){
-                    console.log(response['no_coin']);
-                    let no_coin = response['no_coin'];
-                    if(response['is_taken'] == 1){
-                        $("#c_data").val();
-                        $("#c_data").val(no_coin);
-                    }
-                    else{
-                         alert("Give a Numeric Value !!");
-                    }
-                  
-                },
-            error: function (){
-                           alert('Something went wrong !!');
-                    }
-                });
-}
-</script>
-
-
-<script type="text/javascript">
-    function buymycoinfunction()
-    {
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '{% url "CoinRequestLink" %}',
-            async: true,
-            data: {
-				no_coin: $('#money').val(),
-                total_amountw: $('#c_data').val()
-               },
-            success: function (response)
-                {
-                  let submitted = response['is_taken'];
-                  if(submitted == 1)
-				  {
-					alert("Request Succefully Submitted");
-                    $('#money').val("");
-					$('#c_data').val("");
-				  }
-				  else
-				  {
-					alert("Try Again");
-				  }
-               },
-			error: function ()
-			{
-			notify('Something went wrong');
-			}
-		});
-    }
-</script>
-
-
-
-<script>
-	setInterval(function()
-	{
-		SetNewCoinForGraph();
-	},4000);
-</script>
-	
-	
-<script type="text/javascript">
-		function SetNewCoinForGraph()
-		{
-		$.ajax({
-				type: "GET",
-				contentType: "application/json; charset=utf-8",
-				url: '{% url "mytest" %}',
-				async: true,
-				data: {
-						
-					},
-				success: function (response)
-				{
-					
-
-					new Chart(document.getElementById("bar-chart1"), {
-						type: 'bar',
-						data: {
-							labels: response['coin_id'],
-							datasets: [
-							{
-								label: "USD",
-								backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2"],
-								data: response['coin_price']
-							}
-							]
-						},
-						options: {
-							legend: { display: false },
-							title: {
-							display: true,
-							text: 'Crypto Coin Price'
-							}
-						}
-					});
-
-
-					// Highcharts.chart('coinGraph', {
-					// 	chart: {
-					// 		type: 'line',
-					// 		backgroundColor: '#f4f4f4',
-					// 		marginBottom: 30
-					// 	},
-					// 	title: {
-					// 		text: 'Top 17 Coin Price Graph'
-					// 	},
-					// 	subtitle: {
-					// 		text: false
-					// 	},
-					// 	legend: {
-					// 		margin: 0,
-					// 		verticalAlign: 'bottom',
-					// 		y: 15
-					// 	},
-					// 	xAxis: {
-					// 		title: false,
-					// 		tickInterval:1,
-					// 		labels: false
-					// 	},
-					// 	yAxis: {
-					// 		title: false,
-					// 		tickInterval:1,
-					// 		labels: false
-					// 	},
-					// 	plotOptions: {
-					// 		line: {
-					// 			dataLabels: {
-					// 				enabled: true
-					// 			},
-					// 			enableMouseTracking: false
-					// 		}
-					// 	},
-					// 	series: [{
-					// 		name: 'Price',
-					// 		data: response['coin_price'],
-					// 		color: '#6b3008'
-					// 	}, {
-					// 		name: 'Coin',
-					// 		data: response['coin_id'],
-					// 		color: '#ff7d00'
-					// 	}]
-					// });
-	
-				},
-				error: function (){
-							   alert('Something went wrong !!');
-						}
-					});
-	}
-</script>
-
-
 
 </body>
 </html>

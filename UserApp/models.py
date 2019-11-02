@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 
 #---------------------------------------------------- User Details Info -------------------------------------------------------
 # Storing Data For A New User and Existing User
@@ -126,6 +126,8 @@ class UserFeedbackTable(models.Model):
     satisfaction_level = models.SmallIntegerField()
     customer_service = models.SmallIntegerField()
     description = models.TextField()
+    UserImg = models.ImageField(upload_to='Review User Image/', default='/media/User%20Profile%20Image/user4-128x128.jpg')
+    Time = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):
         return self.user_mail

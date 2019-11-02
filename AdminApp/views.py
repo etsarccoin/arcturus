@@ -10,7 +10,8 @@ from UserApp.MyHelpPackage import Big_Number_Generator, Number_Generator, SendMa
 
 # DB For CMS
 from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS, DEVELOPMENTROADMAPCMS, HeaderCMS, FooterCMS,\
-    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS, SocialMedialCMS
+    AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, LatestNewsCMS, WhitePaperPDFCMS, SocialMedialCMS,\
+    HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS, ToursContentTableCMS, RecreationContentTableCMS
 
 from .models import AdminProfileData, AdminToDoListTable, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration
 
@@ -787,10 +788,17 @@ def CMSForWebsite(req):
         Whiteobj = WhitePaperCMS.objects.get(white_uni_key=1)
         copyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
+        HotelObj = HotelContentTableCMS.objects.get(uni_key=1)
+        TravelObj = TravelsContentTableCMS.objects.get(uni_key=1)
+        FoodObj = FoodingContentTableCMS.objects.get(uni_key=1)
+        PaymentObj = PaymentsContentTableCMS.objects.get(uni_key=1)
+        TourObj = ToursContentTableCMS.objects.get(uni_key=1)
+        RecObj = RecreationContentTableCMS.objects.get(uni_key=1)
 
         context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj, 'whychooseusobj': whychooseusobj,\
              'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj, 'Whiteobj': Whiteobj,\
-                 'copyObj': copyObj, 'NewsObj': NewsObj}
+                 'copyObj': copyObj, 'NewsObj': NewsObj, 'HotelObj': HotelObj, 'TravelObj': TravelObj, 'FoodObj': FoodObj, \
+                'PaymentObj': PaymentObj, 'TourObj': TourObj, 'RecObj': RecObj}
         return render(req, 'AdminApp/CMS/HomePage.html', context=context)
     
     except Exception as e:
@@ -1571,3 +1579,117 @@ def AdminCheckUserFeedback(req):
     except Exception as e:
         print(e)
         return AdminDashboardPanel(req)
+
+
+def AdminHotelContent(req):
+    HotelContent = None
+    try:
+        HotelContent = req.POST['HotelContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = HotelContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = HotelContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = HotelContentTableCMS(uni_key=1,data=HotelContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)
+
+
+def AdminTravelsContent(req):
+    TravelsContent = None
+    try:
+        TravelsContent = req.POST['TravelsContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = TravelsContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = TravelsContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = TravelsContentTableCMS(uni_key=1,data=TravelsContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)
+
+
+def AdminFoodingContent(req):
+    FoodingContent = None
+    try:
+        FoodingContent = req.POST['FoodingContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = FoodingContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = FoodingContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = FoodingContentTableCMS(uni_key=1,data=FoodingContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)
+
+
+def AdminPaymentsContent(req):
+    PaymentsContent = None
+    try:
+        PaymentsContent = req.POST['PaymentsContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = PaymentsContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = PaymentsContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = PaymentsContentTableCMS(uni_key=1,data=PaymentsContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)
+
+
+def AdminToursContent(req):
+    ToursContent = None
+    try:
+        ToursContent = req.POST['ToursContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = ToursContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = ToursContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = ToursContentTableCMS(uni_key=1,data=ToursContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)
+
+
+def AdminRecreationContent(req):
+    RecreationContent = None
+    try:
+        RecreationContent = req.POST['RecreationContent']
+    except Exception as e:
+        print(e)
+    try:
+        TempObj = RecreationContentTableCMS.objects.get(uni_key=1)
+        TempObj.data = RecreationContent
+        TempObj.save()
+
+    except Exception as e:
+        print(e)
+        TempObj = RecreationContentTableCMS(uni_key=1,data=RecreationContent)
+        TempObj.save()
+    
+    return CMSForWebsite(req)

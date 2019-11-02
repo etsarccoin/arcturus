@@ -294,12 +294,10 @@ class WhitePaperCMS(models.Model):
     Headsub5 = models.TextField()
     Headsub5Content = models.TextField()
 
-########
 class CopyRightCMS(models.Model):
     uni_key = models.SmallIntegerField(primary_key=1)
     copyRightData = models.TextField()
 
-#######
 class LatestNewsCMS(models.Model):
     news_uni_key = models.SmallIntegerField(primary_key=1)
     LatestNewsImg1 = models.ImageField(upload_to='CMS/Latest News/')
@@ -310,6 +308,36 @@ class LatestNewsCMS(models.Model):
 class WhitePaperPDFCMS(models.Model):
     pdf_uni_key = models.SmallIntegerField(primary_key=True)
     pdffile = models.FileField(upload_to='CMS/White Paper PDF/')
+
+
+class HotelContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
+
+
+class TravelsContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
+
+
+class FoodingContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
+
+
+class PaymentsContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
+
+
+class ToursContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
+
+
+class RecreationContentTableCMS(models.Model):
+    uni_key = models.SmallIntegerField(primary_key=True)
+    data = models.TextField()
 
 
 class SocialMedialCMS(models.Model):

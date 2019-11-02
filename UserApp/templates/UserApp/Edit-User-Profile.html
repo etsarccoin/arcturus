@@ -159,13 +159,14 @@
 				<div class="col">
 					<div class="card upload-card pad0T pad0B">
 						<div class="row">
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<div class="col-lg-6 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header">
 										<div class="row align-items-center">
 											<div class="col">Arcturus Wallet</div>
 											<div class="col text-right">
-												<a href="#">Withdrawl</a>
+												<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 											</div>
 										</div>
 									</div>
@@ -179,13 +180,14 @@
 									</div>
 								</div>	
 							</div>
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<div class="col-lg-6 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header bg-brown">
 										<div class="row align-items-center">
 											<div class="col">No Of Coin</div>
 											<div class="col text-right">
-												<a href="#">History</a>
+												<a href="{% url 'UserWalletView' %}">History</a>
 											</div>
 										</div>
 									</div>
@@ -199,7 +201,8 @@
 									</div>
 								</div>	
 							</div>
-							<div class="col-lg-4 mrg15T mrg15B">
+
+							<!-- <div class="col-lg-4 mrg15T mrg15B">
 								<div class="info-panel-container">
 									<div class="header">
 										<div class="row align-items-center">
@@ -218,7 +221,8 @@
 										</div>
 									</div>
 								</div>	
-							</div>						
+							</div>		 -->
+
 						</div>
 					</div>
 				</div>
@@ -238,7 +242,7 @@
 												<input type="text" value="{{u_obj.first_name}}" class="form-control" placeholder="First Name" readonly>
 											</div>
 											<div class="form-group col-md-4">
-												<input type="text" value="{{userAddressObj.mdName}}" name="mdName" id="mdName" class="form-control" placeholder="Middle Name">
+												<input type="text" value="{% if userAddressObj.mdName == 'Unknown' %}{% else %}{{userAddressObj.mdName}}{% endif %}" name="mdName" id="mdName" class="form-control" placeholder="Middle Name">
 											</div>
 											<div class="form-group col-md-4">
 												<input type="text" value="{{u_obj.last_name}}" class="form-control" placeholder="Last Name" readonly>
@@ -249,21 +253,21 @@
 												<input type="text" value="{{u_obj.email}}" class="form-control" placeholder="Email" readonly>
 											</div>
 											<div class="form-group col-md-4">
-												<input type="text" name="phone" value="{{userAddressObj.phone}}" id="phone" class="form-control" placeholder="Phone">
+												<input type="text" name="phone" value="{% if userAddressObj.phone == 'Unknown' %}{% else %}{{userAddressObj.phone}}{% endif %}" id="phone" class="form-control" placeholder="Phone">
 											</div>
 											<div class="form-group col-md-4">
-												<input type="text" name="fax" value="{{userAddressObj.fax}}" id="fax" class="form-control" placeholder="Fax">
+												<input type="text" name="fax" value="{% if userAddressObj.fax == 'Unknown' %}{% else %}{{userAddressObj.fax}}{% endif %}" id="fax" class="form-control" placeholder="Fax">
 											</div>
 										</div>
 										<div class="form-row">
 											<div class="form-group col-md-4">
-												<input type="text" value="{{userAddressObj.country}}" name="country" id="country" class="form-control" placeholder="Country">
+												<input type="text" value="{% if userAddressObj.country == 'Unknown' %}{% else %}{{userAddressObj.country}}{% endif %}" name="country" id="country" class="form-control" placeholder="Country">
 											</div>
 											<div class="form-group col-md-4">
-												<input type="text" value="{{userAddressObj.state_name}}" name="state_name" id="state_name" class="form-control" placeholder="State">
+												<input type="text" value="{% if userAddressObj.state_name == 'Unknown' %}{% else %}{{userAddressObj.state_name}}{% endif %}" name="state_name" id="state_name" class="form-control" placeholder="State">
 											</div>
 											<div class="form-group col-md-4">
-												<input type="text" value="{{userAddressObj.zipcode}}" name="zipcode" id="zipcode" class="form-control" placeholder="Zip Code">
+												<input type="text" value="{% if userAddressObj.zipcode == 'Unknown' %}{% else %}{{userAddressObj.zipcode}}{% endif %}" name="zipcode" id="zipcode" class="form-control" placeholder="Zip Code">
 											</div>
 										</div>
 										

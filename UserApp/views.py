@@ -29,7 +29,9 @@ from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
 # Coming From Admin Model
 from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
      DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, WhitePaperPDFCMS, SocialMedialCMS,\
-     LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration
+     LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration,\
+     HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS,\
+    ToursContentTableCMS, RecreationContentTableCMS
 
 # from .models import UsersD as UsersDetail
 
@@ -57,13 +59,13 @@ def Test(request):
 
 
 def ShowGraph(req):
-    try:
-        coin_id, coin_price = SupplyCoinData20()
-    except Exception as e:
-        coin_id, coin_price = SupplyCoinData2140()
+    # try:
+    #     coin_id, coin_price = SupplyCoinData20()
+    # except Exception as e:
+    #     coin_id, coin_price = SupplyCoinData2140()
         
-    context = {'coin_id': coin_id, 'coin_price': coin_price}
-    # context = {'a': 1}
+    # context = {'coin_id': coin_id, 'coin_price': coin_price}
+    context = {'a': 1}
     return JsonResponse(context)
 
 
@@ -73,6 +75,7 @@ def hotel(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    HotelObj = HotelContentTableCMS.objects.get(uni_key=1)
 
     try:
         user_id = request.session['user_id']
@@ -80,7 +83,8 @@ def hotel(request):
     except:
         logged_in = False
 
-    context = {'logged_in':logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+    context = {'logged_in':logged_in, 'headerObj': headerObj, 'footerObj':footerObj, \
+        'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'HotelObj': HotelObj}
     return render(request, 'UserApp/hotels.html', context=context)
 
 
@@ -96,9 +100,10 @@ def travel(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    TravelObj = TravelsContentTableCMS.objects.get(uni_key=1)
 
     context = {'logged_in':logged_in,'headerObj': headerObj, 'footerObj':footerObj,\
-         'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+         'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'TravelObj': TravelObj}
     return render(request, 'UserApp/travels.html', context=context)
 
 
@@ -114,8 +119,10 @@ def food(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    FoodObj = FoodingContentTableCMS.objects.get(uni_key=1)
 
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj,\
+         'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'FoodObj': FoodObj}
     return render(request, 'UserApp/fooding.html', context=context)
 
 
@@ -131,8 +138,10 @@ def payment(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    PaymentObj = PaymentsContentTableCMS.objects.get(uni_key=1)
 
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, \
+        'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'PaymentObj': PaymentObj}
     return render(request, 'UserApp/payments.html', context=context)
 
 
@@ -147,8 +156,10 @@ def tour(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    TourObj = ToursContentTableCMS.objects.get(uni_key=1)
 
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj': CopyObj,\
+         'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'TourObj': TourObj}
     return render(request, 'UserApp/tour.html', context=context)
 
 
@@ -163,8 +174,10 @@ def recreation(request):
     CopyObj = CopyRightCMS.objects.get(uni_key=1)
     NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
     SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+    RecObj = RecreationContentTableCMS.objects.get(uni_key=1)
 
-    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj':CopyObj, 'NewsObj': NewsObj, 'SocialMObj':SocialMObj}
+    context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj':footerObj, 'CopyObj':CopyObj, \
+        'NewsObj': NewsObj, 'SocialMObj':SocialMObj, 'RecObj': RecObj}
     return render(request, 'UserApp/recreation.html', context=context)
 
 
@@ -230,10 +243,15 @@ def UserIndex(request):
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+
+        from datetime import date
+        today = date.today()
+        end_date = datetime.date(today.year, today.month, today.day)
+        UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
         
         context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
             'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj,\
-             'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+             'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UserReviewDataObj': UserReviewDataObj}
         return render(request, 'UserApp/index.html', context=context)
 
 
@@ -448,14 +466,20 @@ def CoinBuyCheckStatus(request):
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+
+        from datetime import date
+        today = date.today()
+        end_date = datetime.date(today.year, today.month, today.day)
+        UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
         
         context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
             'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj,\
-             'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
+             'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UserReviewDataObj': UserReviewDataObj}
         return render(request, 'UserApp/index.html', context=context)
 
-    except:
-         return UserIndex(request)
+    except Exception as e:
+        print("fddgdgdg", e)
+        return UserIndex(request)
 
 
 def CoinRequestControler(request):
@@ -674,7 +698,8 @@ def SubmitUserFeedBack(request):
     if request.method == 'GET':
         try:
             form_data = json.loads(request.GET.get('feedbackdata'))
-            print(form_data)
+            #print("form_data", form_data)
+
             feedback_obj = UserFeedbackTable(
             user_name=form_data['user_name'],
             user_mail = form_data['user_mail'],
@@ -684,7 +709,9 @@ def SubmitUserFeedBack(request):
             our_support = int(form_data['our_support']),
             satisfaction_level = int(form_data['satisfaction_level']),
             customer_service = int(form_data['score']),
-            description = form_data['description']
+            description = form_data['description'],
+            UserImg = form_data['UImgFeed'],
+            Time = datetime.datetime.now()
             )
             print(feedback_obj)
             feedback_obj.save()
@@ -834,7 +861,7 @@ def UserTermsConditions(req):
     logged_in = False
     headerObj = None
     try:
-        user_id = request.session['user_id']
+        user_id = req.session['user_id']
         logged_in = True
     except Exception as e:
         print(e)
@@ -855,7 +882,7 @@ def UserPolicy(req):
     logged_in = False
     headerObj = None
     try:
-        user_id = request.session['user_id']
+        user_id = req.session['user_id']
         logged_in = True
     except Exception as e:
         print(e)
@@ -887,4 +914,50 @@ def UserProfileImageChangeData(req):
 
         return UserProfileSettingPage(req)
     except:
+        return UserIndex(req)
+
+
+def UserAccountWitdrawlData(req):
+    from datetime import datetime  
+    from datetime import timedelta
+    try:
+        user_id = req.session['user_id']
+        coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
+        u_obj = UsersDetail.objects.get(email=user_id)
+        u_name = u_obj.first_name + " " + u_obj.last_name
+        no_of_coin_obj = UserAccountCoin.objects.get(email=user_id)
+        temp_val = no_of_coin_obj.no_of_coin
+        # Getting CoinPrice now
+        c_obj = CoinPrice.objects.get(id=1)
+        coin_price = c_obj.price_in_usd
+        noCoin = temp_val/coin_price
+
+        logged_in = True
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        CopyObj = CopyRightCMS.objects.get(uni_key=1)
+        NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
+        SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except:
+            UImgObj = False
+
+        try:
+            req_list = []
+            for i in coin_req_obj:
+                if i.approved == True:
+                    req_list.append(i.approved_date)
+
+            date_withdrawl = req_list[0] + timedelta(days=180)
+        except Exception as e:
+            print(e)
+            date_withdrawl = False
+
+        context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
+             'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
+             'SocialMObj': SocialMObj, 'UImgObj': UImgObj, 'date_withdrawl': date_withdrawl}
+        return render(req,'UserApp/UserWalletWithdrawl.html', context=context)
+    
+    except Exception as e:
+        print(e)
         return UserIndex(req)

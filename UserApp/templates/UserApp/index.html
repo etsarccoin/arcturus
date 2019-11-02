@@ -342,28 +342,29 @@
 				</div>
 			</div>			
 		</div>
+
+		<!-- User Review -->
 		<div class="col-lg-6 live-right-bg pad40T pad40B">
 			<div class="owl-carousel owl-theme live-slider pad40L pad40R">
+				{% for i in UserReviewDataObj %}
 				<div class="item">
 					<div class="image" align="center">
-						<img src="{% static 'UserApp/assets/img/user.jpg' %}" width="20px" alt=""/>
+						<img src="{{i.UserImg}}" width="20px" alt=""/>
 					</div>
-					<div class="text">I have and will continue to recommend you to anyone who<br>asks about a good cleaning service. You're the best!</div>
+					<div class="text">
+							{{i.user_name}} &nbsp;&nbsp; <small>{{i.Time}}</small>
+						</div>
+					<div class="text">
+						{{i.description}}
+					</div>
 					<div class="rating-warp pad30B">
-						<div class="rating-star" data-number="5" data-score="4"></div>
+						<div class="rating-star" data-number="5" data-score=" {{i.customer_service}}"></div>
 					</div>
 				</div>
-				<div class="item">
-					<div class="image" align="center">
-						<img src="{% static 'UserApp/assets/img/user.jpg' %}" width="20px" alt=""/>
-					</div>
-					<div class="text">I have and will continue to recommend you to anyone who<br>asks about a good cleaning service. You're the best!</div>
-					<div class="rating-warp pad30B">
-						<div class="rating-star" data-number="5" data-score="4"></div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
+
 	</div>
 </div>
 
