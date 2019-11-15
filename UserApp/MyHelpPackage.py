@@ -3,7 +3,7 @@ from smtplib import SMTPException
 from email.mime.text import MIMEText
 import secrets
 import string
-from .models import EmailVerifyCodes
+# from .models import EmailVerifyCodes
 import hashlib
 import socket
 import httpagentparser
@@ -167,3 +167,4 @@ def price():
     coinmarketcap = Market()
     y=coinmarketcap.ticker(start=0, limit=2, convert='USD')
     return {"btc":bitcoin_price,"eth":y["data"]["1027"]["quotes"]['USD']['price']}
+
