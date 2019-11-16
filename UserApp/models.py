@@ -9,11 +9,7 @@ class UsersDetail(models.Model):
     email = models.EmailField(primary_key=True, unique=True)
     active_user = models.BooleanField()
     created_at = models.DateTimeField()
-    # account_conf = models.DateTimeField()
-    # updated_at = models.DateTimeField()
-    # last_login_ip = models.GenericIPAddressField()
-    # last_login_browser = models.CharField(max_length=100)
-    # last_login_time = models.DateTimeField()
+    # refercode=models.CharField(max_length=8,blank=True)
     reference_id = models.CharField(max_length=65, unique=True)
     activation_link = models.CharField(max_length=300)
 
@@ -184,3 +180,21 @@ class ContactUSFormData(models.Model):
 
     def __str__(self):
         return self.mail
+# class referencecodeused(models.Model):
+#     mail=models.EmailField(blank=False)
+#     refer_code=models.CharField(blank=True,max_length=8)
+#     def __str__(self):
+#         return str(self.mail)+","+str(refer_code)
+# class referencecodemodel(models.Model):
+#     mail=models.EmailField()
+#     code=models.CharField(max_length=8)
+#     use=models.BigIntegerField()
+#     def __str__(self):
+#         return self.mail
+# class referencecalculation(models.Model):
+#     main_mail=models.EmailField(blank=True)
+#     mail1=models.EmailField(blank=True)
+#     mail2=models.EmailField(blank=True)
+#     mail3=models.EmailField(blank=True)
+#     def __str__(self):
+#         return str(self.main_mail)+","+str(self.mail1)+","+str(self.mail2)+","+str(self.mail3)

@@ -18,13 +18,14 @@ from django.http import FileResponse
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
      Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
      GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
-
+from .ref import randomString as  referencecode
 from .CoinPriceChecker import SupplyCoinData20, SupplyCoinData2140
 
 from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
     UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
     SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
-        ContactUSFormData, UserProfileData, UserFeedbackTable, UserProfileImage
+        ContactUSFormData, UserProfileData, UserFeedbackTable, UserProfileImage,
+        # referencecodemodel,referencecalculation,referencecodeused
 
 # Coming From Admin Model
 from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
@@ -32,7 +33,7 @@ from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgrou
      LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration,\
      HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS,\
     ToursContentTableCMS, RecreationContentTableCMS
-
+from .ref import randomString
 # from .models import UsersD as UsersDetail
 
 
@@ -206,6 +207,8 @@ def white12(request):
 def UserIndex(request):
     try:
         user_id = request.session['user_id']
+        referencecode=randomString()
+        # referencecodemodel.objects.create(mail=user_id,code=referencecode,use=3)
         logged_in = True
         u_obj = UsersDetail.objects.get(email=user_id)
         u_name = u_obj.first_name + " " + u_obj.last_name
@@ -225,12 +228,13 @@ def UserIndex(request):
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
         except:
             UImgObj = False
-
+        string=randomString()
         context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': noCoin, 'footerObj': footerObj, 'CopyObj': CopyObj,\
-            'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
+            'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"id":string}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
     except Exception as e:
+        print(">>>>>>",e)
         print("User Is LogOut !!")
         logged_in = False
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -271,6 +275,7 @@ def register(request):
             last_name = request.POST['lastName']
             email = request.POST['e_mail']
             password = request.POST['psw']
+            refer=request.POST['userrefercode']
 
             # last_login_hostpc = GetHostNamePC()
             # last_login_ip = GetIPLocationPC(request)
@@ -285,16 +290,20 @@ def register(request):
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                newu_obj = UsersDetail(first_name=first_name, last_name=last_name, email=email,active_user=False,created_at=now_time_date,reference_id=user_src_code,activation_link=base_url)
+                newu_obj = UsersDetail.objects.create(first_name=first_name, last_name=last_name, email=email,active_user=False,created_at=now_time_date,reference_id=user_src_code,activation_link=base_url)
                             # ph=0, fax="Unknown", country="Unknown", state="Unknown", zipcode="Unknown",
                             # active_user=active_user, created_at=created_at, account_conf=created_at,
                             # updated_at=created_at, last_login_hostpc=last_login_hostpc,
                             # last_login_ip=last_login_ip, last_login_browser=last_login_browser, 
                             # mac=mac, last_login_time=last_login_time, browser_history="Empty !!",reference_id=user_src_code)
                 newu_obj.save()
+                # user_refer_code=referencecodeused.objects.create
 
                 newu_cre_obj = UserCredintials(user_id=email, password=password)
                 newu_cre_obj.save()
+
+                # refer=referencecodemodel.objects.create(mail=user_id,code=referencecode(),use=3)
+                refe.save()
 
                 email_veri = EmailVerifyCodes.objects.create(user_email=email, user_src_code=user_src_code, code=num)
                 email_veri.save()
@@ -303,7 +312,6 @@ def register(request):
                            "[*NOTE: Don't share this code with anyone]" + "\n\n\n" + base_url + "confirmation/" + user_src_code + "-" + num + "/"
                 
                 SendMail(email, mail_body)
-
                 # Creating Notification
                 NotiTime = datetime.datetime.now()
                 RandNo = GenerateOnlyNumber()
