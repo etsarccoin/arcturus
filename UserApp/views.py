@@ -15,24 +15,15 @@ import httpagentparser
 import logging
 from django.http import FileResponse
 
-from .MyHelpPackage import Number_Generator, SendMail, HideMyData,\
-     Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,\
-     GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
+from .MyHelpPackage import Number_Generator, SendMail, HideMyData,Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
 from .ref import randomString as  referencecode
 from .CoinPriceChecker import SupplyCoinData20, SupplyCoinData2140
 
-from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, \
-    UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable, \
-    SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper, \
-        ContactUSFormData, UserProfileData, UserFeedbackTable, UserProfileImage,
+from .models import UsersDetail, EmailVerifyCodes, ForgetPasswordTable, UserAccountCoin, CoinRequest, UserWalletTableHistory, UserWalletTable,SubscriptionTable, CoinPrice, CoinPriceChangeHistory, UserCredintials, AdminWhitePaper,ContactUSFormData, UserProfileData, UserFeedbackTable, UserProfileImage
         # referencecodemodel,referencecalculation,referencecodeused
 
 # Coming From Admin Model
-from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,\
-     DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, WhitePaperPDFCMS, SocialMedialCMS,\
-     LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration,\
-     HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS,\
-    ToursContentTableCMS, RecreationContentTableCMS
+from AdminApp.models import FooterCMS, HeaderCMS, OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEUSCMS,DEVELOPMENTROADMAPCMS, AboutPageStepGuideTable, WhitePaperCMS, CopyRightCMS, WhitePaperPDFCMS, SocialMedialCMS,LatestNewsCMS, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration,HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS,ToursContentTableCMS, RecreationContentTableCMS
 from .ref import randomString
 # from .models import UsersD as UsersDetail
 
