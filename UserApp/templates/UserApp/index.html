@@ -46,6 +46,97 @@
   height: 300px;
 }
 </style>
+<style type="text/css">
+    #particles canvas{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    div.example {
+          padding: 50px;
+        }
+
+        @media (max-width: 1000px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 30%;
+            }
+                
+        }
+        @media (max-width: 900px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 45%;
+            }
+                
+        }
+        @media (max-width: 800px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 55%;
+            }
+                
+        }
+        @media (max-width: 700px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 65%;
+            }
+                
+        }
+        @media (max-width: 600px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 75%;
+            }
+                
+        }
+        @media (max-width: 500px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 85%;
+            }
+                
+        }
+        @media (max-width: 400px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 95%;
+            }
+                
+        }
+        @media (max-width: 300px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 105%;
+            }
+                
+        }
+        @media (max-width: 200px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 115%;
+            }
+                
+        }
+        @media (max-width: 100px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 125%;
+            }
+                
+        }
+        @media (max-width: 50px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 135%;
+            }
+                
+        }
+        @media (max-width: 25px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 145%;
+            }
+                
+        }
+        @media (max-width: 100px) { 
+                .embed-responsive-4by1.particle-back::before {
+                padding-top: 155%;
+            }
+                
+        }
+    }
+</style>
 </head>
 <body role="document">
 
@@ -132,14 +223,14 @@
 </div>
 	
 <!--Banner Slider-->
-<div class="container-fluid baner-bg2 pad40B">
+<div  class="container-fluid baner-bg2 pad40B example">
     <div class="row" style="position: relative;">
         <div class="embed-responsive embed-responsive-4by1 particle-back">
             <canvas class="particle embed-responsive-item"></canvas>
         </div>
         <div class="text-container">
             <div class="text-row">
-                <div class="text-top">{{headerObj.HeaderHeading|safe}}</div>
+                <div class="example">{{headerObj.HeaderHeading|safe}}</div>
                 <text class="text-bot">
 					{{headerObj.HeaderHeadingContent|safe}}
                 </text>
