@@ -11,6 +11,8 @@ class UsersDetail(models.Model):
     created_at = models.DateTimeField()
     # refercode=models.CharField(max_length=8,blank=True)
     reference_id = models.CharField(max_length=65, unique=True)
+    usedrefer=models.CharField(max_length=60)
+    refercode=models.CharField(max_length=60)
     activation_link = models.CharField(max_length=300)
 
     def __str__(self):

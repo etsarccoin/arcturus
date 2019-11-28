@@ -142,11 +142,63 @@ def CoinRequestApprove(request, slug):
             obj = CoinRequest.objects.get(unique_id=slug_val)
             user_email = obj.user_mail
             no_coin_to_add = obj.no_coin
+            try:
+                userdata=UsersDetail.objects.get(email=user_email)
+                refercode1=userdata.usedrefer
+                #10%
+                try:
+                    userdata1=UsersDetail.objects.get(refercode=refercode1)
+                    if len(userdata1.usedrefer)!=0 or len(userdata1.usedrefer)!="0":
+                        user_email1=userdata1.email
+                        old_wallet_obj1 = UserAccountCoin.objects.get(email=user_email1)
+                        print("level1 ",old_wallet_obj1.no_of_coin)
+                        no_of_coin_now1 = old_wallet_obj1.no_of_coin
+                        updated_coin_no1 = float(no_of_coin_now1) + (float(no_coin_to_add)*0.10)
+                        old_wallet_obj1.no_of_coin = updated_coin_no1
+                        old_wallet_obj1.save()
+                        print("level1 ",old_wallet_obj1.no_of_coin)
+                except Exception as e:
+                    print("error from 10%",e)
+                    pass
+                print("refercode 3")
+                #5%
+                try:
+                    userdata2=UsersDetail.objects.get(refercode=userdata1.usedrefer)
+                    if len(userdata2.usedrefer)!=0 or len(userdata2.usedrefer)!="0":
+                        user_email2=userdata2.email
+                        old_wallet_obj2 = UserAccountCoin.objects.get(email=user_email2)
+                        print("level2 ",old_wallet_obj2.no_of_coin)
+                        no_of_coin_now2 = old_wallet_obj2.no_of_coin
+                        updated_coin_no2 = float(no_of_coin_now2) + (float(no_coin_to_add)*0.05)
+                        old_wallet_obj2.no_of_coin = updated_coin_no2
+                        old_wallet_obj2.save()
+                        print("level2 ",old_wallet_obj2.no_of_coin)
+                except Exception as e:
+                    print("error from 5%",e)
+                    pass
+                #3%
+                try:
+                    userdata3=UsersDetail.objects.get(refercode=userdata2.usedrefer)
+                    if len(userdata2.usedrefer)!=0 or len(userdata2.usedrefer)!="0":
+                        user_email3=userdata3.email
+                        old_wallet_obj3 = UserAccountCoin.objects.get(email=user_email3)
+                        print("level3 ",old_wallet_obj3.no_of_coin)
+                        no_of_coin_now3 = old_wallet_obj3.no_of_coin
+                        updated_coin_no3 = float(no_of_coin_now3) + (float(no_coin_to_add)*0.03)
+                        old_wallet_obj3.no_of_coin = updated_coin_no3
+                        old_wallet_obj3.save()
+                        print("level3 ",old_wallet_obj3.no_of_coin)
+                except Exception as e:
+                    print("error from 3% ",e)
+                    pass
+            except Exception as e:
+                print("error geting refercode",e)
+                pass
 
             # Updating Wallet Blance
             old_wallet_obj = UserAccountCoin.objects.get(email=user_email)
             no_of_coin_now = old_wallet_obj.no_of_coin
-            updated_coin_no = no_of_coin_now + no_coin_to_add
+            updated_coin_no = float(no_of_coin_now) + float(no_coin_to_add)
             old_wallet_obj.no_of_coin = updated_coin_no
             old_wallet_obj.save()
             

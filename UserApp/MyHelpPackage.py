@@ -16,12 +16,16 @@ import urllib, json
 import requests as r
 from forex_python.converter import CurrencyRates
 from forex_python.bitcoin import BtcConverter
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 def SendMail(toaddr, message):
     fromaddr = "arcturuscoin@gmail.com"
     password = "arc@2019"
     toaddr = toaddr
     subject = 'Arcturus'
+    print("*"*60)
+    print("Hi i am from mailsend ",message)
     message = 'Subject: {}\n\n{}'.format(subject, message)
     # msg = MIMEText(u'message', 'html')
     
@@ -44,6 +48,7 @@ def SendMail(toaddr, message):
     #     s.quit()
     # except Exception as e:
     #     print("HI I AM FROM MAIL SEND ",e)
+
 
 
 def SendMailWithSubject(toaddr, subject, message):
