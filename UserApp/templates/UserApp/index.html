@@ -30,6 +30,8 @@
     
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'UserApp\assets\styles\bootstrap.min.css' %}" >
+<link rel="stylesheet" href="{% static 'UserApp\assets\styles\buttons1.css' %}"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
 <script type="text/javascript">
   window.onload = function() {
@@ -200,6 +202,9 @@
 					<a href="{% url 'UserLogin' %}" class="btn btn-navbar-brown">Login</a>
 					{% endif %}
 				</li>
+                <li class="nav-item mrg5A">
+                    <a href="{% url 'UserRegister' %}" class="btn btn-navbar-brown">Register</a>
+                </li>
                 <!--<li class="nav-item mrg5A">
                 	<a href="#" class="btn btn-navbar-brown">Get Quote</a>
                 </li>
@@ -223,18 +228,17 @@
 </div>
 	
 <!--Banner Slider-->
-<div  class="container-fluid baner-bg2 pad40B example">
+<div  class="container-fluid baner-bg2 pad40B ">
     <div class="row" style="position: relative;">
         <div class="embed-responsive embed-responsive-4by1 particle-back">
             <canvas class="particle embed-responsive-item"></canvas>
         </div>
-        <div class="text-container">
+            <div class="text-container">
             <div class="text-row">
-                <div class="example">{{headerObj.HeaderHeading|safe}}</div>
-                <text class="text-bot">
-					{{headerObj.HeaderHeadingContent|safe}}
-                </text>
+                <div class="text-top">{{headerObj.HeaderHeading|safe}}</div>
+                <text class="text-bot">{{headerObj.HeaderHeadingContent|safe}}</text>
             </div>
+        </div>
         </div>
     </div>
 </div>
@@ -554,7 +558,7 @@
 						</div>
         			</div>
         		</div>
-        		
+                           
         	</div>
         	
         </div>
@@ -583,7 +587,6 @@
 						<img src="{% static 'UserApp/assets/img/map-icon-01.png' %}" width="106" class="img-fluid" alt=""/>
 					</div>
 					<div class="map-text" align="center">
- 
 						<div class="top">{{roadmapObj.Heading1EditLabel|safe}}</div>
  
 						<a href="/more/" class="btn btn-navbar-brown">More</a>
@@ -694,8 +697,12 @@
         <div class="row align-items-center">
             <h3 class="border-heading-white mrg10B">EXCHANGE LINK</h3>
             <div class="col-md-12">
-            <a href="https://coinmarketdaddy.com/currencies/arcturus/" style="color:#000"><h4>CLick here for the wave coin on exchange.</h4> </a>
-            <!-- <script type="text/javascript" src="https://coinmarketdaddy.com/currency.js"></script><div class="coinmarketdaddy-currency-widget" data-currencyid="15940" data-base="INR" data-rating="true" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-supply="true" data-mode="light"></div> -->
+                <div class="col-lg-4 col-md-8 ">
+                    <a href= "https://coinmarketdaddy.com/currencies/arcturus/">
+                     <button type="button" formaction="" class="btn btn-warning btn-lg btn-radius"><img src="https://coinmarketdaddy.com/images/cmd_logo_site.png">Arcturus on coinmarketdaday portal</button></a>
+                    </form>
+                </div>
+              <!--   <script type="text/javascript" src="https://coinmarketdaddy.com/currency.js"></script><div class="coinmarketdaddy-currency-widget" data-currencyid="15940" data-base="INR" data-rating="true" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-supply="true" data-mode="light"></div> -->
 
             </div>
         </div>        

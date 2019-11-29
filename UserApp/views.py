@@ -467,18 +467,21 @@ def CoinRequestControler(request):
     try:
         user_id = request.session['user_id']
         no_coin = request.GET.get('no_coin')
-        total_amount = request.GET.get('total_amountw')
+        total_amount1 = request.GET.get('total_amountw')
 
         # Getting CoinPrice now
         c_obj = CoinPrice.objects.get(id=1)
         coin_price = c_obj.price_in_usd
-        
+        no_coin=float(total_amount1)
         unique_id = Big_Number_Generator()
-        
+        print("*"*60)
+        print(total_amount1)
+        print(float(coin_price)*float(total_amount1))
         # Inserting Coin Into DB
+        # total_amount=float(coin_price)*float(total_amount1)
         req_date = datetime.datetime.now()
         approved_date = req_date
-        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=total_amount, approved=False, reject=False, req_date=req_date, approved_date=approved_date)
+        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date)
         s.save()
 
         data =  {'is_taken': 1}
@@ -500,7 +503,7 @@ def CoinValueCalculate(request):
         c_type = request.GET.get('c_type')
         c_obj = CoinPrice.objects.get(id=1).price_in_usd
         print("c_val",a,"c_type",c_type,"c_obj",c_obj)
-        no_coin = arcturus_cal(money=a,bonus=50,c_type=c_type,arcturus_rate=float(c_obj))['no_of_arcturus']
+        no_coin = arcturus_cal(money=a,c_type=c_type,arcturus_rate=float(c_obj))['no_of_arcturus']
         is_taken = 1
     except Exception as e:
         print("CoinValueCalculate >> ", e)

@@ -149,7 +149,7 @@ def arcturus_cal(money,arcturus_rate,c_type,bonus=0):
     print(c_type)
     if c_type=="USD":
         if int(money)>=100:
-            usd=float(money)+(float(money)*(bonus/100))
+            usd=float(money)
             no_of_btc=b.convert_to_btc(usd,'USD')
             return {"no_of_arcturus":float(usd)/float(arcturus_rate)}
         else:
@@ -157,7 +157,7 @@ def arcturus_cal(money,arcturus_rate,c_type,bonus=0):
     elif c_type.upper()=="BTC":
         usd=b.convert_btc_to_cur(float(money), 'USD')
         if int(usd)>=100:
-            usd=float(usd)+(float(usd)*(bonus/100))
+            usd=float(usd)
             return {"no_of_arcturus":float(usd)/float(arcturus_rate)}
         else:
             return {"no_of_arcturus":"Minimum transaction should be more then 100 usd"}

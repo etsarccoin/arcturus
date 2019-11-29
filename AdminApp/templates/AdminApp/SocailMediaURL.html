@@ -488,6 +488,11 @@
 										<input type="text" value="{{SocalMediaObj.linkedin}}" class="form-control" id="linkin_id" name="linkin_id" placeholder="LinkedIn URL">
 									</div>
 									<div class="form-group"><button type="submit" id="linkin_sub" onclick="sociallinkupdate4()">Submit</button></div>
+									<div class="form-group">
+										<label>YouTube Video</label>
+										<input type="text" value="{{SocalMediaObj.youtube}}" class="form-control" id="youtubelink" name="youtubelink" placeholder="youtubelink URL">
+									</div>
+									<div class="form-group"><button type="submit" id="youtubelink_sub" onclick="sociallinkupdate5()">Submit</button></div>
 								
 							</div>
 
@@ -682,6 +687,37 @@
 					  if (submitted == true)
 					  {
 						alert("LinkedIN Link Updated Successfully !!");
+					  }
+					  else
+					  {
+						alert("Try Again !!");
+					  }
+				   },
+		error: function ()
+		{
+		 notify('Something went wrong');
+		 }
+	});
+	}
+	</script>
+    <script type="text/javascript">
+	function sociallinkupdate5()
+		{
+		$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				url: '/user-admin/social-link/update/',
+				async: true,
+				data: {
+					linkin_id: $('#youtubelink_sub').val(),
+					mval: 5,
+				   },
+				success: function (response)
+					{
+					  let submitted = response['submitted'];
+					  if (submitted == true)
+					  {
+						alert("Youtube Video Updated Successfully !!");
 					  }
 					  else
 					  {

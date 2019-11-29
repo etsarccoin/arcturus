@@ -346,6 +346,7 @@ class SocialMedialCMS(models.Model):
     twitter_link = models.TextField()
     googleplus = models.TextField()
     linkedin = models.TextField()
+    youtube=models.TextField(null=True)
 
 
 class TermsAndConditionCMS(models.Model):

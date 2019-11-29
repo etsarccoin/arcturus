@@ -179,7 +179,7 @@ def CoinRequestApprove(request, slug):
                 #3%
                 try:
                     userdata3=UsersDetail.objects.get(refercode=userdata2.usedrefer)
-                    if len(userdata2.usedrefer)!=0 or len(userdata2.usedrefer)!="0":
+                    if len(userdata3.usedrefer)!=0 or len(userdata3.usedrefer)!="0":
                         user_email3=userdata3.email
                         old_wallet_obj3 = UserAccountCoin.objects.get(email=user_email3)
                         print("level3 ",old_wallet_obj3.no_of_coin)
@@ -592,6 +592,8 @@ def SocialURLUpdate(request):
         admin_id = request.session['admin_id']
         m_val = request.GET.get('mval')
         m_val = int(m_val)
+        obj = SocialMedialCMS.objects.get(social_uni_key=1)
+        print(obj.youtube)
         if m_val == 1:
             fb_id = request.GET.get('fb_id')
             obj = SocialMedialCMS.objects.get(social_uni_key=1)
@@ -619,6 +621,12 @@ def SocialURLUpdate(request):
             obj.linkedin = linkin_id
             obj.save()
             submitted = True
+        elif m_val == 5:
+            youtube = request.GET.get('youtube')
+            obj = SocialMedialCMS.objects.get(social_uni_key=1)
+            obj.youtube = youtube
+            obj.save()
+            submitted = True
 
         else:
             pass
@@ -627,6 +635,7 @@ def SocialURLUpdate(request):
         return JsonResponse(data)
 
     except Exception as e:
+        print(e)
         data = {'submitted': submitted}
         return JsonResponse(data)
 
