@@ -67,7 +67,6 @@ class ForgetPasswordTable(models.Model):
 class UserAccountCoin(models.Model):
     email = models.EmailField(primary_key=True)
     no_of_coin = models.FloatField()
-
     def __str__(self):
         return self.email
 
@@ -84,6 +83,7 @@ class CoinRequest(models.Model):
     reject = models.BooleanField(default=False)
     req_date = models.DateTimeField()
     approved_date = models.DateTimeField()
+    request_type=models.CharField(max_length=20)
 
     def __str__(self):
         return self.unique_id
@@ -98,6 +98,9 @@ class UserWalletTableHistory(models.Model):
     buy_date = models.DateTimeField()
     coin_price = models.FloatField()
     total_amount = models.FloatField()
+    refcoin=models.FloatField()
+    # get_date=models.DateTimeField()
+    got_refered_from=models.CharField(max_length=40,blank=True)
 
     def __str__(self):
         return self.email

@@ -481,7 +481,8 @@ def CoinRequestControler(request):
         # total_amount=float(coin_price)*float(total_amount1)
         req_date = datetime.datetime.now()
         approved_date = req_date
-        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date)
+        request_type="m"
+        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
         s.save()
 
         data =  {'is_taken': 1}

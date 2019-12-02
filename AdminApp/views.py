@@ -14,7 +14,7 @@ from .models import OURSERVICECMS1, ReviewBackgroundCMS1, ABOUTUSCMS, WHYCHOOSEU
     HotelContentTableCMS, TravelsContentTableCMS, FoodingContentTableCMS, PaymentsContentTableCMS, ToursContentTableCMS, RecreationContentTableCMS
 
 from .models import AdminProfileData, AdminToDoListTable, TermsAndConditionCMS, PolicyCMS, NotificationForNewUserRegistration
-
+from UserApp.MyHelpPackage import *
 import datetime
 from datetime import date
 
@@ -138,7 +138,8 @@ def CoinRequestApprove(request, slug):
             obj1.approved_date = approved_date
             obj1.approved = True
             obj1.save()
-
+            c_obj = CoinPrice.objects.get(id=1)
+            coin_price = c_obj.price_in_usd
             obj = CoinRequest.objects.get(unique_id=slug_val)
             user_email = obj.user_mail
             no_coin_to_add = obj.no_coin
@@ -156,6 +157,20 @@ def CoinRequestApprove(request, slug):
                         updated_coin_no1 = float(no_of_coin_now1) + (float(no_coin_to_add)*0.10)
                         old_wallet_obj1.no_of_coin = updated_coin_no1
                         old_wallet_obj1.save()
+                        ##############################################################
+                        unique_id =Big_Number_Generator()
+                        user_mail = user_email1
+                        coin_price = coin_price
+                        no_coin = updated_coin_no1
+                        total_amount = float(updated_coin_no1)*float(coin_price)
+                        approved = True
+                        reject = False
+                        req_date = datetime.datetime.now()
+                        approved_date = datetime.datetime.now()
+                        request_type="r"
+                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
+                        s.save()
+                        ###############################################################
                         print("level1 ",old_wallet_obj1.no_of_coin)
                 except Exception as e:
                     print("error from 10%",e)
@@ -172,6 +187,20 @@ def CoinRequestApprove(request, slug):
                         updated_coin_no2 = float(no_of_coin_now2) + (float(no_coin_to_add)*0.05)
                         old_wallet_obj2.no_of_coin = updated_coin_no2
                         old_wallet_obj2.save()
+                        ##############################################################
+                        unique_id =Big_Number_Generator()
+                        user_mail = user_email2
+                        coin_price = coin_price
+                        no_coin = updated_coin_no1
+                        total_amount = float(updated_coin_no1)*float(coin_price)
+                        approved = True
+                        reject = False
+                        req_date = datetime.datetime.now()
+                        approved_date = datetime.datetime.now()
+                        request_type="r"
+                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
+                        s.save()
+                        ###############################################################
                         print("level2 ",old_wallet_obj2.no_of_coin)
                 except Exception as e:
                     print("error from 5%",e)
@@ -187,9 +216,53 @@ def CoinRequestApprove(request, slug):
                         updated_coin_no3 = float(no_of_coin_now3) + (float(no_coin_to_add)*0.03)
                         old_wallet_obj3.no_of_coin = updated_coin_no3
                         old_wallet_obj3.save()
+                        ##############################################################
+                        unique_id =Big_Number_Generator()
+                        user_mail = user_email3
+                        coin_price = coin_price
+                        no_coin = updated_coin_no1
+                        total_amount = float(updated_coin_no1)*float(coin_price)
+                        approved = True
+                        reject = False
+                        req_date = datetime.datetime.now()
+                        approved_date = datetime.datetime.now()
+                        request_type="r"
+                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
+                        s.save()
+                        ###############################################################
                         print("level3 ",old_wallet_obj3.no_of_coin)
                 except Exception as e:
                     print("error from 3% ",e)
+                    pass
+                #2%
+                try:
+                    userdata4=UsersDetail.objects.get(refercode=userdata3.usedrefer)
+                    if len(userdata4.usedrefer)!=0 or len(userdata4.usedrefer)!="0":
+                        user_email4=userdata4.email
+                        old_wallet_obj4 = UserAccountCoin.objects.get(email=user_email4)
+                        print("level4 ",old_wallet_obj4.no_of_coin)
+                        no_of_coin_now4 = old_wallet_obj4.no_of_coin
+                        updated_coin_no4 = float(no_of_coin_now4) + (float(no_coin_to_add)*0.02)
+                        old_wallet_obj4.no_of_coin = updated_coin_no4
+                        old_wallet_obj4.save()
+                        print("level4 ",old_wallet_obj4.no_of_coin)
+                except Exception as e:
+                    print("error from 2% ",e)
+                    pass
+                #1%
+                try:
+                    userdata3=UsersDetail.objects.get(refercode=userdata4.usedrefer)
+                    if len(userdata5.usedrefer)!=0 or len(userdata5.usedrefer)!="0":
+                        user_email5=userdata5.email
+                        old_wallet_obj5 = UserAccountCoin.objects.get(email=user_email5)
+                        print("level3 ",old_wallet_obj5.no_of_coin)
+                        no_of_coin_now5 = old_wallet_obj5.no_of_coin
+                        updated_coin_no5 = float(no_of_coin_now5) + (float(no_coin_to_add)*0.01)
+                        old_wallet_obj5.no_of_coin = updated_coin_no5
+                        old_wallet_obj5.save()
+                        print("level5 ",old_wallet_obj5.no_of_coin)
+                except Exception as e:
+                    print("error from 1% ",e)
                     pass
             except Exception as e:
                 print("error geting refercode",e)
