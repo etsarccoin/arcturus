@@ -19,7 +19,7 @@ from forex_python.converter import CurrencyRates
 from forex_python.bitcoin import BtcConverter
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from .models import *
+# from .models import *
 
 def SendMail(toaddr, message):
     fromaddr = "arcturuscoin@gmail.com"
