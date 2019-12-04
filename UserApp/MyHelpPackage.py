@@ -14,10 +14,12 @@ from forex_python.bitcoin import BtcConverter
 from coinmarketcap import Market
 import urllib, json
 import requests as r
+import random
 from forex_python.converter import CurrencyRates
 from forex_python.bitcoin import BtcConverter
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from .models import *
 
 def SendMail(toaddr, message):
     fromaddr = "arcturuscoin@gmail.com"
@@ -104,6 +106,11 @@ def HideMyData(data):
     result = ''
     result = hashlib.sha256(data.encode())
     return result.hexdigest()
+
+def getotp():
+    x=random.randint(100000,999999)
+    SendMailWithSubject()
+    return 
 
 
 def GetHostNamePC():

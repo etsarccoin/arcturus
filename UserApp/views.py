@@ -210,7 +210,6 @@ def UserIndex(request):
         c_obj = CoinPrice.objects.get(id=1)
         coin_price = c_obj.price_in_usd
         noCoin = temp_val/coin_price
-
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
@@ -219,7 +218,7 @@ def UserIndex(request):
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
         except:
             UImgObj = False
-        context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': noCoin, 'footerObj': footerObj, 'CopyObj': CopyObj,\
+        context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': temp_val,"ammount":float(coin_price)*float(temp_val) ,'footerObj': footerObj, 'CopyObj': CopyObj,\
             'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"id":referencecode}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
@@ -474,15 +473,12 @@ def CoinRequestControler(request):
         coin_price = c_obj.price_in_usd
         no_coin=float(total_amount1)
         unique_id = Big_Number_Generator()
-        print("*"*60)
-        print(total_amount1)
-        print(float(coin_price)*float(total_amount1))
         # Inserting Coin Into DB
         # total_amount=float(coin_price)*float(total_amount1)
         req_date = datetime.datetime.now()
         approved_date = req_date
         request_type="m"
-        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
+        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type,refere=False,direct=True)
         s.save()
 
         data =  {'is_taken': 1}
@@ -778,7 +774,7 @@ def UserWalletPage(request):
         c_obj = CoinPrice.objects.get(id=1)
         coin_price = c_obj.price_in_usd
         noCoin = temp_val/coin_price
-
+        total_amount=temp_val*coin_price
         logged_in = True
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
@@ -790,8 +786,8 @@ def UserWalletPage(request):
             UImgObj = False
 
         context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
-             'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
-             'SocialMObj': SocialMObj, 'UImgObj': UImgObj}
+             'no_of_coin_obj': no_of_coin_obj , 'noCoin': temp_val, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
+             'SocialMObj': SocialMObj,'UImgObj': UImgObj,'total_amount':total_amount}
         return render(request,'UserApp/user-wallet.html', context=context)
     
     except Exception as e:
@@ -903,7 +899,8 @@ def UserProfileImageChangeData(req):
 
 
 def UserAccountWitdrawlData(req):
-    from datetime import datetime  
+    from datetime import datetime
+    from datetime import date  
     from datetime import timedelta
     try:
         user_id = req.session['user_id']
@@ -912,11 +909,15 @@ def UserAccountWitdrawlData(req):
         u_name = u_obj.first_name + " " + u_obj.last_name
         no_of_coin_obj = UserAccountCoin.objects.get(email=user_id)
         temp_val = no_of_coin_obj.no_of_coin
+        refer_coin=no_of_coin_obj.refercoin
         # Getting CoinPrice now
         c_obj = CoinPrice.objects.get(id=1)
         coin_price = c_obj.price_in_usd
-        noCoin = temp_val/coin_price
-
+        noCoin = temp_val
+        total_coin=float(temp_val)+float(refer_coin)
+        total_amount=coin_price*temp_val
+        print("*"*70)
+        print(total_amount)
         logged_in = True
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         CopyObj = CopyRightCMS.objects.get(uni_key=1)
@@ -933,14 +934,21 @@ def UserAccountWitdrawlData(req):
                 if i.approved == True:
                     req_list.append(i.approved_date)
 
-            date_withdrawl = req_list[0] + timedelta(days=180)
+            date_withdrawl = req_list[0] + timedelta(days=30)
+            if date.today() >=date_withdrawl.date():
+                coinwithdraw=float(noCoin)+float(refer_coin)
+            else:
+                coinwithdraw=(float(noCoin)/2)+float(refer_coin)
+            print("&"*60)
+            rest_coin=float(total_coin)-float(coinwithdraw)
+            print(total_coin,coinwithdraw,rest_coin)
         except Exception as e:
             print(e)
             date_withdrawl = False
 
         context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
              'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
-             'SocialMObj': SocialMObj, 'UImgObj': UImgObj, 'date_withdrawl': date_withdrawl}
+             'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"total_coin": total_coin,"rest_coin":rest_coin, 'date_withdrawl': date_withdrawl,'coin_withdrawable':coinwithdraw,"total_amount":total_amount}
         return render(req,'UserApp/UserWalletWithdrawl.html', context=context)
     
     except Exception as e:

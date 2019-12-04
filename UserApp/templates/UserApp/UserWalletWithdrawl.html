@@ -31,7 +31,54 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-	
+    <style type="text/css">
+	       .new-login-area{
+			  padding:24px;
+			}
+			h3 {
+			  font-size: 24px;
+			  line-height: 30px;
+			}
+			label {
+			  font-size: 12px;
+			}
+			.request-otp-header {
+			  margin: 40px 0px;
+			}
+			.login-label label {
+			  color: #c74032;
+			  font-weight: 600;
+			}
+			.input-edit {
+			  border: none !important;
+			  border-bottom: 2px solid #ccc !important;
+			  padding: 6px 0px;
+			  opacity: 0.8;
+			}
+			.input-edit:focus {
+			  border-bottom-color: #c74032 !important;
+			  box-shadow: none;
+			  outline: 0;
+			}
+
+			.request-otp {
+			  margin-top: 40px;
+			  background: linear-gradient(#c74032, #91041b);
+			  font-size: 14px;
+			  color: #fff;
+			}
+			.request-otp:focus {
+			  box-shadow: none;
+			}
+			.fa-chevron-left {
+			  cursor: pointer;
+			}
+			.resend-otp{
+			  margin-top:6px;
+			  cursor:pointer;
+			}
+
+	</style>
 </head>
 
 <body role="document">
@@ -175,7 +222,7 @@
 											<div class="col">
 												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
 											</div>
-											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
+											<div class="col">{{total_amount}}</div>
 										</div>
 									</div>
 								</div>	
@@ -246,18 +293,19 @@
 									<div class="body">
 										<div class="row align-items-center">
 											<strong>
-													&nbsp; &nbsp;   Withdraw can only be Performed after 6 Months From the Date of 1st Investment.<br><br>
-													&nbsp; &nbsp; 	Withdraw could only be done as 25% of the total coin. If a user is withdrawing after 1 year then he can withdraw 50%. Similarly, after 1.5 years 75% and after 2 years 100%.
+													&nbsp; &nbsp;You Can withdraw 50% of insted and 50% after 1 month <br><br>
+													&nbsp; &nbsp; Coin From Reference you can get right now. 	
 													<br>
 											</strong> 
 										</div>
 									</div>
+
 									
 									<div class="body">
 										<div class="row align-items-center">
 											<strong>
 													&nbsp; &nbsp;   
-													<h2 style="padding-left: 20px;">You Can Withdrawl Your Coin On or After : &nbsp; {% if not date_withdrawl %}You Not Invested Anything Yet{% else %}{{date_withdrawl}}{% endif %}</h2>
+													<h2 style="padding-left: 20px;"> &nbsp; {% if not date_withdrawl %}You Not Invested Anything Yet{% else %} Total amount of coin {{total_coin}}... you Can Withdraw {{coin_withdrawable}} Right now and {{rest_coin}} on  {{date_withdrawl}}{% endif %}</h2>
 													<br>
 											</strong> 
 										</div>
@@ -270,7 +318,123 @@
 					</div>
 				</div>
 			</div>
-		
+			<div class="row pad20T pad20B">
+				<div class="col">
+					<div class="card upload-card pad0T pad0B">
+						<div class="row">
+							
+							<div class="col-lg-12 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header">
+										<div class="row align-items-center">
+											<div class="col">
+												WITHDRAW
+											</div>
+										</div>
+									</div>
+									<div class="container-fluid pad40T pad40B">
+										<div class="container">
+											<div class="row justify-content-center">
+												<div class=" col-lg-8 col-md-10 col-sm-12">
+													<div class="signup-form">
+														<form method="post" action="{% url 'UserLogin' %}">
+																{% csrf_token %}
+															<div class="form-group">
+																	<!-- <div class="alertforemail" id="errormsg" style="display: none;">
+																		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+																		<div id="showmymsg"></div>
+																	</div> -->
+																	<input name="ammount" id="ammount" type="text" class="form-control" required="required" placeholder="Enter the number of coin">
+															</div>
+															<div class="form-group">
+																
+															</div>
+																<div class="container new-login-area">
+															    <div id='sign-in' class='login-setup-section'>
+															        <button type="button" class="btn btn-default btn-lg btn-block request-otp" id='request-otp'>Get OTP</button>
+															    </div>
+															    <div id='verify-otp' class="login-setup-section">
+															        <i class="fa" aria-hidden="false"></i>
+															        <div class="form-group login-label">
+															            <input type="number" class="form-control input-edit" placeholder='Enter OTP' id="number">
+															        </div>
+															        <button type="button" class="btn btn-default btn-lg btn-block request-otp ">submit</button>
+															    </div>
+															</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row pad20T pad20B">
+				<div class="col">
+					<div class="card upload-card pad0T pad0B">
+						<div class="row">
+							
+							<div class="col-lg-12 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header">
+										<div class="row align-items-center">
+											<div class="col">
+												WITHDRAW
+											</div>
+										</div>
+									</div>
+									<div class="container-fluid pad40T pad40B">
+										<div class="container">
+											<div class="row justify-content-center">
+												<div class=" col-lg-8 col-md-10 col-sm-12">
+													<div class="signup-form">
+														<form method="post" action="{% url 'UserLogin' %}">
+																{% csrf_token %}
+															<div class="form-group">
+																	<!-- <div class="alertforemail" id="errormsg" style="display: none;">
+																		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+																		<div id="showmymsg"></div>
+																	</div> -->
+																	<input name="ammount" id="ammount" type="text" class="form-control" required="required" placeholder="Enter the number of coin">
+															</div>
+															<div class="form-group">
+																
+															</div>
+															<div class="form-group">
+																<input name="toaddress" id="toaddress" type="text" class="form-control" placeholder="To Address" required="required">
+															</div>
+																<div class="container new-login-area">
+															    <div id='sign-in1' class='login-setup-section'>
+															        <button type="button" class="btn btn-default btn-lg btn-block request-otp" id='request-otp1'>Get OTP</button>
+															    </div>
+															    <div id='verify-otp1' class="login-setup-section">
+															        <i class="fa" aria-hidden="false"></i>
+															        <div class="form-group login-label">
+															            <input type="number" class="form-control input-edit" placeholder='Enter OTP' id="number">
+															        </div>
+															        <button type="button" class="btn btn-default btn-lg btn-block request-otp ">submit</button>
+															    </div>
+															</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>		
 		
 		<div class="row pad20T pad20B">
 			<div class="col">
@@ -292,6 +456,51 @@
 								</thead>
 								<tbody>
 										{% for i in coin_req_obj %}
+										{%if i.direct%}
+									<tr>
+										 <td>
+										  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+										  	<span> Arcturus</span>
+										  </td>
+										  <td>{{i.unique_id}}</td>
+										  <td>{{i.coin_price}}</td>
+										  <td>{{i.no_coin}}</td>
+										  <td>{{i.total_amount}}</td>
+										  <td>{{i.req_date}}</td>
+										  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
+										  <td>{{i.request_type}}</td>
+									</tr>
+									{%endif%}
+									{% endfor %}
+									
+								</tbody>
+							</table>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col profile-info">
+							<div class="table-header">Wallet Operation</div>
+							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="profile-table">
+								<thead>
+									<tr>
+										<th>Refrence got from</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>Refered date</th>
+										<th>refered data</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in coin_req_obj %}
+										{%if i.refere%}
 									<tr>
 									  <td>
 									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
@@ -304,9 +513,11 @@
 									  <td>{{i.req_date}}</td>
 									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
 									</tr>
+									{%endif%}
 									{% endfor %}
 									
 								</tbody>
+							</table>
 							</table>
 						</div>						
 					</div>
@@ -461,6 +672,28 @@
 		});
 	});
 </script> 
+<script type="text/javascript">
+	$('#verify-otp').hide();
+	$('#request-otp').on('click',function(){
+	  $('#sign-in').hide();
+	  $('#verify-otp').show();
+	});
+	$('.fa-chevron-left').on('click',function(){
+	  $('#sign-in').show();
+	  $('#verify-otp').hide();
+	});
+</script>
+<script type="text/javascript">
+	$('#verify-otp1').hide();
+	$('#request-otp1').on('click',function(){
+	  $('#sign-in1').hide();
+	  $('#verify-otp1').show();
+	});
+	$('.fa-chevron-left').on('click',function(){
+	  $('#sign-in1').show();
+	  $('#verify-otp1').hide();
+	});
+</script>
 
 <script type="text/javascript">
 	function SubcriberFunction()

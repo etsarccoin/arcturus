@@ -175,7 +175,7 @@
 											<div class="col">
 												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
 											</div>
-											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
+											<div class="col">{{total_amount}}</div>
 										</div>
 									</div>
 								</div>	
@@ -246,10 +246,15 @@
 										<th>Total Amount</th>
 										<th>Request Date</th>
 										<th>Status</th>
+										<th>type</th>
 									</tr>
 								</thead>
+								<div>
+									{{i.direct}}
+								</div>
 								<tbody>
 										{% for i in coin_req_obj %}
+										{%if i.direct%}
 									<tr>
 									  <td>
 									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
@@ -261,7 +266,9 @@
 									  <td>{{i.total_amount}}</td>
 									  <td>{{i.req_date}}</td>
 									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
+									  <td>{{i.request_type}}</td>
 									</tr>
+									{%endif%}
 									{% endfor %}
 									
 								</tbody>
@@ -291,6 +298,7 @@
 								</thead>
 								<tbody>
 										{% for i in coin_req_obj %}
+										{% if i.refere %}
 									<tr>
 									  <td>
 									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
@@ -298,11 +306,12 @@
 									  </td>
 									  <td>{{i.unique_id}}</td>
 									  <td>{{i.coin_price}}</td>
-									  <td>{{i.no_coin}}</td>
+									  <td>{{i.refercoin}}</td>
 									  <td>{{i.total_amount}}</td>
 									  <td>{{i.req_date}}</td>
 									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
 									</tr>
+									{% endif %}
 									{% endfor %}
 									
 								</tbody>

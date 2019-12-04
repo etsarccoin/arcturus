@@ -152,24 +152,27 @@ def CoinRequestApprove(request, slug):
                     if len(userdata1.usedrefer)!=0 or len(userdata1.usedrefer)!="0":
                         user_email1=userdata1.email
                         old_wallet_obj1 = UserAccountCoin.objects.get(email=user_email1)
-                        print("level1 ",old_wallet_obj1.no_of_coin)
-                        no_of_coin_now1 = old_wallet_obj1.no_of_coin
+                        print("level1 ",old_wallet_obj1.refercoin)
+                        no_of_coin_now1 = old_wallet_obj1.refercoin
                         updated_coin_no1 = float(no_of_coin_now1) + (float(no_coin_to_add)*0.10)
-                        old_wallet_obj1.no_of_coin = updated_coin_no1
+                        old_wallet_obj1.refercoin = updated_coin_no1
                         old_wallet_obj1.save()
                         ##############################################################
-                        unique_id =Big_Number_Generator()
-                        user_mail = user_email1
-                        coin_price = coin_price
-                        no_coin = updated_coin_no1
-                        total_amount = float(updated_coin_no1)*float(coin_price)
-                        approved = True
-                        reject = False
-                        req_date = datetime.datetime.now()
-                        approved_date = datetime.datetime.now()
-                        request_type="r"
-                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
-                        s.save()
+                        try:
+                            unique_id1 =Big_Number_Generator()
+                            user_mail1 = user_email1
+                            coin_price1 = coin_price
+                            no_coin1 = float(no_coin_to_add)*0.10
+                            total_amount1 = float(updated_coin_no1)*float(coin_price)
+                            approved1 = True
+                            reject1 = False
+                            req_date1 = datetime.datetime.now()
+                            approved_date1 = datetime.datetime.now()
+                            request_type1="r"
+                            s = CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_mail1, coin_price=coin_price1, no_coin=no_coin1, total_amount=float(no_coin1)*float(coin_price), approved=True, reject=False, req_date=req_date1, approved_date=approved_date1,request_type=request_type1,refere=True,direct=False)
+                            s.save()
+                        except Exception as e:
+                            print("line no 175",e)
                         ###############################################################
                         print("level1 ",old_wallet_obj1.no_of_coin)
                 except Exception as e:
@@ -182,26 +185,29 @@ def CoinRequestApprove(request, slug):
                     if len(userdata2.usedrefer)!=0 or len(userdata2.usedrefer)!="0":
                         user_email2=userdata2.email
                         old_wallet_obj2 = UserAccountCoin.objects.get(email=user_email2)
-                        print("level2 ",old_wallet_obj2.no_of_coin)
-                        no_of_coin_now2 = old_wallet_obj2.no_of_coin
+                        print("level2 ",old_wallet_obj2.refercoin)
+                        no_of_coin_now2 = old_wallet_obj2.refercoin
                         updated_coin_no2 = float(no_of_coin_now2) + (float(no_coin_to_add)*0.05)
-                        old_wallet_obj2.no_of_coin = updated_coin_no2
+                        old_wallet_obj2.refercoin = updated_coin_no2
                         old_wallet_obj2.save()
                         ##############################################################
-                        unique_id =Big_Number_Generator()
-                        user_mail = user_email2
-                        coin_price = coin_price
-                        no_coin = updated_coin_no1
-                        total_amount = float(updated_coin_no1)*float(coin_price)
-                        approved = True
-                        reject = False
-                        req_date = datetime.datetime.now()
-                        approved_date = datetime.datetime.now()
-                        request_type="r"
-                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
-                        s.save()
+                        try:
+                            unique_id2 =Big_Number_Generator()
+                            user_mail2 = user_email2
+                            coin_price2 = coin_price
+                            no_coin2 = float(no_coin_to_add)*0.05
+                            total_amount2 = float(no_of_coin_now2)*float(coin_price)
+                            approved2 = True
+                            reject2 = False
+                            req_date2 = datetime.datetime.now()
+                            approved_date2 = datetime.datetime.now()
+                            request_type2="r"
+                            s = CoinRequest.objects.create(unique_id=unique_id2, user_mail=user_mail2, coin_price=coin_price2, no_coin=no_coin2, total_amount=float(no_coin2)*float(coin_price), approved=True, reject=False, req_date=req_date2, approved_date=approved_date2,request_type=request_type2,refere=True,direct=False)
+                            s.save()
+                        except Exception as e:
+                            print("line no 208",e)
                         ###############################################################
-                        print("level2 ",old_wallet_obj2.no_of_coin)
+                        print("level2 ",old_wallet_obj2.refercoin)
                 except Exception as e:
                     print("error from 5%",e)
                     pass
@@ -211,26 +217,26 @@ def CoinRequestApprove(request, slug):
                     if len(userdata3.usedrefer)!=0 or len(userdata3.usedrefer)!="0":
                         user_email3=userdata3.email
                         old_wallet_obj3 = UserAccountCoin.objects.get(email=user_email3)
-                        print("level3 ",old_wallet_obj3.no_of_coin)
-                        no_of_coin_now3 = old_wallet_obj3.no_of_coin
+                        print("level3 ",old_wallet_obj3.refercoin)
+                        no_of_coin_now3 = old_wallet_obj3.refercoin
                         updated_coin_no3 = float(no_of_coin_now3) + (float(no_coin_to_add)*0.03)
                         old_wallet_obj3.no_of_coin = updated_coin_no3
                         old_wallet_obj3.save()
                         ##############################################################
-                        unique_id =Big_Number_Generator()
-                        user_mail = user_email3
-                        coin_price = coin_price
-                        no_coin = updated_coin_no1
-                        total_amount = float(updated_coin_no1)*float(coin_price)
-                        approved = True
-                        reject = False
-                        req_date = datetime.datetime.now()
-                        approved_date = datetime.datetime.now()
-                        request_type="r"
-                        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type)
-                        s.save()
+                        try:
+                            unique_id3 =Big_Number_Generator()
+                            user_mail3 = user_email3
+                            coin_price3 = coin_price
+                            no_coin3 = float(no_coin_to_add)*0.03
+                            req_date3 = datetime.datetime.now()
+                            approved_date3 = datetime.datetime.now()
+                            request_type3="r"
+                            s = CoinRequest.objects.create(unique_id=unique_id3, user_mail=user_mail3, coin_price=coin_price3, no_coin=no_coin3, total_amount=float(no_coin3)*float(coin_price), approved=True, reject=False, req_date=req_date3, approved_date=approved_date3,request_type=request_type3,refere=True,direct=False)
+                            s.save()
+                        except Exception as e:
+                            print("line no 237",e)
                         ###############################################################
-                        print("level3 ",old_wallet_obj3.no_of_coin)
+                        print("level3 ",old_wallet_obj3.refercoin)
                 except Exception as e:
                     print("error from 3% ",e)
                     pass
@@ -240,27 +246,55 @@ def CoinRequestApprove(request, slug):
                     if len(userdata4.usedrefer)!=0 or len(userdata4.usedrefer)!="0":
                         user_email4=userdata4.email
                         old_wallet_obj4 = UserAccountCoin.objects.get(email=user_email4)
-                        print("level4 ",old_wallet_obj4.no_of_coin)
-                        no_of_coin_now4 = old_wallet_obj4.no_of_coin
+                        print("level4 ",old_wallet_obj4.refercoin)
+                        no_of_coin_now4 = old_wallet_obj4.refercoin
                         updated_coin_no4 = float(no_of_coin_now4) + (float(no_coin_to_add)*0.02)
-                        old_wallet_obj4.no_of_coin = updated_coin_no4
+                        old_wallet_obj4.refercoin = updated_coin_no4
                         old_wallet_obj4.save()
-                        print("level4 ",old_wallet_obj4.no_of_coin)
+                        ##############################################################
+                        try:
+                            unique_id4 =Big_Number_Generator()
+                            user_mail4 = user_email4
+                            coin_price4 = coin_price
+                            no_coin4 = float(no_coin_to_add)*0.02
+                            req_date4 = datetime.datetime.now()
+                            approved_date4 = datetime.datetime.now()
+                            request_type4="r"
+                            s = CoinRequest.objects.create(unique_id=unique_id4, user_mail=user_mail4, coin_price=coin_price4, no_coin=no_coin4, total_amount=float(coin_price)*float( no_coin4), approved=True, reject=False, req_date=req_date4, approved_date=approved_date4,request_type=request_type4,refere=True,direct=False)
+                            s.save()
+                        except Exception as e:
+                            print("line no 266",e)
+                        ###############################################################
+                        print("level4 ",old_wallet_obj4.refercoin)
                 except Exception as e:
                     print("error from 2% ",e)
                     pass
                 #1%
                 try:
-                    userdata3=UsersDetail.objects.get(refercode=userdata4.usedrefer)
+                    userdata5=UsersDetail.objects.get(refercode=userdata4.usedrefer)
                     if len(userdata5.usedrefer)!=0 or len(userdata5.usedrefer)!="0":
                         user_email5=userdata5.email
                         old_wallet_obj5 = UserAccountCoin.objects.get(email=user_email5)
-                        print("level3 ",old_wallet_obj5.no_of_coin)
-                        no_of_coin_now5 = old_wallet_obj5.no_of_coin
+                        print("level3 ",old_wallet_obj5.refercoin)
+                        no_of_coin_now5 = old_wallet_obj5.refercoin
                         updated_coin_no5 = float(no_of_coin_now5) + (float(no_coin_to_add)*0.01)
-                        old_wallet_obj5.no_of_coin = updated_coin_no5
+                        old_wallet_obj5.refercoin = updated_coin_no5
                         old_wallet_obj5.save()
-                        print("level5 ",old_wallet_obj5.no_of_coin)
+                        ##############################################################
+                        try:
+                            unique_id5 =Big_Number_Generator()
+                            user_mail5 = user_email5
+                            coin_price5 = coin_price
+                            no_coin5 = float(no_coin_to_add)*0.01
+                            req_date5 = datetime.datetime.now()
+                            approved_date5 = datetime.datetime.now()
+                            request_type5="r"
+                            s = CoinRequest.objects.create(unique_id=unique_id5, user_mail=user_mail5, coin_price=coin_price5, no_coin=no_coin5, total_amount=float(no_coin5)*float(coin_price), approved=True, reject=False, req_date=req_date5, approved_date=approved_date5,request_type=request_type5,refere=True,direct=False)
+                            s.save()
+                        except Exception as e:
+                            print("line no 295",e)
+                        ###############################################################
+                        print("level5 ",old_wallet_obj5.refercoin)
                 except Exception as e:
                     print("error from 1% ",e)
                     pass
@@ -1641,7 +1675,6 @@ def AdminViewUserProfileData(req, slug):
         CoinReqObj = CoinRequest.objects.all().filter(user_mail=UsersDetailObj.email)
         UserAccCoinObj = UserAccountCoin.objects.get(email=UsersDetailObj.email)
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
-
         context = {'UserAccCoinObj': UserAccCoinObj, 'UsersDetailObj': UsersDetailObj, 'UserProfileObj': UserProfileObj, 'CoinReqObj': CoinReqObj,\
              'AdminProfileObj': AdminProfileObj}
 
