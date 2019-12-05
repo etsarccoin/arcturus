@@ -40,7 +40,9 @@ urlpatterns = [
 
     path('user/Terms-Conditions/', views.UserTermsConditions, name="UserTermsConditionsurl"),
     path('user/Policy-View/', views.UserPolicy, name="Userpolicyurl"),
-
+    path('user/mailsend/',views.sendotp,name="sendotp"),
+    path('user/withdraw/',views.coinwithdraw,name="coinwithdraw"),
+    path('user/coinsend/',views.coinsend,name="coinsend"),
     # For Testing
     # path('kuntal/', views.Test, name="mytest"),
     path('graph/', views.ShowGraph, name="mytest"),

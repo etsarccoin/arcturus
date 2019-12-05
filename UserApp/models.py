@@ -14,6 +14,7 @@ class UsersDetail(models.Model):
     usedrefer=models.CharField(max_length=60)
     refercode=models.CharField(max_length=60)
     activation_link = models.CharField(max_length=300)
+    otp=models.FloatField()
 
     def __str__(self):
         return self.email
@@ -87,7 +88,9 @@ class CoinRequest(models.Model):
     request_type=models.CharField(max_length=20)
     refere=models.BooleanField(default=False)
     direct=models.BooleanField(default=False)
-
+    withdraw=models.BooleanField(default=False)
+    transfer=models.BooleanField(default=False)
+    source=models.CharField(max_length=200)
     def __str__(self):
         return self.unique_id
 

@@ -569,6 +569,88 @@
 					</div>
 				
             </section>
+            <section class="content"> 
+					<div class="col-md-13">
+                        <!-- Form Section -->
+                        <h3 align="center">Coin from transfer</h3>
+						<div class="box box-primary pad30T pad30L pad30R pad10B">
+							<table id="table-transfer" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Coin Name</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>Added Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in CoinReqObj %}
+										{%if i.transfer%}
+                                        <tr>
+                                            <td>
+                                                <img src="{% static 'AdminApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+                                                <span> Arcturus</span>
+                                            </td>
+                                            <td>{{i.unique_id}}</td>
+                                            <td>{{i.coin_price}}</td>
+                                            <td>{{i.no_coin}}</td>
+                                            <td>{{i.total_amount}}</td>
+                                            <td>{{i.req_date}}</td>
+                                            <td>{{i.source}}</td>
+                                        </tr>
+                                        {%endif%}
+										{% endfor %}
+								</tbody>
+                            </table> 
+                        </div>
+                        <br><br><br>
+					</div>
+				
+            </section>
+            <section class="content"> 
+					<div class="col-md-13">
+                        <!-- Form Section -->
+                        <h3 align="center">Coin from Withdraw</h3>
+						<div class="box box-primary pad30T pad30L pad30R pad10B">
+							<table id="table-withdraw" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Coin Name</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>Added Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in CoinReqObj %}
+										{%if i.withdraw%}
+                                        <tr>
+                                            <td>
+                                                <img src="{% static 'AdminApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+                                                <span> Arcturus</span>
+                                            </td>
+                                            <td>{{i.unique_id}}</td>
+                                            <td>{{i.coin_price}}</td>
+                                            <td>{{i.no_coin}}</td>
+                                            <td>{{i.total_amount}}</td>
+                                            <td>{{i.req_date}}</td>
+                                            <td>{{i.source}}</td>
+                                        </tr>
+                                        {%endif%}
+										{% endfor %}
+								</tbody>
+                            </table> 
+                        </div>
+                        <br><br><br>
+					</div>
+				
+            </section>
             </div>
 		</div>
     
@@ -641,6 +723,19 @@
 			"pagingType": "full_numbers",
 			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
 		});
+		var ref_table = $('#table-transfer').DataTable({
+			"order": [[ 0, "desc" ]],
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
+		});
+		var ref_table = $('#table-withdraw').DataTable({
+			"order": [[ 0, "desc" ]],
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
+		});
+
 
 	});
 

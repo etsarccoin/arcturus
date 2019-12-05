@@ -109,8 +109,7 @@ def HideMyData(data):
 
 def getotp():
     x=random.randint(100000,999999)
-    SendMailWithSubject()
-    return 
+    return x
 
 
 def GetHostNamePC():

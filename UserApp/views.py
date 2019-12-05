@@ -15,7 +15,9 @@ import httpagentparser
 import logging
 from django.http import FileResponse
 
-from .MyHelpPackage import Number_Generator, SendMail, HideMyData,Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,GetMacAddress, GenerateOnlyNumber, arcturus_cal, price
+from datetime import date  
+
+from .MyHelpPackage import Number_Generator, SendMail, HideMyData,Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,GetMacAddress, GenerateOnlyNumber, arcturus_cal, price,getotp
 # from .ref import randomString as  referencecode
 from .CoinPriceChecker import SupplyCoinData20, SupplyCoinData2140
 
@@ -478,7 +480,8 @@ def CoinRequestControler(request):
         req_date = datetime.datetime.now()
         approved_date = req_date
         request_type="m"
-        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type,refere=False,direct=True)
+        source="Money"
+        s = CoinRequest(unique_id=unique_id, user_mail=user_id, coin_price=coin_price, no_coin=no_coin, total_amount=float(coin_price)*float(total_amount1), approved=False, reject=False, req_date=req_date, approved_date=approved_date,request_type=request_type,refere=False,direct=True,source=source)
         s.save()
 
         data =  {'is_taken': 1}
@@ -508,6 +511,158 @@ def CoinValueCalculate(request):
     data = {'is_taken': is_taken, 'no_coin': no_coin}
     return JsonResponse(data)
 
+
+def sendotp(request):
+    is_taken=0
+    try:
+        user_id = request.session['user_id']
+        u_obj = UsersDetail.objects.get(email=user_id)
+        first_name=u_obj.first_name
+        otp=getotp()
+        mail_body = "Hi "+first_name+" , Your otp is "+str(otp)
+        SendMail(user_id, mail_body)
+        u_obj.otp=otp
+        u_obj.save()
+        is_taken=1
+        status="Please check your Mail"
+        print("Mail send done")
+        respo={"is_taken":is_taken,"status":status}
+    except Exception as e:
+        print("Error from otpsend",e)
+        # respo={"is_taken":is_taken,"status":"Somting went wrong. Please try again after sometime or contact to yourcontact person"}
+        respo=respo={"is_taken":is_taken,"status":e}
+    return JsonResponse(respo)
+
+
+
+def coinwithdraw(request):
+    from datetime import datetime
+    from datetime import timedelta
+    try:
+        # import datetime
+        is_taken=0
+        user_id = request.session['user_id']
+        u_obj = UsersDetail.objects.get(email=user_id)
+        nocoin=UserAccountCoin.objects.get(email=user_id)
+        coinprice= CoinPrice.objects.get(id=1)
+        cprice=coinprice.price_in_usd
+        main=nocoin.no_of_coin
+        refer_coin=nocoin.refercoin
+        requestcoin=request.GET.get("ammount")
+        otp=request.GET.get("otp")
+        unique_id1 =Big_Number_Generator()
+        req_date1 =datetime.now()
+        approved_date1 = datetime.now()
+        coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
+        req_list = []
+        for i in coin_req_obj:
+            if i.approved == True:
+                req_list.append(i.approved_date)
+        date_withdrawl = req_list[0] + timedelta(days=30)
+
+        if date.today() >=date_withdrawl.date():
+                coinwithdraw=float(main)+float(refer_coin)
+        else:
+            coinwithdraw=(float(main)/2)+float(refer_coin)
+
+        if float(otp)==float(u_obj.otp):
+            if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
+                is_taken=1
+                source="withdraw"
+                s=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="w",refere=False,direct=False,withdraw=True,source=source)
+                s.save()
+                print(coinwithdraw)
+                print(otp)
+                data={"is_taken":is_taken,"status":"Withdraw request on process"}
+            else:
+                data={"is_taken":is_taken,"status":"not enough coin"}
+        else:
+            print("otp not matched ")
+            data={"is_taken":is_taken,"status":"otp not matched"}
+        
+    except Exception as e:
+        data={"is_taken":is_taken,"status":"Somting went wrong. Please try again after sometime or contact to yourcontact person"}
+        print("error form coinwithdraw",e)
+    return JsonResponse(data)
+
+
+def coinsend(request):
+    from datetime import datetime
+    from datetime import timedelta
+    import traceback
+    try:
+        # import datetime
+        import random
+        is_taken=0
+        user_id = request.session['user_id']
+        u_obj = UsersDetail.objects.get(email=user_id)
+        nocoin=UserAccountCoin.objects.get(email=user_id)
+        coinprice= CoinPrice.objects.get(id=1)
+        cprice=coinprice.price_in_usd
+        main=nocoin.no_of_coin
+        refer_coin=nocoin.refercoin
+        requestcoin=request.GET.get("ammount")
+        otp_send=request.GET.get("otp_send")
+        toadd=request.GET.get("toaddress")
+        toobj= UsersDetail.objects.get(reference_id=toadd)
+        tomail=toobj.email
+        unique_id1 =str(Big_Number_Generator())+str(random.randint(100,999))
+        req_date1 =datetime.now()
+        approved_date1 = datetime.now()
+        coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
+        req_list = []
+        for i in coin_req_obj:
+            if i.approved == True:
+                req_list.append(i.approved_date)
+        date_withdrawl = req_list[0] + timedelta(days=30)
+
+        if date.today() >=date_withdrawl.date():
+            coinwithdraw=float(main)+float(refer_coin)
+        else:
+            coinwithdraw=(float(main)/2)+float(refer_coin)
+        if float(otp_send)==float(u_obj.otp):
+            if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
+                print(tomail)
+                coinobj=UserAccountCoin.objects.get(email=tomail)
+                update_coin=float(coinobj.no_of_coin)+float(requestcoin)
+                print(update_coin)
+                coinobj.no_of_coin=update_coin
+                coinobj.save()
+                print(coinobj.no_of_coin)
+                source="Got "+str(requestcoin)+" coins from "+str(u_obj.reference_id)
+                s=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="ct",refere=False,direct=False,withdraw=False,transfer=True,source=source)
+                s.save()
+                if float(coinwithdraw)<float(requestcoin):
+                    coinobj1=UserAccountCoin.objects.get(email=user_id)
+                    update_coin=float(refer_coin)-(float(requestcoin)-float(coinobj1.no_of_coin))
+                    coinobj1.no_of_coin=update_coin
+                    coinobj1.save()
+                    # source="sent "+str(requestcoin)+" to "+str(toadd)
+                    # s1=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="ct",refere=False,direct=False,withdraw=False,transfer=True,source=source)
+                    # s.save()
+                else:
+                    coinobj1=UserAccountCoin.objects.get(email=user_id)
+                    update_coin=float(coinobj1.no_of_coin)-float(requestcoin)
+                    coinobj1.no_of_coin=update_coin
+                    coinobj1.save()
+                    # source="sent "+str(requestcoin)+" to "+str(toadd)
+                    # s1=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="ct",refere=False,direct=False,withdraw=False,transfer=True,source=source)
+                    # s.save()
+                is_taken=1
+                data={"is_taken":is_taken,"status":"Successfully sent {} to {} ".format(toadd,requestcoin)}
+            else:
+                data={"is_taken":is_taken,"status":"not enough coin"}
+        else:
+            print("otp not matched ")
+            data={"is_taken":is_taken,"status":"otp not matched"}
+        
+    except Exception as e:
+        data={"is_taken":is_taken,"status":e}
+        print("error form coinwirtrthdraw",e)
+        exc = e
+
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+    return JsonResponse(data)
 
 def EmailExist(request):
     mail = request.GET.get('mail')
