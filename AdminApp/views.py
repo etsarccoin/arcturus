@@ -700,7 +700,6 @@ def SocialURLUpdate(request):
         m_val = request.GET.get('mval')
         m_val = int(m_val)
         obj = SocialMedialCMS.objects.get(social_uni_key=1)
-        print(obj.youtube)
         if m_val == 1:
             fb_id = request.GET.get('fb_id')
             obj = SocialMedialCMS.objects.get(social_uni_key=1)
@@ -729,9 +728,11 @@ def SocialURLUpdate(request):
             obj.save()
             submitted = True
         elif m_val == 5:
-            youtube = request.GET.get('youtube')
+            youtube = request.GET.get('youtubelink')
+            youtubelink=youtube[youtube.find("=")+1:]
+            print(youtubelink)
             obj = SocialMedialCMS.objects.get(social_uni_key=1)
-            obj.youtube = youtube
+            obj.youtube = youtubelink
             obj.save()
             submitted = True
 

@@ -512,10 +512,20 @@ background-repeat:no-repeat;
         
         <div class="row pad40T pad40B">
         	<div class="col-lg-5 col-md-6 mrg30B order-md-7">
-        		<img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
-                <p>
-                <iframe width="500" height="480" src="https://www.youtube.com/embed/bB4qq73OzsY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </p>
+        		<div class="row">
+                    <div class="col">
+                        <img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col pad15T">
+                        <iframe  src="https://www.youtube.com/embed/{{SocialMObj.youtube|safe}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen  style="min-width: 100%;min-height: 280px"></iframe>
+                    </div>    
+                </div>
+                
+                <!-- <p>
+                
+                </p> -->
         	</div>
         	<div class="col-lg-7 col-md-6 mrg30B">
 				
