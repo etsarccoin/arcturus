@@ -9,12 +9,12 @@ class UsersDetail(models.Model):
     email = models.EmailField(primary_key=True, unique=True)
     active_user = models.BooleanField()
     created_at = models.DateTimeField()
-    # refercode=models.CharField(max_length=8,blank=True)
+    refercode=models.CharField(max_length=8,blank=True)
     reference_id = models.CharField(max_length=65, unique=True)
     usedrefer=models.CharField(max_length=60)
     refercode=models.CharField(max_length=60)
     activation_link = models.CharField(max_length=300)
-    otp=models.FloatField()
+    otp=models.FloatField(blank=True)
 
     def __str__(self):
         return self.email

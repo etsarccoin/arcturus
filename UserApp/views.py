@@ -198,6 +198,7 @@ def white12(request):
     
 # Home Page After Login
 def UserIndex(request):
+    import traceback
     try:
         user_id = request.session['user_id']
         # referencecode=randomString()
@@ -227,6 +228,10 @@ def UserIndex(request):
     except Exception as e:
         print(">>>>>>",e)
         print("User Is LogOut !!")
+        print("*"*60)
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -261,6 +266,11 @@ def register(request):
         return login(request)
 
     except Exception as e:
+        import traceback
+        print("*"*60)
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         if request.method == 'POST':
             first_name = request.POST['firstName']
             last_name = request.POST['lastName']
@@ -275,7 +285,7 @@ def register(request):
                 user_src_code = HideMyData(email)
                 num = Number_Generator()
 
-                newu_obj = UsersDetail.objects.create(first_name=first_name, last_name=last_name, email=email,active_user=False,created_at=now_time_date,reference_id=user_src_code,activation_link=base_url,usedrefer=refer,refercode=refercode)
+                newu_obj = UsersDetail.objects.create(first_name=first_name, last_name=last_name, email=email,active_user=False,created_at=now_time_date,reference_id=user_src_code,activation_link=base_url,usedrefer=refer,refercode=refercode,otp=909)
                 # user_refer_code=referencecodeused.objects.create
 
                 newu_cre_obj = UserCredintials(user_id=email, password=password)
