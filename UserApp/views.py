@@ -14,7 +14,7 @@ import socket
 import httpagentparser
 import logging
 from django.http import FileResponse
-
+import traceback
 from datetime import date  
 
 from .MyHelpPackage import Number_Generator, SendMail, HideMyData,Big_Number_Generator, GetHostNamePC, GetIPLocationPC, DetectBrowser,GetMacAddress, GenerateOnlyNumber, arcturus_cal, price,getotp
@@ -46,6 +46,9 @@ def Test(request):
     try:
         coin_id, coin_price = SupplyCoinData20()
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         coin_id, coin_price = SupplyCoinData2140()
 
     context = {'coin_id': coin_id, 'coin_price': coin_price}
@@ -74,7 +77,10 @@ def hotel(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     context = {'logged_in':logged_in, 'headerObj': headerObj, 'footerObj':footerObj, \
@@ -86,7 +92,10 @@ def travel(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -105,7 +114,10 @@ def food(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -124,7 +136,10 @@ def payment(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -143,7 +158,10 @@ def tour(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
     footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -161,7 +179,10 @@ def recreation(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
     footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -179,7 +200,10 @@ def white12(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
     guideObj = AboutPageStepGuideTable.objects.get(uni_key=1)
@@ -219,13 +243,19 @@ def UserIndex(request):
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         try:
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             UImgObj = False
         context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': temp_val,"ammount":float(coin_price)*float(temp_val) ,'footerObj': footerObj, 'CopyObj': CopyObj,\
             'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"id":referencecode}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(">>>>>>",e)
         print("User Is LogOut !!")
         print("*"*60)
@@ -321,6 +351,9 @@ def register(request):
                 return render(request, 'UserApp/login.html', context=context)
 
             except Exception as e:
+                exc = e
+                print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+                print("*"*60)
                 print(e)
                 msg = "Registation Not Successful !! Please Try Again !! "
 
@@ -379,7 +412,10 @@ def accountConfirmation(request, slug):
             context = {'msg': msg, 'chk': True, 'footerObj': footerObj}
             return render(request, 'UserApp/login.html', context=context)
 
-    except: 
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60) 
         msg = "User Not Registered Yet !!"
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         context = {'msg': msg, 'chk': False, 'footerObj': footerObj}
@@ -391,7 +427,10 @@ def login(request):
         user_id = request.session['user_id']
         return UserIndex(request)
     
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         if request.method == 'POST':
             user_id = request.POST['e_mail']
             user_psw = request.POST['pswd']
@@ -420,7 +459,10 @@ def login(request):
                     context = {'msg': msg, 'chk': True, 'footerObj': footerObj, 'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj}
                     return render(request, 'UserApp/login.html', context=context)
 
-            except:
+            except Exception as e:
+                exc = e
+                print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+                print("*"*60)
                 return register(request)
 
         else:
@@ -438,7 +480,10 @@ def logout(request):
     try:
         del request.session['user_id']
         return UserIndex(request)
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         return UserIndex(request)
 
 
@@ -447,7 +492,10 @@ def CoinBuyCheckStatus(request):
         try:
             user_id = request.session['user_id']
             logged_in = True
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             logged_in = False
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -471,6 +519,9 @@ def CoinBuyCheckStatus(request):
         return render(request, 'UserApp/index.html', context=context)
 
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print("fddgdgdg", e)
         return UserIndex(request)
 
@@ -498,6 +549,9 @@ def CoinRequestControler(request):
         return JsonResponse(data)
 
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print("CoinRequestControler", e)
         data =  {'is_taken': 0}
         return JsonResponse(data)
@@ -516,6 +570,9 @@ def CoinValueCalculate(request):
         no_coin = arcturus_cal(money=a,c_type=c_type,arcturus_rate=float(c_obj))['no_of_arcturus']
         is_taken = 1
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print("CoinValueCalculate >> ", e)
 
     data = {'is_taken': is_taken, 'no_coin': no_coin}
@@ -538,6 +595,9 @@ def sendotp(request):
         print("Mail send done")
         respo={"is_taken":is_taken,"status":status}
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print("Error from otpsend",e)
         # respo={"is_taken":is_taken,"status":"Somting went wrong. Please try again after sometime or contact to yourcontact person"}
         respo=respo={"is_taken":is_taken,"status":e}
@@ -578,6 +638,8 @@ def coinwithdraw(request):
         if float(otp)==float(u_obj.otp):
             if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
                 is_taken=1
+                u_obj.otp=909
+                u_obj.save()
                 source="withdraw"
                 s=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="w",refere=False,direct=False,withdraw=True,source=source)
                 s.save()
@@ -591,6 +653,9 @@ def coinwithdraw(request):
             data={"is_taken":is_taken,"status":"otp not matched"}
         
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         data={"is_taken":is_taken,"status":"Somting went wrong. Please try again after sometime or contact to yourcontact person"}
         print("error form coinwithdraw",e)
     return JsonResponse(data)
@@ -631,6 +696,8 @@ def coinsend(request):
         else:
             coinwithdraw=(float(main)/2)+float(refer_coin)
         if float(otp_send)==float(u_obj.otp):
+            u_obj.otp=909
+            u_obj.save()
             if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
                 print(tomail)
                 coinobj=UserAccountCoin.objects.get(email=tomail)
@@ -667,6 +734,7 @@ def coinsend(request):
             data={"is_taken":is_taken,"status":"otp not matched"}
         
     except Exception as e:
+
         data={"is_taken":is_taken,"status":e}
         print("error form coinwirtrthdraw",e)
         exc = e
@@ -686,7 +754,10 @@ def EmailExist(request):
             verified = 1
         else:
             verified = 0
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         is_taken = 0
         verified = 0
 
@@ -709,6 +780,9 @@ def SubscriptionReqest(request):
     
     except Exception as e:
         print(e)
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         data = {'submitted': False}
     
     return JsonResponse(data)
@@ -718,7 +792,10 @@ def about(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -740,7 +817,10 @@ def more(request):
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
     footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -761,6 +841,9 @@ def sucess(request):
         return render(request, 'UserApp/sucess.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
         context = {'logged_in': logged_in}
         return render(request, 'UserApp/sucess.html', context=context)
@@ -770,7 +853,10 @@ def service(request): #$$
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     headerObj = HeaderCMS.objects.get(header_uni_key=1)
@@ -793,7 +879,10 @@ def ContactControler(request): # #
     try:
         user_id = request.session['user_id']
         logged_in = True
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
 
     footerObj = FooterCMS.objects.get(footer_uni_key=1)
@@ -828,7 +917,10 @@ def UserFeedbackControler(request):
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
         try:
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             UImgObj = False
 
         context = {'logged_in': logged_in, 'u_mail': u_mail, 'u_name': u_name, 'UPObjPhone':UPObjPhone, 'footerObj': footerObj,\
@@ -836,6 +928,9 @@ def UserFeedbackControler(request):
         return render(request,'UserApp/user-feedback.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         return UserIndex(request)
 
 
@@ -865,6 +960,9 @@ def SubmitUserFeedBack(request):
             data = {'is_taken': 1}
             return JsonResponse(data)
         except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             print(e)
             data = {'is_taken': 2}
             return JsonResponse(data)
@@ -889,7 +987,10 @@ def UserProfileSettingPage(request):
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
         try:
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             UImgObj = False
 
         context = {'logged_in': logged_in, 'u_obj':u_obj, 'userAddressObj': userAddressObj, 'u_name': u_name, 'no_of_coin_obj': no_of_coin_obj,
@@ -897,6 +998,9 @@ def UserProfileSettingPage(request):
         return render(request,'UserApp/Edit-User-Profile.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         return UserIndex(request)
 
 
@@ -920,6 +1024,9 @@ def EditUserProfileDataControler(request):
         submitted = True
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(e)
         submitted = False
     
@@ -947,7 +1054,10 @@ def UserWalletPage(request):
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
         try:
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             UImgObj = False
 
         context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
@@ -956,6 +1066,9 @@ def UserWalletPage(request):
         return render(request,'UserApp/user-wallet.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         return UserIndex(request)
 
 
@@ -966,6 +1079,9 @@ def DownloadWhitePaper(req):
         return FileResponse(req, as_attachment=True, filename=obj.white_pdf.url)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print("Exception ---> ", e)
         return HttpResponse("PPP")
 
@@ -996,6 +1112,9 @@ def ContactUsFormDataControler(request):
                 is_okay = True
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(e)
         is_okay = False 
 
@@ -1010,6 +1129,9 @@ def UserTermsConditions(req):
         user_id = req.session['user_id']
         logged_in = True
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(e)
         logged_in = False
     
@@ -1017,7 +1139,10 @@ def UserTermsConditions(req):
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         TermsOnj = TermsAndConditionCMS.objects.get(uni_key=1)
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         headerObj, footerObj, guideObj, TermsOnj = None, None, None, None
     
     context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'TermsOnj': TermsOnj}
@@ -1032,13 +1157,19 @@ def UserPolicy(req):
         logged_in = True
     except Exception as e:
         print(e)
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         logged_in = False
     
     try:
         headerObj = HeaderCMS.objects.get(header_uni_key=1)
         footerObj = FooterCMS.objects.get(footer_uni_key=1)
         PolicyObj = PolicyCMS.objects.get(uni_key=1)
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         headerObj, footerObj, guideObj, PolicyObj = None, None, None, None
     
     context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'PolicyObj': PolicyObj}
@@ -1054,12 +1185,18 @@ def UserProfileImageChangeData(req):
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
             UImgObj.UImg = userImg
             UImgObj.save()
-        except:
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             UImgObj = UserProfileImage(user_mail=user_id,UImg=userImg)
             UImgObj.save()
 
         return UserProfileSettingPage(req)
-    except:
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         return UserIndex(req)
 
 
@@ -1089,25 +1226,38 @@ def UserAccountWitdrawlData(req):
         NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
         SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
         try:
+            print(user_id)
             UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-        except:
+        except Exception as e:
             UImgObj = False
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
+            
 
         try:
             req_list = []
             for i in coin_req_obj:
                 if i.approved == True:
                     req_list.append(i.approved_date)
-
-            date_withdrawl = req_list[0] + timedelta(days=30)
-            if date.today() >=date_withdrawl.date():
-                coinwithdraw=float(noCoin)+float(refer_coin)
-            else:
-                coinwithdraw=(float(noCoin)/2)+float(refer_coin)
+            print("date",req_list)
+            try:
+                date_withdrawl = req_list[0] + timedelta(days=30)
+                if date.today() >=date_withdrawl.date():
+                    coinwithdraw=float(noCoin)+float(refer_coin)
+                else:
+                    coinwithdraw=(float(noCoin)/2)+float(refer_coin)
+            except Exception as e:
+                coinwithdraw=0
+                rest_coin=0
+                date_withdrawl="You Havn't Invested Anything"
             print("&"*60)
             rest_coin=float(total_coin)-float(coinwithdraw)
             print(total_coin,coinwithdraw,rest_coin)
         except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
             print(e)
             date_withdrawl = False
 
@@ -1117,5 +1267,8 @@ def UserAccountWitdrawlData(req):
         return render(req,'UserApp/UserWalletWithdrawl.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(e)
         return UserIndex(req)
