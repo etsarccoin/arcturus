@@ -1,0 +1,31 @@
+/* Author Kuntal */
+
+.myheadingstyle{
+    font-size: 18px;
+    font-family: monospace;
+}
+
+.mystylebutton{
+    padding-right: 40px;
+    height: 50px;
+}
+
+.mylinkliststyle{
+    color: blueviolet;
+}
+
+.myhedingcolor
+{
+    color: darkcyan;
+}
+
+/* Admin Profile Edit */
+.updateButtonstyle{
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+    background-color: #3c8dbc;
+    border-color: #367fa9;
+    border-radius: 4px;
+    color: #fff;
+}

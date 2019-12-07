@@ -1,0 +1,687 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{% static 'UserApp/assets/img/title.ico' %}">
+<title>User Dashboard</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/animations.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-social.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/highcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.bootstrap4.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-timepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-colorpicker.min.css' %}">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+
+<style>
+.xxx{
+		height: 400;
+		width: 400;
+	}
+</style>
+
+</head>
+
+<body role="document">
+
+<!--Header Top-->
+<div class="container-fluid bg-header-top">
+	<div class="container pad10T pad10B">
+    	<div class="row">
+            <div class="col-md-6 text-left-to-center pad5T pad5B">
+                <span class="header-top-text">Welcome to Arcturus</span>
+            </div>
+            <div class="col-md-6 text-right-to-center pad5T pad5B">
+					<a href="{{SocialMObj.facebook_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.twitter_link|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.googleplus|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+						</a>
+						<a href="{{SocialMObj.linkedin|safe}}" class="top-socila-icon">
+							<img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+						</a>
+            </div>
+        </div>
+    </div>	
+</div>
+	
+<!-- Navbar Start -->
+<div class="container pad0L pad0R">
+	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
+        <a class="navbar-brand" href="{% url 'Userindex' %}">
+            <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbar">
+				<ul class="navbar-nav ml-auto">
+				<li class="nav-item mrg5A active">
+					<a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+				</li>
+				<li class="nav-item mrg5A">
+						<a class="nav-link" href="{% url 'white' %}">White Paper</a>
+				</li>
+				<li class="nav-item mrg5A">
+					<a class="nav-link" href="{% url 'Userabout' %}">About</a>
+				</li>
+				<li class="nav-item mrg5A">
+					<a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
+				</li>
+				<li class="nav-item mrg5A">
+					{% if logged_in %}
+					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
+					{% endif %}
+				</li>
+            </ul>
+        </div>
+    </nav>
+</div>
+	
+<!--Body Section-->
+<div class="container-fluid pad20T pad20B">
+	<div class="container">
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="profile-table">
+								<div class="profile-col">
+									<div class="image-warp">
+										<a href="javascript:" class="image">
+											{% if not UImgObj %}
+											<img src="{% static 'UserApp/assets/img/upload-01.jpg' %}" alt="">
+											{% else %}
+											<img src="{{UImgObj.UImg.url}}" alt="" height="140" width="130">
+											{% endif %}
+										</a>
+									</div>
+								</div>
+								<div class="profile-col">
+									<div class="top">{{u_name}}</div>
+									<div class="link">
+										<a href="{% url 'UserProfileSettingPage' %}"><u>Edit Profile</u></a>
+									</div>
+									<div class="link">
+										<a href="{% url 'UserFeedback' %}"><u>Feedback</u></a>
+									</div>
+									<div class="link">
+										<a href="{% url 'UserWalletView' %}"><u>Wallet</u></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 text-right-to-left">
+							<div class="prifile-welcome pad40T">Welcome to Arcturus Coin</div>
+							<div class="profile-action">
+								<ul class="profile-list">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Coin</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="{% url 'UserWalletView' %}"><b>User Wallet</b></a>
+											<a class="dropdown-item" href="{% url 'UserProfileSettingPage' %}"><b>User Profile</b></a>
+											<a class="dropdown-item" href="{% url 'UserFeedback' %}"><b>User Feedback</b></a>
+										</div>
+									</li>
+									<li>
+										<a href="{% url 'UserLogout' %}">
+											<img src="{% static 'UserApp/assets/img/icon-power.png' %}" width="28" height="28" alt=""/>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card pad0T pad0B">
+					<div class="row">
+
+						<div class="col-lg-6 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header">
+									<div class="row align-items-center">
+										<div class="col">Arcturus Wallet</div>
+										<div class="col text-right">
+											<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">{{ammount}}</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+
+						<div class="col-lg-6 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header bg-brown">
+									<div class="row align-items-center">
+										<div class="col">No Of Coin</div>
+										<div class="col text-right">
+											<a href="{% url 'UserWalletView' %}">History</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">{{noCoin}}</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+
+						<!-- <div class="col-lg-4 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header">
+									<div class="row align-items-center">
+										<div class="col">Requests Funds</div>
+										<div class="col text-right">
+											<a href="#">Requests</a>
+										</div>
+									</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+										</div>
+										<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
+									</div>
+								</div>
+							</div>	
+						</div>		 -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row pad20T pad20B">
+				<div class="col">
+					<div class="card upload-card pad0T pad0B">
+						<div class="row">
+							
+							<div class="col-lg-12 mrg15T mrg15B">
+								<div class="info-panel-container">
+									<div class="header">
+										<div class="row align-items-center">
+											<div class="col">
+												Arcturus Coin Investment Rules
+											</div>
+										</div>
+									</div>
+									<div class="body">
+										<div class="row align-items-center">
+											<strong>
+													&nbsp; &nbsp; Refer Your Friend And You Will Get 10% Bonus Instantly. using this reference key: {{id}}
+											</strong> 
+										</div>
+									</div>
+								</div>	
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col-md-8">
+							<div class="graph-cont">
+								<div class="header">Latest Crypto Coin Graph</div>
+								<div class="body">
+									<div id="coinGraph" style="width: 100%; height: 340px; margin: 0 auto">
+										<canvas id="bar-chart1"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="live-left-bg border-radious-2">
+								<h3 class="border-heading-white">Calculate Live Cryptocurrency</h3>
+								
+								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
+		                        <div class="input-group-prepend">
+		                            <button class="btn dropdown-toggle" id="selected-crypto" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BTC</button>
+		                            <div class="crypto-type-selector dropdown-menu">
+		                                <a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">BTC</a>
+		                                <a class="dropdown-item" onclick="$('#crypto-type').val($(this).text());$('#selected-crypto').text($(this).text());" href="javascript:void(0)">USD</a>
+		                            </div>
+		                        </div>
+		                        <input type="text" name="Money" id="money" class="form-control" aria-label="Text input with dropdown button">
+		                        <input type="hidden" id="crypto-type" name="crypto-type">
+		                    </div>
+
+								<div class="pad20T pad20B">
+									<button onclick="checkcoinprice()"><img src="{% static 'UserApp/assets/img/toggle-switch-bg.png' %}" width="33" height="33" alt=""/></button>
+								</div>
+
+								<div class="input-group col-xl-10 col-lg-10 col-md-8 col-sm-10">
+									<div class="input-group-prepend">
+										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MyCoin</button>
+										<!-- <div class="dropdown-menu">
+											<a class="dropdown-item" href="#">INR</a>
+											<a class="dropdown-item" href="#">BTC</a>
+										</div> -->
+									</div>
+									<input type="text" id="c_data" class="form-control" aria-label="Text input with dropdown button">
+								</div>
+								<br>
+								<div class="pad20T pad20B">
+									<button class="btn btn-primary" style="background-color: #ff7c00;border-block-color: #000;" onclick="buymycoinfunction()">Click Here To Buy</button>
+								</div>
+								<br><br>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- <div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col">
+							<div class="text-container">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
+								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
+								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<p>Consectetur adipisicing elit. Commodi beatae vero exercitationem aliquam saepe molestias nobis. Laboriosam odio repudiandae obcaecati, temporibus incidunt voluptatum, libero quasi dolores non magni nesciunt minus!</p>
+								<p>Placeat, quas velit in, consequuntur maiores molestias error quidem ad quisquam illo est voluptatem voluptatibus unde quibusdam harum aut qui alias. Nisi, commodi quos laborum in ducimus placeat voluptatibus itaque.</p>
+							</div>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!--Join Section-->
+<div class="container-fluid join-section-bg pad40T pad10B">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mrg30B">
+				<div class="join-left-text">Join our subscription and get instant updates about offers and discounts.</div>
+			</div>
+			<div class="col-lg-6 mrg30B">
+				<div class="join-right-input">
+					<div class="input-group mb-0">
+						<input type="text" name="s_u_val" id="s_u_val" class="form-control" placeholder="Enter Your mail id to subscribe our news letter">
+						<div class="input-group-append">
+							<span class="input-group-text" onclick="SubcriberFunction()">Submit</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Footer top-->
+<div class="container-fluid footer-bg-back pad40T pad10B">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 mrg30B">
+				<div class="footer-logo">
+					<a href="#">
+						<img src="{% static 'UserApp/assets/img/logo-bw.png' %}" width="222" class="img-fluid" alt=""/>
+					</a>
+				</div>
+				<div class="footer-logo-mater">
+						{{footerObj.FooterContent|safe}}
+				</div>
+				
+				<ul>
+						<li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+						<br>
+						<li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+					</ul>
+				
+			</div>
+		  	<div class="col-lg-4">
+                <div class="footer-heading">Latest News</div>
+                
+                <div class="footer-news-container">
+						<div class="footer-news-col">
+							<div class="image">
+								<img src="{{NewsObj.LatestNewsImg1.url}}" width="100%" alt=""/>
+							</div>
+						</div>
+						<div class="footer-news-col">
+							<div class="top">{{NewsObj.LatestNewsContent1|safe}}</div>
+							<a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
+						</div>
+					</div>
+					
+                <div>
+						<ul>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+									<span>{{footerObj.FooterAddress|safe}}</span>
+								</a>
+							</li>
+							<br>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+									<span>{{footerObj.FooterPhone|safe}}</span>
+								</a>
+							</li>
+							<br>
+							<li>
+								<a href="#">
+									<img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+									<span>{{footerObj.FooterMail|safe}}</span>
+								</a>
+							</li>		
+						</ul>	
+					  </div>
+                
+            </div>
+			<!-- <div class="col-lg-4">
+                <div class="footer-heading">Twitter Feed</div>
+                
+                <div class="footer-twitter-table">
+                    <div class="footer-twitter-table-col">
+                        <div class="image">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="footer-twitter-table-col">
+                        <div class="top"><a class="twitter-timeline" href="https://twitter.com/ArcturusCoin?ref_src=twsrc%5Etfw">Tweets by ArcturusCoin</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                    </div>
+                </div>                
+            </div> -->
+		</div>
+	</div>
+</div>
+
+<!--Footer Bottom-->
+<div class="container-fluid bg-footer-bot">
+	<div class="row">
+		<div class="col">
+			<div class="footer-bot-text">
+					<a href="javascript:">{{CopyObj.copyRightData|safe}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!-- Bootstrap core JavaScript --> 
+<script src="{% static 'UserApp/assets/js/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/css3-animate-it.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.input-mask.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2-2.3.4.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2.thumbs.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/highcharts.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.raty-fa.js' %}"></script>
+
+<script src="{% static 'UserApp/assets/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-colorpicker.min.js' %}"></script>
+	
+<script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script type="text/javascript">
+	function SubcriberFunction()
+    {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "Subscription" %}',
+            async: true,
+            data: {
+                mail: $('#s_u_val').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['submitted'];
+                  if(submitted == true)
+				  {
+					alert("Succefully Submitted");
+                    $('#s_u_val').val("");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
+</script> 
+
+
+<script type="text/javascript">
+    function checkcoinprice()
+    {
+    $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "CoinValueCalling" %}',
+            async: true,
+            data: {
+                        c_val: $('#money').val(),
+                        c_type: $('#selected-crypto').text(),
+                    },
+            success: function (response){
+                    console.log(response['no_coin']);
+                    let no_coin = response['no_coin'];
+                    if(response['is_taken'] == 1){
+                        $("#c_data").val();
+                        $("#c_data").val(no_coin);
+                    }
+                    else{
+                         alert("Give a Numeric Value !!");
+                    }
+                  
+                },
+            error: function (){
+                           alert('Something went wrong !!');
+                    }
+                });
+}
+</script>
+
+
+<script type="text/javascript">
+    function buymycoinfunction()
+    {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "CoinRequestLink" %}',
+            async: true,
+            data: {
+				no_coin: $('#money').val(),
+                total_amountw: $('#c_data').val()
+               },
+            success: function (response)
+                {
+                  let submitted = response['is_taken'];
+                  if(submitted == 1)
+				  {
+					alert("Request Succefully Submitted");
+                    $('#money').val("");
+					$('#c_data').val("");
+				  }
+				  else
+				  {
+					alert("Try Again");
+				  }
+               },
+			error: function ()
+			{
+			notify('Something went wrong');
+			}
+		});
+    }
+</script>
+
+
+
+<script>
+	setInterval(function()
+	{
+		SetNewCoinForGraph();
+	},4000);
+</script>
+	
+	
+<script type="text/javascript">
+		function SetNewCoinForGraph()
+		{
+		$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				url: '{% url "mytest" %}',
+				async: true,
+				data: {
+						
+					},
+				success: function (response)
+				{
+					
+
+					new Chart(document.getElementById("bar-chart1"), {
+						type: 'bar',
+						data: {
+							labels: response['coin_id'],
+							datasets: [
+							{
+								label: "USD",
+								backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#3e95cd", "#8e5ea2"],
+								data: response['coin_price']
+							}
+							]
+						},
+						options: {
+							legend: { display: false },
+							title: {
+							display: true,
+							text: 'Crypto Coin Price'
+							}
+						}
+					});
+
+
+					// Highcharts.chart('coinGraph', {
+					// 	chart: {
+					// 		type: 'line',
+					// 		backgroundColor: '#f4f4f4',
+					// 		marginBottom: 30
+					// 	},
+					// 	title: {
+					// 		text: 'Top 17 Coin Price Graph'
+					// 	},
+					// 	subtitle: {
+					// 		text: false
+					// 	},
+					// 	legend: {
+					// 		margin: 0,
+					// 		verticalAlign: 'bottom',
+					// 		y: 15
+					// 	},
+					// 	xAxis: {
+					// 		title: false,
+					// 		tickInterval:1,
+					// 		labels: false
+					// 	},
+					// 	yAxis: {
+					// 		title: false,
+					// 		tickInterval:1,
+					// 		labels: false
+					// 	},
+					// 	plotOptions: {
+					// 		line: {
+					// 			dataLabels: {
+					// 				enabled: true
+					// 			},
+					// 			enableMouseTracking: false
+					// 		}
+					// 	},
+					// 	series: [{
+					// 		name: 'Price',
+					// 		data: response['coin_price'],
+					// 		color: '#6b3008'
+					// 	}, {
+					// 		name: 'Coin',
+					// 		data: response['coin_id'],
+					// 		color: '#ff7d00'
+					// 	}]
+					// });
+	
+				},
+				error: function (){
+							   alert('Something went wrong !!');
+						}
+					});
+	}
+</script>
+
+
+
+</body>
+</html>

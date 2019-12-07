@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="{%static 'UserApp/assets/img/title.ico' %}">
+<title>About US</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/animations.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-social.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/highcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/responsive.bootstrap4.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-timepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/bootstrap-colorpicker.min.css' %}">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+<script type="text/javascript">
+  window.onload = function() {
+  Particles.init({
+    selector: '.particle',
+    connectParticles: true,
+    color:'#619932',
+  });
+};
+</script>
+</head>
+
+<body role="document">
+
+<!--Header Top-->
+<div class="container-fluid bg-header-top">
+	<div class="container pad10T pad10B">
+    	<div class="row">
+            <div class="col-md-6 text-left-to-center pad5T pad5B">
+                <span class="header-top-text">Welcome to Arcturus</span>
+            </div>
+            <div class="col-md-6 text-right-to-center pad5T pad5B">
+                    <a href="{{SocialMObj.facebook_link|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-fb.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.twitter_link|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-tw.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.googleplus|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-gp.png' %}" width="32" height="32" alt=""/>
+                        </a>
+                        <a href="{{SocialMObj.linkedin|safe}}" class="top-socila-icon">
+                            <img src="{% static 'UserApp/assets/img/icon-social-in.png' %}" width="32" height="32" alt=""/>
+                        </a>
+            </div>
+        </div>
+    </div>	
+</div>
+	
+<!-- Navbar Start -->
+<div class="container pad0L pad0R">
+	<nav class="navbar navbar-expand-lg bg-white navbar-light pad20T pad20B">
+        <a class="navbar-brand" href="{% url 'Userindex' %}">
+            <img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="222" alt="" class="img-fluid"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mrg5A active">
+                    <a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'white' %}">White Paper</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'Userabout' %}">About</a>
+                </li>
+                <li class="nav-item mrg5A">
+                    <a class="nav-link" href="{% url 'UserContact' %}">Contact</a>
+                </li>
+				<li class="nav-item mrg5A">
+					{% if logged_in %}
+					<a href="{% url 'UserLogout' %}" class="btn btn-navbar-brown">Logout</a>
+					{% else %}
+					<a href="{% url 'UserLogin' %}" class="btn btn-navbar-brown">Login</a>
+					{% endif %}
+				</li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid baner-bg2 pad40B">
+    <div class="row" style="position: relative;">
+       <div class="embed-responsive embed-responsive-4by1 particle-back">
+            <canvas class="particle embed-responsive-item"></canvas>
+        </div>
+        <div class="text-container">
+            <div class="text-row">
+                <div class="text-top">{{headerObj.HeaderHeading|safe}}</div>
+                    <text class="text-bot">
+                        {{headerObj.HeaderHeadingContent|safe}}
+                    </text>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--About Section-->
+<div class="container-fluid pad40T pad0B">
+	<div class="container">
+   	
+    	<div class="row">
+        	<h2 class="border-heading">Our Services</h2>
+            <div class="col">
+            	<div class="body-text text-center pad20T"><h2 class="section-header">Tour</h2></div>
+            </div>
+        </div>
+        
+        <div class="row pad40T pad40B">
+            <div class="col">
+                <div class="section-mater"> 
+					<p>
+						{{TourObj.data|safe}}				
+					</p>
+				</div>
+            	<!-- <div class="section-button">
+            		<a href="/more/" class="btn btn-navbar-brown mrg5A">Read More</a>
+            		<a href="#" class="btn btn-navbar-brown-border mrg5A">Get Demo</a>
+            	</div> -->
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!--Footer top-->
+<div class="container-fluid footer-bg-back pad40T pad10B">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 mrg30B">
+				<div class="footer-logo">
+					<a href="#">
+						<img src="{% static 'UserApp/assets/img/logo-bw.png' %}" width="222" class="img-fluid" alt=""/>
+					</a>
+				</div>
+				<div class="footer-logo-mater">
+                    {{footerObj.FooterContent|safe}}
+                </div>
+                
+                <ul>
+                        <li><a href="{% url 'UserTermsConditionsurl' %}">Terms-Conditions</a></li>
+                        <br>
+                        <li><a href="{% url 'Userpolicyurl' %}">Policy</a></li>
+                    </ul>
+				
+			</div>
+		  	<div class="col-lg-4">
+                <div class="footer-heading">Latest News</div>
+                
+                <div class="footer-news-container">
+                        <div class="footer-news-col">
+                            <div class="image">
+                                <img src="{{NewsObj.LatestNewsImg1.url}}" width="100%" alt=""/>
+                            </div>
+                        </div>
+                        <div class="footer-news-col">
+                            <div class="top">{{NewsObj.LatestNewsContent1|safe}}</div>
+                            <a href="#" class="bot">{{NewsObj.LatestNewsDate1|safe}}</a>
+                        </div>
+                    </div>
+                
+                <div>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="{% static 'UserApp/assets/img/icon-footer-location.png' %}" width="36" height="36" alt=""/>
+                                    <span>{{footerObj.FooterAddress|safe}}</span>
+                                </a>
+                            </li>
+                            <br>
+                            <li>
+                                <a href="#">
+                                    <img src="{% static 'UserApp/assets/img/icon-footer-phone.png' %}" width="36" height="36" alt=""/>
+                                    <span>{{footerObj.FooterPhone|safe}}</span>
+                                </a>
+                            </li>
+                            <br>
+                            <li>
+                                <a href="#">
+                                    <img src="{% static 'UserApp/assets/img/icon-footer-mail.png' %}" width="36" height="36" alt=""/>
+                                    <span>{{footerObj.FooterMail|safe}}</span>
+                                </a>
+                            </li>		
+                        </ul>	
+                      </div>
+                
+            </div>
+			<!-- <div class="col-lg-4">
+                <div class="footer-heading">Twitter Feed</div>
+                
+                <div class="footer-twitter-table">
+                    <div class="footer-twitter-table-col">
+                        <div class="image">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="footer-twitter-table-col">
+                        <div class="top"><a class="twitter-timeline" href="https://twitter.com/ArcturusCoin?ref_src=twsrc%5Etfw">Tweets by ArcturusCoin</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+                    </div>
+                </div>                
+            </div> -->
+		</div>
+	</div>
+</div>
+
+<!--Footer Bottom-->
+<div class="container-fluid bg-footer-bot">
+	<div class="row">
+		<div class="col">
+			<div class="footer-bot-text">
+                    <a href="javascript:">{{CopyObj.copyRightData|safe}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!-- Bootstrap core JavaScript --> 
+<script src="{% static 'UserApp/assets/js/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/css3-animate-it.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.input-mask.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2-2.3.4.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/owl.carousel2.thumbs.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/highcharts.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/jquery.raty-fa.js' %}"></script>
+
+<script src="{% static 'UserApp/assets/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/bootstrap-colorpicker.min.js' %}"></script>
+	
+<script src="{% static 'UserApp/assets/js/bootstrap-multiselect.js' %}"></script>
+<script src="{% static 'UserApp/assets/js/theme.js' %}"></script> 
+
+<script>
+	
+</script> 
+
+</body>
+</html>

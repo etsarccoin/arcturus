@@ -321,6 +321,93 @@
 				</div>
 			</div>
 		</div>
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col profile-info">
+							<div class="table-header">transfer</div>
+							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="table-transfer">
+								<thead>
+									<tr>
+										<th>transfer to  from</th>
+										<th>Unique Txn ID</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>transfer date</th>
+										<!-- <th>refered data</th> -->
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in coin_req_obj %}
+										{%if i.transfer%}
+									<tr>
+									  <td>
+									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+									  	<span> Arcturus</span>
+									  </td>
+									  <td>{{i.unique_id}}</td>
+									  <td>{{i.coin_price}}</td>
+									  <td>{{i.no_coin}}</td>
+									  <td>{{i.total_amount}}</td>
+									  <td>{{i.req_date}}</td>
+									</tr>
+									{%endif%}
+									{% endfor %}
+									
+								</tbody>
+							</table>
+							</table>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row pad20T pad20B">
+			<div class="col">
+				<div class="card upload-card">
+					<div class="row justify-content-center pad15L pad15R" align="center">
+						<div class="col profile-info">
+							<div class="table-header">Withdraw</div>
+							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="table-withdraw">
+								<thead>
+									<tr>
+										<th>Refrence got from</th>
+										<th>Reciver id</th>
+										<th>Coin Price</th>
+										<th>No Coin</th>
+										<th>Total Amount</th>
+										<th>date</th>
+										<th>status</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in coin_req_obj %}
+										{%if i.withdraw%}
+									<tr>
+									  <td>
+									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
+									  	<span> Arcturus</span>
+									  </td>
+									  <td>{{i.unique_id}}</td>
+									  <td>{{i.coin_price}}</td>
+									  <td>{{i.no_coin}}</td>
+									  <td>{{i.total_amount}}</td>
+									  <td>{{i.req_date}}</td>
+									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
+									</tr>
+									{%endif%}
+									{% endfor %}
+									
+								</tbody>
+							</table>
+							</table>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -461,11 +548,30 @@
 	$(document).ready(function() {	
 		"use strict";
 		$('#profile-table').DataTable( {
+			"order": [[ 0, "desc" ]],
 			responsive: true,
 			"pagingType": "full_numbers",
 			"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 			"bLengthChange": false,
 			"bFilter": false,
+		});
+		var ref_table = $('#table-reference').DataTable({
+			"order": [[ 0, "desc" ]],
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
+		});
+		var ref_table = $('#table-transfer').DataTable({
+			"order": [[ 0, "desc" ]],
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
+		});
+		var ref_table = $('#table-withdraw').DataTable({
+			"order": [[ 0, "desc" ]],
+			responsive: true,
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]]
 		});
 	});
 </script> 
@@ -501,6 +607,68 @@
 		});
     }
 </script> 
+<script type="text/javascript">
+	function coinwithdraw(){
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "coinwithdraw" %}',
+            async: true,
+
+            data: {
+                ammount: $('#ammount').val(),
+                otp: $('#otp').val()
+               },
+            success: function (response){
+                  let submitted = response['is_taken'];
+                  if(response['is_taken'] == 1){
+                  	    console.log("Withdraw request submited")
+                        alert(response["status"])
+                    }
+                    else{
+                        alert(response["status"]);
+                    }
+
+               },
+			error: function (){
+				notify('Something went wrong');
+			}
+		});
+    }
+</script>
+<!-- coin send to others -->
+<script type="text/javascript">
+	function sendcoin(){
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: '{% url "coinsend" %}',
+            async: true,
+            data: {
+                ammount: $('#ammountsent').val(),
+                otp_send: $('#otp_send').val(),
+                toaddress: $('#toaddress').val()
+               },
+            success: function (response){
+                  let submitted = response['is_taken'];
+                  // console.log(otp)
+                  if(response['is_taken'] == 1){
+                  	    // console.log("coin sent Succefully")
+                        alert(response["status"])
+                    }
+                    else{
+                    	// console.log(response["status"])
+                        alert(response["status"]);
+                    }
+
+               },
+			error: function (){
+				// console.log(response["status"])
+				alert('Something went wrong');
+			}
+		});
+    }
+</script>
 
 </body>
 </html>
