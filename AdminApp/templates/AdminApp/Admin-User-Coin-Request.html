@@ -519,7 +519,7 @@
 					<div class="col-md-13">
 						<!-- Form Section -->
 						<div class="box box-primary pad30T pad30L pad30R pad10B">
-							<table id="table-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+							<table id="widraw-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
 								<thead>
 									<tr>
 										<th>SL</th>
@@ -532,8 +532,7 @@
 									</tr>
 								</thead>
 								<tbody>
-										{% for i in coin_req_obj %}
-										{%if i.withdraw%}
+										{% for i in withdraw_request %}
 									<tr>
 										<td><b>{{ forloop.counter }}</b></td>
 										<td><b>{{ i.unique_id }}</b></td>
@@ -543,7 +542,6 @@
 										<td>{{ i.total_amount }}</td>
 										<td><a href="{% url 'CoinRequestApprove' i.unique_id %}">Approve</a> | <a href="{% url 'CoinRequestRejectUrl' i.unique_id %}">Reject</a> | <a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
 									</tr>
-									    {%endif%}
 										{% endfor %}
 								</tbody>
 							</table> 
@@ -612,7 +610,7 @@
 <script>
 	$(document).ready(function() {
 		"use strict";
-		var table = $('#table-list').DataTable( {
+		var table = $('#table-list, #widraw-list').DataTable( {
 			"order": [[ 0, "desc" ]],
 			responsive: true,
 			"pagingType": "full_numbers",

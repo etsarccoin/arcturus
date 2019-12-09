@@ -161,68 +161,47 @@
 						<div class="row">
 
 							<div class="col-lg-6 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">Arcturus Wallet</div>
-											<div class="col text-right">
-												<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
-											</div>
+							<div class="info-panel-container">
+								<div class="header">
+									<div class="row align-items-center">
+										<div class="col">coin wallet </div>
+										<div class="col text-right">
+											<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 										</div>
 									</div>
-									<div class="body">
-										<div class="row align-items-center">
-											<div class="col">
-												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
-											</div>
-											<div class="col">{{total_amount}}</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
 										</div>
+										<!-- coin wallet -->
+										<div class="col">{{noCoin}} </div>
 									</div>
-								</div>	
-							</div>
+								</div>
+							</div>	
+						</div>
 
-							<div class="col-lg-6 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header bg-brown">
-										<div class="row align-items-center">
-											<div class="col">No Of Coin</div>
-											<div class="col text-right">
-												<a href="{% url 'UserWalletView' %}">History</a>
-											</div>
+						<div class="col-lg-6 mrg15T mrg15B">
+							<div class="info-panel-container">
+								<div class="header bg-brown">
+									<div class="row align-items-center">
+										<div class="col">Referral Wallet</div>
+										<div class="col text-right">
+											<a href="{% url 'UserWalletView' %}">History</a>
 										</div>
 									</div>
-									<div class="body">
-										<div class="row align-items-center">
-											<div class="col">
-												<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
-											</div>
-											<div class="col">{{noCoin}}</div>
+								</div>
+								<div class="body">
+									<div class="row align-items-center">
+										<div class="col">
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
 										</div>
+										<div class="col">{{ammount}}</div>
 									</div>
-								</div>	
-							</div>
-
-							<!-- <div class="col-lg-4 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">Requests Funds</div>
-											<div class="col text-right">
-												<a href="#">Requests</a>
-											</div>
-										</div>
-									</div>
-									<div class="body">
-										<div class="row align-items-center">
-											<div class="col">
-												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
-											</div>
-											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
-										</div>
-									</div>
-								</div>	
-							</div>	 -->
-
+								</div>
+							</div>	
+						</div>
 						</div>
 					</div>
 				</div>

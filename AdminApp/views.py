@@ -336,10 +336,11 @@ def UserCoinRequestControler(request):
     try:
         admin_id = request.session['admin_id']
         coin_req_obj = CoinRequest.objects.all().filter(approved=False).filter(reject=False).order_by('req_date')
+        coin_widra_obj = CoinRequest.objects.all().filter(approved=False,withdraw=True).order_by('req_date')
         RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
-        context = {'coin_req_obj': coin_req_obj, 'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
+        context = {'coin_req_obj': coin_req_obj,"withdraw_request":coin_widra_obj,'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
         return render(request, 'AdminApp/Admin-User-Coin-Request.html', context=context)
 
     except Exception as e:

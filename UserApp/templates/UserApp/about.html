@@ -193,21 +193,58 @@
 <!--Why Choose Section-->
 <div class="container-fluid pad40T pad0B">
 	<div class="container">
+   	
+    	<div class="row">
+        	<h2 class="border-heading">About us</h2>
+            <div class="col">
+            	<div class="body-text text-center pad20T">
+					{{aboutUsObj.AboutHeading|safe}}
+				</div>
+            </div>
+        </div>
+        
+        <div class="row pad40T pad40B">
+        	<div class="col-lg-6 mrg30B">
+            	<img src="{{aboutUsObj.AboutUSImage.url}}" width="100%" alt=""/>
+            </div>
+            <div class="col-lg-6 mrg30B">
+            	<h1 class="section-header">Arcturus..</h1>
+                <div class="section-mater">
+                    {{aboutUsObj.AboutArcturusContent|safe}}
+            	</div>
+            	<!-- <div class="section-button">
+            		<a href="#" class="btn btn-navbar-brown mrg5A">Read More</a>
+            		<a href="#" class="btn btn-navbar-brown-border mrg5A">Get Demo</a>
+            	</div> -->
+            </div>
+        </div>
         
         <div class="row">
         	<h2 class="border-heading">Why Choose US</h2>
         </div>
-        
+        <!-- Youtube Video -->
         <div class="row pad40T pad40B">
         	<div class="col-lg-5 col-md-6 mrg30B order-md-7">
-        		<img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
+        		<div class="row">
+                    <div class="col">
+                        <img src="{{whychooseObj.ChooseUSImage.url}}" width="100%" alt=""/>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col pad15T">
+                        <iframe  src="https://www.youtube.com/embed/{{SocialMObj.youtube|safe}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen  style="min-width: 100%;min-height: 280px"></iframe>
+                    </div>    
+                </div>
+                
+                <!-- <p>
+                
+                </p> -->
         	</div>
         	<div class="col-lg-7 col-md-6 mrg30B">
 				
        			<div class="choose-table-row">
-        		<div class="choose-table-row">
         			<div class="choose-table-cell">
-        				<img src="{% static 'UserApp/assets/img/icon-service.png' %}" width="92" height="92" alt=""/>
+        				<img src="{% static 'UserApp/assets/img/icon-team.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
         				<div class="header">{{whychooseObj.ChooseUsHeading1|safe}}</div>
@@ -219,7 +256,7 @@
         		
         		<div class="choose-table-row">
         			<div class="choose-table-cell">
-        				<img src="{% static 'UserApp/assets/img/icon-access.png' %}" width="92" height="92" alt=""/>
+        				<img src="{% static 'UserApp/assets/img/icon-service.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
         				<div class="header">{{whychooseObj.ChooseUsHeading2|safe}}</div>
@@ -231,7 +268,7 @@
         		
         		<div class="choose-table-row">
         			<div class="choose-table-cell">
-        				<img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
+        				<img src="{% static 'UserApp/assets/img/icon-access.png' %}" width="92" height="92" alt=""/>
         			</div>
         			<div class="choose-table-cell">
         				<div class="header">{{whychooseObj.ChooseUsHeading3|safe}}</div>
@@ -239,25 +276,25 @@
 								{{whychooseObj.ChooseUsHeading3Content|safe}}
 						</div>
         			</div>
-				</div>
-				
-				<div class="choose-table-row">
-						<div class="choose-table-cell">
-							<img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
-						</div>
-						<div class="choose-table-cell">
-							<div class="header">{{whychooseObj.ChooseUsHeading4|safe}}</div>
-							<div class="mater">
-									{{whychooseObj.ChooseUsHeading4Content|safe}}
-							</div>
-						</div>
-					</div>
+        		</div>
         		
+        		<div class="choose-table-row">
+        			<div class="choose-table-cell">
+        				<img src="{% static 'UserApp/assets/img/icon-wallet.png' %}" width="92" height="92" alt=""/>
+        			</div>
+        			<div class="choose-table-cell">
+        				<div class="header">{{whychooseObj.ChooseUsHeading4|safe}}</div>
+        				<div class="mater">
+								{{whychooseObj.ChooseUsHeading4Content|safe}}
+						</div>
+        			</div>
+        		</div>
+                           
         	</div>
-        	
         </div>
-        
+
     </div>
+    
 </div>
 
 <!--Join Section-->

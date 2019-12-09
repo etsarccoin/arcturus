@@ -630,12 +630,14 @@ def coinwithdraw(request):
         approved_date1 = datetime.now()
         coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
         req_list = []
-        for i in coin_req_obj:
-            if i.approved == True:
-                req_list.append(i.approved_date)
-        date_withdrawl = req_list[0] + timedelta(days=30)
+        print("&"*60)
+        # print(coin_req_obj.approved_date)
+        # for i in coin_req_obj:
+        #     if i.withdraw == True:
+        #         req_list.append(i.approved_date)
+        date_withdrawl = req_date1.date() + timedelta(days=30)
 
-        if date.today() >=date_withdrawl.date():
+        if datetime.now().date() >=date_withdrawl:
                 coinwithdraw=float(main)+float(refer_coin)
         else:
             coinwithdraw=(float(main)/2)+float(refer_coin)
@@ -646,7 +648,20 @@ def coinwithdraw(request):
                 u_obj.otp=909
                 u_obj.save()
                 source="withdraw"
-                s=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="w",refere=False,direct=False,withdraw=True,source=source)
+                s=CoinRequest.objects.create(unique_id=unique_id1, 
+                    user_mail=user_id, 
+                    coin_price=cprice, 
+                    no_coin=requestcoin, 
+                    total_amount=float(requestcoin)*float(cprice), 
+                    approved=False, 
+                    reject=False, 
+                    req_date=req_date1, 
+                    approved_date=date_withdrawl,
+                    request_type="w",
+                    refere=False,
+                    direct=False,
+                    withdraw=True,
+                    source=source)
                 s.save()
                 print(coinwithdraw)
                 print(otp)
@@ -1065,7 +1080,7 @@ def UserWalletPage(request):
             print("*"*60)
             UImgObj = False
 
-        context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
+        context = {'logged_in': logged_in,"ammount":no_of_coin_obj.refercoin, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
              'no_of_coin_obj': no_of_coin_obj , 'noCoin': temp_val, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
              'SocialMObj': SocialMObj,'UImgObj': UImgObj,'total_amount':total_amount}
         return render(request,'UserApp/user-wallet.html', context=context)
@@ -1266,7 +1281,7 @@ def UserAccountWitdrawlData(req):
             print(e)
             date_withdrawl = False
 
-        context = {'logged_in': logged_in, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
+        context = {'logged_in': logged_in,"ammount":refer_coin ,'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
              'no_of_coin_obj': no_of_coin_obj , 'noCoin': noCoin, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
              'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"total_coin": total_coin,"rest_coin":rest_coin, 'date_withdrawl': date_withdrawl,'coin_withdrawable':coinwithdraw,"total_amount":total_amount}
         return render(req,'UserApp/UserWalletWithdrawl.html', context=context)
