@@ -134,7 +134,7 @@ class UserFeedbackTable(models.Model):
     satisfaction_level = models.SmallIntegerField()
     customer_service = models.SmallIntegerField()
     description = models.TextField()
-    UserImg = models.ImageField(upload_to='Review User Image/', default='/media/User%20Profile%20Image/user4-128x128.jpg')
+    UserImg = models.ImageField(upload_to='Review User Image/', default='https://www.elegantthemes.com/blog/wp-content/uploads/2017/01/shutterstock_534491617-600.jpg')
     Time = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):

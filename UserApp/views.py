@@ -248,7 +248,7 @@ def UserIndex(request):
             print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
             print("*"*60)
             UImgObj = False
-        context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': temp_val,"ammount":float(coin_price)*float(temp_val) ,'footerObj': footerObj, 'CopyObj': CopyObj,\
+        context = {'logged_in': logged_in, 'u_name': u_name, 'noCoin': no_of_coin_obj.no_of_coin,"ammount": no_of_coin_obj.refercoin ,'footerObj': footerObj, 'CopyObj': CopyObj,\
             'no_of_coin_obj': no_of_coin_obj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UImgObj': UImgObj,"id":referencecode}
         return render(request, 'UserApp/UserDashboard.html', context=context)
 
@@ -277,7 +277,12 @@ def UserIndex(request):
         from datetime import date
         today = date.today()
         end_date = datetime.date(today.year, today.month, today.day)
-        UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
+        # UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
+        UserReviewDataObj = UserFeedbackTable.objects.all()
+        print("#"*60)
+        for i in UserReviewDataObj:
+            print(i) 
+        print("#"*60)
         
         context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
             'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj,\
@@ -511,8 +516,8 @@ def CoinBuyCheckStatus(request):
         from datetime import date
         today = date.today()
         end_date = datetime.date(today.year, today.month, today.day)
-        UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
-        
+        # UserReviewDataObj = UserFeedbackTable.objects.all().filter(Time__lte=end_date)[:10]
+        UserReviewDataObj = UserFeedbackTable.objects.all()
         context = {'logged_in': logged_in, 'headerObj': headerObj, 'footerObj': footerObj, 'serviceObj': serviceObj,\
             'reviewObj': reviewObj, 'aboutUsObj': aboutUsObj, 'whychooseObj': whychooseObj, 'roadmapObj': roadmapObj,\
              'CopyObj': CopyObj, 'NewsObj': NewsObj, 'SocialMObj': SocialMObj, 'UserReviewDataObj': UserReviewDataObj}

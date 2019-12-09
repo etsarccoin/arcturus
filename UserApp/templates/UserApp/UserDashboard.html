@@ -81,10 +81,10 @@
         <div class="collapse navbar-collapse" id="navbar">
 				<ul class="navbar-nav ml-auto">
 				<li class="nav-item mrg5A active">
-					<a class="nav-link" href="{% url 'UserCoinStatus' %}">Home</a>
+					<a class="nav-link" href="{% url 'UserWalletView' %}">Wallet</a>
 				</li>
 				<li class="nav-item mrg5A">
-						<a class="nav-link" href="{% url 'white' %}">White Paper</a>
+						<a class="nav-link" href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 				</li>
 				<li class="nav-item mrg5A">
 					<a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -171,7 +171,7 @@
 							<div class="info-panel-container">
 								<div class="header">
 									<div class="row align-items-center">
-										<div class="col">Arcturus Wallet</div>
+										<div class="col">coin wallet </div>
 										<div class="col text-right">
 											<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 										</div>
@@ -180,9 +180,9 @@
 								<div class="body">
 									<div class="row align-items-center">
 										<div class="col">
-											<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
+											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
 										</div>
-										<div class="col">{{ammount}}</div>
+										<div class="col">{{noCoin}} </div>
 									</div>
 								</div>
 							</div>	
@@ -192,7 +192,7 @@
 							<div class="info-panel-container">
 								<div class="header bg-brown">
 									<div class="row align-items-center">
-										<div class="col">No Of Coin</div>
+										<div class="col">Referral Wallet</div>
 										<div class="col text-right">
 											<a href="{% url 'UserWalletView' %}">History</a>
 										</div>
@@ -203,7 +203,7 @@
 										<div class="col">
 											<img src="{% static 'UserApp/assets/img/logo-color.png' %}" width="141" class="img-fluid" alt=""/>
 										</div>
-										<div class="col">{{noCoin}}</div>
+										<div class="col">{{ammount}}</div>
 									</div>
 								</div>
 							</div>	
@@ -253,7 +253,7 @@
 									<div class="body">
 										<div class="row align-items-center">
 											<strong>
-													&nbsp; &nbsp; Refer Your Friend And You Will Get 10% Bonus Instantly. using this reference key: {{id}}
+													&nbsp; &nbsp; Refer Your Friend And You Will Get 10% Bonus Instantly. using this reference key: <h3>&nbsp; &nbsp; {{id}}</h3>
 											</strong> 
 										</div>
 									</div>
