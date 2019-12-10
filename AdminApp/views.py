@@ -30,7 +30,9 @@ from .models import HomePage,OurSerice,SocialMedialLink,common_field_update,edit
 
 
 def Test(request):
-    return render(request, 'AdminApp/demo-blank.html', context={})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request, 'AdminApp/demo-blank.html', context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 
 def AdminDashboardPanel(request):
@@ -39,6 +41,8 @@ def AdminDashboardPanel(request):
         NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
         NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
         context = {'AdminProfileObj': AdminProfileObj, 'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/index.html', context=context)
@@ -52,15 +56,23 @@ def AdminDashboardPanel(request):
 
 def changeimage(request):
     try:
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         if request.method == 'POST' and request.FILES['myfile']:
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             uploaded_file_url = fs.url(filename)
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
             return render(request, 'core/simple_upload.html', {
-                'uploaded_file_url': uploaded_file_url
+                'uploaded_file_url': uploaded_file_url,
+                'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti
             })
-        return render(request, 'core/simple_upload.html')
+
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        return render(request, 'core/simple_upload.html',context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
     except Exception as e:
         print("hi i am error from change image ",e)
 
@@ -82,17 +94,25 @@ def AdminLogin(request):
                     request.session['admin_id'] = 'admin'
                     return AdminDashboardPanel(request)
                 else:
-                    return render(request, 'AdminApp/admin-login.html', context={})
+                    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+                    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+                    return render(request, 'AdminApp/admin-login.html', context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
             else:
-                return render(request, 'AdminApp/admin-login.html', context={})
+                NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+                NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+                return render(request, 'AdminApp/admin-login.html', context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
         except Exception as e:
-            return render(request, 'AdminApp/admin-login.html', context={})
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            return render(request, 'AdminApp/admin-login.html', context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
     else:
         try:
             if request.session['admin_id']:
                 return AdminDashboardPanel(request)  
         except Exception as e:
-            return render(request, 'AdminApp/admin-login.html', context={})
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            return render(request, 'AdminApp/admin-login.html', context={'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 
 
@@ -120,12 +140,47 @@ def UserManagementControler(request):
 
         except:
             u_obj = "No User Found !!"
-        context = {'u_obj': u_obj, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        context = {'u_obj': u_obj, 'logged_in': True, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-User-Management.html', context=context)
 
     except Exception as e:
         print(e)
         return AdminLogin(request)
+
+def coinwithdraw(request,slug):
+    try:
+        slug_val = slug
+        admin_id=request.session["admin_id"]
+        approvedate=datetime.datetime.now()
+        obj1=CoinRequest.objects.get(unique_id=slug_val)
+        obj1.approved_date=approvedate
+        obj1.approved=True
+        obj1.save()
+        c_obj = CoinPrice.objects.get(id=1)
+        coin_price = c_obj.price_in_usd
+        obj = CoinRequest.objects.get(unique_id=slug_val)
+        user_email = obj.user_mail
+        try:
+            no_coin_to_add = obj.no_coin
+            old_wallet_obj = UserAccountCoin.objects.get(email=user_email)
+            no_of_coin_now = old_wallet_obj.no_of_coin
+            updated_coin_no = float(no_of_coin_now) - float(no_coin_to_add)
+            print("r"*60)
+            print("after withdraw {} no of coin {}".format(no_coin_to_add,updated_coin_no))
+            old_wallet_obj.no_of_coin = updated_coin_no
+            old_wallet_obj.save()
+            return UserCoinRequestControler(request)
+
+        except:
+            HttpResponse("Something Went Wrong !!")
+            return AdminDashboardPanel(request)
+
+    except Exception as e:
+        print(e)
+        return AdminLogin(request)
+
 
 
 def CoinRequestApprove(request, slug):
@@ -305,6 +360,8 @@ def CoinRequestApprove(request, slug):
             # Updating Wallet Blance
             old_wallet_obj = UserAccountCoin.objects.get(email=user_email)
             no_of_coin_now = old_wallet_obj.no_of_coin
+            print("%^"*60)
+            print("coin will be added ",no_coin_to_add)
             updated_coin_no = float(no_of_coin_now) + float(no_coin_to_add)
             old_wallet_obj.no_of_coin = updated_coin_no
             old_wallet_obj.save()
@@ -339,8 +396,10 @@ def UserCoinRequestControler(request):
         coin_widra_obj = CoinRequest.objects.all().filter(approved=False,withdraw=True).order_by('req_date')
         RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'coin_req_obj': coin_req_obj,"withdraw_request":coin_widra_obj,'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
+        context = {'coin_req_obj': coin_req_obj,"withdraw_request":coin_widra_obj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti,'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
         return render(request, 'AdminApp/Admin-User-Coin-Request.html', context=context)
 
     except Exception as e:
@@ -353,8 +412,12 @@ def RejectedCoinRequestByAdmin(req):
         admin_id = req.session['admin_id']
         RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
+        context = {'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/RejectedCoinRequest.html', context=context)
     
     except Exception as e:
@@ -370,12 +433,16 @@ def CoinPricePage(request):
             c_obj = CoinPrice.objects.get(id=1)
             current_val = c_obj.price_in_usd
             AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
-            context = {'current_val': current_val, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            context = {'current_val': current_val, 'logged_in': True, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
 
         except Exception as e:
             print("CoinPricePage >> ", e)
             CoinPrice(price_in_usd=0).save()
-            context = {'current_val': 0, 'logged_in': True}
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            context = {'current_val': 0, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
 
         return render(request, 'AdminApp/Admin-Edit-Coin-Price.html', context=context)
 
@@ -404,12 +471,14 @@ def EditCoinPriceControler(request):
             current_value = coin_price_now
             previous_coin_value = previous_value
             changed_date = datetime.datetime.now()
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
             CoinPriceChangeHistory(unique_id=u_no, current_value=current_value, previous_value=previous_coin_value, changed_date=changed_date, description=description).save()
-            data = {'updated': True, 'coin_price_now': coin_price_now, 'logged_in': True}
+            data = {'updated': True, 'coin_price_now': coin_price_now, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
 
         except Exception as e:
-            data = {'updated': False, 'logged_in': True}
+            data = {'updated': False, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return JsonResponse(data)
 
     except Exception as e:
@@ -424,10 +493,14 @@ def CoinHistoryPage(request):
         try:
             coin_hist = CoinPriceChangeHistory.objects.all().order_by('changed_date')
             AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
-            context = {'c_obj': coin_hist, 'logged_in': True, 'AdminProfileObj': AdminProfileObj}
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            context = {'c_obj': coin_hist, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         
         except Exception as e:
-            context = {'c_obj': "No Data", 'logged_in': True}
+            NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+            NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+            context = {'c_obj': "No Data", 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
 
         return render(request, 'AdminApp/Admin-Check-Coin-Price-History.html', context=context)
 
@@ -441,8 +514,10 @@ def TermsAndConditionsControler(request):
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
         TermsObj = TermsAndConditionCMS.objects.get(uni_key=1)
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj, 'TermsObj': TermsObj}
+        context = {'AdminProfileObj': AdminProfileObj, 'TermsObj': TermsObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Terms-and-Conditions.html', context=context)
 
     except Exception as e:
@@ -455,8 +530,10 @@ def PolicyControler(request):
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
         PolicyObj = PolicyCMS.objects.get(uni_key=1)
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj, 'PolicyObj': PolicyObj}
+        context = {'AdminProfileObj': AdminProfileObj, 'PolicyObj': PolicyObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Policy.html', context=context)
 
     except Exception as e:
@@ -506,8 +583,10 @@ def QuickEmailControler(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj}
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Quick-Email.html', context=context)
 
     except Exception as e:
@@ -536,8 +615,10 @@ def MultipleEmailControler(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj}
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Multiple-Email.html', context=context)
     except Exception as e:
         print(e)
@@ -580,8 +661,10 @@ def PromoEmailControler(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         
-        context = {'AdminProfileObj': AdminProfileObj}
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Promo-Email.html', context=context)
     
     except Exception as e:
@@ -593,8 +676,10 @@ def DemoGraphControler(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj}
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Demo-Graph.html', context=context)
     
     except Exception as e:
@@ -609,8 +694,10 @@ def AdminToDoListControler(request):
         end_date = datetime.date(today.year, today.month, today.day)
         ToDoObj = AdminToDoListTable.objects.all().filter(Status=False).filter(DeadLineAt__lte=end_date)
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj, 'ToDoObj': ToDoObj}
+        context = {'AdminProfileObj': AdminProfileObj, 'ToDoObj': ToDoObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-To-Do-List.html', context=context)
     
     except Exception as e:
@@ -651,8 +738,10 @@ def AdminCalenderControler(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'AdminProfileObj': AdminProfileObj}
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-Calender.html', context=context)
     
     except Exception as e:
@@ -671,8 +760,10 @@ def ShowSubcribeUser(request):
 
         except Exception as e:
             sub_obj = "No Data Found !!"
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'sub_obj': sub_obj, 'AdminProfileObj': AdminProfileObj}
+        context = {'sub_obj': sub_obj, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/Admin-User-Subcription.html', context=context)
 
     except Exception as e:
@@ -685,8 +776,10 @@ def SocialURLManagement(request):
         admin_id = request.session['admin_id']
         SocalMediaObj = SocialMedialCMS.objects.get(social_uni_key=1)
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'SocalMediaObj': SocalMediaObj, 'AdminProfileObj': AdminProfileObj}
+        context = {'SocalMediaObj': SocalMediaObj, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/SocailMediaURL.html', context=context)
     
     except Exception as e:
@@ -763,8 +856,9 @@ def HomePageEditView(request):
             
             print(home_page)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
-
-    return render(request,'AdminApp/Admin-home-page-edit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/Admin-home-page-edit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 def CommonEdit(request):
     form = common_field()
@@ -779,7 +873,9 @@ def CommonEdit(request):
             print(commonfield)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/common.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/common.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
     
 def feedback_edit(request):
     form = feed_back_edit()
@@ -794,7 +890,9 @@ def feedback_edit(request):
             print(feedback)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/feedback.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/feedback.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 def hotel_edit(request):
     form = hotels_edit()
     if request.method == "POST":
@@ -808,7 +906,9 @@ def hotel_edit(request):
             print(edit_hotel)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/hoteledit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/hoteledit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 def food_edit(request):
     form = fooding_edit()
     if request.method == "POST":
@@ -821,8 +921,9 @@ def food_edit(request):
             
             print(foodedit)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
-
-    return render(request,'AdminApp/foodedit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/foodedit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 def payment_edit(request):
     form = payments_edit()
@@ -836,8 +937,9 @@ def payment_edit(request):
             
             print(payment)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
-
-    return render(request,'AdminApp/paymnent.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/paymnent.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 
 def touredit(request):
@@ -853,7 +955,9 @@ def touredit(request):
             print(tour)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/touredit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/touredit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 def recretaion(request):
     form = recreation_edit()
     if request.method == "POST":
@@ -867,7 +971,9 @@ def recretaion(request):
             print(recreationedit)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/recre_edit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/recre_edit.html',cotext={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 def travel_edit(request):
     form = travel_edit()
@@ -881,7 +987,9 @@ def travel_edit(request):
             print(tarvel)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/traveledit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/traveledit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 def about_edit(request):
     form = about_us_edit()
@@ -896,7 +1004,9 @@ def about_edit(request):
             print(aboutus)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/about.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/about.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 def white_page_edit1(request):
     form = white_page_edit()
@@ -911,7 +1021,9 @@ def white_page_edit1(request):
             print(whitepage)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/whitepage.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/whitepage.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 def roadmap_edit(request):
     form = edit_road_map()
     if request.method == "POST":
@@ -925,7 +1037,9 @@ def roadmap_edit(request):
             print(roadmap)
             # print('\n\n\n\n\n\n#############################\n\n\n',form_data)
 
-    return render(request,'AdminApp/roadmapedit.html',{'form':form})
+    NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+    NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+    return render(request,'AdminApp/roadmapedit.html',context={'form':form,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti})
 
 
 
@@ -935,8 +1049,10 @@ def ShowContactUSFormData(req):
         admin_id = req.session['admin_id']
         obj = ContactUSFormData.objects.all()
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'obj': obj, 'AdminProfileObj': AdminProfileObj}
+        context = {'obj': obj, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/ContactUsData.html', context=context)
     
     except Exception as e:
@@ -964,11 +1080,12 @@ def CMSForWebsite(req):
         PaymentObj = PaymentsContentTableCMS.objects.get(uni_key=1)
         TourObj = ToursContentTableCMS.objects.get(uni_key=1)
         RecObj = RecreationContentTableCMS.objects.get(uni_key=1)
-
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         context = {'serviceobj': serviceobj, 'reviewbgobj': reviewbgobj, 'aboutusobj': aboutusobj, 'whychooseusobj': whychooseusobj,\
              'roadmapobj': roadmapobj, 'headerobj': headerobj, 'footerobj': footerobj, 'guideobj': guideobj, 'Whiteobj': Whiteobj,\
                  'copyObj': copyObj, 'NewsObj': NewsObj, 'HotelObj': HotelObj, 'TravelObj': TravelObj, 'FoodObj': FoodObj, \
-                'PaymentObj': PaymentObj, 'TourObj': TourObj, 'RecObj': RecObj}
+                'PaymentObj': PaymentObj, 'TourObj': TourObj, 'RecObj': RecObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/CMS/HomePage.html', context=context)
     
     except Exception as e:
@@ -1597,7 +1714,10 @@ def AdminProfilePage(request):
     try:
         admin_id = request.session['admin_id']
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
-        context = {'AdminProfileObj': AdminProfileObj}
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        
+        context = {'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(request, 'AdminApp/admin-profile.html', context=context)
     
     except Exception as e:
@@ -1677,9 +1797,12 @@ def AdminViewUserProfileData(req, slug):
         CoinReqObj = CoinRequest.objects.all().filter(user_mail=UsersDetailObj.email)
         UserAccCoinObj = UserAccountCoin.objects.get(email=UsersDetailObj.email)
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         context = {'UserAccCoinObj': UserAccCoinObj, 'UsersDetailObj': UsersDetailObj, 'UserProfileObj': UserProfileObj, 'CoinReqObj': CoinReqObj,\
-             'AdminProfileObj': AdminProfileObj}
+             'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
 
+        
         return render(req, 'AdminApp/ViewUserProfile.html', context=context)
 
     except:
@@ -1696,8 +1819,10 @@ def CoinRequestMakerProfileData(req, slug):
         UserAccCoinObj = UserAccountCoin.objects.get(email=user_mail)
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         context = {'UserAccCoinObj': UserAccCoinObj, 'UsersDetailObj': UsersDetailObj, 'UserProfileObj': UserProfileObj, 'CoinReqObj': CoinReqObj,\
-             'AdminProfileObj': AdminProfileObj}
+             'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
     
         return render(req, 'AdminApp/ViewUserProfile.html', context=context)
 
@@ -1711,6 +1836,8 @@ def AdminNewUserNotificationControler(req):
         NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
         context = {'AdminProfileObj': AdminProfileObj, 'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/UserAccNotification.html', context=context)
 
@@ -1743,7 +1870,9 @@ def AdminCheckUserFeedback(req):
         NoOfFeedback = UserFeedbackTable.objects.all().count()
         AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
 
-        context = {'AdminProfileObj': AdminProfileObj, 'FeedbackObj': FeedbackObj, 'NoOfFeedback': NoOfFeedback}
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        context = {'AdminProfileObj': AdminProfileObj, 'FeedbackObj': FeedbackObj, 'NoOfFeedback': NoOfFeedback,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/UserFeedBack.html', context=context)
     except Exception as e:
         print(e)

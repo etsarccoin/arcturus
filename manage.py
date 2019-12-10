@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
+"""Django's command-line utility for administrative tasks.
+   manage.py 
+   project name: creation of Cryptocurrency
+   @ Author  Kuntal & Himalaya
+   @ version  0.1
+   @date      05/09/2019
+   """
 import os
 import sys
 import numpy as np

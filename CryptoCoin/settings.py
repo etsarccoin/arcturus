@@ -75,24 +75,24 @@ WSGI_APPLICATION = 'CryptoCoin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = { 
-#               'default': 
-#                 {  
-#                   'ENGINE': 'djongo', 
-#                   'ENFORCE_SCHEMA': True, 
-#                   'NAME': 'crypto', 
-#                   'HOST': 'mongodb+srv://root:05041995db@crypto-kfrx2.mongodb.net/test?retryWrites=true&w=majority', 
-#                   'PORT': 27017, 
-#                   'USER': 'root',
-#                   'PASSWORD': '05041995db', 
-#                 }
-#             }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = { 
+              'default': 
+                {  
+                  'ENGINE': 'djongo', 
+                  'ENFORCE_SCHEMA': True, 
+                  'NAME': 'crypto', 
+                  'HOST': 'mongodb+srv://root:05041995db@crypto-kfrx2.mongodb.net/test?retryWrites=true&w=majority', 
+                  'PORT': 27017, 
+                  'USER': 'root',
+                  'PASSWORD': '05041995db', 
+                }
+            }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

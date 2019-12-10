@@ -19,6 +19,7 @@ urlpatterns = [
     path('view-coin-request/', views.UserCoinRequestControler, name="UsermadeCoinRequest"),
     path('coin-approve/<slug:slug>/', views.CoinRequestApprove, name="CoinRequestApprove"),
     path('coin-reject/<slug:slug>/', views.CoinRequestRejectAction, name="CoinRequestRejectUrl"),
+    path('widraw-approve/<slug:slug>/', views.coinwithdraw, name="coinwithdraw"),
     path('rejected/coin-req/', views.RejectedCoinRequestByAdmin, name="RejectedCoinReqUrl"),
     path('coin-price/', views.CoinPricePage, name="EditCoinPricePage"),
     path('edit-coinp/', views.EditCoinPriceControler, name="EditCoinPrice"),
