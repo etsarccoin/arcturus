@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "c:\\Users\\himal\\Desktop\\arcturus\\arcturus\\venv\\Scripts\\python.exe",
+    "python.testing.pytestArgs": [
+        "UserApp"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}

@@ -727,7 +727,20 @@ def coinsend(request):
                 coinobj.save()
                 print(coinobj.no_of_coin)
                 source="Got "+str(requestcoin)+" coins from "+str(u_obj.reference_id)
-                s=CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_id, coin_price=cprice, no_coin=requestcoin, total_amount=float(requestcoin)*float(cprice), approved=False, reject=True, req_date=req_date1, approved_date=approved_date1,request_type="ct",refere=False,direct=False,withdraw=False,transfer=True,source=source)
+                s=CoinRequest.objects.create(unique_id=unique_id1, 
+                user_mail=user_id, coin_price=cprice, 
+                no_coin=requestcoin, 
+                total_amount=float(requestcoin)*float(cprice), 
+                approved=False, 
+                reject=True, 
+                req_date=req_date1, 
+                approved_date=approved_date1,
+                request_type="ct",
+                refere=False,
+                direct=False,
+                withdraw=False,
+                transfer=True,
+                source=source)
                 s.save()
                 if float(coinwithdraw)<float(requestcoin):
                     coinobj1=UserAccountCoin.objects.get(email=user_id)
