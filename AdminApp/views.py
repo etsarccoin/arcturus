@@ -184,12 +184,14 @@ def coinwithdraw(request,slug):
 
 
 def CoinRequestApprove(request, slug):
+    from datetime import timedelta
     try:
         admin_id = request.session['admin_id']
         try:
             slug_val = slug
             approved_date = datetime.datetime.now()
             obj1 = CoinRequest.objects.get(unique_id=slug_val)
+            date_withdrawl = approved_date.date() + timedelta(days=30)
             obj1.approved_date = approved_date
             obj1.approved = True
             obj1.save()
@@ -224,7 +226,18 @@ def CoinRequestApprove(request, slug):
                             req_date1 = datetime.datetime.now()
                             approved_date1 = datetime.datetime.now()
                             request_type1="r"
-                            s = CoinRequest.objects.create(unique_id=unique_id1, user_mail=user_mail1, coin_price=coin_price1, no_coin=no_coin1, total_amount=float(no_coin1)*float(coin_price), approved=True, reject=False, req_date=req_date1, approved_date=approved_date1,request_type=request_type1,refere=True,direct=False)
+                            s = CoinRequest.objects.create(unique_id=unique_id1, 
+                                user_mail=user_mail1, 
+                                coin_price=coin_price1, 
+                                no_coin=no_coin1, 
+                                total_amount=float(no_coin1)*float(coin_price), 
+                                approved=True, 
+                                reject=False, 
+                                req_date=req_date1, 
+                                approved_date=approved_date1,
+                                request_type=request_type1,
+                                refere=True,
+                                direct=False)
                             s.save()
                         except Exception as e:
                             print("line no 175",e)
@@ -257,7 +270,18 @@ def CoinRequestApprove(request, slug):
                             req_date2 = datetime.datetime.now()
                             approved_date2 = datetime.datetime.now()
                             request_type2="r"
-                            s = CoinRequest.objects.create(unique_id=unique_id2, user_mail=user_mail2, coin_price=coin_price2, no_coin=no_coin2, total_amount=float(no_coin2)*float(coin_price), approved=True, reject=False, req_date=req_date2, approved_date=approved_date2,request_type=request_type2,refere=True,direct=False)
+                            s = CoinRequest.objects.create(unique_id=unique_id2, 
+                                user_mail=user_mail2, 
+                                coin_price=coin_price2, 
+                                no_coin=no_coin2, 
+                                total_amount=float(no_coin2)*float(coin_price), 
+                                approved=True, 
+                                reject=False, 
+                                req_date=req_date2, 
+                                approved_date=approved_date2,
+                                request_type=request_type2,
+                                refere=True,
+                                direct=False)
                             s.save()
                         except Exception as e:
                             print("line no 208",e)
@@ -286,7 +310,18 @@ def CoinRequestApprove(request, slug):
                             req_date3 = datetime.datetime.now()
                             approved_date3 = datetime.datetime.now()
                             request_type3="r"
-                            s = CoinRequest.objects.create(unique_id=unique_id3, user_mail=user_mail3, coin_price=coin_price3, no_coin=no_coin3, total_amount=float(no_coin3)*float(coin_price), approved=True, reject=False, req_date=req_date3, approved_date=approved_date3,request_type=request_type3,refere=True,direct=False)
+                            s = CoinRequest.objects.create(unique_id=unique_id3, 
+                                user_mail=user_mail3, 
+                                coin_price=coin_price3, 
+                                no_coin=no_coin3, 
+                                total_amount=float(no_coin3)*float(coin_price), 
+                                approved=True, 
+                                reject=False, 
+                                req_date=req_date3, 
+                                approved_date=approved_date3,
+                                request_type=request_type3,
+                                refere=True,
+                                direct=False)
                             s.save()
                         except Exception as e:
                             print("line no 237",e)
@@ -315,7 +350,18 @@ def CoinRequestApprove(request, slug):
                             req_date4 = datetime.datetime.now()
                             approved_date4 = datetime.datetime.now()
                             request_type4="r"
-                            s = CoinRequest.objects.create(unique_id=unique_id4, user_mail=user_mail4, coin_price=coin_price4, no_coin=no_coin4, total_amount=float(coin_price)*float( no_coin4), approved=True, reject=False, req_date=req_date4, approved_date=approved_date4,request_type=request_type4,refere=True,direct=False)
+                            s = CoinRequest.objects.create(unique_id=unique_id4, 
+                                user_mail=user_mail4, 
+                                coin_price=coin_price4, 
+                                no_coin=no_coin4, 
+                                total_amount=float(coin_price)*float( no_coin4), 
+                                approved=True, 
+                                reject=False, 
+                                req_date=req_date4, 
+                                approved_date=approved_date4,
+                                request_type=request_type4,
+                                refere=True,
+                                direct=False)
                             s.save()
                         except Exception as e:
                             print("line no 266",e)
@@ -344,7 +390,18 @@ def CoinRequestApprove(request, slug):
                             req_date5 = datetime.datetime.now()
                             approved_date5 = datetime.datetime.now()
                             request_type5="r"
-                            s = CoinRequest.objects.create(unique_id=unique_id5, user_mail=user_mail5, coin_price=coin_price5, no_coin=no_coin5, total_amount=float(no_coin5)*float(coin_price), approved=True, reject=False, req_date=req_date5, approved_date=approved_date5,request_type=request_type5,refere=True,direct=False)
+                            s = CoinRequest.objects.create(unique_id=unique_id5, 
+                                user_mail=user_mail5, 
+                                coin_price=coin_price5, 
+                                no_coin=no_coin5, 
+                                total_amount=float(no_coin5)*float(coin_price), 
+                                approved=True, 
+                                reject=False, 
+                                req_date=req_date5, 
+                                approved_date=approved_date5,
+                                request_type=request_type5,
+                                refere=True,
+                                direct=False)
                             s.save()
                         except Exception as e:
                             print("line no 295",e)
@@ -399,7 +456,13 @@ def UserCoinRequestControler(request):
         NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
         NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'coin_req_obj': coin_req_obj,"withdraw_request":coin_widra_obj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti,'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj}
+        context = {'coin_req_obj': coin_req_obj,
+        "withdraw_request":coin_widra_obj,
+        'NewUserNotiObj': NewUserNotiObj, 
+        'NoOfNoti': NoOfNoti,
+        'logged_in': True, 
+        'AdminProfileObj': AdminProfileObj, 
+        'RejectedCoinReqObj': RejectedCoinReqObj}
         return render(request, 'AdminApp/Admin-User-Coin-Request.html', context=context)
 
     except Exception as e:
@@ -408,6 +471,7 @@ def UserCoinRequestControler(request):
 
 
 def RejectedCoinRequestByAdmin(req):
+    import traceback
     try:
         admin_id = req.session['admin_id']
         RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
@@ -417,10 +481,17 @@ def RejectedCoinRequestByAdmin(req):
         NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
         NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-        context = {'logged_in': True, 'AdminProfileObj': AdminProfileObj, 'RejectedCoinReqObj': RejectedCoinReqObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+        context = {'logged_in': True, 
+        'AdminProfileObj': AdminProfileObj, 
+        'RejectedCoinReqObj': RejectedCoinReqObj,
+        'NewUserNotiObj': NewUserNotiObj, 
+        'NoOfNoti': NoOfNoti}
         return render(req, 'AdminApp/RejectedCoinRequest.html', context=context)
     
     except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
         print(e)
         return AdminLogin(req)
 
@@ -435,7 +506,11 @@ def CoinPricePage(request):
             AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
             NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
             NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
-            context = {'current_val': current_val, 'logged_in': True, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+            context = {'current_val': current_val, 
+            'logged_in': True, 
+            'AdminProfileObj': AdminProfileObj,
+            'NewUserNotiObj': NewUserNotiObj, 
+            'NoOfNoti': NoOfNoti}
 
         except Exception as e:
             print("CoinPricePage >> ", e)
@@ -474,8 +549,17 @@ def EditCoinPriceControler(request):
             NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
             NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
 
-            CoinPriceChangeHistory(unique_id=u_no, current_value=current_value, previous_value=previous_coin_value, changed_date=changed_date, description=description).save()
-            data = {'updated': True, 'coin_price_now': coin_price_now, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+            CoinPriceChangeHistory(unique_id=u_no, 
+                current_value=current_value, 
+                previous_value=previous_coin_value,
+                 changed_date=changed_date, 
+                 description=description).save()
+
+            data = {'updated': True, 
+            'coin_price_now': coin_price_now, 
+            'logged_in': True,
+            'NewUserNotiObj': NewUserNotiObj, 
+            'NoOfNoti': NoOfNoti}
 
         except Exception as e:
             data = {'updated': False, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
@@ -495,12 +579,21 @@ def CoinHistoryPage(request):
             AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
             NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
             NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
-            context = {'c_obj': coin_hist, 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti, 'AdminProfileObj': AdminProfileObj,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+            context = {'c_obj': coin_hist, 
+            'logged_in': True,
+            'NewUserNotiObj': NewUserNotiObj, 
+            'NoOfNoti': NoOfNoti, 
+            'AdminProfileObj': AdminProfileObj,
+            'NewUserNotiObj': NewUserNotiObj, 
+            'NoOfNoti': NoOfNoti}
         
         except Exception as e:
             NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
             NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
-            context = {'c_obj': "No Data", 'logged_in': True,'NewUserNotiObj': NewUserNotiObj, 'NoOfNoti': NoOfNoti}
+            context = {'c_obj': "No Data", 
+            'logged_in': True,
+            'NewUserNotiObj': NewUserNotiObj, 
+            'NoOfNoti': NoOfNoti}
 
         return render(request, 'AdminApp/Admin-Check-Coin-Price-History.html', context=context)
 
