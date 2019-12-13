@@ -2084,3 +2084,31 @@ def AdminRecreationContent(req):
         TempObj.save()
     
     return CMSForWebsite(req)
+
+
+def approvedcoinlist(request):
+    try:
+        admin_id = request.session['admin_id']
+        coin_req_obj = CoinRequest.objects.all().filter(approved=True,direct=True).order_by('req_date')
+        coin_widra_obj = CoinRequest.objects.all().filter(approved=True,withdraw=True).order_by('req_date')
+        RejectedCoinReqObj = CoinRequest.objects.all().filter(reject=True).order_by('req_date')
+        transfercoin=CoinRequest.objects.all().filter(approved=True,transfer=True).order_by('req_date')
+        refercoin=CoinRequest.objects.all().filter(approved=True,refere=True).order_by('req_date')
+        AdminProfileObj = AdminProfileData.objects.get(email='admin@gmail.com')
+        NewUserNotiObj = NotificationForNewUserRegistration.objects.all().filter(check=False).order_by('-Noti_time')[:3]
+        NoOfNoti = NotificationForNewUserRegistration.objects.filter(check=False).count()
+        context = {'coin_req_obj': coin_req_obj,
+        "withdraw_request":coin_widra_obj,
+        'NewUserNotiObj': NewUserNotiObj, 
+        'NoOfNoti': NoOfNoti,
+        'logged_in': True, 
+        'AdminProfileObj': AdminProfileObj, 
+        'RejectedCoinReqObj': RejectedCoinReqObj,
+        "refercoin":refercoin,
+        "transfercoin":transfercoin,
+        }
+        return render(request, 'AdminApp/showallcoinrequest.html', context=context)
+
+    except Exception as e:
+        print("UserCoinRequestControler >> ", e)
+        return AdminLogin(request)

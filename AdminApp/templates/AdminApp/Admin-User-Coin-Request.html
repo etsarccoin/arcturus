@@ -213,6 +213,16 @@
 									</a>
 								</li>
 								<li>
+									<a href="{% url 'approvedcoinlist' %}">
+										<i class="fa fa-circle-o"></i> Approved Client Request 
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'RejectedCoinReqUrl' %}">
+										<i class="fa fa-circle-o"></i> Rejected Client Request 
+									</a>
+								</li>
+								<li>
 									<a href="{% url 'SocialUrlMNGT' %}">
 										<i class="fa fa-circle-o"></i> Social Media
 									</a>
@@ -318,6 +328,7 @@
 			<section class="content-header">
 				<h1 align="center">Coin Request Arrived</h1>
 				<ol class="breadcrumb">
+					<li><a href="{% url 'approvedcoinlist' %}"><h4><u>Approved Request List</u></h4></a></li>
 					<li><a href="{% url 'RejectedCoinReqUrl' %}"><h4><u>Rejected Request List</u></h4></a></li>
 				</ol>
 			</section>

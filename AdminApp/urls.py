@@ -25,6 +25,7 @@ urlpatterns = [
     path('edit-coinp/', views.EditCoinPriceControler, name="EditCoinPrice"),
     path('coin-history/', views.CoinHistoryPage, name="CoinPriceHistory"),
     path('show-graph/', views.DemoGraphControler, name="Demograph"),
+    path("approvedcoinlist/",views.approvedcoinlist,name="approvedcoinlist"),
 
     # To Do List 
     path('to-do-list/', views.AdminToDoListControler, name="AdminToDoList"),

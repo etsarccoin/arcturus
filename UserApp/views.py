@@ -661,7 +661,9 @@ def coinwithdraw(request):
                     refere=False,
                     direct=False,
                     withdraw=True,
-                    source=source)
+                    source=source,
+                    tomail=user_id,
+                    withdraw_date=datetime.now())
                 s.save()
                 print(coinwithdraw)
                 print(otp)
@@ -740,7 +742,9 @@ def coinsend(request):
                 direct=False,
                 withdraw=False,
                 transfer=True,
-                source=source)
+                source=source,
+                tomail=tomail,
+                withdraw_date=datetime.now())
                 s.save()
                 if float(coinwithdraw)<float(requestcoin):
                     coinobj1=UserAccountCoin.objects.get(email=user_id)

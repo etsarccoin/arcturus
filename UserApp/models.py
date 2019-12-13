@@ -79,6 +79,7 @@ class CoinRequest(models.Model):
     unique_id = models.CharField(max_length=21, primary_key=True)
     user_mail = models.EmailField()
     coin_price = models.FloatField()
+    tomail=models.EmailField(blank=True)
     no_coin = models.FloatField()
     total_amount = models.FloatField()
     approved = models.BooleanField()
@@ -91,9 +92,9 @@ class CoinRequest(models.Model):
     withdraw=models.BooleanField(default=False)
     transfer=models.BooleanField(default=False)
     source=models.CharField(max_length=200)
+    withdraw_date=models.DateTimeField(blank=True)
     def __str__(self):
         return self.unique_id
-
 
 
 # User Wallet History Data

@@ -58,7 +58,7 @@
 <div class="wrapper">
     <header class="main-header"> 
         <!-- Logo --> 
-        <a href="{% url 'AdminDashboard' %}" class="logo">
+        <a href="{% url 'AdminDashboard' %}" class="logo"> 
         <!-- mini logo for sidebar mini 50x50 pixels --> 
         <span class="logo-mini"><b>A</b>LT</span> 
         <!-- logo for regular state and mobile devices --> 
@@ -71,10 +71,10 @@
 			</a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->					
+                    <!-- Messages: style can be found in dropdown.less-->
+					
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <!-- notification area -->
-                     <li class="dropdown notifications-menu">
+                    <li class="dropdown notifications-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-bell-o"></i>
 							<span class="label label-warning">{{NoOfNoti}}</span>
@@ -110,6 +110,20 @@
                             <li class="user-header">
 								<img src="{{AdminProfileObj.img.url}}" class="img-circle" alt="User Image">
                                 <p> {{AdminProfileObj.firstname}} {{AdminProfileObj.lastname}} </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+										<a href="#">Followers</a>
+									</div>
+                                    <div class="col-xs-4 text-center">
+										<a href="#">Sales</a> </div>
+                                    <div class="col-xs-4 text-center">
+										<a href="#">Friends</a>
+									</div>
+                                </div>
+                                <!-- /.row --> 
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -312,41 +326,158 @@
         
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Show Your List<small></small> </h1>
+				<h1 align="center">All Approved Coin Request</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="{% url 'approvedcoinlist' %}"><h4><u>Approved Request List</u></h4></a></li>
+					<!-- hello -->
+					<li><a href="{% url 'RejectedCoinReqUrl' %}"><h4><u>Rejected Request List</u></h4></a></li>
 				</ol>
 			</section>
-			
+			<h3 align="center">Coin Buy Request</h3>
 			<section class="content"> 
 					<div class="col-md-13">
 						<!-- Form Section -->
 						<div class="box box-primary pad30T pad30L pad30R pad10B">
 							<table id="table-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
 								<thead>
-										<tr>
-											<th>SL</th>
-											<th>Email</th>
-											<th>Requested Time</th>
-										</tr>
+									<tr>
+										<th>SL</th>
+										<th>Order Id</th>
+										<th>Email</th>
+										<th>Coin Price</th>
+										<th>No Of Coin</th>
+										<th>Total Amount</th>
+										<th>Action</th>
+									</tr>
 								</thead>
 								<tbody>
-										{% for i in sub_obj %}
+										{% for i in coin_req_obj %}
 									<tr>
-										<td>{{ forloop.counter }}</td>
-										<td>{{ i.email }}</td>
-										<td>{{ i.req_at }}</td>
+										<td><b>{{ forloop.counter }}</b></td>
+										<td><b>{{ i.unique_id }}</b></td>
+										<td>{{ i.user_mail }}</td>
+										<td>$ {{ i.coin_price }}</td>
+										<td>{{ i.no_coin }}</td>
+										<td>{{ i.total_amount }}</td>
+										<td><!-- <a href="{% url 'CoinRequestRejectUrl' i.unique_id %}">Reject</a> | --> <a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
 									</tr>
-									{% endfor %}
+										{% endfor %}
 								</tbody>
 							</table> 
 						</div>
+						<br><br>
 					</div>
-				</div>
 			</section>
+			<h3 align="center">Coin Withdraw List</h3>
+			<section class="content"> 
+					<div class="col-md-13">
+						<!-- Form Section -->
+						<div class="box box-primary pad30T pad30L pad30R pad10B">
+							<table id="widraw-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>SL</th>
+										<th>Order Id</th>
+										<th>Email</th>
+										<th>Coin Price</th>
+										<th>No Of Coin</th>
+										<th>Total Amount</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in withdraw_request %}
+									<tr>
+										<td><b>{{ forloop.counter }}</b></td>
+										<td><b>{{ i.unique_id }}</b></td>
+										<td>{{ i.user_mail }}</td>
+										<td>$ {{ i.coin_price }}</td>
+										<td>{{ i.no_coin }}</td>
+										<td>{{ i.total_amount }}</td>
+										<td> <a href="{% url 'CoinRequestMakerProfileUrl' i.unique_id %}">View</a></td>
+									</tr>
+										{% endfor %}
+								</tbody>
+							</table> 
+						</div>
+						<br><br>
+					</div>
+			</section>
+			<h3 align="center">coin Earnd from reference.</h3>
+			<section class="content"> 
+					<div class="col-md-13">
+						<!-- Form Section -->
+						<div class="box box-primary pad30T pad30L pad30R pad10B">
+							<table id="widraw-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>SL</th>
+										<th>Order Id</th>
+										<th>Email</th>
+										<th>Coin Price</th>
+										<th>No Of Coin</th>
+										<th>Total Amount</th>
+										<th>Date of Withdraw</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in refercoin %}
+									<tr>
+										<td><b>{{ forloop.counter }}</b></td>
+										<td><b>{{ i.unique_id }}</b></td>
+										<td>{{ i.user_mail }}</td>
+										<td>$ {{ i.coin_price }}</td>
+										<td>{{ i.no_coin }}</td>
+										<td>{{ i.total_amount }}</td>
+										<td>{{i.withdraw_date}}</td>
+									</tr>
+										{% endfor %}
+								</tbody>
+							</table> 
+						</div>
+						<br><br>
+					</div>
+			</section>
+			<h3 align="center">Coin From transfer</h3>
+			<section class="content"> 
+					<div class="col-md-13">
+						<!-- Form Section -->
+						<div class="box box-primary pad30T pad30L pad30R pad10B">
+							<table id="widraw-list" class="table table-bordered table-responsive table-striped" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>SL</th>
+										<th>Order Id</th>
+										<th>Email</th>
+										<th>To mail</th>
+										<th>Coin Price</th>
+										<th>No Of Coin</th>
+										<th>Total Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for i in transfercoin %}
+									<tr>
+										<td><b>{{ forloop.counter }}</b></td>
+										<td><b>{{ i.unique_id }}</b></td>
+										<td><b>{{i.tomail}}</b></td>
+										<td>{{ i.user_mail }}</td>
+										<td>$ {{ i.coin_price }}</td>
+										<td>{{ i.no_coin }}</td>
+										<td>{{ i.total_amount }}</td>
+									</tr>
+										{% endfor %}
+								</tbody>
+							</table> 
+						</div>
+						<br><br>
+					</div>
+			</section>
+
 		</div>
-    <!--Footer-->
-    <footer class="main-footer"> <strong>Copyright &copy; 2018-2019 <a href="{% url 'AdminLogin' %}">ETS</a>.</strong> All rights reserved. </footer>
+
+
+		</div>
 </div>
 <!-- ./wrapper --> 
 
@@ -403,7 +534,7 @@
 <script>
 	$(document).ready(function() {
 		"use strict";
-		var table = $('#table-list').DataTable( {
+		var table = $('#table-list, #widraw-list').DataTable( {
 			"order": [[ 0, "desc" ]],
 			responsive: true,
 			"pagingType": "full_numbers",
