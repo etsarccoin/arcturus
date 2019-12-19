@@ -193,6 +193,7 @@ def CoinRequestApprove(request, slug):
             obj1 = CoinRequest.objects.get(unique_id=slug_val)
             date_withdrawl = approved_date.date() + timedelta(days=30)
             obj1.approved_date = approved_date
+            obj1.withdraw_date=date_withdrawl
             obj1.approved = True
             obj1.save()
             c_obj = CoinPrice.objects.get(id=1)
@@ -236,6 +237,7 @@ def CoinRequestApprove(request, slug):
                                 req_date=req_date1, 
                                 approved_date=approved_date1,
                                 request_type=request_type1,
+                                withdraw_date=approved_date1,
                                 refere=True,
                                 direct=False)
                             s.save()
@@ -280,6 +282,7 @@ def CoinRequestApprove(request, slug):
                                 req_date=req_date2, 
                                 approved_date=approved_date2,
                                 request_type=request_type2,
+                                withdraw_date=approved_date2,
                                 refere=True,
                                 direct=False)
                             s.save()
@@ -320,6 +323,7 @@ def CoinRequestApprove(request, slug):
                                 req_date=req_date3, 
                                 approved_date=approved_date3,
                                 request_type=request_type3,
+                                withdraw_date=approved_date3,
                                 refere=True,
                                 direct=False)
                             s.save()
@@ -360,6 +364,7 @@ def CoinRequestApprove(request, slug):
                                 req_date=req_date4, 
                                 approved_date=approved_date4,
                                 request_type=request_type4,
+                                withdraw_date=approved_date4,
                                 refere=True,
                                 direct=False)
                             s.save()
@@ -400,6 +405,7 @@ def CoinRequestApprove(request, slug):
                                 req_date=req_date5, 
                                 approved_date=approved_date5,
                                 request_type=request_type5,
+                                withdraw_date=approved_date1,
                                 refere=True,
                                 direct=False)
                             s.save()

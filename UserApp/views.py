@@ -637,17 +637,19 @@ def coinwithdraw(request):
         #     if i.withdraw == True:
         #         req_list.append(i.approved_date)
         for i in coin_req_obj:
-                date_withdrawl = i.withdraw_date
-                if i.approved:
-                    if i.refere:
+
+            date_withdrawl = i.withdraw_date
+            print(i.withdraw_date)
+            if i.approved:
+                if i.refere:
+                    rest_coin+=float(i.no_coin)
+                if i.transfer:
+                    rest_coin+=float(i.no_coin)
+                if i.direct:
+                    if date.today() >=date_withdrawl.date():
                         rest_coin+=float(i.no_coin)
-                    if i.transfer:
-                        rest_coin+=float(i.no_coin)
-                    if i.direct:
-                        if date.today() >=date_withdrawl.date():
-                            rest_coin+=float(i.no_coin)
-                        else:
-                            rest_coin+=float(i.no_coin)/2
+                    else:
+                        rest_coin+=float(i.no_coin)/2
 
         if float(otp)==float(u_obj.otp):
             if float(rest_coin)>=float(requestcoin):
@@ -1257,6 +1259,7 @@ def UserAccountWitdrawlData(req):
     from datetime import datetime
     from datetime import date  
     from datetime import timedelta
+    coinwithdraw=0
     try:
         rest_coin=0
 
@@ -1295,6 +1298,8 @@ def UserAccountWitdrawlData(req):
                 print(temp_val)
                 print(rest_coin)
                 date_withdrawl = i.withdraw_date
+                print("^^"*60)
+                print(i)
                 if i.approved:
                     if i.refere:
                         rest_coin+=float(i.no_coin)
