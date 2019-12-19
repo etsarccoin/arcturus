@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="{% static 'UserApp/assets/img/favicon.ico' %}">
-<title>Withdrawl Money</title>
+<title>User Wallet</title>
 <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/font-awesome.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/icofont.css' %}">
@@ -31,54 +31,7 @@
 	
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'UserApp/assets/css/theme-query.css' %}">
-    <style type="text/css">
-	       .new-login-area{
-			  padding:24px;
-			}
-			h3 {
-			  font-size: 24px;
-			  line-height: 30px;
-			}
-			label {
-			  font-size: 12px;
-			}
-			.request-otp-header {
-			  margin: 40px 0px;
-			}
-			.login-label label {
-			  color: #c74032;
-			  font-weight: 600;
-			}
-			.input-edit {
-			  border: none !important;
-			  border-bottom: 2px solid #ccc !important;
-			  padding: 6px 0px;
-			  opacity: 0.8;
-			}
-			.input-edit:focus {
-			  border-bottom-color: #c74032 !important;
-			  box-shadow: none;
-			  outline: 0;
-			}
-
-			.request-otp {
-			  margin-top: 40px;
-			  background: linear-gradient(#c74032, #91041b);
-			  font-size: 14px;
-			  color: #fff;
-			}
-			.request-otp:focus {
-			  box-shadow: none;
-			}
-			.fa-chevron-left {
-			  cursor: pointer;
-			}
-			.resend-otp{
-			  margin-top:6px;
-			  cursor:pointer;
-			}
-
-	</style>
+	
 </head>
 
 <body role="document">
@@ -124,7 +77,7 @@
 					<a class="nav-link" href="{% url 'UserWalletView' %}">Wallet</a>
 				</li>
 				<li class="nav-item mrg5A">
-						<a class="nav-link" href="{% url 'withdrawdetails' %}">Withdrawl Deatils</a>
+						<a class="nav-link" href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 				</li>
                 <li class="nav-item mrg5A">
                     <a class="nav-link" href="{% url 'Userabout' %}">About</a>
@@ -207,13 +160,13 @@
 					<div class="card upload-card pad0T pad0B">
 						<div class="row">
 
-						  <div class="col-lg-6 mrg15T mrg15B">
+							<div class="col-lg-6 mrg15T mrg15B">
 							<div class="info-panel-container">
 								<div class="header">
 									<div class="row align-items-center">
 										<div class="col">coin wallet </div>
 										<div class="col text-right">
-											<a href="{% url 'withdrawdetails' %}">Withdrawl Deatils</a>
+											<a href="{% url 'UserWalletWithdrawlUrl' %}">Withdrawl</a>
 										</div>
 									</div>
 								</div>
@@ -249,205 +202,19 @@
 								</div>
 							</div>	
 						</div>
-
-							<!-- <div class="col-lg-4 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">Requests Funds</div>
-											<div class="col text-right">
-												<a href="#">Requests</a>
-											</div>
-										</div>
-									</div>
-									<div class="body">
-										<div class="row align-items-center">
-											<div class="col">
-												<img src="{% static 'UserApp/assets/img/logo-color-usd.png' %}" width="141" class="img-fluid" alt=""/>
-											</div>
-											<div class="col">{{no_of_coin_obj.no_of_coin}}</div>
-										</div>
-									</div>
-								</div>	
-							</div>	 -->
-
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-			<div class="row pad20T pad20B">
-				<div class="col">
-					<div class="card upload-card pad0T pad0B">
-						<div class="row">
-							
-							<div class="col-lg-12 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">
-												Arcturus Coin Withdrawl Rules
-											</div>
-										</div>
-									</div>
-									<div class="body">
-										<div class="row align-items-center">
-											<strong>
-													&nbsp; &nbsp;You Can withdraw 50% of insted and 50% after 1 month <br><br>
-													&nbsp; &nbsp; Coin From Reference you can get right now. 	
-													<br>
-											</strong> 
-										</div>
-									</div>
-
-									
-									<div class="body">
-										<div class="row align-items-center">
-											<strong>
-													&nbsp; &nbsp;   
-													<h2 style="padding-left: 20px;"> &nbsp; {% if not date_withdrawl %}You Not Invested Anything Yet{% else %} Total amount of coin {{total_coin}}</h2>
-													<br>
-													<h2 style="padding-left: 20px;"> &nbsp; Total Withdrawable {{rest_coin}}
-													{% endif %} </h2>
-													<h4> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;For all withdrawls date please <a href="{% url 'withdrawdetails' %}">Click Here</a></h4>
-											</strong> 
-										</div>
-									</div>
-
-								</div>	
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- coin withdraw -->
-			<div class="row pad20T pad20B">
-				<div class="col">
-					<div class="card upload-card pad0T pad0B">
-						<div class="row">
-							
-							<div class="col-lg-12 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">
-												WITHDRAW
-											</div>
-										</div>
-									</div>
-									<div class="container-fluid pad40T pad40B">
-										<div class="container">
-											<div class="row justify-content-center">
-												<div class=" col-lg-8 col-md-10 col-sm-12">
-													<div class="signup-form">
-														<form method="post" action="{% url 'UserLogin' %}">
-																{% csrf_token %}
-															<div class="form-group">
-																	<!-- <div class="alertforemail" id="errormsg" style="display: none;">
-																		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-																		<div id="showmymsg"></div>
-																	</div> -->
-																	<input name="ammount" id="ammount" type="text" class="form-control" required="required" placeholder="Enter the number of coin">
-															</div>
-															<div class="form-group">
-																
-															</div>
-																<div class="container new-login-area">
-															    <div id='sign-in' class='login-setup-section'>
-															        <button onclick="sendotp()" type="button" class="btn btn-default btn-lg btn-block request-otp" id='request-otp'>Get OTP</button>
-															    </div>
-															    <div id='verify-otp' class="login-setup-section">
-															        <i class="fa" aria-hidden="false"></i>
-															        <div class="form-group login-label">
-															            <input type="number" class="form-control input-edit" placeholder='Enter OTP' required="required" id="otp">
-															        </div>
-															        <button onclick="coinwithdraw()" type="button" class="btn btn-default btn-lg btn-block request-otp ">submit</button>
-															    </div>
-															</div>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- coin send -->
-			<div class="row pad20T pad20B">
-				<div class="col">
-					<div class="card upload-card pad0T pad0B">
-						<div class="row">
-							
-							<div class="col-lg-12 mrg15T mrg15B">
-								<div class="info-panel-container">
-									<div class="header">
-										<div class="row align-items-center">
-											<div class="col">
-												Coin Transfer To Another User
-											</div>
-										</div>
-									</div>
-									<div class="container-fluid pad40T pad40B">
-										<div class="container">
-											<div class="row justify-content-center">
-												<div class=" col-lg-8 col-md-10 col-sm-12">
-													<div class="signup-form">
-														<form method="post" action="{% url 'UserLogin' %}">
-																{% csrf_token %}
-															<div class="form-group">
-																	<!-- <div class="alertforemail" id="errormsg" style="display: none;">
-																		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-																		<div id="showmymsg"></div>
-																	</div> -->
-																	<input name="ammountsent"  type="text" class="form-control" required="required" placeholder="Enter the number of coin" id="ammountsent">
-															</div>
-															<div class="form-group">
-																
-															</div>
-															<div class="form-group">
-																<input name="toaddress" id="toaddress" type="text" class="form-control" placeholder="To Address" required="required">
-															</div>
-																<div class="container new-login-area">
-															    <div id='sign-in1' class='login-setup-section'>
-															        <button onclick="sendotp()" type="button" class="btn btn-default btn-lg btn-block request-otp" id='request-otp1'>Get OTP</button>
-															    </div>
-															    <div id='verify-otp1' class="login-setup-section">
-															        <i class="fa" aria-hidden="false"></i>
-															        <div class="form-group login-label">
-															            <input type="number" class="form-control input-edit" placeholder='Enter OTP' id="otp_send">
-															        </div>
-															        <button onclick="sendcoin()"  type="button" class="btn btn-default btn-lg btn-block request-otp ">submit</button>
-															    </div>
-															</div>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>		
+		
+		
 		
 		<div class="row pad20T pad20B">
 			<div class="col">
 				<div class="card upload-card">
 					<div class="row justify-content-center pad15L pad15R" align="center">
 						<div class="col profile-info">
-							<div class="table-header">Brought Using Money</div>
+							<div class="table-header">Withdraw Dates</div>
 							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="profile-table">
 								<thead>
 									<tr>
@@ -457,100 +224,16 @@
 										<th>No Coin</th>
 										<th>Total Amount</th>
 										<th>Request Date</th>
-										<th>Status</th>
+										<th>100% coin Withdraw date</th>
 									</tr>
 								</thead>
+								<div>
+									{{i.direct}}
+								</div>
 								<tbody>
 										{% for i in coin_req_obj %}
-										{%if i.direct%}
-									<tr>
-										 <td>
-										  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
-										  	<span> Arcturus</span>
-										  </td>
-										  <td>{{i.unique_id}}</td>
-										  <td>{{i.coin_price}}</td>
-										  <td>{{i.no_coin}}</td>
-										  <td>{{i.total_amount}}</td>
-										  <td>{{i.req_date}}</td>
-										  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
-										  <!-- <td>{{i.request_type}}</td> -->
-									</tr>
-									{%endif%}
-									{% endfor %}
-									
-								</tbody>
-							</table>
-						</div>						
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row pad20T pad20B">
-			<div class="col">
-				<div class="card upload-card">
-					<div class="row justify-content-center pad15L pad15R" align="center">
-						<div class="col profile-info">
-							<div class="table-header">From reference</div>
-							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="table-reference">
-								<thead>
-									<tr>
-										<th>Refrence got from</th>
-										<th>Unique Txn ID</th>
-										<th>Coin Price</th>
-										<th>No Coin</th>
-										<th>Total Amount</th>
-										<!-- <th>Refered date</th> -->
-										<!-- <th>refered data</th> -->
-									</tr>
-								</thead>
-								<tbody>
-										{% for i in coin_req_obj %}
-										{%if i.refere%}
-									<tr>
-									  <td>
-									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
-									  	<span> Arcturus</span>
-									  </td>
-									  <td>{{i.unique_id}}</td>
-									  <td>{{i.coin_price}}</td>
-									  <td>{{i.no_coin}}</td>
-									  <td>{{i.total_amount}}</td>
-									  <!-- <td>{{i.req_date}}</td> -->
-									  <!-- <td></td> -->
-									</tr>
-									{%endif%}
-									{% endfor %}
-									
-								</tbody>
-							</table>
-							</table>
-						</div>						
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row pad20T pad20B">
-			<div class="col">
-				<div class="card upload-card">
-					<div class="row justify-content-center pad15L pad15R" align="center">
-						<div class="col profile-info">
-							<div class="table-header">transfer</div>
-							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="table-transfer">
-								<thead>
-									<tr>
-										<th>transfer to  from</th>
-										<th>Unique Txn ID</th>
-										<th>Coin Price</th>
-										<th>No Coin</th>
-										<th>Total Amount</th>
-										<th>transfer date</th>
-										<!-- <th>refered data</th> -->
-									</tr>
-								</thead>
-								<tbody>
-										{% for i in coin_req_obj %}
-										{%if i.transfer%}
+										{%if i.approved%}
+										{%if i.direct or i.refere or i.transfer%}
 									<tr>
 									  <td>
 									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
@@ -561,39 +244,40 @@
 									  <td>{{i.no_coin}}</td>
 									  <td>{{i.total_amount}}</td>
 									  <td>{{i.req_date}}</td>
+									  <td>{{i.withdraw_date}}</td>
 									</tr>
+									{%endif%}
 									{%endif%}
 									{% endfor %}
 									
 								</tbody>
-							</table>
 							</table>
 						</div>						
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row pad20T pad20B">
+		<!-- <div class="row pad20T pad20B">
 			<div class="col">
 				<div class="card upload-card">
 					<div class="row justify-content-center pad15L pad15R" align="center">
 						<div class="col profile-info">
-							<div class="table-header">Withdraw</div>
-							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="table-withdraw">
+							<div class="table-header">Coin From reference</div>
+							<table width="100%" class="profile-table table table-bordered2 table-striped table-responsive" id="profile-table">
 								<thead>
 									<tr>
 										<th>Refrence got from</th>
-										<th>Reciver id</th>
+										<th>Unique Txn ID</th>
 										<th>Coin Price</th>
 										<th>No Coin</th>
 										<th>Total Amount</th>
-										<th>date</th>
-										<th>status</th>
+										<th>Refered date</th>
+										<th>refered data</th>
 									</tr>
 								</thead>
 								<tbody>
 										{% for i in coin_req_obj %}
-										{%if i.withdraw%}
+										{% if i.refere %}
 									<tr>
 									  <td>
 									  	<img src="{% static 'UserApp/assets/img/coin-icon-01.png' %}" width="16" height="16" alt=""/>
@@ -601,22 +285,21 @@
 									  </td>
 									  <td>{{i.unique_id}}</td>
 									  <td>{{i.coin_price}}</td>
-									  <td>{{i.no_coin}}</td>
+									  <td>{{i.refercoin}}</td>
 									  <td>{{i.total_amount}}</td>
 									  <td>{{i.req_date}}</td>
 									  <td>{% if i.approved %}<strong>Approved</strong>{% else %}<strong>Pending</strong>{% endif %}</td>
 									</tr>
-									{%endif%}
+									{% endif %}
 									{% endfor %}
 									
 								</tbody>
-							</table>
 							</table>
 						</div>						
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 
@@ -757,6 +440,7 @@
 	$(document).ready(function() {	
 		"use strict";
 		$('#profile-table').DataTable( {
+			"order": [[ 0, "desc" ]],
 			responsive: true,
 			"pagingType": "full_numbers",
 			"lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
@@ -783,28 +467,6 @@
 		});
 	});
 </script> 
-<script type="text/javascript">
-	$('#verify-otp').hide();
-	$('#request-otp').on('click',function(){
-	  $('#sign-in').hide();
-	  $('#verify-otp').show();
-	});
-	$('.fa-chevron-left').on('click',function(){
-	  $('#sign-in').show();
-	  $('#verify-otp').hide();
-	});
-</script>
-<script type="text/javascript">
-	$('#verify-otp1').hide();
-	$('#request-otp1').on('click',function(){
-	  $('#sign-in1').hide();
-	  $('#verify-otp1').show();
-	});
-	$('.fa-chevron-left').on('click',function(){
-	  $('#sign-in1').show();
-	  $('#verify-otp1').hide();
-	});
-</script>
 
 <script type="text/javascript">
 	function SubcriberFunction()
@@ -838,31 +500,6 @@
     }
 </script> 
 <script type="text/javascript">
-    function sendotp()
-    {
-    $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: '{% url "sendotp" %}',
-            async: true,
-            success: function (response){
-                    console.log("mail send Succefull");
-                    if(response['is_taken'] == 1){
-                        alert(response["status"])
-                    }
-                    else{
-                        alert(response["status"]);
-                    }
-                  
-                },
-            error: function (){
-                           alert('Something went wrong !!');
-                    }
-                });
-}
-</script>
-<!-- coin withdraw in cash -->
-<script type="text/javascript">
 	function coinwithdraw(){
         $.ajax({
             type: "GET",
@@ -894,7 +531,6 @@
 <!-- coin send to others -->
 <script type="text/javascript">
 	function sendcoin(){
-        console.log( $('#otp_send').val());
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
@@ -925,7 +561,6 @@
 		});
     }
 </script>
-
 
 </body>
 </html>

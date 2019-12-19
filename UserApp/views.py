@@ -616,6 +616,7 @@ def coinwithdraw(request):
     try:
         # import datetime
         is_taken=0
+        rest_coin=0
         user_id = request.session['user_id']
         u_obj = UsersDetail.objects.get(email=user_id)
         nocoin=UserAccountCoin.objects.get(email=user_id)
@@ -635,15 +636,21 @@ def coinwithdraw(request):
         # for i in coin_req_obj:
         #     if i.withdraw == True:
         #         req_list.append(i.approved_date)
-        date_withdrawl = req_date1.date() + timedelta(days=30)
-
-        if datetime.now().date() >=date_withdrawl:
-                coinwithdraw=float(main)+float(refer_coin)
-        else:
-            coinwithdraw=(float(main)/2)+float(refer_coin)
+        for i in coin_req_obj:
+                date_withdrawl = i.withdraw_date
+                if i.approved:
+                    if i.refere:
+                        rest_coin+=float(i.no_coin)
+                    if i.transfer:
+                        rest_coin+=float(i.no_coin)
+                    if i.direct:
+                        if date.today() >=date_withdrawl.date():
+                            rest_coin+=float(i.no_coin)
+                        else:
+                            rest_coin+=float(i.no_coin)/2
 
         if float(otp)==float(u_obj.otp):
-            if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
+            if float(rest_coin)>=float(requestcoin):
                 is_taken=1
                 u_obj.otp=909
                 u_obj.save()
@@ -707,20 +714,29 @@ def coinsend(request):
         req_date1 =datetime.now()
         approved_date1 = datetime.now()
         coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
+        rest_coin=0
+        for i in coin_req_obj:
+                date_withdrawl = i.withdraw_date
+                if i.approved:
+                    if i.refere:
+                        rest_coin+=float(i.no_coin)
+                    if i.transfer:
+                        rest_coin+=float(i.no_coin)
+                    if i.direct:
+                        if date.today() >=date_withdrawl.date():
+                            rest_coin+=float(i.no_coin)
+                        else:
+                            rest_coin+=float(i.no_coin)/2
         req_list = []
         for i in coin_req_obj:
             if i.approved == True:
                 req_list.append(i.approved_date)
         date_withdrawl = req_list[0] + timedelta(days=30)
-
-        if date.today() >=date_withdrawl.date():
-            coinwithdraw=float(main)+float(refer_coin)
-        else:
-            coinwithdraw=(float(main)/2)+float(refer_coin)
-        if float(otp_send)==float(u_obj.otp):
+        print("otp",otp_send,"database otp",u_obj.otp)
+        if int(otp_send)==int(u_obj.otp):
             u_obj.otp=909
             u_obj.save()
-            if float(coinwithdraw)+float(refer_coin)>=float(requestcoin):
+            if rest_coin >= float(requestcoin):
                 print(tomail)
                 coinobj=UserAccountCoin.objects.get(email=tomail)
                 update_coin=float(coinobj.no_of_coin)+float(requestcoin)
@@ -746,7 +762,7 @@ def coinsend(request):
                 tomail=tomail,
                 withdraw_date=datetime.now())
                 s.save()
-                if float(coinwithdraw)<float(requestcoin):
+                if float(rest_coin)<float(requestcoin):
                     coinobj1=UserAccountCoin.objects.get(email=user_id)
                     update_coin=float(refer_coin)-(float(requestcoin)-float(coinobj1.no_of_coin))
                     coinobj1.no_of_coin=update_coin
@@ -1242,6 +1258,8 @@ def UserAccountWitdrawlData(req):
     from datetime import date  
     from datetime import timedelta
     try:
+        rest_coin=0
+
         user_id = req.session['user_id']
         coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
         u_obj = UsersDetail.objects.get(email=user_id)
@@ -1271,13 +1289,26 @@ def UserAccountWitdrawlData(req):
             print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
             print("*"*60)
             
-
         try:
             req_list = []
             for i in coin_req_obj:
-                if i.approved == True:
-                    req_list.append(i.approved_date)
-            print("date",req_list)
+                print(temp_val)
+                print(rest_coin)
+                date_withdrawl = i.withdraw_date
+                if i.approved:
+                    if i.refere:
+                        rest_coin+=float(i.no_coin)
+                    if i.transfer:
+                        rest_coin+=float(i.no_coin)
+                    if i.direct:
+                        if date.today() >=date_withdrawl.date():
+                            rest_coin+=float(i.no_coin)
+                        else:
+                            rest_coin+=float(i.no_coin)/2
+
+            #         req_list.append(i.approved_date)
+            # print("date",req_list)
+            print(rest_coin)
             try:
                 date_withdrawl = req_list[0] + timedelta(days=30)
                 if date.today() >=date_withdrawl.date():
@@ -1286,11 +1317,7 @@ def UserAccountWitdrawlData(req):
                     coinwithdraw=(float(noCoin)/2)+float(refer_coin)
             except Exception as e:
                 coinwithdraw=0
-                rest_coin=0
                 date_withdrawl="You Havn't Invested Anything"
-            print("&"*60)
-            rest_coin=float(total_coin)-float(coinwithdraw)
-            print(total_coin,coinwithdraw,rest_coin)
         except Exception as e:
             exc = e
             print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
@@ -1309,3 +1336,43 @@ def UserAccountWitdrawlData(req):
         print("*"*60)
         print(e)
         return UserIndex(req)
+def withdrawdetails(request):
+    try:
+        user_id = request.session['user_id']
+        coin_req_obj = CoinRequest.objects.all().filter(user_mail=user_id)
+        print("#"*60)
+        for i in coin_req_obj:
+            print(i)
+        print("#"*60)
+        u_obj = UsersDetail.objects.get(email=user_id)
+        u_name = u_obj.first_name + " " + u_obj.last_name
+        no_of_coin_obj = UserAccountCoin.objects.get(email=user_id)
+        temp_val = no_of_coin_obj.no_of_coin
+        # Getting CoinPrice now
+        c_obj = CoinPrice.objects.get(id=1)
+        coin_price = c_obj.price_in_usd
+        noCoin = temp_val/coin_price
+        total_amount=temp_val*coin_price
+        logged_in = True
+        footerObj = FooterCMS.objects.get(footer_uni_key=1)
+        CopyObj = CopyRightCMS.objects.get(uni_key=1)
+        NewsObj = LatestNewsCMS.objects.get(news_uni_key=1)
+        SocialMObj = SocialMedialCMS.objects.get(social_uni_key=1)
+        try:
+            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+        except Exception as e:
+            exc = e
+            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+            print("*"*60)
+            UImgObj = False
+
+        context = {'logged_in': logged_in,"ammount":no_of_coin_obj.refercoin, 'u_name': u_name, 'footerObj': footerObj, 'coin_req_obj': coin_req_obj,\
+             'no_of_coin_obj': no_of_coin_obj , 'noCoin': temp_val, 'CopyObj': CopyObj, 'NewsObj': NewsObj,\
+             'SocialMObj': SocialMObj,'UImgObj': UImgObj,'total_amount':total_amount}
+        return render(request,'UserApp/user-withdrawdetails.html', context=context)
+    
+    except Exception as e:
+        exc = e
+        print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+        print("*"*60)
+        return UserIndex(request)

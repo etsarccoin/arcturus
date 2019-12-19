@@ -46,4 +46,5 @@ urlpatterns = [
     # For Testing
     # path('kuntal/', views.Test, name="mytest"),
     path('graph/', views.ShowGraph, name="mytest"),
+    path('user/wallet/withdrawdetails/',views.withdrawdetails,name="withdrawdetails"),
 ]

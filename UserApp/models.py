@@ -93,6 +93,8 @@ class CoinRequest(models.Model):
     transfer=models.BooleanField(default=False)
     source=models.CharField(max_length=200)
     withdraw_date=models.DateTimeField(blank=True)
+    trnsferin=models.BooleanField(blank=True)
+    transferout=models.BooleanField(blank=True)
     def __str__(self):
         return self.unique_id
 
