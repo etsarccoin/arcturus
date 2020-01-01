@@ -1023,7 +1023,7 @@ def SubmitUserFeedBack(request):
             return JsonResponse(data)
         
 
-def UserProfileSettingPage(request):
+def UserProfileSettingPage(request,a=None):
     try:
         user_id = request.session['user_id']
         logged_in = True
@@ -1236,16 +1236,21 @@ def UserProfileImageChangeData(req):
         user_id = req.session['user_id']
         userImg = None
         userImg = req.FILES['userImg']
-        try:
-            UImgObj = UserProfileImage.objects.get(user_mail=user_id)
-            UImgObj.UImg = userImg
-            UImgObj.save()
-        except Exception as e:
-            exc = e
-            print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
-            print("*"*60)
-            UImgObj = UserProfileImage(user_mail=user_id,UImg=userImg)
-            UImgObj.save()
+        datatype={".jpg",".png","jpeg",".bmp"}
+        if str(userImg.name)[-4:] in datatype:
+            try:
+                UImgObj = UserProfileImage.objects.get(user_mail=user_id)
+                print("*"*60)
+                print(str(userImg.name)[str(userImg.name).find("."):])
+                print(userImg)
+                UImgObj.UImg = userImg
+                UImgObj.save()
+            except Exception as e:
+                exc = e
+                print(''.join(traceback.format_exception(None, exc, exc.__traceback__)))
+                print("*"*60)
+                UImgObj = UserProfileImage(user_mail=user_id,UImg=userImg)
+                UImgObj.save()
 
         return UserProfileSettingPage(req)
     except Exception as e:
